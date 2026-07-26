@@ -1,0 +1,41 @@
+name: Documentation
+description: Request or track a documentation change
+title: "[docs] "
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What documentation should be added or updated?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Documentation area
+      options:
+        - Product
+        - Architecture
+        - Data / corpus
+        - RAG
+        - Development
+        - Operations
+        - Governance
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: Related documents
+      description: Paths or URLs of existing docs that should change.
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ]
+        - [ ]
+    validations:
+      required: true

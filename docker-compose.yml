@@ -1,0 +1,24 @@
+# Local development services for the Space Biology Evidence Engine MVP.
+# Application containers (api/web/worker) are intentionally deferred until implementation.
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: spacebio-evidence-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-spacebio}
+      POSTGRES_USER: ${POSTGRES_USER:-spacebio}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-spacebio}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - spacebio_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-spacebio} -d ${POSTGRES_DB:-spacebio}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  spacebio_pgdata:
