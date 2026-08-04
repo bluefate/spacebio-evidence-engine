@@ -1,5 +1,6 @@
 # Local development services for the Space Biology Evidence Engine MVP.
-# Application containers (api/web/worker) are intentionally deferred until implementation.
+# Application containers (api/web) can be added later; current Compose services provide Postgres + pgvector.
+# Run API/web via `make api` and `make web` on the host for the August MVP.
 
 services:
   db:

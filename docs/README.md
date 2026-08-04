@@ -16,7 +16,7 @@ Initial documentation package for multi-agent engineering.
 - RAG: [chunking](rag/CHUNKING_STRATEGY.md), [retrieval](rag/RETRIEVAL_STRATEGY.md), [prompting](rag/PROMPTING_STRATEGY.md), [citations](rag/CITATION_STRATEGY.md), [evaluation](rag/EVALUATION_STRATEGY.md)
 - Development: [guide](development/DEVELOPMENT_GUIDE.md), [testing](development/TESTING_STRATEGY.md), [branching](development/BRANCHING_STRATEGY.md), [pull requests](development/PULL_REQUEST_PROCESS.md), [agent workflow](development/AGENT_WORKFLOW.md), [ready](development/DEFINITION_OF_READY.md), [done](development/DEFINITION_OF_DONE.md)
 - Operations: [local setup](operations/LOCAL_SETUP.md), [deployment](operations/DEPLOYMENT.md), [backup](operations/BACKUP_AND_RECOVERY.md)
-- Governance: [decisions](governance/DECISION_LOG.md), [risks](governance/RISK_REGISTER.md), [traceability](governance/TRACEABILITY_MATRIX.md), [roadmap](governance/PROJECT_ROADMAP.md), [release process](governance/RELEASE_PROCESS.md)
+- Governance: [decisions](governance/DECISION_LOG.md), [risks](governance/RISK_REGISTER.md), [traceability](governance/TRACEABILITY_MATRIX.md), [backlog index](governance/BACKLOG.md), [roadmap](governance/PROJECT_ROADMAP.md), [release process](governance/RELEASE_PROCESS.md)
 
 ## Related documents
 - [Repository README](../README.md)

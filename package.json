@@ -2,12 +2,14 @@
   "name": "spacebio-evidence-engine",
   "version": "0.1.0",
   "private": true,
-  "description": "Web application for the Space Biology Evidence Engine (MVP placeholder).",
+  "description": "Monorepo root for the Space Biology Evidence Engine.",
+  "workspaces": [
+    "apps/web"
+  ],
   "scripts": {
-    "dev": "echo \"Next.js app not scaffolded yet\"",
-    "build": "echo \"Next.js app not scaffolded yet\"",
-    "lint": "echo \"Next.js app not scaffolded yet\"",
-    "test": "echo \"No frontend tests yet\""
+    "dev:web": "npm run dev -w @spacebio/web",
+    "build:web": "npm run build -w @spacebio/web",
+    "lint:web": "npm run lint -w @spacebio/web"
   },
   "engines": {
     "node": ">=20"

@@ -7,18 +7,19 @@ Define engineering standards for implementation.
 Backend, frontend, ingestion, RAG, data, tests, and CI.
 
 ## Current status
-Initial guide before code scaffolding.
+Monorepo scaffold started: FastAPI under `apps/api`, Next.js under `apps/web`, shared placeholder package under `src/spacebio_evidence_engine`.
 
 ## Standards
 - Python 3.12 or newer.
-- FastAPI for backend APIs.
+- FastAPI for backend APIs (`apps/api/src/spacebio_api`).
 - PostgreSQL with pgvector for MVP persistence and vector search.
-- Alembic for migrations.
-- Next.js with TypeScript for frontend.
-- Docker Compose for local services.
+- SQLAlchemy 2.x + Alembic for persistence (migrations land in later issues).
+- Pydantic / pydantic-settings for API schemas and settings.
+- Next.js with TypeScript for frontend (`apps/web`).
+- Docker Compose for local Postgres.
 - Pytest for Python tests.
 - Ruff for linting and formatting.
-- Pyright for type checking.
+- **Pyright** for type checking.
 - GitHub Actions for CI.
 
 ## Diagram standards
@@ -28,7 +29,11 @@ Initial guide before code scaffolding.
 - Keep color semantic and readable in light and dark GitHub themes.
 
 ## Package layout
-- Monorepo with `apps/api` (FastAPI) and `apps/web` (Next.js); shared `packages` deferred until needed.
+- `apps/api` — FastAPI service (`spacebio_api.main:app`)
+- `apps/web` — Next.js UI
+- `src/spacebio_evidence_engine` — shared Python package placeholder
+- `packages/` — deferred until shared libraries are needed
+- Ports: API `8000`, web `3000`, Postgres `5432`
 
 ## Package principles
 - Keep provider-specific model code behind abstractions.

@@ -17,6 +17,18 @@ The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, 
 
 Development and day-to-day engineering happen in the principal repository. The Classroom repository is the official submission remote for AI HootCamp Summer 2026 and should stay in sync for plan, design, and incremental build deliverables.
 
+## Backlog and project (source of truth)
+
+Weekly windows in [plan.md](plan.md) are **schedule targets**. Execution order, ownership, and status live on GitHub:
+
+| Resource | URL |
+|----------|-----|
+| **GitHub Project** | [Space Biology Evidence Engine (project #6)](https://github.com/users/bluefate/projects/6) |
+| **Issues** | [bluefate/spacebio-evidence-engine/issues](https://github.com/bluefate/spacebio-evidence-engine/issues) |
+| **Backlog index** | [docs/governance/BACKLOG.md](docs/governance/BACKLOG.md) |
+
+Claim and implement from Project status `Ready` per [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
+
 ## Build Phase deliverables
 
 | Document | Description |
