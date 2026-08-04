@@ -1,27 +1,84 @@
-## Summary
-<!-- What changed and why? -->
+## Linked issue
 
-## Related issue
-<!-- Link the issue this PR closes or relates to. -->
 Closes #
 
+## Summary
+
+<!-- One short paragraph: what this PR does. -->
+
 ## Changes
+
 -
 -
 
-## Test plan
-- [ ] Documentation reviewed for accuracy
-- [ ] Lint / type checks pass (when applicable)
-- [ ] Tests added or updated (when applicable)
-- [ ] No secrets or `.env` values included
-- [ ] RAG / citation behavior unchanged or evaluated (when applicable)
+## Reason
 
-## Docs
-- [ ] Docs updated
-- [ ] Docs not required
+<!-- Why this change is needed now. -->
 
-## Risk notes
-<!-- Call out corpus, schema, prompt, or security risks. -->
+## Test evidence
+
+```text
+make lint
+make typecheck
+make test
+# or make validate
+```
+
+- Commands run:
+- Results:
+- New/updated tests:
+
+## Retrieval or RAG effects
+
+- [ ] No RAG / retrieval / citation / prompt changes
+- [ ] Retrieval behavior changed — describe:
+- [ ] Generation / prompting changed — describe:
+- [ ] Citation or grounding behavior changed — describe:
+- [ ] Evaluation notes attached or linked:
+
+## Data schema effects
+
+- [ ] No schema changes
+- [ ] Schema changed — tables/columns/indexes:
+- [ ] Migration ID(s):
+
+## Documentation updates
+
+- [ ] Docs updated (list paths):
+- [ ] Docs not required — why:
+
+## Security effects
+
+- [ ] No security or privacy impact
+- [ ] Secrets / env keys changed (`.env.example` updated)
+- [ ] Document parsing or untrusted content handling changed
+- [ ] Auth, network exposure, or dependency risk — describe:
 
 ## Screenshots
-<!-- Required for UI changes. -->
+
+<!-- Required for UI changes. Otherwise write N/A. -->
+
+## Migration instructions
+
+<!-- Steps to apply schema or data migrations. Write N/A if none. -->
+
+## Rollback instructions
+
+<!-- How to reverse this change safely. Write N/A if none. -->
+
+## Known limitations
+
+-
+-
+
+## Human review checklist
+
+- [ ] Issue linked and scope respected
+- [ ] Acceptance criteria addressed
+- [ ] Tests, lint, and type checks reported
+- [ ] Documentation current
+- [ ] No secrets committed
+- [ ] Scientific provenance / citations preserved where applicable
+- [ ] Migrations and rollback reviewed if applicable
+- [ ] Remaining risks understood
+- [ ] Human approval required before merge (agents must not approve or merge)

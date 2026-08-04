@@ -21,11 +21,18 @@ Initial guide before code scaffolding.
 - mypy or pyright after human decision.
 - GitHub Actions for CI.
 
+## Diagram standards
+- Use Mermaid diagrams for architecture, workflow, data lineage, and RAG sequences.
+- Use color where it clarifies meaning, such as distinguishing users, services, data stores, providers, future/deferred components, review states, and risk paths.
+- Prefer restrained, consistent colors over decorative gradients.
+- Keep color semantic and readable in light and dark GitHub themes.
+
 ## Package principles
 - Keep provider-specific model code behind abstractions.
 - Keep RAG orchestration separate from API routes.
 - Keep ingestion repeatable and observable.
 - Keep prompts versioned.
+- Follow the root [AGENTS.md](../../AGENTS.md) contract on every task.
 
 ## Related documents
 - [Local setup](../operations/LOCAL_SETUP.md)

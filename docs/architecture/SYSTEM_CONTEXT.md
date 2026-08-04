@@ -19,6 +19,18 @@ flowchart LR
   App --> Models["Embedding and LLM providers"]
   App --> Corpus["Controlled open-access publication corpus"]
   App -. "future optional" .-> Graph["Neo4j or graph service"]
+
+  classDef user fill:#E0F2FE,stroke:#0284C7,color:#0F172A
+  classDef app fill:#DCFCE7,stroke:#16A34A,color:#052E16
+  classDef data fill:#FEF3C7,stroke:#D97706,color:#451A03
+  classDef provider fill:#F3E8FF,stroke:#9333EA,color:#3B0764
+  classDef future fill:#F1F5F9,stroke:#64748B,stroke-dasharray: 5 5,color:#334155
+
+  class Researcher,Student,Maintainer user
+  class App app
+  class DB,Corpus data
+  class Models provider
+  class Graph future
 ```
 
 ## MVP context

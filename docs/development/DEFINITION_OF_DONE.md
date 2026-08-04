@@ -4,27 +4,30 @@
 Define completion criteria for engineering work.
 
 ## Scope
-All repository changes.
+All repository changes by humans and agents.
 
 ## Current status
-Initial completion checklist.
+Active completion checklist. Root contract: [AGENTS.md](../../AGENTS.md).
 
 ## Done checklist
 - Acceptance criteria satisfied.
-- Tests added or updated.
-- Lint and type checks pass.
-- Migrations added when schema changes.
-- Documentation updated when behavior changes.
-- RAG changes include evaluation notes.
-- Citation behavior remains intact.
-- Security-sensitive changes reviewed.
+- Tests added or updated for new behavior; tests not disabled to force a green build.
+- Lint and type checks pass (`make lint`, `make typecheck`, or `make validate`).
+- Migrations added when schema changes; risks noted.
+- Documentation updated when architecture, commands, schemas, or behavior change.
+- Material architecture decisions recorded in the [decision log](../governance/DECISION_LOG.md) / ADR process.
+- RAG changes include retrieval/citation evaluation notes.
+- Citation identifiers, sections, pages, and passages remain intact.
+- Security-sensitive changes called out for human review.
+- PR opened against `main` with issue link, validation report, and human review requested.
+- No secrets committed; `.env.example` updated if new config keys were added.
 
 ## Related documents
 - [Testing strategy](TESTING_STRATEGY.md)
 - [Pull request process](PULL_REQUEST_PROCESS.md)
+- [Agent workflow](AGENT_WORKFLOW.md)
 - [Release process](../governance/RELEASE_PROCESS.md)
 
 ## Human decisions still required
 - Approve CI checks required for merge.
 - Define release-blocking test failures.
-

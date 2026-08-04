@@ -21,6 +21,18 @@ flowchart LR
   Chunk --> Answer["Generated answer"]
   Passage --> Citation["Passage citation"]
   Citation --> Answer
+
+  classDef source fill:#E0F2FE,stroke:#0284C7,color:#0F172A
+  classDef processed fill:#DCFCE7,stroke:#16A34A,color:#052E16
+  classDef retrieval fill:#F3E8FF,stroke:#9333EA,color:#3B0764
+  classDef evidence fill:#FEF3C7,stroke:#D97706,color:#451A03
+  classDef generated fill:#FFE4E6,stroke:#E11D48,color:#4C0519
+
+  class PDF source
+  class Text,Passage processed
+  class Chunk,Embedding retrieval
+  class Entity,Relationship,Citation evidence
+  class Answer generated
 ```
 
 ## MVP storage

@@ -27,6 +27,18 @@ flowchart TD
   Processing --> Extraction["Metadata/entity extraction"]
   Evaluation["Evaluation harness"] --> Retrieval
   Evaluation --> QA
+
+  classDef ui fill:#E0F2FE,stroke:#0284C7,color:#0F172A
+  classDef api fill:#DCFCE7,stroke:#16A34A,color:#052E16
+  classDef rag fill:#F3E8FF,stroke:#9333EA,color:#3B0764
+  classDef data fill:#FEF3C7,stroke:#D97706,color:#451A03
+  classDef eval fill:#FFE4E6,stroke:#E11D48,color:#4C0519
+
+  class UI ui
+  class API,Search,QA,Compare,Corpus api
+  class Retrieval,Prompting,Citations,Embeddings rag
+  class Store,Processing,Extraction data
+  class Evaluation eval
 ```
 
 ## MVP components

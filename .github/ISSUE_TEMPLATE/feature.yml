@@ -1,60 +1,66 @@
-name: Documentation
-description: Add or update product, architecture, RAG, ops, or process documentation
-title: "[docs] "
-labels: ["documentation"]
+name: Feature
+description: Propose a product or engineering capability change
+title: "[feature] "
+labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
-        Prefer updating canonical docs under `docs/` rather than duplicating guidance.
+        Work from one issue, one branch, and one owner at a time. See `AGENTS.md`.
   - type: textarea
     id: problem
     attributes:
       label: Problem
-      description: What is missing, wrong, or unclear in the docs?
+      description: What user or system problem needs to be solved?
     validations:
       required: true
   - type: textarea
     id: goal
     attributes:
       label: Goal
-      description: What readers should understand or be able to do after the update.
+      description: What successful outcome looks like.
     validations:
       required: true
   - type: textarea
     id: background
     attributes:
       label: Background
-      description: Audience, related docs, and why the change is needed now.
+      description: Context, related decisions, corpus/RAG constraints, and links.
     validations:
       required: true
   - type: textarea
     id: scope
     attributes:
       label: Scope
-      description: Documents and sections in scope.
+      description: What this issue will change.
+      placeholder: |
+        -
     validations:
       required: true
   - type: textarea
     id: out_of_scope
     attributes:
       label: Out of scope
+      description: Explicit non-goals for this issue.
+      placeholder: |
+        -
     validations:
       required: true
   - type: textarea
     id: acceptance_criteria
     attributes:
       label: Acceptance criteria
+      description: Checklist that must pass before the PR is ready for human review.
       placeholder: |
-        - [ ] Canonical doc(s) updated
-        - [ ] Cross-links valid
-        - [ ] MVP vs future architecture remains distinct
+        - [ ]
+        - [ ]
     validations:
       required: true
   - type: textarea
     id: dependencies
     attributes:
       label: Dependencies
+      description: Issues, packages, services, corpus data, or humans this work depends on.
       placeholder: None
     validations:
       required: true
@@ -62,30 +68,31 @@ body:
     id: affected
     attributes:
       label: Files or components likely affected
+      description: Paths, packages, or subsystems expected to change.
       placeholder: |
-        - docs/...
-        - AGENTS.md / README.md / CONTRIBUTING.md (if applicable)
+        - docs/
+        - src/
     validations:
       required: true
   - type: textarea
     id: testing
     attributes:
       label: Testing requirements
-      description: Link checks, doc lint, or manual review steps.
+      description: Unit, integration, RAG eval, UI, migration, or manual checks required.
     validations:
       required: true
   - type: textarea
     id: documentation
     attributes:
       label: Documentation requirements
-      description: Primary docs to create/update and any secondary references.
+      description: Docs, ADRs, prompts, or runbooks that must be updated.
     validations:
       required: true
   - type: textarea
     id: scientific_provenance
     attributes:
       label: Scientific provenance considerations
-      description: Whether citation, grounding, corpus, or evidence guidance changes.
+      description: Citation, grounding, corpus license, organism/system labeling, or evidence risks.
       placeholder: None / N/A — explain why if none.
     validations:
       required: true
@@ -93,6 +100,7 @@ body:
     id: security
     attributes:
       label: Security considerations
+      description: Secrets, untrusted document content, auth, privacy, or exposure risks.
       placeholder: None / N/A — explain why if none.
     validations:
       required: true
@@ -100,12 +108,19 @@ body:
     id: definition_of_done
     attributes:
       label: Definition of done
+      description: Issue-specific completion bar (also see docs/development/DEFINITION_OF_DONE.md).
+      placeholder: |
+        - [ ] Acceptance criteria pass
+        - [ ] Tests / lint / typecheck pass
+        - [ ] Docs current
+        - [ ] PR linked and human review requested
     validations:
       required: true
   - type: dropdown
     id: parallel_safe
     attributes:
       label: Whether parallel work is safe
+      description: Can another agent work elsewhere without conflicting on these files?
       options:
         - "Yes — parallel work is safe outside listed files"
         - "No — serialize related work"
@@ -116,6 +131,7 @@ body:
     id: blocking_issues
     attributes:
       label: Blocking issues
+      description: Issue numbers or links that block this work.
       placeholder: None
     validations:
       required: true
@@ -123,6 +139,7 @@ body:
     id: human_decisions
     attributes:
       label: Human decisions required
+      description: Decisions that must be made by the human owner before or during implementation.
       placeholder: None
     validations:
       required: true

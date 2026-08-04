@@ -1,44 +1,45 @@
-name: Documentation
-description: Add or update product, architecture, RAG, ops, or process documentation
-title: "[docs] "
-labels: ["documentation"]
+name: Research
+description: Investigate a scientific, corpus, RAG, or evaluation question before implementation
+title: "[research] "
+labels: ["research"]
 body:
   - type: markdown
     attributes:
       value: |
-        Prefer updating canonical docs under `docs/` rather than duplicating guidance.
+        Research issues produce findings, recommendations, and follow-up issues. They do not ship product behavior unless scope explicitly says so.
   - type: textarea
     id: problem
     attributes:
       label: Problem
-      description: What is missing, wrong, or unclear in the docs?
+      description: What question or uncertainty must be resolved?
     validations:
       required: true
   - type: textarea
     id: goal
     attributes:
       label: Goal
-      description: What readers should understand or be able to do after the update.
+      description: Decision, recommendation, or evidence summary expected at the end.
     validations:
       required: true
   - type: textarea
     id: background
     attributes:
       label: Background
-      description: Audience, related docs, and why the change is needed now.
+      description: Known corpus items, prior evals, related ADRs, and hypotheses.
     validations:
       required: true
   - type: textarea
     id: scope
     attributes:
       label: Scope
-      description: Documents and sections in scope.
+      description: What will be reviewed, measured, compared, or prototyped.
     validations:
       required: true
   - type: textarea
     id: out_of_scope
     attributes:
       label: Out of scope
+      description: Implementation work that must wait for follow-up issues.
     validations:
       required: true
   - type: textarea
@@ -46,9 +47,9 @@ body:
     attributes:
       label: Acceptance criteria
       placeholder: |
-        - [ ] Canonical doc(s) updated
-        - [ ] Cross-links valid
-        - [ ] MVP vs future architecture remains distinct
+        - [ ] Question answered with cited sources or eval evidence
+        - [ ] Recommendation and risks written
+        - [ ] Follow-up issues filed if needed
     validations:
       required: true
   - type: textarea
@@ -62,31 +63,28 @@ body:
     id: affected
     attributes:
       label: Files or components likely affected
-      placeholder: |
-        - docs/...
-        - AGENTS.md / README.md / CONTRIBUTING.md (if applicable)
+      description: Docs, notebooks, eval fixtures, or temporary experiment branches.
     validations:
       required: true
   - type: textarea
     id: testing
     attributes:
       label: Testing requirements
-      description: Link checks, doc lint, or manual review steps.
+      description: Evaluation sets, manual review protocol, or reproducibility steps.
     validations:
       required: true
   - type: textarea
     id: documentation
     attributes:
       label: Documentation requirements
-      description: Primary docs to create/update and any secondary references.
+      description: Where findings will be recorded (issue comment, ADR draft, eval notes).
     validations:
       required: true
   - type: textarea
     id: scientific_provenance
     attributes:
       label: Scientific provenance considerations
-      description: Whether citation, grounding, corpus, or evidence guidance changes.
-      placeholder: None / N/A — explain why if none.
+      description: Organism/system labeling, abstract vs full text, citation fidelity, conflicting evidence.
     validations:
       required: true
   - type: textarea
@@ -123,6 +121,6 @@ body:
     id: human_decisions
     attributes:
       label: Human decisions required
-      placeholder: None
+      description: Scientific or product calls that only the human owner should make.
     validations:
       required: true

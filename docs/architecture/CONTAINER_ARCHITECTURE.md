@@ -22,6 +22,18 @@ flowchart TD
   Provider --> LocalEmb["Sentence Transformers"]
   Provider --> OpenAI["OpenAI API when configured"]
   API -. "future" .-> Neo4j["Neo4j graph database"]
+
+  classDef client fill:#E0F2FE,stroke:#0284C7,color:#0F172A
+  classDef service fill:#DCFCE7,stroke:#16A34A,color:#052E16
+  classDef data fill:#FEF3C7,stroke:#D97706,color:#451A03
+  classDef provider fill:#F3E8FF,stroke:#9333EA,color:#3B0764
+  classDef future fill:#F1F5F9,stroke:#64748B,stroke-dasharray: 5 5,color:#334155
+
+  class Browser client
+  class Web,API,Worker service
+  class DB,Files data
+  class Provider,LocalEmb,OpenAI provider
+  class Neo4j future
 ```
 
 ## MVP containers

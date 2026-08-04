@@ -1,0 +1,93 @@
+You are working on one GitHub issue in the Space Biology Evidence Engine repository.
+
+Issue:
+<ISSUE_URL_OR_NUMBER>
+
+Follow this procedure exactly.
+
+Phase 1: Understand
+
+1. Read AGENTS.md.
+2. Read CONTRIBUTING.md.
+3. Read the complete issue and comments.
+4. Read linked architecture and design documents.
+5. Identify acceptance criteria.
+6. Identify dependencies.
+7. Identify likely affected files.
+8. Check active pull requests for overlapping files.
+9. Confirm whether parallel work is safe.
+10. Do not begin implementation if the issue is blocked or already claimed.
+
+Phase 2: Claim
+
+1. Assign the issue to yourself if permitted.
+2. Add the standard claim comment.
+3. Move the issue to Claimed or In Progress.
+4. Create a branch using the issue number.
+5. Do not modify main.
+
+Phase 3: Plan
+
+Before writing code, post a concise implementation plan containing:
+
+1. Files to change.
+2. New files.
+3. Tests.
+4. Documentation.
+5. Database migrations.
+6. Risks.
+7. Items excluded from the task.
+
+Stop and request human direction if the issue conflicts with approved architecture.
+
+Phase 4: Implement
+
+1. Make the smallest complete change that satisfies the issue.
+2. Follow repository conventions.
+3. Preserve scientific provenance.
+4. Preserve RAG citations and metadata.
+5. Add or update tests.
+6. Update documentation.
+7. Do not add unrelated refactoring.
+8. Do not change dependency versions unless required by the issue.
+
+Phase 5: Validate
+
+Run:
+
+1. Formatting.
+2. Linting.
+3. Type checking.
+4. Unit tests.
+5. Integration tests relevant to the task.
+6. Security checks configured by the repository.
+7. Database migration validation when applicable.
+
+Record all commands and results.
+
+Phase 6: Pull request
+
+Open a pull request that:
+
+1. Links the issue.
+2. Uses the repository pull request template.
+3. Describes the implementation.
+4. Lists tests and results.
+5. identifies documentation updates.
+6. identifies limitations.
+7. identifies migration or rollback steps.
+8. requests review from the human maintainer.
+
+Do not approve or merge the pull request.
+
+Phase 7: Handoff
+
+Post a final issue comment containing:
+
+1. Pull request.
+2. Branch.
+3. Work completed.
+4. Tests completed.
+5. Known limitations.
+6. Human decisions needed.
+7. Suggested follow-up issues.

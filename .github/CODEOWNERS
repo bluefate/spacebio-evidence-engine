@@ -1,3 +1,48 @@
-# Space Biology Evidence Engine — GitHub ownership
+# Human maintainer ownership for multi-agent collaboration.
+# Do not list agent bot accounts as required approving owners.
+# Maintainer: @bluefate
 
+# Default owner for all paths
 * @bluefate
+
+# Agent contract
+/AGENTS.md @bluefate
+
+# GitHub workflows and collaboration templates
+/.github/workflows/ @bluefate
+/.github/CODEOWNERS @bluefate
+/.github/ISSUE_TEMPLATE/ @bluefate
+/.github/PULL_REQUEST_TEMPLATE.md @bluefate
+
+# Security files
+/SECURITY.md @bluefate
+/docs/architecture/SECURITY_ARCHITECTURE.md @bluefate
+/.env.example @bluefate
+
+# Database migrations (present and future layouts)
+/alembic/ @bluefate
+/**/alembic/ @bluefate
+/**/migrations/ @bluefate
+/**/versions/*.py @bluefate
+
+# Architecture documentation
+/docs/architecture/ @bluefate
+/docs/governance/DECISION_LOG.md @bluefate
+
+# RAG prompting and evaluation
+/docs/rag/ @bluefate
+/docs/architecture/RAG_ARCHITECTURE.md @bluefate
+/**/prompts/ @bluefate
+/**/evaluation/ @bluefate
+/**/evals/ @bluefate
+
+# Deployment configuration
+/docker-compose.yml @bluefate
+/docker-compose.*.yml @bluefate
+/Dockerfile @bluefate
+/**/Dockerfile* @bluefate
+/docs/operations/DEPLOYMENT.md @bluefate
+/docs/operations/LOCAL_SETUP.md @bluefate
+/docs/architecture/DEPLOYMENT_ARCHITECTURE.md @bluefate
+/docs/architecture/CONTAINER_ARCHITECTURE.md @bluefate
+/Makefile @bluefate

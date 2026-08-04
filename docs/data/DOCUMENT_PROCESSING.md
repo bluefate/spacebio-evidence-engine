@@ -23,6 +23,18 @@ stateDiagram-v2
   Evaluated --> Published
   Extracted --> Rejected: poor extraction
   Candidate --> Rejected: out of scope
+
+  classDef intake fill:#E0F2FE,stroke:#0284C7,color:#0F172A
+  classDef processing fill:#DCFCE7,stroke:#16A34A,color:#052E16
+  classDef review fill:#FEF3C7,stroke:#D97706,color:#451A03
+  classDef terminal fill:#F3E8FF,stroke:#9333EA,color:#3B0764
+  classDef rejected fill:#FFE4E6,stroke:#E11D48,color:#4C0519
+
+  class Candidate,Approved,Acquired intake
+  class Extracted,Chunked,Embedded,Indexed processing
+  class Evaluated review
+  class Published terminal
+  class Rejected rejected
 ```
 
 ## MVP processing steps
