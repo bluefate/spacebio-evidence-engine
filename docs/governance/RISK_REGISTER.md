@@ -26,7 +26,6 @@ Initial risk register.
 - [Evaluation strategy](../rag/EVALUATION_STRATEGY.md)
 - [Security architecture](../architecture/SECURITY_ARCHITECTURE.md)
 
-## Human decisions still required
-- Assign owners.
-- Approve risk severity scale.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](DECISION_LOG.md).
 

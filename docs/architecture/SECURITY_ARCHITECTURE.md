@@ -7,10 +7,11 @@ Define security controls for development and deployment.
 Secrets, data access, user input, model providers, logs, and dependency risk.
 
 ## Current status
-Initial baseline pending threat modeling.
+Initial baseline for local August MVP; full threat modeling before any public deployment.
 
 ## MVP controls
 - Environment-based secret configuration.
+- Anonymous local use (authentication out of August MVP scope).
 - Server-side model provider calls.
 - Parameterized SQL through ORM/query builders.
 - Least-privilege database users when practical.
@@ -29,8 +30,6 @@ Initial baseline pending threat modeling.
 - [Deployment architecture](DEPLOYMENT_ARCHITECTURE.md)
 - [Observability](OBSERVABILITY.md)
 
-## Human decisions still required
-- Decide whether user accounts are MVP scope.
-- Choose production secret manager.
-- Approve log retention policy.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

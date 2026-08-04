@@ -20,15 +20,13 @@ Initial baseline. A full threat model should be completed before public deployme
 - Require HTTPS outside local development.
 
 ## Vulnerability reporting
-Until a public process is approved, report vulnerabilities privately to the repository maintainers.
+Report vulnerabilities via this file and GitHub security advisories to repository maintainers.
 
 ## Related documents
 - [Security architecture](docs/architecture/SECURITY_ARCHITECTURE.md)
 - [Deployment](docs/operations/DEPLOYMENT.md)
 - [Backup and recovery](docs/operations/BACKUP_AND_RECOVERY.md)
 
-## Human decisions still required
-- Choose vulnerability disclosure channel.
-- Choose production identity and access model.
-- Decide whether public user accounts are in scope.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](docs/governance/DECISION_LOG.md).
 

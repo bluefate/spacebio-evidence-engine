@@ -10,10 +10,10 @@ MVP retrieval over PostgreSQL and pgvector.
 Initial strategy.
 
 ## MVP strategy
-- Use Sentence Transformers for local embeddings where practical.
+- Embeddings: local Sentence Transformers (`all-MiniLM-L6-v2`).
 - Store vectors in pgvector.
-- Support vector search.
-- Add keyword or hybrid search if benchmark questions show vector-only gaps.
+- Vector-only search (hybrid keyword retrieval deferred post-August).
+- Default top-k: 8; no reranker for August MVP.
 - Filter by corpus topic, organism, system, exposure, and publication metadata when available.
 - Return ranked passages with citation metadata.
 
@@ -25,8 +25,6 @@ Reranking, query decomposition, ontology expansion, and graph-assisted retrieval
 - [Evaluation strategy](EVALUATION_STRATEGY.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
 
-## Human decisions still required
-- Approve embedding model.
-- Approve hybrid retrieval priority.
-- Approve retrieval quality targets.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

@@ -36,7 +36,7 @@ sequenceDiagram
   participant L as LLM provider
   U->>API: Ask question
   API->>R: Retrieve candidate passages
-  R->>DB: Hybrid/vector query
+  R->>DB: Vector query
   DB-->>R: Ranked passages
   R-->>API: Cited context
   API->>API: Evidence sufficiency check
@@ -49,7 +49,7 @@ sequenceDiagram
 ## MVP RAG requirements
 - Controlled corpus only.
 - Citation-preserving chunks.
-- Semantic retrieval with optional hybrid keyword support.
+- Vector-only semantic retrieval (default top-k 8; hybrid keyword deferred post-August).
 - Grounded generation.
 - Insufficient-evidence response path.
 - Evaluation with benchmark questions.
@@ -61,8 +61,6 @@ sequenceDiagram
 - [Citation strategy](../rag/CITATION_STRATEGY.md)
 - [Evaluation strategy](../rag/EVALUATION_STRATEGY.md)
 
-## Human decisions still required
-- Approve top-k defaults and reranking approach.
-- Approve model provider selection.
-- Approve minimum citation validation thresholds.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

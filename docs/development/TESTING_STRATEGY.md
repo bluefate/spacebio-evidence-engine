@@ -23,7 +23,6 @@ Initial test strategy.
 - [Definition of done](DEFINITION_OF_DONE.md)
 - [Pull request process](PULL_REQUEST_PROCESS.md)
 
-## Human decisions still required
-- Approve minimum coverage expectations.
-- Choose frontend test framework.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

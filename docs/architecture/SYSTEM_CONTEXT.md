@@ -34,7 +34,7 @@ flowchart LR
 ```
 
 ## MVP context
-Users access the web app. The backend retrieves controlled-corpus passages from PostgreSQL and calls configured model providers through abstractions.
+Users access the web app anonymously for local August MVP. The backend retrieves controlled-corpus passages from PostgreSQL and calls configured model providers (local Sentence Transformers embeddings; optional OpenAI LLM) through abstractions.
 
 ## Future context
 Graph-native services, curator interfaces, external repository integrations, and additional corpora may be added after MVP.
@@ -44,7 +44,6 @@ Graph-native services, curator interfaces, external repository integrations, and
 - [Container architecture](CONTAINER_ARCHITECTURE.md)
 - [Security architecture](SECURITY_ARCHITECTURE.md)
 
-## Human decisions still required
-- Confirm whether anonymous public users are supported.
-- Confirm allowed external model providers.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

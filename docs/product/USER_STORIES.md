@@ -10,13 +10,16 @@ MVP and near-future stories for researchers, students, reviewers, engineers, and
 Initial backlog source.
 
 ## MVP stories
+Priority order for August MVP: researchers first, then students/educators.
+
 - As a researcher, I want natural-language search so I can find relevant studies.
 - As a user, I want answers with passage-level citations so I can verify claims.
-- As a scientist, I want to compare studies so I can inspect organisms, exposures, methods, findings, and limitations.
 - As a reviewer, I want insufficient-evidence responses so unsupported claims are avoided.
 - As a student, I want grounded explanations so I can learn from cited publications.
 - As a maintainer, I want a controlled corpus manifest so ingestion is reproducible.
 - As a RAG engineer, I want benchmark questions so retrieval and citation quality can be tested.
+
+**Deferred past August MVP:** As a scientist, I want to compare studies so I can inspect organisms, exposures, methods, findings, and limitations.
 
 ## Future stories
 - As a curator, I want to approve extracted facts before they appear as trusted graph relationships.
@@ -28,7 +31,6 @@ Initial backlog source.
 - [Project roadmap](../governance/PROJECT_ROADMAP.md)
 - [Definition of ready](../development/DEFINITION_OF_READY.md)
 
-## Human decisions still required
-- Rank MVP stories.
-- Decide which stories become milestone one GitHub issues.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

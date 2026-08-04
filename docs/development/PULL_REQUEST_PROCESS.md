@@ -34,6 +34,5 @@ Active process. Agents open PRs; humans approve and merge.
 - [Testing strategy](TESTING_STRATEGY.md)
 - [Agent workflow](AGENT_WORKFLOW.md)
 
-## Human decisions still required
-- Confirm required approvals.
-- Decide whether scientific reviewer approval is mandatory for corpus changes.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).

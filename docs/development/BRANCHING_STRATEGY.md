@@ -51,6 +51,5 @@ Examples: `feature/42-citation-panel`, `fix/77-chunk-offsets`.
 - [Release process](../governance/RELEASE_PROCESS.md)
 - [Contributing](../../CONTRIBUTING.md)
 
-## Human decisions still required
-- Confirm branch protection and required checks.
-- Confirm squash versus merge commits.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).

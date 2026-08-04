@@ -15,10 +15,10 @@ flowchart TD
   Dev["Developer machine"] --> Compose["Docker Compose"]
   Compose --> Web["web container"]
   Compose --> API["api container"]
-  Compose --> Worker["worker container"]
+  Compose --> CLI["CLI jobs (ingest/eval)"]
   Compose --> DB["postgres-pgvector volume"]
   API --> Env["Environment secrets"]
-  Worker --> Corpus["Mounted corpus directory"]
+  CLI --> Corpus["Mounted corpus directory"]
   Cloud["Future cloud environment"] -.-> LB["Load balancer"]
   LB -.-> CloudWeb["Web service"]
   LB -.-> CloudAPI["API service"]
@@ -31,14 +31,14 @@ flowchart TD
   classDef future fill:#F1F5F9,stroke:#64748B,stroke-dasharray: 5 5,color:#334155
 
   class Dev,Compose local
-  class Web,API,Worker service
+  class Web,API,CLI service
   class DB,Corpus,ManagedDB data
   class Env secret
   class Cloud,LB,CloudWeb,CloudAPI future
 ```
 
 ## MVP deployment
-Local Docker Compose is the primary deployment target.
+Local Docker Compose is the only August MVP deployment target (deadline 2026-08-31). Public cloud hosting is deferred post-August.
 
 ## Future deployment
 Cloud deployment may use managed PostgreSQL, managed secrets, container hosting, and object storage.
@@ -48,7 +48,6 @@ Cloud deployment may use managed PostgreSQL, managed secrets, container hosting,
 - [Local setup](../operations/LOCAL_SETUP.md)
 - [Security architecture](SECURITY_ARCHITECTURE.md)
 
-## Human decisions still required
-- Choose production host.
-- Decide whether public deployment is required for the challenge submission.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

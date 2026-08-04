@@ -26,7 +26,6 @@ Initial matrix.
 - [Testing strategy](../development/TESTING_STRATEGY.md)
 - [Evaluation strategy](../rag/EVALUATION_STRATEGY.md)
 
-## Human decisions still required
-- Approve final requirement IDs.
-- Add issue links after backlog creation.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](DECISION_LOG.md).
 

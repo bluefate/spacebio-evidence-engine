@@ -29,7 +29,6 @@ Initial dictionary.
 - [Corpus specification](CORPUS_SPECIFICATION.md)
 - [Citation strategy](../rag/CITATION_STRATEGY.md)
 
-## Human decisions still required
-- Approve controlled vocabularies.
-- Decide whether ontology mappings are MVP scope.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

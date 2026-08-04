@@ -6,7 +6,7 @@
 Define and build a citation-first evidence engine for a controlled corpus of open-access space biology publications.
 
 ## Scope
-The MVP focuses on retrieval-augmented generation, passage-level citations, study comparison, evidence sufficiency, and a small corpus of approximately 20 to 30 publications in one topic area. The recommended initial topic is microgravity and skeletal muscle.
+The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, passage-level citations, evidence sufficiency, and a small corpus of approximately **10 to 15** open-access publications on **microgravity and skeletal muscle**. Study comparison and several advanced features are deferred past August.
 
 ## Repositories
 
@@ -27,19 +27,19 @@ Development and day-to-day engineering happen in the principal repository. The C
 Supporting deep-dive documentation lives under [docs/](docs/README.md).
 
 ## Current status
-Documentation-first project initialization. No implementation code has been generated yet. Build Phase plan and design documents are in place.
+Documentation-first project with locked Build Phase decisions and an **end-of-August 2026 MVP** (deadline 2026-08-31). Implementation scaffolding is next. See [plan.md](plan.md) and [decision log](docs/governance/DECISION_LOG.md).
 
 ## Architecture position
-The preferred stack is mostly accepted with review:
+Accepted stack for the August MVP:
 
-- Python 3.12+, FastAPI, PostgreSQL, pgvector, SQLAlchemy or SQLModel, Alembic, PyMuPDF, Jupyter, Sentence Transformers, Next.js, TypeScript, Docker Compose, Pytest, Ruff, mypy or pyright, GitHub Actions, and Mermaid are appropriate for the MVP.
-- OpenAI models should be optional behind provider abstractions.
-- Neo4j is deferred until the knowledge graph phase requires graph-native traversal or visualization.
-- Advanced multi-agent orchestration and advanced contradiction detection are future capabilities, not MVP requirements.
+- Python 3.12+, FastAPI, PostgreSQL, pgvector, **SQLAlchemy 2.x + Alembic**, Pydantic API schemas, PyMuPDF, Sentence Transformers (`all-MiniLM-L6-v2`), optional OpenAI (`gpt-4o-mini`, **$50/mo hard cap**), Next.js, TypeScript, Docker Compose, Pytest, Ruff, **pyright**, GitHub Actions, Mermaid.
+- Neo4j, study compare UI, hybrid retrieval, auth, and public hosting are deferred past August.
+- Advanced multi-agent orchestration and advanced contradiction detection remain future capabilities.
 
 ## Start here
 - [Build plan](plan.md)
 - [Technical design](design.md)
+- [Decision log](docs/governance/DECISION_LOG.md)
 - [Documentation index](docs/README.md)
 - [Product requirements](docs/product/PRODUCT_REQUIREMENTS.md)
 - [Architecture overview](docs/architecture/ARCHITECTURE.md)
@@ -54,9 +54,7 @@ The preferred stack is mostly accepted with review:
 - [Risk register](docs/governance/RISK_REGISTER.md)
 - [Decision log](docs/governance/DECISION_LOG.md)
 
-## Human decisions still required
-- Approve the initial topic area and corpus selection rules.
-- Choose SQLAlchemy versus SQLModel.
-- Choose mypy versus pyright as the primary type checker.
-- Choose the initial model providers and cost limits.
-- Confirm Apache-2.0 as the final public license after legal review.
+## Open follow-ons (do not block August MVP)
+- Select the final ~10–15 open-access publications for the approved topic.
+- Public hosting platform (deferred past local Compose demo).
+- Production secret manager, observability stack, and user accounts (post-August).

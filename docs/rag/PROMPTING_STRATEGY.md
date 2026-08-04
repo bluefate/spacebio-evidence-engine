@@ -26,7 +26,6 @@ Prompts must not assume a single LLM provider. OpenAI models may be used when co
 - [Evaluation strategy](EVALUATION_STRATEGY.md)
 - [RAG architecture](../architecture/RAG_ARCHITECTURE.md)
 
-## Human decisions still required
-- Approve prompt templates before implementation.
-- Decide whether prompt outputs must use strict JSON for selected tasks.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

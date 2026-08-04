@@ -14,7 +14,7 @@ Make targets exist. `make api` and `make web` fail intentionally until those pac
 - Node.js 20+ (for the MVP Next.js app when scaffolded).
 - Docker and Docker Compose.
 - GNU Make.
-- `pre-commit`, Ruff, Pytest, Pyright (or mypy after human decision).
+- `pre-commit`, Ruff, Pytest, Pyright.
 
 ## Commands
 
@@ -32,10 +32,10 @@ make web         # placeholder until web package exists
 ```
 
 ## Expected local services
-- PostgreSQL with pgvector (Compose).
-- FastAPI backend (future package).
-- Next.js frontend (future package).
-- Optional worker for ingestion and evaluation.
+- PostgreSQL with pgvector (Compose) on port `5432`.
+- FastAPI backend (`apps/api`) on port `8000`.
+- Next.js frontend (`apps/web`) on port `3000`.
+- CLI jobs for ingestion and evaluation (no always-on worker for August MVP).
 
 ## Related documents
 - [AGENTS](../../AGENTS.md)
@@ -43,7 +43,5 @@ make web         # placeholder until web package exists
 - [Deployment architecture](../architecture/DEPLOYMENT_ARCHITECTURE.md)
 - [Operations deployment](DEPLOYMENT.md)
 
-## Human decisions still required
-- Choose package managers and final package layout.
-- Approve default local ports.
-- Choose mypy versus pyright as the primary type checker.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).

@@ -34,7 +34,6 @@ The system should verify that cited passage IDs were present in retrieved contex
 - [Prompting strategy](PROMPTING_STRATEGY.md)
 - [Agent workflow](../development/AGENT_WORKFLOW.md)
 
-## Human decisions still required
-- Approve citation display format.
-- Define acceptable citation granularity.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

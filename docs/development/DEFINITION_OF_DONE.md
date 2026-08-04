@@ -28,6 +28,5 @@ Active completion checklist. Root contract: [AGENTS.md](../../AGENTS.md).
 - [Agent workflow](AGENT_WORKFLOW.md)
 - [Release process](../governance/RELEASE_PROCESS.md)
 
-## Human decisions still required
-- Approve CI checks required for merge.
-- Define release-blocking test failures.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).

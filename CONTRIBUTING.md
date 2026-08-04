@@ -31,8 +31,6 @@ Initial contribution policy for a pre-implementation repository.
 - [Pull request process](docs/development/PULL_REQUEST_PROCESS.md)
 - [Testing strategy](docs/development/TESTING_STRATEGY.md)
 
-## Human decisions still required
-- Confirm required review count.
-- Confirm whether protected branches are required from project start.
-- Confirm whether external contributions are expected.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](docs/governance/DECISION_LOG.md).
 

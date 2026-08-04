@@ -15,9 +15,9 @@ flowchart TD
   Browser["Browser"] --> Web["Next.js web app"]
   Web --> API["FastAPI API"]
   API --> DB["PostgreSQL + pgvector"]
-  API --> Worker["Ingestion/evaluation worker"]
-  Worker --> DB
-  Worker --> Files["Local corpus files"]
+  API --> CLI["CLI ingestion/evaluation jobs"]
+  CLI --> DB
+  CLI --> Files["Local corpus files"]
   API --> Provider["Model provider abstraction"]
   Provider --> LocalEmb["Sentence Transformers"]
   Provider --> OpenAI["OpenAI API when configured"]
@@ -30,7 +30,7 @@ flowchart TD
   classDef future fill:#F1F5F9,stroke:#64748B,stroke-dasharray: 5 5,color:#334155
 
   class Browser client
-  class Web,API,Worker service
+  class Web,API,CLI service
   class DB,Files data
   class Provider,LocalEmb,OpenAI provider
   class Neo4j future
@@ -40,7 +40,7 @@ flowchart TD
 - `web`: Next.js TypeScript application.
 - `api`: FastAPI backend.
 - `db`: PostgreSQL with pgvector.
-- `worker`: ingestion, embedding, and evaluation jobs.
+- Ingestion, embedding, and evaluation run as CLI jobs from the API container (no separate always-on worker for August MVP).
 
 ## Future containers
 - `graph`: Neo4j or graph API.
@@ -51,7 +51,6 @@ flowchart TD
 - [Deployment architecture](DEPLOYMENT_ARCHITECTURE.md)
 - [Local setup](../operations/LOCAL_SETUP.md)
 
-## Human decisions still required
-- Decide whether worker is a separate process in MVP or a CLI module.
-- Approve Docker image standards.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. August MVP uses CLI/jobs for ingestion and evaluation, not a separate always-on worker container. See [decision log](../governance/DECISION_LOG.md).
 

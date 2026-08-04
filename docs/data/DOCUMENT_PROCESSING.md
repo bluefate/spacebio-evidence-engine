@@ -40,7 +40,7 @@ stateDiagram-v2
 ## MVP processing steps
 - Register source in corpus manifest.
 - Verify access and license status.
-- Extract text with PyMuPDF.
+- Extract text with PyMuPDF (body text only for August MVP; tables and figures deferred post-August).
 - Preserve page numbers and section hints.
 - Normalize text.
 - Create citation-preserving passages and chunks.
@@ -52,7 +52,6 @@ stateDiagram-v2
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
 - [Corpus specification](CORPUS_SPECIFICATION.md)
 
-## Human decisions still required
-- Define minimum extraction quality threshold.
-- Decide whether tables and figures are MVP scope.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

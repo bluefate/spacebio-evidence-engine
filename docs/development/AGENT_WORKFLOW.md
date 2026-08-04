@@ -186,8 +186,5 @@ Use this comment when work cannot continue.
 - [Testing strategy](TESTING_STRATEGY.md)
 - [Branching strategy](BRANCHING_STRATEGY.md)
 
-## Human decisions still required
-
-- Approve whether agents may create issues autonomously.
-- Confirm review requirements for scientific content and corpus changes.
-- Confirm whether Devin may own long-running epics or only single issues.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).

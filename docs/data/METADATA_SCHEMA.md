@@ -48,7 +48,6 @@ Initial logical schema, not yet implemented.
 - [Citation strategy](../rag/CITATION_STRATEGY.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
 
-## Human decisions still required
-- Approve final database naming conventions.
-- Choose JSON versus normalized tables for selected metadata.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

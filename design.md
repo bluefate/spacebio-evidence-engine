@@ -2,7 +2,9 @@
 
 Living technical design for the AI HootCamp Summer 2026 Build Phase. Diagrams and schemas below are the assignment-facing summary; authoritative detail remains in [`docs/architecture/`](docs/architecture/ARCHITECTURE.md) and related packages.
 
-Companion plan: [`plan.md`](plan.md).
+Companion plan: [`plan.md`](plan.md).  
+Locked decisions: [`docs/governance/DECISION_LOG.md`](docs/governance/DECISION_LOG.md).  
+**August MVP deadline:** 2026-08-31.
 
 ## Repositories
 
@@ -18,8 +20,8 @@ Companion plan: [`plan.md`](plan.md).
 1. Ground every scientific answer in retrieved corpus passages.
 2. Preserve publication ID, title, section, page, and source location through the pipeline.
 3. Separate source evidence, extracted structure, and generated interpretation.
-4. Keep MVP operable on Docker Compose with optional cloud LLM providers.
-5. Defer graph-native and heavy multi-agent complexity until justified.
+4. Keep August MVP operable on Docker Compose with optional cloud LLM providers ($50/mo hard cap).
+5. Defer graph-native work, study compare UI, hybrid retrieval, auth, and public hosting past 2026-08-31.
 
 ---
 
@@ -55,14 +57,15 @@ flowchart TD
   Browser["Browser"] --> Web["Next.js web app"]
   Web --> API["FastAPI API"]
   API --> DB["PostgreSQL + pgvector"]
-  API --> Worker["Ingestion/evaluation worker"]
-  Worker --> DB
-  Worker --> Files["Local corpus files"]
+  CLI["Ingest and eval CLI jobs"] --> DB
+  CLI --> Files["Local corpus files"]
   API --> Provider["Model provider abstraction"]
-  Provider --> LocalEmb["Sentence Transformers"]
-  Provider --> OpenAI["OpenAI API when configured"]
+  Provider --> LocalEmb["Sentence Transformers all-MiniLM-L6-v2"]
+  Provider --> OpenAI["OpenAI gpt-4o-mini when configured"]
   API -. "future" .-> Neo4j["Neo4j graph database"]
 ```
+
+August MVP containers: `web`, `api`, `db`. Ingestion and evaluation run as **CLI/jobs**, not a separate always-on worker.
 
 **Detail:** [SYSTEM_CONTEXT.md](docs/architecture/SYSTEM_CONTEXT.md), [CONTAINER_ARCHITECTURE.md](docs/architecture/CONTAINER_ARCHITECTURE.md), [COMPONENT_ARCHITECTURE.md](docs/architecture/COMPONENT_ARCHITECTURE.md).
 
@@ -75,17 +78,17 @@ flowchart TD
 ```mermaid
 sequenceDiagram
   participant M as Maintainer
-  participant W as Worker
+  participant C as Ingest CLI
   participant P as PyMuPDF
   participant DB as PostgreSQL/pgvector
   participant E as Embedding provider
-  M->>W: Add corpus manifest entry
-  W->>P: Extract text and page spans
-  W->>W: Normalize sections and chunks
-  W->>DB: Store documents, passages, chunks
-  W->>E: Generate embeddings
-  E-->>W: Vectors
-  W->>DB: Store vectors and lineage
+  M->>C: Add corpus manifest entry
+  C->>P: Extract text and page spans
+  C->>C: Normalize sections and chunks
+  C->>DB: Store documents, passages, chunks
+  C->>E: Generate embeddings
+  E-->>C: Vectors
+  C->>DB: Store vectors and lineage
 ```
 
 ### Query / answer
@@ -136,31 +139,29 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-  Start["Open web app"] --> Home["Home / search"]
+  Start["Open web app"] --> Home["Home / ask"]
   Home --> Ask["Ask a question"]
-  Home --> Browse["Browse corpus"]
-  Home --> Compare["Select studies to compare"]
+  Home --> Browse["Browse corpus optional"]
   Ask --> Wait["Loading / retrieval state"]
   Wait --> Suff{"Evidence sufficient?"}
   Suff -->|No| Insuff["Show insufficient-evidence message"]
   Suff -->|Yes| Answer["Show answer + passage citations"]
   Answer --> Inspect["Open cited passage / page / section"]
   Browse --> Pub["Publication detail + metadata"]
-  Compare --> Table["Side-by-side organism, exposure, findings, limits"]
   Insuff --> Refine["Refine query or inspect corpus coverage"]
 ```
 
-### Wireframe sketch (MVP screens)
+### Wireframe sketch (August MVP screens)
 
 | Screen | Purpose | Primary elements |
 |--------|---------|------------------|
-| Search / Ask | Natural-language Q&A | Query input, submit, loading, answer, citation list |
-| Passage inspector | Verify claim | Passage text, publication title, section, page, source link |
-| Corpus browser | Explore included papers | Table/list of publications, topic filters, license status |
-| Study compare | Compare selected studies | Multi-select, comparison table of metadata/findings |
-| Maintainer (CLI/UI light) | Ingest status | Manifest entries, ingestion status, extraction quality flags |
+| Ask | Natural-language Q&A | Query input, submit, loading, answer, citation list |
+| Passage inspector | Verify claim | Passage excerpt, title, section, page, source link |
+| Corpus list (light) | See included papers | Title, topic, license/ingestion status |
+| Study compare | Deferred past August | — |
+| Maintainer | CLI ingest jobs | Manifest entries, status, extraction quality flags |
 
-UI priority: **citation visibility over decorative chrome**. Cards only where they wrap an interaction (e.g., selectable study).
+UI priority: **citation visibility over decorative chrome**.
 
 **Detail:** [USER_STORIES.md](docs/product/USER_STORIES.md).
 
@@ -220,10 +221,9 @@ Base: FastAPI under `/api/v1` (exact prefix finalized at scaffolding). All scien
 | `GET` | `/publications/{id}` | — | `Publication` + metadata |
 | `POST` | `/search` | `{ "query": str, "top_k": int, "filters"?: object }` | `{ "results": [RankedPassage...] }` |
 | `POST` | `/ask` | `{ "question": str, "top_k"?: int, "filters"?: object }` | `{ "answer": str, "citations": [...], "sufficiency": "ok"|"insufficient", "retrieval": {...} }` |
-| `POST` | `/compare` | `{ "publication_ids": [str] }` | `{ "rows": [ComparisonField...] }` |
 | `GET` | `/passages/{id}` | — | `Passage` with location fields |
-| `POST` | `/ingest/runs` | `{ "manifest_entry_id": str }` | job status (maintainer) |
-| `GET` | `/eval/benchmarks` | — | benchmark list (dev/eval) |
+| `POST` | `/compare` | — | **Deferred** past August MVP |
+| CLI | `ingest` / `eval` jobs | manifest entry / benchmark run | status on stdout / DB rows |
 
 ### Example `/ask` response
 
@@ -261,7 +261,6 @@ flowchart TD
   UI["Citation-first UI"] --> API["API routes"]
   API --> Search["Search service"]
   API --> QA["Question-answering service"]
-  API --> Compare["Study comparison service"]
   API --> Corpus["Corpus service"]
   Search --> Retrieval["Retrieval engine"]
   QA --> Retrieval
@@ -270,23 +269,24 @@ flowchart TD
   QA --> Sufficiency["Evidence sufficiency check"]
   Retrieval --> Embeddings["Embedding provider"]
   Retrieval --> Store["PostgreSQL + pgvector"]
-  Corpus --> Processing["Document processing"]
-  Processing --> Extraction["Metadata/entity extraction"]
+  Corpus --> Processing["Document processing via CLI"]
   Evaluation["Evaluation harness"] --> Retrieval
   Evaluation --> QA
 ```
 
-### RAG design choices
+### RAG design choices (locked)
 
 | Concern | Decision |
 |---------|----------|
 | Vector DB | pgvector in PostgreSQL |
-| Chunking | Section-aware, ~500–900 token overlap; versioned |
-| Embeddings | Local Sentence Transformers by default |
-| Generation | Provider abstraction; optional OpenAI |
+| Chunking | Section-aware, ~500–900 tokens, ~10–20% overlap; versioned |
+| Embeddings | Local `all-MiniLM-L6-v2` |
+| Retrieval | Vector-only; top-k 8; no hybrid/reranker in August |
+| Generation | Provider abstraction; optional OpenAI `gpt-4o-mini`; $50/mo hard cap |
 | Citations | Passage-level; validate IDs against retrieved set |
 | Failure mode | Insufficient-evidence response |
-| Agents | Service/tool boundaries only in MVP; multi-agent deferred |
+| Agents | Service boundaries only; multi-agent deferred |
+| Compare / entities | Deferred past August |
 
 **Detail:** [docs/rag/](docs/rag/CHUNKING_STRATEGY.md), [PROMPTING_STRATEGY.md](docs/rag/PROMPTING_STRATEGY.md), [CITATION_STRATEGY.md](docs/rag/CITATION_STRATEGY.md).
 
@@ -299,10 +299,10 @@ flowchart TD
   Dev["Developer machine"] --> Compose["Docker Compose"]
   Compose --> Web["web container"]
   Compose --> API["api container"]
-  Compose --> Worker["worker container"]
   Compose --> DB["postgres-pgvector volume"]
   API --> Env["Environment secrets"]
-  Worker --> Corpus["Mounted corpus directory"]
+  CLI["Ingest CLI on host or api image"] --> Corpus["Mounted corpus directory"]
+  CLI --> DB
   Cloud["Future cloud environment"] -.-> LB["Load balancer"]
   LB -.-> CloudWeb["Web service"]
   LB -.-> CloudAPI["API service"]
@@ -311,7 +311,7 @@ flowchart TD
 
 | Environment | Topology |
 |-------------|----------|
-| **MVP** | Docker Compose: web, api, worker, postgres-pgvector; secrets via env |
+| **August MVP** | Docker Compose: web, api, postgres-pgvector; CLI ingest; secrets via env |
 | **Future hosted** | Managed PostgreSQL, container hosting, HTTPS, managed secrets, backups |
 
 CI/CD intent: GitHub Actions for lint, typecheck, tests; no secrets in repo.
@@ -327,8 +327,8 @@ CI/CD intent: GitHub Actions for lint, typecheck, tests; no secrets in repo.
 | Secrets | Env vars; server-side provider keys; redacted logs |
 | Input | Treat PDF/HTML text as untrusted; no execution of extracted content |
 | Data access | ORM/parameterized queries; least-privilege DB roles when practical |
-| Auth | Not required for local MVP; add before public multi-user hosting if needed |
-| Observability | Request logs; retrieval IDs/scores; prompt version; ingestion summaries; eval outputs |
+| Auth | Out of August MVP (anonymous local use) |
+| Observability | Request logs; retrieval IDs/scores; prompt version (bodies redacted); ingestion summaries; eval outputs |
 
 **Detail:** [SECURITY_ARCHITECTURE.md](docs/architecture/SECURITY_ARCHITECTURE.md), [OBSERVABILITY.md](docs/architecture/OBSERVABILITY.md).
 
@@ -340,27 +340,32 @@ CI/CD intent: GitHub Actions for lint, typecheck, tests; no secrets in repo.
 |----------|--------|-----------|
 | Application pattern | RAG with passage citations | Scientific trust requires provenance |
 | API | FastAPI | Python-native RAG/ingest/eval stack |
-| DB + vectors | PostgreSQL + pgvector | One operational surface for MVP corpus size |
-| Separate vector SaaS | Deferred | Unnecessary cost/complexity for ~20–30 papers |
-| Frontend | Next.js + TypeScript | Strong path for citation inspection UX |
-| Graph DB (Neo4j) | Deferred | Graph useful later; not MVP-critical |
-| LLM access | Provider abstraction | Local/dev vs cloud without rewrite |
-| Multi-agent orchestration | Deferred | Focus on retrieval quality and citations first |
-| Auth provider | TBD if hosting requires accounts | Local MVP can be open; harden for public deploy |
-| Deploy platform | Compose now; cloud host TBD | Matches current approved architecture |
+| ORM | SQLAlchemy 2.x + Alembic; Pydantic API schemas | Mature migrations; clear layers |
+| Type checker | pyright | Primary checker for FastAPI/Pydantic |
+| DB + vectors | PostgreSQL + pgvector | One operational surface for ~10–15 papers |
+| Separate vector SaaS | Deferred | Unnecessary cost/complexity |
+| Embeddings | `all-MiniLM-L6-v2` local | $0 cloud embeddings |
+| LLM | Optional OpenAI `gpt-4o-mini`; $50/mo hard cap | Bound spend; local $0 mode |
+| Frontend | Next.js + TypeScript | Citation inspection UX |
+| Graph DB (Neo4j) | Deferred past August | Not August-critical |
+| Study compare | Deferred past August | Schedule cut for 2026-08-31 |
+| Multi-agent orchestration | Deferred | Focus on retrieval quality and citations |
+| Auth | Out of August MVP | Anonymous local use |
+| Deploy platform | Local Compose only for August | Public host deferred |
+| License | Apache-2.0 | Confirmed |
 
 Tracked formally in [DECISION_LOG.md](docs/governance/DECISION_LOG.md).
 
 ---
 
-## 11. Open decisions
+## 11. Deferred decisions (post-August)
 
-- SQLAlchemy vs SQLModel
-- mypy vs pyright
-- Initial embedding model and top-k / rerank defaults
-- Public deployment host (if required for demo)
-- Whether user accounts are in MVP scope for hosted environments
-- Final license confirmation (Apache-2.0 proposed)
+- Final 10–15 paper titles
+- Public hosting platform
+- Production secret manager / observability stack
+- User accounts / IAM
+- Hybrid retrieval, reranking, study compare UI
+- Per-file ADR documents (single decision log for now)
 
 ---
 
@@ -369,3 +374,4 @@ Tracked formally in [DECISION_LOG.md](docs/governance/DECISION_LOG.md).
 | Date | Change |
 |------|--------|
 | 2026-08-04 | Initial Build Phase `design.md` created from existing architecture package |
+| 2026-08-04 | Locked stack and compressed August MVP scope per decision log |

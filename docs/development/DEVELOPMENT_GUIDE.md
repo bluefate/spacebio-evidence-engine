@@ -18,7 +18,7 @@ Initial guide before code scaffolding.
 - Docker Compose for local services.
 - Pytest for Python tests.
 - Ruff for linting and formatting.
-- mypy or pyright after human decision.
+- Pyright for type checking.
 - GitHub Actions for CI.
 
 ## Diagram standards
@@ -26,6 +26,9 @@ Initial guide before code scaffolding.
 - Use color where it clarifies meaning, such as distinguishing users, services, data stores, providers, future/deferred components, review states, and risk paths.
 - Prefer restrained, consistent colors over decorative gradients.
 - Keep color semantic and readable in light and dark GitHub themes.
+
+## Package layout
+- Monorepo with `apps/api` (FastAPI) and `apps/web` (Next.js); shared `packages` deferred until needed.
 
 ## Package principles
 - Keep provider-specific model code behind abstractions.
@@ -39,8 +42,6 @@ Initial guide before code scaffolding.
 - [Testing strategy](TESTING_STRATEGY.md)
 - [Branching strategy](BRANCHING_STRATEGY.md)
 
-## Human decisions still required
-- Confirm backend package layout.
-- Choose type checker.
-- Decide whether monorepo package management is required.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

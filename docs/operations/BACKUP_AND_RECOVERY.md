@@ -23,7 +23,6 @@ Use managed database backups, object storage versioning, and recovery drills.
 - [Deployment](DEPLOYMENT.md)
 - [Security architecture](../architecture/SECURITY_ARCHITECTURE.md)
 
-## Human decisions still required
-- Approve backup frequency.
-- Decide which generated artifacts are stored versus regenerated.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

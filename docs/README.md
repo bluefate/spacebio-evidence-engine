@@ -24,7 +24,6 @@ Initial documentation package for multi-agent engineering.
 - [Technical design](../design.md)
 - [Agents](../AGENTS.md)
 
-## Human decisions still required
-- Confirm documentation ownership by area.
-- Confirm whether architecture decision records should be added as separate files.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](governance/DECISION_LOG.md).
 

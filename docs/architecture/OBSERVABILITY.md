@@ -29,7 +29,6 @@ Initial observability guidance.
 - [Evaluation strategy](../rag/EVALUATION_STRATEGY.md)
 - [Security architecture](SECURITY_ARCHITECTURE.md)
 
-## Human decisions still required
-- Approve logging detail for prompts.
-- Choose production observability stack.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

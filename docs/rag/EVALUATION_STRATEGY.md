@@ -30,7 +30,6 @@ Initial evaluation plan.
 - [Retrieval strategy](RETRIEVAL_STRATEGY.md)
 - [Citation strategy](CITATION_STRATEGY.md)
 
-## Human decisions still required
-- Approve benchmark questions.
-- Define minimum acceptance thresholds.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

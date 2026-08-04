@@ -42,7 +42,7 @@ flowchart TD
 ```
 
 ## MVP components
-Use modular Python packages for ingestion, retrieval, RAG orchestration, citation assembly, extraction, persistence, and evaluation.
+Use modular Python packages for ingestion, retrieval, RAG orchestration, citation assembly, extraction, persistence, and evaluation. API request/response schemas use Pydantic directly (not SQLModel-derived schemas); persistence uses SQLAlchemy 2.x.
 
 ## Future components
 Curated graph services, contradiction review, and evidence grading should be separate modules.
@@ -52,7 +52,6 @@ Curated graph services, contradiction review, and evidence grading should be sep
 - [Data architecture](DATA_ARCHITECTURE.md)
 - [Testing strategy](../development/TESTING_STRATEGY.md)
 
-## Human decisions still required
-- Approve internal package boundaries.
-- Decide whether API schemas use Pydantic directly or SQLModel-derived schemas.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

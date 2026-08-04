@@ -20,7 +20,6 @@ Initial lightweight code of conduct. The team may replace it with the Contributo
 - [Contributing](CONTRIBUTING.md)
 - [Agent workflow](docs/development/AGENT_WORKFLOW.md)
 
-## Human decisions still required
-- Decide whether to adopt the full Contributor Covenant.
-- Identify maintainers responsible for conduct enforcement.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](docs/governance/DECISION_LOG.md).
 

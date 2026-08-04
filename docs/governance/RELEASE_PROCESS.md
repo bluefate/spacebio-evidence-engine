@@ -22,7 +22,6 @@ Initial process.
 - [Testing strategy](../development/TESTING_STRATEGY.md)
 - [Project roadmap](PROJECT_ROADMAP.md)
 
-## Human decisions still required
-- Choose versioning scheme.
-- Define release approvers.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](DECISION_LOG.md).
 

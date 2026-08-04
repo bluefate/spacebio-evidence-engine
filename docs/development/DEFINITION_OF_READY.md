@@ -22,7 +22,6 @@ Initial readiness checklist.
 - [Pull request process](PULL_REQUEST_PROCESS.md)
 - [Traceability matrix](../governance/TRACEABILITY_MATRIX.md)
 
-## Human decisions still required
-- Approve whether issues may start without UX designs.
-- Approve readiness gate owners.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

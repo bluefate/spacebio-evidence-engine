@@ -46,7 +46,6 @@ Neo4j may be introduced when graph traversal, visualization, or relationship cur
 - [Metadata schema](../data/METADATA_SCHEMA.md)
 - [Corpus specification](../data/CORPUS_SPECIFICATION.md)
 
-## Human decisions still required
-- Approve whether extracted relationships are treated as provisional until human reviewed.
-- Approve retention policy for prompts and answer logs.
+## Decision status
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
 

@@ -4,46 +4,51 @@
 Define what the Space Biology Evidence Engine must accomplish before implementation.
 
 ## Scope
-MVP requirements for a controlled-corpus, RAG-based evidence engine with passage-level citations.
+August MVP requirements for a controlled-corpus, RAG-based evidence engine with passage-level citations. Deadline: **2026-08-31**.
 
 ## Current status
-Approved project definition converted into engineering requirements.
+Approved project definition with locked decisions (see [decision log](../governance/DECISION_LOG.md)).
 
 ## Problem
 Public space biology publications are difficult to search, compare, and synthesize for focused scientific questions. The product must help users explore the evidence while preserving citation traceability and uncertainty.
 
 ## Product vision
-Build a trustworthy evidence workspace for space biology literature, beginning with approximately 20 to 30 open-access publications in one topic area.
+Build a trustworthy evidence workspace for space biology literature, beginning with approximately **10 to 15** open-access publications on **microgravity and skeletal muscle**.
 
-## MVP functional requirements
+## August MVP functional requirements
 - Ingest controlled open-access publications.
-- Search publications using natural language.
+- Search publications using natural language (vector semantic search).
 - Answer scientific questions using RAG.
 - Ground answers only in retrieved passages.
 - Display passage-level citations.
-- Compare selected studies.
-- Inspect organisms, systems, exposures, conditions, measurements, findings, and limitations.
-- Identify candidate conflicts only when evidence context is comparable.
-- Identify corpus-limited research gaps.
 - Provide insufficient-evidence responses.
-- Show knowledge graph relationships when useful, without requiring Neo4j for MVP.
+- Support a minimal citation-first web UI.
+
+## Deferred past August MVP
+- Compare selected studies (UI).
+- Rich organism/system/exposure inspection beyond free-text metadata.
+- Candidate conflict detection.
+- Corpus-limited research gap identification.
+- Knowledge graph relationships / Neo4j.
 
 ## Nonfunctional requirements
 - Citation-first trustworthiness.
 - Repeatable ingestion and evaluation.
-- Local-first development.
+- Local-first development (Compose).
 - Modular service boundaries.
-- Clear separation between MVP and future architecture.
-- Open-source tools where practical.
+- Clear separation between August MVP and future architecture.
+- Open-source tools where practical; Apache-2.0 license.
+- LLM spend hard-capped at $50/month; local mode at $0 cloud.
+
+## Success metrics
+See [plan.md](../../plan.md) §2.1.2 and [decision log](../governance/DECISION_LOG.md).
+
+## Target user priority
+Researchers first; students/educators second.
 
 ## Related documents
 - [User stories](USER_STORIES.md)
 - [RAG architecture](../architecture/RAG_ARCHITECTURE.md)
 - [Citation strategy](../rag/CITATION_STRATEGY.md)
 - [Traceability matrix](../governance/TRACEABILITY_MATRIX.md)
-
-## Human decisions still required
-- Approve initial topic.
-- Approve MVP success metrics.
-- Confirm target user priority for first release.
-
+- [Decision log](../governance/DECISION_LOG.md)
