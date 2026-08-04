@@ -20,6 +20,8 @@ Initial documentation package for multi-agent engineering.
 
 ## Related documents
 - [Repository README](../README.md)
+- [Build plan](../plan.md)
+- [Technical design](../design.md)
 - [Agents](../AGENTS.md)
 
 ## Human decisions still required

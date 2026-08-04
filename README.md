@@ -6,8 +6,26 @@ Define and build a citation-first evidence engine for a controlled corpus of ope
 ## Scope
 The MVP focuses on retrieval-augmented generation, passage-level citations, study comparison, evidence sufficiency, and a small corpus of approximately 20 to 30 publications in one topic area. The recommended initial topic is microgravity and skeletal muscle.
 
+## Repositories
+
+| Role | Repository |
+|------|------------|
+| **Principal / development** | [bluefate/spacebio-evidence-engine](https://github.com/bluefate/spacebio-evidence-engine) |
+| **Course submission (GitHub Classroom)** | [FAU-AI-HootCamp-Summer-2026/buildphase-bluefate](https://github.com/FAU-AI-HootCamp-Summer-2026/buildphase-bluefate) |
+
+Development and day-to-day engineering happen in the principal repository. The Classroom repository is the official submission remote for AI HootCamp Summer 2026 and should stay in sync for plan, design, and incremental build deliverables.
+
+## Build Phase deliverables
+
+| Document | Description |
+|----------|-------------|
+| [plan.md](plan.md) | Project plan: summary, requirements, RAG/production/security topics, weekly milestones |
+| [design.md](design.md) | Technical design: architecture, data flow, user flow, schema, API, AI/RAG, deployment |
+
+Supporting deep-dive documentation lives under [docs/](docs/README.md).
+
 ## Current status
-Documentation-first project initialization. No implementation code has been generated yet.
+Documentation-first project initialization. No implementation code has been generated yet. Build Phase plan and design documents are in place.
 
 ## Architecture position
 The preferred stack is mostly accepted with review:
@@ -18,6 +36,8 @@ The preferred stack is mostly accepted with review:
 - Advanced multi-agent orchestration and advanced contradiction detection are future capabilities, not MVP requirements.
 
 ## Start here
+- [Build plan](plan.md)
+- [Technical design](design.md)
 - [Documentation index](docs/README.md)
 - [Product requirements](docs/product/PRODUCT_REQUIREMENTS.md)
 - [Architecture overview](docs/architecture/ARCHITECTURE.md)
