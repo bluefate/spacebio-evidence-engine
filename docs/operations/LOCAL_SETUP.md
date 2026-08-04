@@ -4,14 +4,14 @@
 Define the expected local development environment and Make targets used by humans and agents.
 
 ## Scope
-Setup, services, lint, typecheck, test, and future API/web run commands.
+Setup, services, lint, typecheck, test, and API/web run commands.
 
 ## Current status
-Make targets exist. `make api` and `make web` fail intentionally until those packages are scaffolded.
+Monorepo scaffold is in place: `apps/api` (FastAPI), `apps/web` (Next.js), Compose Postgres/pgvector.
 
 ## Expected tools
 - Python 3.12 or newer.
-- Node.js 20+ (for the MVP Next.js app when scaffolded).
+- Node.js 20+.
 - Docker and Docker Compose.
 - GNU Make.
 - `pre-commit`, Ruff, Pytest, Pyright.
@@ -21,14 +21,14 @@ Make targets exist. `make api` and `make web` fail intentionally until those pac
 Aligned with [AGENTS.md](../../AGENTS.md):
 
 ```bash
-make setup       # .env, venv, editable install, pre-commit, Compose DB
+make setup       # .env, venv, editable install, web npm install, pre-commit, Compose DB
 make services    # PostgreSQL + pgvector via Docker Compose
+make api         # uvicorn on http://localhost:8000 (GET /health)
+make web         # Next.js on http://localhost:3000
 make lint
 make typecheck
 make test
 make validate    # lint + typecheck + test
-make api         # placeholder until API package exists
-make web         # placeholder until web package exists
 ```
 
 ## Expected local services
@@ -42,6 +42,7 @@ make web         # placeholder until web package exists
 - [Development guide](../development/DEVELOPMENT_GUIDE.md)
 - [Deployment architecture](../architecture/DEPLOYMENT_ARCHITECTURE.md)
 - [Operations deployment](DEPLOYMENT.md)
+- [Backlog index](../governance/BACKLOG.md)
 
 ## Decision status
 Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).

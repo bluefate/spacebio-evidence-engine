@@ -8,6 +8,7 @@ PIP ?= pip
 RUFF ?= ruff
 PYRIGHT ?= pyright
 PYTEST ?= pytest
+UVICORN ?= uvicorn
 
 help:
 	@echo "Targets: setup api web services lint typecheck test validate"
@@ -17,16 +18,15 @@ setup:
 	@if [ ! -d .venv ]; then $(PYTHON) -m venv .venv; fi
 	@. .venv/bin/activate && $(PIP) install -e ".[dev]"
 	@. .venv/bin/activate && pre-commit install || true
+	@if [ -f apps/web/package.json ]; then cd apps/web && npm install; fi
 	@docker compose up -d
 	@echo "Setup complete. Activate with: source .venv/bin/activate"
 
 api:
-	@echo "API package not scaffolded yet. Document start command in docs/operations/LOCAL_SETUP.md when apps/api (or equivalent) exists."
-	@exit 1
+	@. .venv/bin/activate && PYTHONPATH=apps/api/src:src $(UVICORN) spacebio_api.main:app --reload --host 0.0.0.0 --port 8000
 
 web:
-	@echo "Web package not scaffolded yet. Document start command in docs/operations/LOCAL_SETUP.md when apps/web (or equivalent) exists."
-	@exit 1
+	@cd apps/web && npm run dev
 
 services:
 	@docker compose up -d
@@ -37,7 +37,7 @@ lint:
 	@$(RUFF) format --check .
 
 typecheck:
-	@$(PYRIGHT) src
+	@$(PYRIGHT)
 
 test:
 	@$(PYTEST) -q

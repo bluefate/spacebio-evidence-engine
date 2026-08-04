@@ -4,28 +4,41 @@
 Map requirements to design and verification artifacts.
 
 ## Scope
-MVP traceability.
+August MVP (deadline 2026-08-31) and deferred post-August items.
 
 ## Current status
-Initial matrix.
+Aligned with [decision log](DECISION_LOG.md) and [product requirements](../product/PRODUCT_REQUIREMENTS.md).
 
-## Matrix
-| Requirement | Design document | Verification |
+## August MVP matrix
+
+| Requirement | Design document | Verification | Tracking |
+| --- | --- | --- | --- |
+| Natural-language search (vector) | [Retrieval strategy](../rag/RETRIEVAL_STRATEGY.md) | Retrieval smoke / draft benchmarks | [Issues](https://github.com/bluefate/spacebio-evidence-engine/issues?q=label%3Amilestone%3Aretrieval) |
+| Scientific Q&A | [RAG architecture](../architecture/RAG_ARCHITECTURE.md) | Answer smoke tests | [Issues](https://github.com/bluefate/spacebio-evidence-engine/issues?q=label%3Amilestone%3Agrounded-answers) |
+| Passage-level citations | [Citation strategy](../rag/CITATION_STRATEGY.md) | Citation validation tests | Same as Q&A |
+| Evidence insufficiency | [Prompting strategy](../rag/PROMPTING_STRATEGY.md) | Insufficient-evidence tests | Same as Q&A |
+| Corpus control (~10–15 OA) | [Corpus specification](../data/CORPUS_SPECIFICATION.md) | Manifest + license review | [Issues](https://github.com/bluefate/spacebio-evidence-engine/issues?q=label%3Amilestone%3Acorpus-discovery) |
+| Minimal citation UI | [design.md](../../design.md) | Manual/smoke UI | [Issues](https://github.com/bluefate/spacebio-evidence-engine/issues?q=label%3Amilestone%3Aweb-interface) |
+| Local Compose deploy | [Deployment architecture](../architecture/DEPLOYMENT_ARCHITECTURE.md) | `make services` / local demo | [Issues](https://github.com/bluefate/spacebio-evidence-engine/issues?q=label%3Amilestone%3Afoundation) |
+
+## Deferred past August (not August MVP)
+
+| Requirement | Notes | Tracking |
 | --- | --- | --- |
-| Natural-language search | Retrieval strategy | Retrieval benchmark |
-| Scientific Q&A | RAG architecture | Answer regression tests |
-| Passage-level citations | Citation strategy | Citation validation tests |
-| Study comparison | Component architecture | Integration tests |
-| Evidence insufficiency | Prompting strategy | Insufficient-evidence benchmark |
-| Corpus control | Corpus specification | Corpus manifest review |
-| Entity inspection | Metadata schema | Extraction review |
-| Knowledge graph view | Data architecture | UI and data tests |
+| Study comparison | Cut from August MVP | e.g. [#65](https://github.com/bluefate/spacebio-evidence-engine/issues/65) (`post-august-mvp`) |
+| Hybrid / full-text / rerank retrieval | Vector-only for August | e.g. [#45](https://github.com/bluefate/spacebio-evidence-engine/issues/45), [#46](https://github.com/bluefate/spacebio-evidence-engine/issues/46), [#48](https://github.com/bluefate/spacebio-evidence-engine/issues/48) |
+| Entity inspection / extraction | Free-text metadata only in August | Post-August |
+| Knowledge graph view / Neo4j | Deferred | [Knowledge-graph milestone](https://github.com/bluefate/spacebio-evidence-engine/issues?q=label%3Amilestone%3Aknowledge-graph) |
+
+## Project board
+
+- **Project:** [Space Biology Evidence Engine](https://github.com/users/bluefate/projects/6)
+- **Issues:** [All issues](https://github.com/bluefate/spacebio-evidence-engine/issues)
+- **Backlog index:** [BACKLOG.md](BACKLOG.md)
 
 ## Related documents
 - [Product requirements](../product/PRODUCT_REQUIREMENTS.md)
 - [Testing strategy](../development/TESTING_STRATEGY.md)
 - [Evaluation strategy](../rag/EVALUATION_STRATEGY.md)
-
-## Decision status
-Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](DECISION_LOG.md).
-
+- [Decision log](DECISION_LOG.md)
+- [Build plan](../../plan.md)

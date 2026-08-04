@@ -15,6 +15,19 @@ Supporting detail lives under [`docs/`](docs/README.md). This file is the assign
 
 Development and review happen in the principal repository. The Classroom repository is the official submission remote and must remain in sync for plan, design, and incremental build deliverables.
 
+## Backlog and project (source of truth)
+
+The week-by-week table in §3 is a **schedule**. Tasks, URLs, assignees, and board status are authoritative here:
+
+| Resource | URL |
+|----------|-----|
+| **GitHub Project** | [Space Biology Evidence Engine (#6)](https://github.com/users/bluefate/projects/6) |
+| **Issues** | [Repository issues](https://github.com/bluefate/spacebio-evidence-engine/issues) |
+| **Backlog index (with issue URLs)** | [docs/governance/BACKLOG.md](docs/governance/BACKLOG.md) |
+| **Traceability** | [docs/governance/TRACEABILITY_MATRIX.md](docs/governance/TRACEABILITY_MATRIX.md) |
+
+Do not treat §3 as a substitute for claiming GitHub issues. Prefer Project column `Ready` → claim → branch → PR.
+
 ---
 
 ## 1. Project Summary
