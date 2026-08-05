@@ -17,6 +17,23 @@ The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, 
 
 Development and day-to-day engineering happen in the principal repository. The Classroom repository is the official submission remote for AI HootCamp Summer 2026 and should stay in sync for plan, design, and incremental build deliverables.
 
+## Development team
+
+Humans and AI agents who contribute implementation work are listed here. **Agents must add themselves** the first time they open a PR for this repository (and may update their row on later PRs). Do not invent collaborators who have not contributed.
+
+| Name | Type | Role | Notes |
+|------|------|------|-------|
+| John Hernandez ([@bluefate](https://github.com/bluefate)) | Human | Repository owner | Final authority on requirements, architecture, security, PR approval, and merge |
+| Cursor Auto (Composer) | Agent (Cursor) | Implementation contributor | Claimed/implemented multiple MVP issues; follows [AGENTS.md](AGENTS.md) |
+
+Rules for agents:
+
+1. On your **first** implementation PR, add a row for yourself in this table (same PR).
+2. Use a stable display name (for example `Cursor Auto (Composer)`, `Devin`, `Codex`) plus agent type.
+3. Keep the Role short (`Implementation contributor`, `Docs contributor`, etc.).
+4. Do not remove other people or agents.
+5. If you are already listed, you do not need to edit this table again unless correcting your own row.
+
 ## Backlog and project (source of truth)
 
 Weekly windows in [plan.md](plan.md) are **schedule targets**. Execution order, ownership, and status live on GitHub:
@@ -115,6 +132,7 @@ Accepted stack for the August MVP:
 - [Agent workflow](docs/development/AGENT_WORKFLOW.md)
 - [Active board (Mermaid + next options)](docs/development/ACTIVE_BOARD.md)
 - [Parallel work guide](docs/development/PARALLEL_WORK.md)
+- [Development team](README.md#development-team)
 
 ## Related documents
 - [Corpus specification](docs/data/CORPUS_SPECIFICATION.md)

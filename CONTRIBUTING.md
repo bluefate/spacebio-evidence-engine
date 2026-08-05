@@ -16,6 +16,7 @@ Initial contribution policy for a pre-implementation repository.
 - Do not add publications to the corpus without license and metadata review.
 - Do not add model-specific logic outside provider abstractions.
 - Do not claim scientific conclusions without passage-level citations.
+- AI agents must list themselves in the [Development team](README.md#development-team) table on their first implementation PR.
 
 ## Pull request expectations
 - Link the issue.

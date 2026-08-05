@@ -20,6 +20,14 @@ Closes #
 - [ ] Item 2 from the issue
 - [ ] Deferred / out of scope (link follow-up issue if needed): 
 
+## Development team
+
+<!-- REQUIRED for agent implementation PRs. -->
+
+- [ ] Added myself to [README Development team](../README.md#development-team) (first PR)
+- [ ] Already listed — no README team edit needed
+- Agent name / type:
+
 ## Summary
 
 <!-- One short paragraph: what this PR does. -->
@@ -93,6 +101,7 @@ make test
 
 - [ ] Issue linked and **Issue items** checklist filled from the issue
 - [ ] Related issues listed (or marked none)
+- [ ] Development team listing confirmed (added self or already listed)
 - [ ] Acceptance criteria / follow-up items addressed or deferred with links
 - [ ] Tests, lint, and type checks reported
 - [ ] Documentation current

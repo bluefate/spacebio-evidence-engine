@@ -98,8 +98,19 @@ Every pull request must:
 9. Identify security or privacy effects.
 10. State remaining risks.
 11. Remain unmerged until a human approves it.
+12. **List the contributing agent on the Development team** in [README.md](README.md#development-team) if this is that agent’s first implementation PR (or if the agent is missing from the table).
 
-Agents opening a PR must fill the repository PR template completely. Do not omit the **Issue items** or **Related issues** sections. Reviewers should be able to check work against the PR body without re-reading the full issue thread.
+Agents opening a PR must fill the repository PR template completely. Do not omit the **Issue items**, **Related issues**, or **Development team** sections. Reviewers should be able to check work against the PR body without re-reading the full issue thread.
+
+### Development team listing (required)
+
+Any agent that implements repository work must appear in the [Development team](README.md#development-team) table in `README.md`.
+
+- Add yourself on the **first** PR you open for this repo (same commit/PR as the work).
+- Use a clear name and agent type (Cursor, Devin, Codex, ChatGPT, Other).
+- Do not invent humans or agents who have not contributed.
+- Do not remove other rows.
+- Peer-review-only comments do not require a team row; opening or substantially updating an implementation PR does.
 
 ### Agent communication formats (required)
 

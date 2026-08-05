@@ -14,6 +14,7 @@ Active process. Agents open PRs; humans approve and merge.
 - Fill the PR template completely, including:
   - **Related issues** table (primary, related, blocked-by / assumes).
   - **Issue items** checklist copied from the issue acceptance criteria, follow-up bullets, or task list, with each item marked done or deferred (link a follow-up issue when deferred).
+  - **Development team** confirmation: agent added to [README Development team](../../README.md#development-team) on first PR, or already listed.
 - Explain the change and identify affected components.
 - List tests executed and include a clear validation report.
 - Include documentation changes (or state none were required).
