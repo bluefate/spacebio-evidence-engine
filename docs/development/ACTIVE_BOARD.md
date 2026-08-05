@@ -27,9 +27,10 @@ make refresh-board
 This runs `scripts/refresh_active_board.py`, which:
 
 1. Reads Status (+ assignees) from [Project #6](https://github.com/users/bluefate/projects/6)
-2. Reads open PR branch names linked to tracked issues
-3. Rebuilds the Mermaid subgraphs (`Done` / `In flight` / critical / parallel)
-4. Rebuilds the **Next options** priority table
+2. For in-flight issues without assignees, reads the newest issue **CLAIMED BY** claim comment
+3. Reads open PR branch names linked to tracked issues
+4. Rebuilds the Mermaid subgraphs (`Done` / `In flight` / critical / parallel), including `owner:` on in-flight nodes
+5. Rebuilds the **Next options** priority table
 
 ### When agents must refresh
 
@@ -67,6 +68,7 @@ flowchart TB
     i28["#28 PDF storage"]
     i29["#29 PDF extract"]
     i30["#30 Sections"]
+    i31["#31 Page map"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
     i51["#51 LLM provider interface"]
@@ -75,7 +77,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i31["#31 Page map<br/>branch: feature/31-page-map<br/>PR #101<br/>status: PR Open"]
+    inflight_empty["(none)"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     i32["#32 Chunking strategy"]
@@ -108,12 +110,11 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) Chunking strategy | Planning | Wait on #31 | Blocked |
+| 1 | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) Chunking strategy | Planning | Next on critical path | Overlap on same files |
 | — | [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33) Chunk metadata schema | Planning | Wait on #32 | Blocked |
 | — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Wait on #33 | Blocked |
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#31](https://github.com/bluefate/spacebio-evidence-engine/issues/31) Page map | PR Open | In flight (see claim comment; `feature/31-page-map`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
