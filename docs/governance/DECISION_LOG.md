@@ -20,6 +20,7 @@ Accepted baseline for the end-of-August 2026 MVP. Single-file decision log (no p
 | ADR-005 | Use Next.js TypeScript frontend | Accepted | Citation inspection UI path |
 | ADR-006 | Use provider abstraction for LLMs | Accepted | Local and OpenAI-backed modes |
 | ADR-007 | Use Apache-2.0 license | Accepted | Confirmed; already in repository `LICENSE` |
+| ADR-008 | Embedding provider ABC (`EmbeddingProvider`) | Accepted | Issue #39. `embed_documents` / `embed_query` + `model_name` / `dimension`. No vendor imports in the interface module; local ST and optional OpenAI are separate implementations. |
 
 ## Accepted product and delivery decisions (2026-08-04)
 
