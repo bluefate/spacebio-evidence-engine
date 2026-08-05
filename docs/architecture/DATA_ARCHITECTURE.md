@@ -38,6 +38,16 @@ flowchart LR
 ## MVP storage
 PostgreSQL stores documents, sources, passages, chunks, embeddings, entities, relationships, benchmark questions, evaluation results, and answer logs.
 
+## Database bootstrap (issue #8)
+
+Local Compose uses the `pgvector/pgvector:pg16` image (`docker-compose.yml`).
+
+1. **Fresh volumes:** SQL under `scripts/db/init/` is mounted at `/docker-entrypoint-initdb.d` and runs once on first init. It enables `CREATE EXTENSION IF NOT EXISTS vector` only — no application tables yet.
+2. **Existing volumes / smoke check:** run `make db-bootstrap` (`scripts/bootstrap_pgvector.py`). The script is idempotent and uses `DATABASE_URL` or `POSTGRES_*` from `.env`.
+3. **Later schema:** Alembic migrations will add publication/chunk/embedding tables in follow-up issues. Do not put app schema in the #8 bootstrap scripts.
+
+Connection settings are documented in `.env.example` (`DATABASE_URL`, `POSTGRES_*`).
+
 ## Future storage
 Neo4j may be introduced when graph traversal, visualization, or relationship curation exceeds PostgreSQL adjacency-query needs.
 

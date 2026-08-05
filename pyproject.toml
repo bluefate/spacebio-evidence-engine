@@ -32,6 +32,7 @@ dependencies = [
   "fastapi>=0.115",
   "uvicorn[standard]>=0.32",
   "pydantic-settings>=2.0",
+  "psycopg[binary]>=3.2",
 ]
 
 [project.optional-dependencies]
@@ -66,6 +67,9 @@ select = ["E", "F", "I", "UP", "B"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src", "apps/api/src"]
+markers = [
+  "integration: requires local services (e.g. Compose PostgreSQL)",
+]
 
 [tool.pyright]
 include = ["src", "apps/api/src", "tests"]

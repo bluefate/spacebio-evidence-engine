@@ -1,7 +1,7 @@
 # Makefile for Space Biology Evidence Engine
 # Keep targets aligned with AGENTS.md. Update AGENTS.md when tooling changes.
 
-.PHONY: setup api web services lint typecheck test validate help
+.PHONY: setup api web services db-bootstrap lint typecheck test validate help
 
 PYTHON ?= python3
 PIP ?= pip
@@ -11,7 +11,7 @@ PYTEST ?= pytest
 UVICORN ?= uvicorn
 
 help:
-	@echo "Targets: setup api web services lint typecheck test validate"
+	@echo "Targets: setup api web services db-bootstrap lint typecheck test validate"
 
 setup:
 	@test -f .env || cp .env.example .env
@@ -20,6 +20,7 @@ setup:
 	@. .venv/bin/activate && pre-commit install || true
 	@if [ -f apps/web/package.json ]; then cd apps/web && npm install; fi
 	@docker compose up -d
+	@. .venv/bin/activate && $(PYTHON) scripts/bootstrap_pgvector.py || true
 	@echo "Setup complete. Activate with: source .venv/bin/activate"
 
 api:
@@ -31,6 +32,9 @@ web:
 services:
 	@docker compose up -d
 	@echo "Started Compose services (PostgreSQL + pgvector)."
+
+db-bootstrap:
+	@. .venv/bin/activate && $(PYTHON) scripts/bootstrap_pgvector.py
 
 lint:
 	@$(RUFF) check .

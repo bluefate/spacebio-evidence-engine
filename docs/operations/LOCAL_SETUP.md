@@ -21,14 +21,29 @@ Monorepo scaffold is in place: `apps/api` (FastAPI), `apps/web` (Next.js), Compo
 Aligned with [AGENTS.md](../../AGENTS.md):
 
 ```bash
-make setup       # .env, venv, editable install, web npm install, pre-commit, Compose DB
-make services    # PostgreSQL + pgvector via Docker Compose
-make api         # uvicorn on http://localhost:8000 (GET /health)
-make web         # Next.js on http://localhost:3000
+make setup         # .env, venv, editable install, web npm install, pre-commit, Compose DB, pgvector bootstrap
+make services      # PostgreSQL + pgvector via Docker Compose
+make db-bootstrap  # Idempotent CREATE EXTENSION IF NOT EXISTS vector
+make api           # uvicorn on http://localhost:8000 (GET /health)
+make web           # Next.js on http://localhost:3000
 make lint
 make typecheck
 make test
-make validate    # lint + typecheck + test
+make validate      # lint + typecheck + test
+```
+
+## Database / pgvector
+
+1. Copy `.env.example` to `.env` and set `POSTGRES_PASSWORD` / `DATABASE_URL` (keep them consistent).
+2. `make services` starts Compose Postgres (`pgvector/pgvector:pg16` on port `5432`).
+3. `make db-bootstrap` enables the `vector` extension (needed if the data volume already existed before init scripts were added).
+4. Fresh volumes also apply `scripts/db/init/01_pgvector.sql` automatically.
+5. Application tables are **not** created here — only the extension (see issue #8).
+
+Integration smoke (optional, needs DB up):
+
+```bash
+SPACEBIO_REQUIRE_DB=1 pytest -q -m integration tests/test_pgvector_bootstrap.py
 ```
 
 ## Expected local services
