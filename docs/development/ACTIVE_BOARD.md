@@ -72,7 +72,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i29["#29 PDF extract<br/>owner: bluefate<br/>status: In Progress"]
+    i29["#29 PDF extract<br/>branch: feature/29-pdf-text-extraction<br/>PR #93<br/>owner: bluefate<br/>status: PR Open"]
     i55["#55 Insufficient evidence<br/>status: In Progress"]
   end
   subgraph nextCritical [Critical path — available / blocked]
@@ -116,7 +116,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
 | — | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | In Progress | Already claimed | **Do not claim** |
-| — | [#29](https://github.com/bluefate/spacebio-evidence-engine/issues/29) PDF extract | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
+| — | [#29](https://github.com/bluefate/spacebio-evidence-engine/issues/29) PDF extract | PR Open | In flight (bluefate; `feature/29-pdf-text-extraction`) | **Do not claim** |
 | — | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | In Progress | In flight (see claim comment; `(branch on issue claim)`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
