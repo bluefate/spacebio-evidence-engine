@@ -31,10 +31,7 @@ export default function HomePage() {
           <a className={styles.primary} href="#ask">
             Ask a question
           </a>
-          <a
-            className={styles.secondary}
-            href="https://github.com/bluefate/spacebio-evidence-engine/blob/main/docs/data/CORPUS_INVENTORY.md"
-          >
+          <a className={styles.secondary} href="/corpus">
             View corpus
           </a>
         </div>
