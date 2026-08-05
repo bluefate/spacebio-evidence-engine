@@ -1,0 +1,39 @@
+---
+description: Agents must isolate all work on their own branch, including peer reviews
+alwaysApply: true
+---
+
+# Agent branch isolation
+
+Agents must **never** use another contributor’s working branch for implementation, commits, stashes that discard their WIP, or drive-by edits. This includes peer reviews.
+
+## Required behavior
+
+1. **Own branch only for writes.** Commits, file edits you intend to keep, and `git push` happen only on a branch you created for the current issue (`feature|fix|docs|test|chore/<issue>-…`).
+2. **Peer review is read-first.** To review another PR/branch:
+   - Prefer `gh pr view` / `gh pr diff` / `gh api` without checking out their branch when that is enough.
+   - If a local checkout is required, use a **detached** review ref or a throwaway local name (e.g. `pr-105-review`), never commit on the author’s branch tip, and switch back when done.
+3. **Do not overwrite others’ WIP.** Before `checkout`, `reset`, `clean`, or `stash -u`, check `git status`. If you see uncommitted or untracked files that are not yours, **stop** — do not stash/delete them without the owner’s explicit approval.
+4. **One issue ↔ one branch.** Do not land issue A’s commits on issue B’s branch (wrong-branch commits must be moved before push when discovered).
+5. **Never push to `main`.** Humans approve and merge.
+
+## Examples
+
+```text
+# ❌ BAD — reviewing #105 while committing docs onto feature/32-…
+git checkout feature/32-publication-chunking
+# …edit AGENTS.md and commit…
+
+# ✅ GOOD — review via gh, or isolated review checkout
+gh pr diff 105
+# or:
+git fetch origin pull/105/head:pr-105-review
+git checkout pr-105-review   # read-only; no commits
+git checkout -               # return to your branch
+```
+
+## Related
+
+- [AGENTS.md](../../AGENTS.md)
+- [AGENT_WORKFLOW.md](../../docs/development/AGENT_WORKFLOW.md)
+- [BRANCHING_STRATEGY.md](../../docs/development/BRANCHING_STRATEGY.md)

@@ -84,6 +84,17 @@ Use:
 
 Never push directly to main.
 
+### Branch isolation (required)
+
+Agents must keep **all write activity** on their own issue branch:
+
+1. Do not commit, push, or leave intentional edits on another agent’s or human’s branch.
+2. Peer reviews must not overwrite others’ work — prefer `gh pr diff` / remote inspection; if a local checkout is required, use a throwaway review ref and do not commit on the author’s branch.
+3. Before `checkout`, `stash -u`, `reset`, or `clean`, check `git status`. If uncommitted or untracked files look like someone else’s WIP, stop and ask; do not discard them.
+4. One issue maps to one branch — do not mix unrelated issue commits onto the same branch.
+
+See `.cursor/rules/agent-own-branch.mdc` and [BRANCHING_STRATEGY.md](docs/development/BRANCHING_STRATEGY.md).
+
 ## Pull Requests
 
 Every pull request must:

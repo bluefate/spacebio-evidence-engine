@@ -44,6 +44,7 @@ Examples: `feature/42-citation-panel`, `fix/77-chunk-offsets`.
 - Open a PR into `main`; do not push commits to `main`.
 - Do not change branch protection settings.
 - Humans approve and merge.
+- **Branch isolation:** Never implement or commit on another contributor’s branch. Peer reviews are read-first (`gh pr diff` / throwaway review checkout). Do not stash, reset, or clean away someone else’s uncommitted or untracked WIP without explicit owner approval. See `.cursor/rules/agent-own-branch.mdc`.
 
 ## Related documents
 - [AGENTS](../../AGENTS.md)
