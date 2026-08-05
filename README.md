@@ -6,7 +6,7 @@
 Define and build a citation-first evidence engine for a controlled corpus of open-access space biology publications.
 
 ## Scope
-The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, passage-level citations, evidence sufficiency, and a small corpus of approximately **10 to 15** open-access publications on **microgravity and skeletal muscle**. Study comparison and several advanced features are deferred past August.
+The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, passage-level citations, evidence sufficiency, and a controlled corpus of **23** open-access publications on **microgravity and skeletal muscle** (see [corpus inventory](docs/data/CORPUS_INVENTORY.md)). Study comparison and several advanced features are deferred past August.
 
 ## Repositories
 
@@ -76,9 +76,9 @@ Use the refreshed board for what is free **now**. Common safe lanes:
 - Anything already in ACTIVE_BOARD **In flight**
 - Second agent on `alembic/`, `src/spacebio_evidence_engine/db/`, or the same package path
 
-### Human gate (does not block parallel coding)
+### Corpus approval
 
-Corpus list rows may still be `human_approval=pending`. Approve on [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) before bulk ingest; parallel interface/schema work can continue.
+The August MVP inventory (**23** publications) is owner-approved (`human_approval=approved` in the manifest; [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) closed). Bulk ingest can proceed subject to license/PDF QA issues.
 
 More detail: [docs/development/PARALLEL_WORK.md](docs/development/PARALLEL_WORK.md).
 
@@ -124,6 +124,5 @@ Accepted stack for the August MVP:
 - [Decision log](docs/governance/DECISION_LOG.md)
 
 ## Open follow-ons (do not block August MVP)
-- Select the final ~10–15 open-access publications for the approved topic.
 - Public hosting platform (deferred past local Compose demo).
 - Production secret manager, observability stack, and user accounts (post-August).
