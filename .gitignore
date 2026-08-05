@@ -148,8 +148,10 @@ coverage/
 !.vscode/launch.json
 *.code-workspace
 
-# Cursor
-.cursor/
+# Cursor (keep shared agent rules; ignore local IDE state)
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
 .cursorignore
 
 # JetBrains

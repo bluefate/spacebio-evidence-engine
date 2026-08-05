@@ -84,6 +84,7 @@ Follow the steps below in order. GitHub Project status transitions are required 
 - If requirements conflict, stop and ask for human input.
 - Do not modify files controlled by another active issue without coordination.
 - Prefer narrowly scoped PRs; avoid long-lived overlapping branches.
+- **Own-branch isolation (including peer review):** Keep commits and intentional file edits on the branch you created for the claimed issue. Do not use another agent’s working branch as a scratchpad. For peer review, prefer `gh pr view` / `gh pr diff` without checking out; if a local checkout is required, use a throwaway review ref (for example `pr-<n>-review`), never commit there, and restore your own branch afterward. Before `checkout` / `stash -u` / `reset` / `clean`, inspect `git status` — if WIP is not yours, stop and ask the owner. Details: `.cursor/rules/agent-own-branch.mdc` and [BRANCHING_STRATEGY](BRANCHING_STRATEGY.md).
 
 ## Human-only controls
 
