@@ -18,33 +18,32 @@ August MVP (`august-mvp` label) on [Project board #6](https://github.com/users/b
 
 ## Current critical path
 
-1. **#27** Publication metadata schema (`parallel-unsafe`) — finish first if in progress.
-2. **#28** PDF storage (`parallel-safe`) — good next parallel track.
-3. **#29 → #30 → #31** Extract → sections → page map.
+1. **#27** Publication metadata schema — **Done** (merged PR #84).
+2. **#28** PDF storage (`parallel-safe`) — Devin / parallel track.
+3. **#29 → #30 → #31** Extract → sections → page map (after #28).
 4. **#32 / #33** Chunking + chunk schema (`parallel-unsafe`).
-5. **#39 → #40 → #42 → #43 → #44** Embeddings and vector search.
+5. **#39** Embedding provider interface → **#40 → #42 → #43 → #44** Embeddings and vector search.
 6. **#51–#60** Grounded answers / API.
 7. **#61–#66** Web UI for ask/evidence/citations.
 
-## Good parallel picks while #27 is active
+## Good parallel picks while #28 / #39 are active
 
 | Issue | Label | Typical files |
 |-------|-------|----------------|
-| #28 PDF storage abstraction | parallel-safe | storage package / docs |
 | #26 Reference questions | parallel-safe | `docs/` / eval fixtures |
 | #23 License spot-check | parallel-safe | corpus docs / notes |
 | #24 Duplicates | parallel-safe | inventory scripts/docs |
 | #25 PDF quality | parallel-safe | corpus QA docs |
-| #39 Embedding provider interface | parallel-safe | provider interfaces |
-| #51 LLM provider interface | parallel-safe | provider interfaces |
+| #51 LLM provider interface | parallel-safe | provider interfaces (avoid `embeddings/`) |
 | #57 Answer response schema | parallel-safe | Pydantic schemas |
 | #55 Insufficient evidence | parallel-safe | RAG behavior module |
 | #6 / #10 / #11 Foundation polish | parallel-safe | setup / test / lint docs |
 
-## Avoid overlapping with #27
+## Avoid overlapping
 
-- Another agent on #27, #32, #33, #42, or #43 at the same time without coordination.
-- Competing edits under `alembic/` or `src/spacebio_evidence_engine/db/`.
+- **#28:** PDF storage modules / docs owned by Devin — do not edit the same paths.
+- **#39:** `src/spacebio_evidence_engine/embeddings/` until the interface PR merges; then #40 owns concrete local provider files.
+- **#32 / #33 / #42:** Competing edits under `alembic/` or `src/spacebio_evidence_engine/db/` without coordination.
 
 ## Related documents
 

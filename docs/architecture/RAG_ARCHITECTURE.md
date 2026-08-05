@@ -7,7 +7,34 @@ Define how retrieval-augmented generation grounds answers in controlled publicat
 Ingestion, retrieval, answer generation, citations, and sufficiency behavior.
 
 ## Current status
-Initial RAG architecture.
+Initial RAG architecture. Embedding **provider interface** is defined (issue #39); concrete local and OpenAI providers are follow-on issues (#40, #41).
+
+## Embedding provider interface
+
+Embeddings are accessed only through `spacebio_evidence_engine.embeddings.EmbeddingProvider`:
+
+| Member | Role |
+| --- | --- |
+| `model_name` | Stable model id stored with vectors for lineage |
+| `dimension` | Fixed output length for all vectors from the provider |
+| `embed_documents(texts)` | Batch-embed chunk/passage texts |
+| `embed_query(text)` | Embed a single retrieval query |
+
+Rules:
+
+- Call sites depend on the abstract interface, not on Sentence Transformers or OpenAI SDKs.
+- The interface module must not import provider-specific packages.
+- Local default remains `all-MiniLM-L6-v2` (D4); optional OpenAI embeddings stay behind a separate implementation.
+
+```mermaid
+flowchart LR
+  ingest[Ingest / chunk job] --> iface[EmbeddingProvider]
+  query[Retriever query] --> iface
+  iface --> local[#40 Local ST]
+  iface --> openai[#41 OpenAI optional]
+  local --> vectors[(Vectors + model_name)]
+  openai --> vectors
+```
 
 ## Ingestion sequence
 ```mermaid
