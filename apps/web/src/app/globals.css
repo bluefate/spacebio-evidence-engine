@@ -1,8 +1,12 @@
 :root {
-  --bg: #061018;
-  --fg: #e8eef4;
-  --muted: #9db0c3;
-  --accent: #2ec4b6;
+  --bg: #f4f7fa;
+  --bg-elevated: #ffffff;
+  --fg: #0b1f33;
+  --muted: #5b6f82;
+  --accent: #0f8f86;
+  --accent-strong: #0b6f69;
+  --border: rgba(11, 31, 51, 0.12);
+  --badge-bg: rgba(11, 31, 51, 0.04);
   --font-display: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
   --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
 }
