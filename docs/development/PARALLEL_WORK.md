@@ -46,26 +46,22 @@ After you claim:
 
 ## Current critical path
 
-1. **#27** Publication metadata schema — **Done** (merged PR #84).
-2. **#28** PDF storage (`parallel-safe`) — was Devin; confirm claim status on board before taking.
+1. **#27** Publication metadata schema — **Done** (PR #84).
+2. **#28** PDF storage — Devin / confirm before reclaiming.
 3. **#29 → #30 → #31** Extract → sections → page map (after #28).
 4. **#32 / #33** Chunking + chunk schema (`parallel-unsafe`).
-5. **#39** Embedding provider interface — **Done** (PR #85) → **#40 → #42 → #43 → #44**.
-6. **#51–#60** Grounded answers / API.
+5. **#39 / #40** Embedding interface + local provider — **Done** → then **#42** (after #33) → **#43 → #44**.
+6. **#51** LLM interface — **Done** → **#55 / #57** grounded answer stubs → later `/ask`.
 7. **#61–#66** Web UI for ask/evidence/citations.
 
 ## Good parallel picks (typical)
 
 | Issue | Label | Typical files |
 |-------|-------|----------------|
-| #40 Local embeddings | after #39 Done | `embeddings/` concrete provider (not interface-only) |
-| #51 LLM provider interface | parallel-safe | LLM interface package (avoid `embeddings/` if #40 active) |
 | #26 Reference questions | parallel-safe | `docs/` / eval fixtures |
-| #23 License spot-check | parallel-safe | corpus docs / notes |
-| #24 Duplicates | parallel-safe | inventory scripts/docs |
-| #25 PDF quality | parallel-safe | corpus QA docs |
-| #57 Answer response schema | parallel-safe | Pydantic schemas |
-| #55 Insufficient evidence | parallel-safe | RAG behavior module |
+| #55 Insufficient evidence | parallel-safe | RAG behavior using answer schema |
+| #57 Answer response schema | parallel-safe | `schemas/` + OpenAPI |
+| #23–#25 Corpus QA | parallel-safe | corpus docs / notes |
 | #6 / #10 / #11 Foundation polish | parallel-safe | setup / test / lint docs |
 
 Exact “what’s free right now” comes from `make refresh-board` → [ACTIVE_BOARD.md](ACTIVE_BOARD.md), not this static table.

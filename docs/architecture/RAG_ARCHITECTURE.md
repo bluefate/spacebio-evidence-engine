@@ -65,6 +65,20 @@ flowchart LR
   stub --> result
 ```
 
+## Grounded answer response schema
+
+Versioned Pydantic models live in `spacebio_evidence_engine.schemas` (issue #57). Current version: **`1.0.0`** (`GROUNDED_ANSWER_SCHEMA_VERSION`).
+
+| Model | Role |
+| --- | --- |
+| `AskRequest` | `/ask` body (`question`, `top_k`) |
+| `GroundedAnswerResponse` | Answer text, citations, sufficiency, limitations, conflicts, warnings |
+| `PassageCitation` | Passage-level provenance (`chunk_id`, publication, section, page, excerpt) |
+| `EvidenceSufficiency` | `sufficient` / `insufficient` / `marginal` plus counts |
+| `LimitationNote` / `ConflictFinding` / `AnswerWarning` | Optional scientific caveats |
+
+FastAPI registers these in OpenAPI via `POST /ask` (`response_model=GroundedAnswerResponse`). The route currently returns **501** until retrieval + generation are wired.
+
 ## Ingestion sequence
 ```mermaid
 sequenceDiagram
