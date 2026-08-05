@@ -45,6 +45,9 @@ dev = [
   "pyright>=1.1",
   "pre-commit>=4.0",
 ]
+embeddings = [
+  "sentence-transformers>=3.0",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/spacebio_evidence_engine"]
@@ -72,6 +75,7 @@ testpaths = ["tests"]
 pythonpath = ["src", "apps/api/src"]
 markers = [
   "integration: requires local services (e.g. Compose PostgreSQL)",
+  "embedding_smoke: downloads/loads real Sentence Transformers weights",
 ]
 
 [tool.pyright]

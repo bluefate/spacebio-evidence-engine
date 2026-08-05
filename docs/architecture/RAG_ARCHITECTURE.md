@@ -7,7 +7,7 @@ Define how retrieval-augmented generation grounds answers in controlled publicat
 Ingestion, retrieval, answer generation, citations, and sufficiency behavior.
 
 ## Current status
-Initial RAG architecture. Embedding **provider interface** is defined (issue #39); concrete local and OpenAI providers are follow-on issues (#40, #41).
+Initial RAG architecture. Embedding **provider interface** is defined (issue #39). **Local** Sentence Transformers provider is implemented (issue #40, `LocalEmbeddingProvider`). Optional OpenAI embeddings remain issue #41.
 
 ## Embedding provider interface
 
@@ -24,13 +24,14 @@ Rules:
 
 - Call sites depend on the abstract interface, not on Sentence Transformers or OpenAI SDKs.
 - The interface module must not import provider-specific packages.
-- Local default remains `all-MiniLM-L6-v2` (D4); optional OpenAI embeddings stay behind a separate implementation.
+- Local implementation: `LocalEmbeddingProvider` (`embeddings/local.py`), default `all-MiniLM-L6-v2` (D4). Install with `pip install -e ".[embeddings]"`.
+- Optional OpenAI embeddings stay behind a separate implementation (#41).
 
 ```mermaid
 flowchart LR
   ingest[Ingest / chunk job] --> iface[EmbeddingProvider]
   query[Retriever query] --> iface
-  iface --> local[#40 Local ST]
+  iface --> local[LocalEmbeddingProvider #40]
   iface --> openai[#41 OpenAI optional]
   local --> vectors[(Vectors + model_name)]
   openai --> vectors

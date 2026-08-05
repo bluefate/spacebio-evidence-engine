@@ -31,6 +31,34 @@ make lint
 make typecheck
 make test
 make validate      # lint + typecheck + test
+make refresh-board # regenerate docs/development/ACTIVE_BOARD.md from Project + PRs
+```
+
+## Local embeddings (issue #40)
+
+Default model: `sentence-transformers/all-MiniLM-L6-v2` (configure via `EMBEDDING_MODEL`).
+
+1. Install the optional extra (pulls `sentence-transformers` / torch):
+
+```bash
+source .venv/bin/activate
+pip install -e ".[embeddings]"
+```
+
+2. First real embed downloads weights into the Hugging Face cache (~90MB for MiniLM). Offline CI does **not** need this — unit tests inject a stub model.
+
+3. Optional live smoke (downloads weights):
+
+```bash
+pytest -q -m embedding_smoke
+```
+
+4. Construct in code:
+
+```python
+from spacebio_evidence_engine.embeddings import LocalEmbeddingProvider
+
+provider = LocalEmbeddingProvider()  # or LocalEmbeddingProvider(model_name=...)
 ```
 
 ## Database / pgvector
