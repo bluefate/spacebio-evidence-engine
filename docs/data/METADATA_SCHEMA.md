@@ -50,10 +50,15 @@ Apply: `make migrate` (or `alembic upgrade head`)
 - `passage_id`
 - `publication_id`
 - `text`
-- `page_start`
-- `page_end`
+- `page_start` / `page_end`
 - `section_label`
 - `extraction_method`
+
+Page mapping note:
+
+- `page_start` and `page_end` are 1-based page numbers when the source text can be mapped to pages.
+- If page mapping is unavailable, keep the fields `null` rather than inventing page numbers.
+- Ingestion contracts should preserve the page map from `ExtractionResult.page_map` so section and chunk spans can reuse it.
 
 *(Not persisted yet — follow-on issues.)*
 
@@ -62,8 +67,14 @@ Apply: `make migrate` (or `alembic upgrade head`)
 - `publication_id`
 - `passage_ids`
 - `chunk_text`
+- `page_start` / `page_end`
 - `embedding_model`
 - `chunking_strategy_version`
+
+Chunk page mapping note:
+
+- Preserve page bounds on chunks whenever they can be derived from source passages.
+- Missing page bounds must stay explicit as `null`; never synthesize a page.
 
 *(Not persisted yet — follow-on issues.)*
 
