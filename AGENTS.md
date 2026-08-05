@@ -22,7 +22,7 @@ Before starting work, read:
 4. docs/architecture/ARCHITECTURE.md
 5. docs/architecture/RAG_ARCHITECTURE.md
 6. docs/development/AGENT_WORKFLOW.md
-7. docs/development/ACTIVE_BOARD.md — Mermaid live board + next-task menu; update it when you claim or clear work
+7. docs/development/ACTIVE_BOARD.md — Mermaid live board + next-task menu; keep current with `make refresh-board`
 8. docs/development/DEFINITION_OF_DONE.md
 9. Documentation specific to the affected component
 
@@ -38,13 +38,15 @@ Before starting work, read:
 8. Create follow-up issues for unrelated findings.
 9. Link the pull request to the issue.
 10. Provide a handoff note if work is incomplete.
+11. Keep [ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md) current with `make refresh-board` when claiming or opening a PR so parallel agents see the tree move.
+12. Follow [PARALLEL_WORK.md](docs/development/PARALLEL_WORK.md) when more than one agent is active.
 
 ## Task Claiming System
 
 The source of truth for task state is the GitHub issue and the [GitHub Project board](https://github.com/users/bluefate/projects/6) ([issues](https://github.com/bluefate/spacebio-evidence-engine/issues), [backlog index](docs/governance/BACKLOG.md)). To prevent multiple agents from modifying the same component, follow this claiming procedure:
 
 1. Read AGENTS.md.
-2. Read [ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md). Prefer an unclaimed row from **Next options**; present that menu if asking the human what to do next.
+2. Read [ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md). Prefer an unclaimed row from **Next options**; present that menu if asking the human what to do next. Run `make refresh-board` when asking “what’s next?” or when the snapshot looks stale.
 3. Select an issue in `Ready`.
 4. If the selected task is blocked because it requires human approval, automatically look for the next `Ready`, dependency-free, parallel-safe task. Only stop when no such task exists.
 5. Check dependencies.
@@ -56,15 +58,16 @@ The source of truth for task state is the GitHub issue and the [GitHub Project b
 11. Create a branch.
 12. Post the branch name.
 13. Move the issue to `In Progress`.
-14. Implement only the defined scope.
-15. Post progress comments for long tasks.
-16. Run required validation.
-17. Open a pull request (refresh ACTIVE_BOARD.md in the same PR).
-18. Move the issue to `PR Open`.
-19. Respond to review comments.
-20. Do not approve or merge.
-21. Wait for human approval and merge.
-22. Issue moves to `Done` (keep ACTIVE_BOARD.md aligned).
+14. Run `make refresh-board` and include `docs/development/ACTIVE_BOARD.md` in the working branch.
+15. Implement only the defined scope.
+16. Post progress comments for long tasks.
+17. Run required validation.
+18. Run `make refresh-board` again, open a pull request (include refreshed ACTIVE_BOARD.md).
+19. Move the issue to `PR Open`.
+20. Respond to review comments.
+21. Do not approve or merge.
+22. Wait for human approval and merge.
+23. Issue moves to `Done` (next agent runs `make refresh-board` if the tree still shows the issue in flight).
 
 Standard comment templates (claiming, progress, handoff, blocked) are in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
 
@@ -199,6 +202,12 @@ Full validation:
 
 ```bash
 make validate
+```
+
+Refresh the shared Mermaid task board from GitHub Project + open PRs:
+
+```bash
+make refresh-board
 ```
 
 Update these commands when repository tooling changes.

@@ -44,7 +44,7 @@ Before claiming an issue, read:
 Follow the steps below in order. GitHub Project status transitions are required unless the Project is unavailable.
 
 1. **Read AGENTS.md.** Confirm the authority, task rules, and stop conditions that apply to this repository.
-2. **Read [ACTIVE_BOARD.md](ACTIVE_BOARD.md).** Use the Mermaid board and **Next options** table to pick work and to show humans/other agents what is free. Update that file in the same PR when you claim, open a PR, or clear a task.
+2. **Read [ACTIVE_BOARD.md](ACTIVE_BOARD.md).** Use the Mermaid board and **Next options** table to pick work and to show humans/other agents what is free. If the snapshot may be stale, run `make refresh-board` first.
 3. **Select an issue in Ready.** The issue must satisfy [DEFINITION_OF_READY.md](DEFINITION_OF_READY.md).
 4. **Skip human-review work.** If the selected task is blocked because it requires human approval, automatically look for the next `Ready`, dependency-free, parallel-safe task. Only stop when no such task exists.
 5. **Check dependencies.** Verify that blocking issues, upstream PRs, and required data or credentials are available. If a dependency is missing, continue searching for another `Ready`, dependency-free, parallel-safe task.
@@ -56,15 +56,16 @@ Follow the steps below in order. GitHub Project status transitions are required 
 11. **Create a branch.** Use one branch per issue following [BRANCHING_STRATEGY](BRANCHING_STRATEGY.md).
 12. **Post the branch name.** Reply on the issue with the branch name.
 13. **Move the issue to In Progress.** Update the GitHub Project status to `In Progress`.
-14. **Implement only the defined scope.** Do not expand scope or fix unrelated findings without creating a follow-up issue.
-15. **Post progress comments for long tasks.** Use the [Progress comment template](#progress-comment-template) when work spans multiple sessions or exceeds a short interval.
-16. **Run required validation.** Execute `make lint`, `make typecheck`, `make test`, and `make validate` as applicable. Fix failures before opening a PR.
-17. **Open a pull request.** Link the PR to the issue, fill out the PR template, and include a validation report. Also refresh [ACTIVE_BOARD.md](ACTIVE_BOARD.md) so other agents see the new In-flight / Next options state.
-18. **Move the issue to PR Open.** Update the GitHub Project status to `PR Open`.
-19. **Respond to review comments.** Address human and agent feedback, push follow-up commits, and re-request review when ready.
-20. **Do not approve or merge.** Agents may review and comment, but only humans may approve or merge.
-21. **Human approves and merges.** After merge, the branch may be deleted.
-22. **Issue moves to Done.** The GitHub Project status is updated to `Done`. Update [ACTIVE_BOARD.md](ACTIVE_BOARD.md) in a follow-up if the merge PR did not already move the node to Done.
+14. **Refresh the board.** Run `make refresh-board` and commit `docs/development/ACTIVE_BOARD.md` on this branch so other agents see the claim.
+15. **Implement only the defined scope.** Do not expand scope or fix unrelated findings without creating a follow-up issue.
+16. **Post progress comments for long tasks.** Use the [Progress comment template](#progress-comment-template) when work spans multiple sessions or exceeds a short interval.
+17. **Run required validation.** Execute `make lint`, `make typecheck`, `make test`, and `make validate` as applicable. Fix failures before opening a PR.
+18. **Refresh again and open a pull request.** Run `make refresh-board`, link the PR to the issue, fill out the PR template, and include a validation report plus the updated board file.
+19. **Move the issue to PR Open.** Update the GitHub Project status to `PR Open`.
+20. **Respond to review comments.** Address human and agent feedback, push follow-up commits, and re-request review when ready.
+21. **Do not approve or merge.** Agents may review and comment, but only humans may approve or merge.
+22. **Human approves and merges.** After merge, the branch may be deleted.
+23. **Issue moves to Done.** The GitHub Project status is updated to `Done`. The next agent (or a follow-up docs commit) runs `make refresh-board` so the Mermaid tree moves the issue into Done.
 
 ## Conflict prevention
 
