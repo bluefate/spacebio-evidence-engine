@@ -7,7 +7,7 @@ Define how source publications become searchable, citable evidence.
 MVP PDF-first processing using PyMuPDF, with future extraction improvements.
 
 ## Current status
-PDF storage (#28), page-level text extraction (#29), section detection (#30), and page mapping (#31) are implemented for the MVP path. Chunking and embedding remain downstream.
+PDF storage (#28), page-level text extraction (#29), section detection (#30), page mapping (#31), and section-aware chunking (#32) are implemented for the MVP path. Chunk persistence (#33) and embedding remain downstream.
 
 ## Document state flow
 ```mermaid
