@@ -60,12 +60,18 @@ Follow the steps below in order. GitHub Project status transitions are required 
 15. **Implement only the defined scope.** Do not expand scope or fix unrelated findings without creating a follow-up issue.
 16. **Post progress comments for long tasks.** Use the [Progress comment template](#progress-comment-template) when work spans multiple sessions or exceeds a short interval.
 17. **Run required validation.** Execute `make lint`, `make typecheck`, `make test`, and `make validate` as applicable. Fix failures before opening a PR.
-18. **Refresh again and open a pull request.** Run `make refresh-board`, link the PR to the issue, fill out the PR template, and include a validation report plus the updated board file.
-19. **Move the issue to PR Open.** Update the GitHub Project status to `PR Open`.
-20. **Respond to review comments.** Address human and agent feedback, push follow-up commits, and re-request review when ready.
-21. **Do not approve or merge.** Agents may review and comment, but only humans may approve or merge.
-22. **Human approves and merges.** After merge, the branch may be deleted.
-23. **Issue moves to Done.** The GitHub Project status is updated to `Done`. The next agent (or a follow-up docs commit) runs `make refresh-board` so the Mermaid tree moves the issue into Done.
+18. **Refresh again and open a pull request.** Run `make refresh-board`, link the PR to the issue, and fill out the PR template completely. Required in the PR body:
+    - **Linked issue** (`Closes #N` / `Fixes #N`)
+    - **Related issues** (primary / related / blocked-by)
+    - **Issue items** checklist copied from the issue (acceptance criteria, follow-up bullets, or task list), each marked done or deferred
+    - Validation report plus the updated board file
+    Reviewers must be able to check work from the PR body without re-reading the full issue thread.
+19. **Post a ready-for-review comment** on the issue using the Progress template (`STATUS: ready_for_review`) or the Handoff template. Include the PR URL.
+20. **Move the issue to PR Open.** Update the GitHub Project status to `PR Open`.
+21. **Respond to review comments.** Address human and agent feedback, push follow-up commits, and re-request review when ready.
+22. **Do not approve or merge.** Agents may review and comment, but only humans may approve or merge.
+23. **Human approves and merges.** After merge, the branch may be deleted.
+24. **Issue moves to Done.** The GitHub Project status is updated to `Done`. The next agent (or a follow-up docs commit) runs `make refresh-board` so the Mermaid tree moves the issue into Done.
 
 ## Conflict prevention
 
@@ -90,9 +96,13 @@ Follow the steps below in order. GitHub Project status transitions are required 
 
 ## Standard comment templates
 
+**Required.** Agents must use these headings and fields for claim, progress, handoff, and blocked comments. Do not replace them with free-form section names (for example prefer `COMPLETED` / `NEXT` over inventing `FINDING` / `CONCLUSION`). Extra bullets under those fields are fine.
+
+PR bodies must use [`.github/pull_request_template.md`](../../.github/pull_request_template.md), including **Related issues** and **Issue items**.
+
 ### Claiming comment template
 
-Use this comment when claiming an issue and after creating the branch.
+Use this comment when claiming an issue and after creating the branch. Post once; do not duplicate a bare “Branch:” line after the template unless correcting a mistake.
 
 ```markdown
 ### Claimed by agent
@@ -110,20 +120,20 @@ Use this comment when claiming an issue and after creating the branch.
 
 ### Progress comment template
 
-Use this comment for status updates on long-running issues.
+Use this comment for status updates on long-running issues, investigations, and when the PR is ready for human review.
 
 ```markdown
 ### Progress update
 
 - **STATUS:** in_progress | blocked | ready_for_review
 - **COMPLETED:**
-  - Item finished since last update
+  - Item finished since last update (include investigation findings here)
 - **NEXT:**
-  - Next step
+  - Next step (or `human review` + PR URL when ready_for_review)
 - **BLOCKERS:**
-  - Any blockers
+  - Any blockers (or `none`)
 - **SCOPE CHANGES:**
-  - Any scope changes with justification and approval
+  - Any scope changes with justification and approval (or `none`)
 - **FILES ADDED OR MODIFIED:**
   - path/to/file.ext
 ```
@@ -136,10 +146,11 @@ Use this comment when work stops (PR opened, blocked, or reassigned).
 ### Agent handoff
 
 - **WORK COMPLETED:**
-  - Summary of completed work
+  - Summary of completed work (mirror Issue items checked in the PR)
 - **WORK REMAINING:**
-  - Summary of remaining work
+  - Summary of remaining work (or `none — awaiting human merge`)
 - **BRANCH:** feature/<issue-number>-<description>
+- **PR:** https://github.com/…/pull/N
 - **LAST COMMIT:** abc1234
 - **TESTS:**
   - Tests run and results
@@ -167,7 +178,6 @@ Use this comment when work cannot continue.
 - **SAFE WORK THAT CAN CONTINUE:**
   - Any independent work that can proceed
 ```
-
 ## Architecture decisions
 
 - Record material architecture changes in [DECISION_LOG](../governance/DECISION_LOG.md) (and dedicated ADR files once that format is approved).

@@ -87,15 +87,36 @@ Never push directly to main.
 
 Every pull request must:
 
-1. Link its GitHub issue.
-2. Explain the change.
-3. Identify affected components.
-4. List tests executed.
-5. Include documentation changes.
-6. Identify migrations.
-7. Identify security or privacy effects.
-8. State remaining risks.
-9. Remain unmerged until a human approves it.
+1. Link its GitHub issue(s) (`Closes #N` / `Fixes #N`, plus any related issues).
+2. Include an **Issue items** checklist copied from the issue (acceptance criteria, follow-up bullets, or task list) with each item marked done or deferred.
+3. List related issues, blocked-by / blocking links, and dependency issues touched or assumed.
+4. Explain the change.
+5. Identify affected components.
+6. List tests executed.
+7. Include documentation changes.
+8. Identify migrations.
+9. Identify security or privacy effects.
+10. State remaining risks.
+11. Remain unmerged until a human approves it.
+
+Agents opening a PR must fill the repository PR template completely. Do not omit the **Issue items** or **Related issues** sections. Reviewers should be able to check work against the PR body without re-reading the full issue thread.
+
+### Agent communication formats (required)
+
+Use the fixed templates in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md). Do not invent alternate headings.
+
+| When | Required format | Where |
+| --- | --- | --- |
+| Claiming work | `### Claimed by agent` template | Issue comment |
+| Multi-step / investigation update | `### Progress update` template | Issue comment |
+| Opening or finishing a PR | `### Agent handoff` with `ready_for_review` (or Progress `STATUS: ready_for_review`) | Issue comment + full PR template body |
+| Blocked | `### Blocked` template | Issue comment |
+
+**Acceptable vs incomplete (example: #94 / PR #95):**
+
+- Claim comment on #94: **acceptable** — matched the claim template (agent, branch, files, deps, overlap).
+- Progress note on PR #97: **acceptable content**, **weak format** — useful finding, but used free-form `FINDING` / `CONCLUSION` instead of `COMPLETED` / `NEXT` / `BLOCKERS`.
+- PR #95 body: **incomplete for review** — filled Summary/Changes/tests, but did **not** copy #94’s five follow-up bullets into an **Issue items** checklist. Humans had to re-read the issue to verify scope.
 
 Agents may review and comment. Only humans may approve or merge.
 
