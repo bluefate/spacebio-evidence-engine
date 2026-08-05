@@ -69,7 +69,7 @@ flowchart TB
   end
   subgraph inflight [In flight — do not claim]
     i28["#28 PDF storage<br/>status: In Progress"]
-    i51["#51 LLM provider interface<br/>owner: bluefate<br/>status: In Progress"]
+    i51["#51 LLM provider interface<br/>branch: feature/51-llm-provider-interface<br/>PR #89<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     i29["#29 PDF extract"]
@@ -115,11 +115,11 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
 | 2 | [#26](https://github.com/bluefate/spacebio-evidence-engine/issues/26) Reference questions | Planning | Parallel-safe now | Overlap with in-flight files |
-| — | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | In Progress | Already claimed | **Do not claim** |
+| — | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | PR Open | Already claimed | **Do not claim** |
 | 3 | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | Planning | Parallel-safe now | Overlap with in-flight files |
 | 4 | [#57](https://github.com/bluefate/spacebio-evidence-engine/issues/57) Answer response schema | Planning | Parallel-safe now | Overlap with in-flight files |
 | — | [#28](https://github.com/bluefate/spacebio-evidence-engine/issues/28) PDF storage | In Progress | In flight (see claim comment; `(branch on issue claim)`) | **Do not claim** |
-| — | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
+| — | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | PR Open | In flight (bluefate; `feature/51-llm-provider-interface`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
