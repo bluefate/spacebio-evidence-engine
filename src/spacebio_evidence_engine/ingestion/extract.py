@@ -48,9 +48,15 @@ class ExtractionResult:
 
 @dataclass(frozen=True, slots=True)
 class PageOffsetMap:
-    """Page lookup for character offsets in an extracted document."""
+    """Page lookup for character offsets in an extracted document.
+
+    Offsets are interpreted against ``ExtractionResult.full_text``. Out-of-range
+    offsets (negative or ``>= text_length``) return ``None`` rather than inventing
+    a page number.
+    """
 
     page_starts: tuple[tuple[int, int], ...]
+    text_length: int = 0
 
     @classmethod
     def from_extraction(cls, extraction: ExtractionResult) -> PageOffsetMap:
@@ -66,11 +72,11 @@ class PageOffsetMap:
             page_starts.append((offset, page.page_number))
             offset += len(page.text)
             first = False
-        return cls(page_starts=tuple(page_starts))
+        return cls(page_starts=tuple(page_starts), text_length=offset)
 
     def page_number_for_offset(self, offset: int) -> int | None:
         """Return the 1-based page covering ``offset`` when known."""
-        if not self.page_starts:
+        if not self.page_starts or offset < 0 or offset >= self.text_length:
             return None
         current: int | None = self.page_starts[0][1]
         for start, page in self.page_starts:

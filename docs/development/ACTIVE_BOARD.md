@@ -66,6 +66,7 @@ flowchart TB
     i27["#27 Publication schema"]
     i28["#28 PDF storage"]
     i29["#29 PDF extract"]
+    i30["#30 Sections"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
     i51["#51 LLM provider interface"]
@@ -74,7 +75,6 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i30["#30 Sections<br/>branch: feature/30-section-detection<br/>PR #100<br/>status: PR Open"]
     i31["#31 Page map<br/>branch: feature/31-page-map<br/>PR #101<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
@@ -113,7 +113,6 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 | — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Wait on #33 | Blocked |
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#30](https://github.com/bluefate/spacebio-evidence-engine/issues/30) Sections | PR Open | In flight (see claim comment; `feature/30-section-detection`) | **Do not claim** |
 | — | [#31](https://github.com/bluefate/spacebio-evidence-engine/issues/31) Page map | PR Open | In flight (see claim comment; `feature/31-page-map`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->

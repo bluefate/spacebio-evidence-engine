@@ -23,9 +23,9 @@ Initial strategy.
 The system should verify that cited passage IDs were present in retrieved context before returning the answer.
 
 ## Page mapping
-- Extraction should preserve a page map from source PDFs to text offsets.
+- Extraction should preserve a page map from source PDFs to text offsets (`ExtractionResult.page_map` / `PageOffsetMap`).
 - Section spans and later chunks should reuse that map rather than inventing page numbers.
-- When a page number cannot be determined, keep the field `null` and preserve that unknown state through storage and retrieval.
+- When a page number cannot be determined — including negative or past-EOF offsets — keep the field `null` and preserve that unknown state through storage and retrieval.
 
 ## Agent preservation rules
 - Preserve publication identifiers, section names, page numbers, and source passages across ingestion, chunking, storage, retrieval, and UI.

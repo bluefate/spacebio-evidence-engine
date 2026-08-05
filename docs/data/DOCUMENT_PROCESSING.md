@@ -7,7 +7,7 @@ Define how source publications become searchable, citable evidence.
 MVP PDF-first processing using PyMuPDF, with future extraction improvements.
 
 ## Current status
-PDF storage (#28), page-level text extraction (#29), and section detection (#30) are implemented for the MVP path. Page mapping, chunking, and embedding remain downstream.
+PDF storage (#28), page-level text extraction (#29), section detection (#30), and page mapping (#31) are implemented for the MVP path. Chunking and embedding remain downstream.
 
 ## Document state flow
 ```mermaid
@@ -103,6 +103,14 @@ Rules:
 - `abstract_is_not_full_study` is always `True` — downstream must not treat abstract spans as a complete study.
 
 Fixture coverage: `tests/test_section_detection.py`.
+
+## Page mapping (issue #31)
+
+`ExtractionResult.page_map` returns a `PageOffsetMap` aligned to `full_text`:
+
+- `page_starts`: `(char_offset, page_number)` pairs for non-empty pages
+- `page_number_for_offset(offset)`: 1-based page, or `None` when offset is unknown / out of range
+- Section detection reuses `extraction.page_map.page_starts` (no duplicate join logic)
 
 ## Related documents
 - [Chunking strategy](../rag/CHUNKING_STRATEGY.md)
