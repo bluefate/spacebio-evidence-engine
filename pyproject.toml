@@ -44,9 +44,14 @@ dev = [
   "ruff>=0.9",
   "pyright>=1.1",
   "pre-commit>=4.0",
+  # PDF extraction tests/typecheck import PyMuPDF (issue #29 / PR #93).
+  "pymupdf>=1.24",
 ]
 embeddings = [
   "sentence-transformers>=3.0",
+]
+ingestion = [
+  "pymupdf>=1.24",
 ]
 
 [tool.hatch.build.targets.wheel]

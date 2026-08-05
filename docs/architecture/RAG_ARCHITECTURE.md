@@ -65,6 +65,10 @@ flowchart LR
   stub --> result
 ```
 
+## Evidence sufficiency check
+
+Before the language model is invoked, `spacebio_evidence_engine.rag.sufficiency.evaluate_sufficiency` checks that retrieved evidence crosses an MVP threshold (3 passages, 2 supporting publications by default). If the evidence is empty or weak, the pipeline returns a `GroundedAnswerResponse` with `sufficiency.status = "insufficient"` and does not call the model. See issue #55.
+
 ## Grounded answer response schema
 
 Versioned Pydantic models live in `spacebio_evidence_engine.schemas` (issue #57). Current version: **`1.0.0`** (`GROUNDED_ANSWER_SCHEMA_VERSION`).

@@ -196,6 +196,7 @@ service-account*.json
 # Project-local artifacts
 data/raw/
 data/processed/
+data/pdfs/
 corpus/files/
 tmp/
 temp/

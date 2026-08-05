@@ -82,6 +82,18 @@ The ingestion pipeline stores source PDFs through a backend selected by `PDF_STO
 - `PDF_STORAGE_BACKEND` — backend type (`local` for the default filesystem store).
 - `PDF_STORAGE_LOCAL_ROOT` — root directory for local PDF files. Default: `data/pdfs`.
 
+## PDF text extraction (issue #29)
+
+PyMuPDF is included in the `dev` extra (so `make setup` / CI `.[dev]` can typecheck and test extraction) and also in the `ingestion` extra for feature-scoped installs:
+
+```bash
+pip install -e ".[dev]"
+# or
+pip install -e ".[ingestion]"
+```
+
+Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_bytes` / `extract_pdf_path` / `extract_pdf_from_storage`. See [Document processing](../data/DOCUMENT_PROCESSING.md).
+
 ## Expected local services
 - PostgreSQL with pgvector (Compose) on port `5432`.
 - FastAPI backend (`apps/api`) on port `8000`.
