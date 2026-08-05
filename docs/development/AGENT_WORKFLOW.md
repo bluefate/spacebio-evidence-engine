@@ -50,28 +50,32 @@ Follow the steps below in order. GitHub Project status transitions are required 
 5. **Check dependencies.** Verify that blocking issues, upstream PRs, and required data or credentials are available. If a dependency is missing, continue searching for another `Ready`, dependency-free, parallel-safe task.
 6. **Check Parallel Safe.** Read the issue body and comments for a `Parallel Safe` flag or overlapping work. If the issue is not marked parallel safe and exclusive ownership is not safe, continue searching.
 7. **Check active pull requests for overlapping files.** Review open PRs for changes to the same files or components. If overlap exists, coordinate on the issue or continue searching for a non-overlapping task.
-8. **Assign the issue to yourself when supported.** If the GitHub API or repository permissions allow assignment, assign the issue to the current agent. Otherwise, proceed by comment and Project status only.
-9. **Post a claim comment.** Use the [Claiming comment template](#claiming-comment-template).
+8. **Assign the issue (required when possible).** Assign the GitHub issue to the working identity so Project/board ownership is visible:
+   - Prefer `gh issue edit <n> --add-assignee @me` (or the agent’s GitHub login) when permissions allow.
+   - If assignment is impossible (no permission / no user), still claim by comment — the board reads **CLAIMED BY** from the claim comment as a fallback owner label.
+9. **Post a claim comment.** Use the [Claiming comment template](#claiming-comment-template). The **CLAIMED BY** value must match the agent display name (and README Development team row when listed).
 10. **Move the issue to Claimed.** Update the GitHub Project status to `Claimed`.
 11. **Create a branch.** Use one branch per issue following [BRANCHING_STRATEGY](BRANCHING_STRATEGY.md).
-12. **Post the branch name.** Reply on the issue with the branch name.
-13. **Move the issue to In Progress.** Update the GitHub Project status to `In Progress`.
-14. **Refresh the board.** Run `make refresh-board` and commit `docs/development/ACTIVE_BOARD.md` on this branch so other agents see the claim.
-15. **Implement only the defined scope.** Do not expand scope or fix unrelated findings without creating a follow-up issue.
-16. **Post progress comments for long tasks.** Use the [Progress comment template](#progress-comment-template) when work spans multiple sessions or exceeds a short interval.
-17. **Run required validation.** Execute `make lint`, `make typecheck`, `make test`, and `make validate` as applicable. Fix failures before opening a PR.
-18. **Refresh again and open a pull request.** Run `make refresh-board`, link the PR to the issue, and fill out the PR template completely. Required in the PR body:
+12. **Post the branch name.** Reply on the issue with the branch name (or include it in the claim comment **BRANCH** field).
+13. **Move the issue to In Progress.** Update the GitHub Project status to `In Progress` (this is the “working” state other agents must respect).
+14. **Refresh the board.** Run `make refresh-board` and commit `docs/development/ACTIVE_BOARD.md` on this branch so other agents see the claim, owner, and In Progress / PR Open status.
+15. **Add yourself to the Development team if needed.** If your agent identity is not already in [README.md — Development team](../../README.md#development-team), add a row in the same PR. Do not invent other contributors.
+16. **Implement only the defined scope.** Do not expand scope or fix unrelated findings without creating a follow-up issue.
+17. **Post progress comments for long tasks.** Use the [Progress comment template](#progress-comment-template) when work spans multiple sessions or exceeds a short interval.
+18. **Run required validation.** Execute `make lint`, `make typecheck`, `make test`, and `make validate` as applicable. Fix failures before opening a PR.
+19. **Refresh again and open a pull request.** Run `make refresh-board`, link the PR to the issue, and fill out the PR template completely. Required in the PR body:
     - **Linked issue** (`Closes #N` / `Fixes #N`)
     - **Related issues** (primary / related / blocked-by)
     - **Issue items** checklist copied from the issue (acceptance criteria, follow-up bullets, or task list), each marked done or deferred
+    - **Development team** confirmation (added self / already listed)
     - Validation report plus the updated board file
     Reviewers must be able to check work from the PR body without re-reading the full issue thread.
-19. **Post a ready-for-review comment** on the issue using the Progress template (`STATUS: ready_for_review`) or the Handoff template. Include the PR URL.
-20. **Move the issue to PR Open.** Update the GitHub Project status to `PR Open`.
-21. **Respond to review comments.** Address human and agent feedback, push follow-up commits, and re-request review when ready.
-22. **Do not approve or merge.** Agents may review and comment, but only humans may approve or merge.
-23. **Human approves and merges.** After merge, the branch may be deleted.
-24. **Issue moves to Done.** The GitHub Project status is updated to `Done`. The next agent (or a follow-up docs commit) runs `make refresh-board` so the Mermaid tree moves the issue into Done.
+20. **Post a ready-for-review comment** on the issue using the Progress template (`STATUS: ready_for_review`) or the Handoff template. Include the PR URL.
+21. **Move the issue to PR Open.** Update the GitHub Project status to `PR Open`.
+22. **Respond to review comments.** Address human and agent feedback, push follow-up commits, and re-request review when ready.
+23. **Do not approve or merge.** Agents may review and comment, but only humans may approve or merge.
+24. **Human approves and merges.** After merge, the branch may be deleted.
+25. **Issue moves to Done.** The GitHub Project status is updated to `Done`. The next agent (or a follow-up docs commit) runs `make refresh-board` so the Mermaid tree moves the issue into Done.
 
 ## Conflict prevention
 

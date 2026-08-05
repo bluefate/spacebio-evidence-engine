@@ -6,6 +6,9 @@ agents can keep a shared snapshot current:
 
     make refresh-board
 
+In-flight owner labels prefer GitHub issue assignees; if none are set, the
+script falls back to the newest issue comment ``**CLAIMED BY:**`` value.
+
 Requires `gh` authenticated against bluefate/spacebio-evidence-engine.
 """
 
@@ -77,10 +80,20 @@ class IssueState:
     title: str
     status: str
     assignees: list[str]
+    claimed_by: str | None
     branch: str | None
     pr_number: int | None
     critical: bool
     short_title: str
+
+    @property
+    def owner_label(self) -> str | None:
+        """GitHub assignees first; else claim-comment CLAIMED BY."""
+        if self.assignees:
+            return ", ".join(self.assignees)
+        if self.claimed_by:
+            return self.claimed_by
+        return None
 
 
 def run(cmd: list[str]) -> str:
@@ -216,9 +229,10 @@ def node_label(issue: IssueState) -> str:
         parts.append(f"branch: {esc(issue.branch)}")
     if issue.pr_number:
         parts.append(f"PR #{issue.pr_number}")
-    if issue.assignees and bucket(issue.status) == "inflight":
-        parts.append(f"owner: {', '.join(issue.assignees)}")
     if bucket(issue.status) == "inflight":
+        owner = issue.owner_label
+        if owner:
+            parts.append(f"owner: {esc(owner)}")
         parts.append(f"status: {issue.status}")
     return "<br/>".join(parts)
 
@@ -324,7 +338,7 @@ def build_next_options(issues: dict[int, IssueState]) -> str:
     for number, issue in sorted(issues.items()):
         if bucket(issue.status) != "inflight":
             continue
-        owner = ", ".join(issue.assignees) if issue.assignees else "see claim comment"
+        owner = issue.owner_label or "see claim comment"
         branch = issue.branch or "(branch on issue claim)"
         rows.append(
             f"| — | [#{number}](https://github.com/{REPO}/issues/{number}) "
@@ -365,6 +379,41 @@ def normalize_status(project_status: str, issue_state: str, has_open_pr: bool) -
     return project_status
 
 
+def fetch_latest_claim_owner(number: int) -> str | None:
+    """Parse the newest ``CLAIMED BY`` value from issue comments."""
+    try:
+        raw = run(
+            [
+                "gh",
+                "api",
+                f"repos/{REPO}/issues/{number}/comments",
+                "--paginate",
+            ]
+        )
+    except RuntimeError:
+        return None
+    if not raw:
+        return None
+    try:
+        comments = json.loads(raw)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(comments, list):
+        return None
+    claimed_by_re = re.compile(
+        r"^\s*[-*]?\s*\*\*CLAIMED BY:\*\*\s*(.+?)\s*$",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    for comment in reversed(comments):
+        body = str(comment.get("body") or "")
+        if "CLAIMED BY" not in body.upper():
+            continue
+        match = claimed_by_re.search(body)
+        if match:
+            return match.group(1).strip().strip("`").strip()
+    return None
+
+
 def load_states() -> dict[int, IssueState]:
     project = fetch_project_items()
     prs = fetch_open_prs()
@@ -379,11 +428,17 @@ def load_states() -> dict[int, IssueState]:
             str(info.get("state") or "OPEN"),
             pr is not None,
         )
+        assignees = list(info.get("assignees") or [])
+        claimed_by: str | None = None
+        # Only hit the comments API for in-flight items missing assignees.
+        if not assignees and status in INFLIGHT_STATUSES:
+            claimed_by = fetch_latest_claim_owner(number)
         states[number] = IssueState(
             number=number,
             title=title,
             status=status,
-            assignees=list(info.get("assignees") or []),
+            assignees=assignees,
+            claimed_by=claimed_by,
             branch=pr[1] if pr else None,
             pr_number=pr[0] if pr else None,
             critical=bool(meta["critical"]),

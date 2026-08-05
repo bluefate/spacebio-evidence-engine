@@ -20,6 +20,7 @@ Active completion checklist. Root contract: [AGENTS.md](../../AGENTS.md).
 - Citation identifiers, sections, pages, and passages remain intact.
 - Security-sensitive changes called out for human review.
 - PR opened against `main` with issue link, **Issue items** checklist from the issue, related-issues list, validation report, and human review requested.
+- Contributing agent listed in [README Development team](../../README.md#development-team) (added in this PR if first contribution).
 - No secrets committed; `.env.example` updated if new config keys were added.
 
 ## Related documents

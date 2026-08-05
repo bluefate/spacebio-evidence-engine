@@ -52,22 +52,23 @@ The source of truth for task state is the GitHub issue and the [GitHub Project b
 5. Check dependencies.
 6. Check `Parallel Safe` in the issue.
 7. Check active pull requests for overlapping files.
-8. Assign the issue to yourself when supported.
-9. Post a claim comment using the template in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
+8. Assign the issue when possible (`gh issue edit <n> --add-assignee @me`). If assignment is impossible, still claim by comment — the board falls back to **CLAIMED BY**.
+9. Post a claim comment using the template in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md) (include **CLAIMED BY**).
 10. Move the issue to `Claimed`.
 11. Create a branch.
 12. Post the branch name.
-13. Move the issue to `In Progress`.
-14. Run `make refresh-board` and include `docs/development/ACTIVE_BOARD.md` in the working branch.
-15. Implement only the defined scope.
-16. Post progress comments for long tasks.
-17. Run required validation.
-18. Run `make refresh-board` again, open a pull request (include refreshed ACTIVE_BOARD.md).
-19. Move the issue to `PR Open`.
-20. Respond to review comments.
-21. Do not approve or merge.
-22. Wait for human approval and merge.
-23. Issue moves to `Done` (next agent runs `make refresh-board` if the tree still shows the issue in flight).
+13. Move the issue to `In Progress` (working state).
+14. Run `make refresh-board` and include `docs/development/ACTIVE_BOARD.md` in the working branch (in-flight nodes show `owner:` from assignee or CLAIMED BY).
+15. Add yourself to the [Development team](README.md#development-team) on your first implementation PR if missing.
+16. Implement only the defined scope.
+17. Post progress comments for long tasks.
+18. Run required validation.
+19. Run `make refresh-board` again, open a pull request (include refreshed ACTIVE_BOARD.md).
+20. Move the issue to `PR Open`.
+21. Respond to review comments.
+22. Do not approve or merge.
+23. Wait for human approval and merge.
+24. Issue moves to `Done` (next agent runs `make refresh-board` if the tree still shows the issue in flight).
 
 Standard comment templates (claiming, progress, handoff, blocked) are in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
 
@@ -98,8 +99,19 @@ Every pull request must:
 9. Identify security or privacy effects.
 10. State remaining risks.
 11. Remain unmerged until a human approves it.
+12. **List the contributing agent on the Development team** in [README.md](README.md#development-team) if this is that agent’s first implementation PR (or if the agent is missing from the table).
 
-Agents opening a PR must fill the repository PR template completely. Do not omit the **Issue items** or **Related issues** sections. Reviewers should be able to check work against the PR body without re-reading the full issue thread.
+Agents opening a PR must fill the repository PR template completely. Do not omit the **Issue items**, **Related issues**, or **Development team** sections. Reviewers should be able to check work against the PR body without re-reading the full issue thread.
+
+### Development team listing (required)
+
+Any agent that implements repository work must appear in the [Development team](README.md#development-team) table in `README.md`.
+
+- Add yourself on the **first** PR you open for this repo (same commit/PR as the work).
+- Use a clear name and agent type (Cursor, Devin, Codex, ChatGPT, Other).
+- Do not invent humans or agents who have not contributed.
+- Do not remove other rows.
+- Peer-review-only comments do not require a team row; opening or substantially updating an implementation PR does.
 
 ### Agent communication formats (required)
 
