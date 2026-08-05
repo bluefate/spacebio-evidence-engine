@@ -76,6 +76,7 @@ These are `parallel-unsafe` and/or share Alembic/ORM/ingest ownership:
 
 Corpus list rows are still `human_approval=pending`. Approve on [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) before bulk ingest; parallel **schema/interface** work can continue.
 
+**Live Mermaid board + next-task menu for agents:** [docs/development/ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md).  
 More detail: [docs/development/PARALLEL_WORK.md](docs/development/PARALLEL_WORK.md).
 
 ## Build Phase deliverables
@@ -109,6 +110,7 @@ Accepted stack for the August MVP:
 - [RAG architecture](docs/architecture/RAG_ARCHITECTURE.md)
 - [Development guide](docs/development/DEVELOPMENT_GUIDE.md)
 - [Agent workflow](docs/development/AGENT_WORKFLOW.md)
+- [Active board (Mermaid + next options)](docs/development/ACTIVE_BOARD.md)
 - [Parallel work guide](docs/development/PARALLEL_WORK.md)
 
 ## Related documents

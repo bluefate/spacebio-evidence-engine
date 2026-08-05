@@ -47,6 +47,7 @@ August MVP (`august-mvp` label) on [Project board #6](https://github.com/users/b
 
 ## Related documents
 
+- [Active board (Mermaid + next options)](ACTIVE_BOARD.md) — **start here** for current in-flight work and what to claim next
 - [Repository README — What to work next](../../README.md#what-to-work-next-and-what-can-run-in-parallel)
 - [Agent workflow](AGENT_WORKFLOW.md)
 - [Backlog index](../governance/BACKLOG.md)

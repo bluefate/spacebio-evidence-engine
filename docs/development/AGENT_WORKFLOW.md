@@ -44,26 +44,27 @@ Before claiming an issue, read:
 Follow the steps below in order. GitHub Project status transitions are required unless the Project is unavailable.
 
 1. **Read AGENTS.md.** Confirm the authority, task rules, and stop conditions that apply to this repository.
-2. **Select an issue in Ready.** The issue must satisfy [DEFINITION_OF_READY.md](DEFINITION_OF_READY.md).
-3. **Skip human-review work.** If the selected task is blocked because it requires human approval, automatically look for the next `Ready`, dependency-free, parallel-safe task. Only stop when no such task exists.
-4. **Check dependencies.** Verify that blocking issues, upstream PRs, and required data or credentials are available. If a dependency is missing, continue searching for another `Ready`, dependency-free, parallel-safe task.
-5. **Check Parallel Safe.** Read the issue body and comments for a `Parallel Safe` flag or overlapping work. If the issue is not marked parallel safe and exclusive ownership is not safe, continue searching.
-6. **Check active pull requests for overlapping files.** Review open PRs for changes to the same files or components. If overlap exists, coordinate on the issue or continue searching for a non-overlapping task.
-7. **Assign the issue to yourself when supported.** If the GitHub API or repository permissions allow assignment, assign the issue to the current agent. Otherwise, proceed by comment and Project status only.
-8. **Post a claim comment.** Use the [Claiming comment template](#claiming-comment-template).
-9. **Move the issue to Claimed.** Update the GitHub Project status to `Claimed`.
-10. **Create a branch.** Use one branch per issue following [BRANCHING_STRATEGY](BRANCHING_STRATEGY.md).
-11. **Post the branch name.** Reply on the issue with the branch name.
-12. **Move the issue to In Progress.** Update the GitHub Project status to `In Progress`.
-13. **Implement only the defined scope.** Do not expand scope or fix unrelated findings without creating a follow-up issue.
-14. **Post progress comments for long tasks.** Use the [Progress comment template](#progress-comment-template) when work spans multiple sessions or exceeds a short interval.
-15. **Run required validation.** Execute `make lint`, `make typecheck`, `make test`, and `make validate` as applicable. Fix failures before opening a PR.
-16. **Open a pull request.** Link the PR to the issue, fill out the PR template, and include a validation report.
-17. **Move the issue to PR Open.** Update the GitHub Project status to `PR Open`.
-18. **Respond to review comments.** Address human and agent feedback, push follow-up commits, and re-request review when ready.
-19. **Do not approve or merge.** Agents may review and comment, but only humans may approve or merge.
-20. **Human approves and merges.** After merge, the branch may be deleted.
-21. **Issue moves to Done.** The GitHub Project status is updated to `Done`.
+2. **Read [ACTIVE_BOARD.md](ACTIVE_BOARD.md).** Use the Mermaid board and **Next options** table to pick work and to show humans/other agents what is free. Update that file in the same PR when you claim, open a PR, or clear a task.
+3. **Select an issue in Ready.** The issue must satisfy [DEFINITION_OF_READY.md](DEFINITION_OF_READY.md).
+4. **Skip human-review work.** If the selected task is blocked because it requires human approval, automatically look for the next `Ready`, dependency-free, parallel-safe task. Only stop when no such task exists.
+5. **Check dependencies.** Verify that blocking issues, upstream PRs, and required data or credentials are available. If a dependency is missing, continue searching for another `Ready`, dependency-free, parallel-safe task.
+6. **Check Parallel Safe.** Read the issue body and comments for a `Parallel Safe` flag or overlapping work. If the issue is not marked parallel safe and exclusive ownership is not safe, continue searching.
+7. **Check active pull requests for overlapping files.** Review open PRs for changes to the same files or components. If overlap exists, coordinate on the issue or continue searching for a non-overlapping task.
+8. **Assign the issue to yourself when supported.** If the GitHub API or repository permissions allow assignment, assign the issue to the current agent. Otherwise, proceed by comment and Project status only.
+9. **Post a claim comment.** Use the [Claiming comment template](#claiming-comment-template).
+10. **Move the issue to Claimed.** Update the GitHub Project status to `Claimed`.
+11. **Create a branch.** Use one branch per issue following [BRANCHING_STRATEGY](BRANCHING_STRATEGY.md).
+12. **Post the branch name.** Reply on the issue with the branch name.
+13. **Move the issue to In Progress.** Update the GitHub Project status to `In Progress`.
+14. **Implement only the defined scope.** Do not expand scope or fix unrelated findings without creating a follow-up issue.
+15. **Post progress comments for long tasks.** Use the [Progress comment template](#progress-comment-template) when work spans multiple sessions or exceeds a short interval.
+16. **Run required validation.** Execute `make lint`, `make typecheck`, `make test`, and `make validate` as applicable. Fix failures before opening a PR.
+17. **Open a pull request.** Link the PR to the issue, fill out the PR template, and include a validation report. Also refresh [ACTIVE_BOARD.md](ACTIVE_BOARD.md) so other agents see the new In-flight / Next options state.
+18. **Move the issue to PR Open.** Update the GitHub Project status to `PR Open`.
+19. **Respond to review comments.** Address human and agent feedback, push follow-up commits, and re-request review when ready.
+20. **Do not approve or merge.** Agents may review and comment, but only humans may approve or merge.
+21. **Human approves and merges.** After merge, the branch may be deleted.
+22. **Issue moves to Done.** The GitHub Project status is updated to `Done`. Update [ACTIVE_BOARD.md](ACTIVE_BOARD.md) in a follow-up if the merge PR did not already move the node to Done.
 
 ## Conflict prevention
 

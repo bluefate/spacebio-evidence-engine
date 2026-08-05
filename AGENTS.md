@@ -22,8 +22,9 @@ Before starting work, read:
 4. docs/architecture/ARCHITECTURE.md
 5. docs/architecture/RAG_ARCHITECTURE.md
 6. docs/development/AGENT_WORKFLOW.md
-7. docs/development/DEFINITION_OF_DONE.md
-8. Documentation specific to the affected component
+7. docs/development/ACTIVE_BOARD.md — Mermaid live board + next-task menu; update it when you claim or clear work
+8. docs/development/DEFINITION_OF_DONE.md
+9. Documentation specific to the affected component
 
 ## Task Rules
 
@@ -43,26 +44,27 @@ Before starting work, read:
 The source of truth for task state is the GitHub issue and the [GitHub Project board](https://github.com/users/bluefate/projects/6) ([issues](https://github.com/bluefate/spacebio-evidence-engine/issues), [backlog index](docs/governance/BACKLOG.md)). To prevent multiple agents from modifying the same component, follow this claiming procedure:
 
 1. Read AGENTS.md.
-2. Select an issue in `Ready`.
-3. If the selected task is blocked because it requires human approval, automatically look for the next `Ready`, dependency-free, parallel-safe task. Only stop when no such task exists.
-4. Check dependencies.
-5. Check `Parallel Safe` in the issue.
-6. Check active pull requests for overlapping files.
-7. Assign the issue to yourself when supported.
-8. Post a claim comment using the template in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
-9. Move the issue to `Claimed`.
-10. Create a branch.
-11. Post the branch name.
-12. Move the issue to `In Progress`.
-13. Implement only the defined scope.
-14. Post progress comments for long tasks.
-15. Run required validation.
-16. Open a pull request.
-17. Move the issue to `PR Open`.
-18. Respond to review comments.
-19. Do not approve or merge.
-20. Wait for human approval and merge.
-21. Issue moves to `Done`.
+2. Read [ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md). Prefer an unclaimed row from **Next options**; present that menu if asking the human what to do next.
+3. Select an issue in `Ready`.
+4. If the selected task is blocked because it requires human approval, automatically look for the next `Ready`, dependency-free, parallel-safe task. Only stop when no such task exists.
+5. Check dependencies.
+6. Check `Parallel Safe` in the issue.
+7. Check active pull requests for overlapping files.
+8. Assign the issue to yourself when supported.
+9. Post a claim comment using the template in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
+10. Move the issue to `Claimed`.
+11. Create a branch.
+12. Post the branch name.
+13. Move the issue to `In Progress`.
+14. Implement only the defined scope.
+15. Post progress comments for long tasks.
+16. Run required validation.
+17. Open a pull request (refresh ACTIVE_BOARD.md in the same PR).
+18. Move the issue to `PR Open`.
+19. Respond to review comments.
+20. Do not approve or merge.
+21. Wait for human approval and merge.
+22. Issue moves to `Done` (keep ACTIVE_BOARD.md aligned).
 
 Standard comment templates (claiming, progress, handoff, blocked) are in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
 
@@ -228,6 +230,7 @@ Stop and request human direction when:
 
 ## Related documents
 
+- [Active board (Mermaid + next options)](docs/development/ACTIVE_BOARD.md)
 - [Agent workflow](docs/development/AGENT_WORKFLOW.md)
 - [Definition of done](docs/development/DEFINITION_OF_DONE.md)
 - [Local setup](docs/operations/LOCAL_SETUP.md)
