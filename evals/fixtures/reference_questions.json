@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.0.0",
+  "topic": "microgravity_skeletal_muscle",
+  "human_scientific_review": "pending",
+  "notes": "Questions are authored for retrieval/answer eval against the August MVP controlled corpus. They must not be answered from general model knowledge in product mode. Expected publication IDs are candidate evidence anchors, not gold passage IDs (passages do not exist until ingest).",
+  "questions": [
+    {
+      "id": "rq_01",
+      "style": "factual_lookup",
+      "question": "What skeletal muscle proteome changes were reported in astronauts after ISS spaceflight?",
+      "expected_evidence": {
+        "organism_models": ["human"],
+        "exposures": ["spaceflight"],
+        "evidence_types": ["primary_research", "proteomics"],
+        "should_be_answerable": true,
+        "candidate_publication_ids": ["pub_001", "pub_008"],
+        "notes": "Prefer astronaut ISS proteome / nitrosative stress findings; cite passage-level methods/results when ingested."
+      }
+    },
+    {
+      "id": "rq_02",
+      "style": "factual_lookup",
+      "question": "How does hindlimb unloading alter skeletal muscle in mouse models of simulated microgravity?",
+      "expected_evidence": {
+        "organism_models": ["mouse"],
+        "exposures": ["simulated_microgravity", "hindlimb_unloading"],
+        "evidence_types": ["primary_research"],
+        "should_be_answerable": true,
+        "candidate_publication_ids": ["pub_002", "pub_010", "pub_012", "pub_023"],
+        "notes": "Multiple HU studies; answer should not merge conflicting findings without labeling."
+      }
+    },
+    {
+      "id": "rq_03",
+      "style": "factual_lookup",
+      "question": "What effects does simulated microgravity have on 3D engineered skeletal muscle myogenesis and contractile function?",
+      "expected_evidence": {
+        "organism_models": ["engineered_tissue", "in_vitro"],
+        "exposures": ["simulated_microgravity"],
+        "evidence_types": ["primary_research"],
+        "should_be_answerable": true,
+        "candidate_publication_ids": ["pub_003"],
+        "notes": "Label evidence as engineered tissue, not whole-organism spaceflight."
+      }
+    },
+    {
+      "id": "rq_04",
+      "style": "factual_lookup",
+      "question": "What mechanisms of skeletal muscle atrophy in microgravity are summarized in recent reviews, and which countermeasures are discussed?",
+      "expected_evidence": {
+        "organism_models": ["human", "animal", "mixed"],
+        "exposures": ["microgravity", "spaceflight", "simulated_microgravity"],
+        "evidence_types": ["review"],
+        "should_be_answerable": true,
+        "candidate_publication_ids": ["pub_006", "pub_007"],
+        "notes": "Treat reviews as secondary; do not present review claims as primary experimental results."
+      }
+    },
+    {
+      "id": "rq_05",
+      "style": "comparison",
+      "question": "How do real spaceflight findings on human skeletal muscle compare with hindlimb-unloading mouse models of simulated microgravity?",
+      "expected_evidence": {
+        "organism_models": ["human", "mouse"],
+        "exposures": ["spaceflight", "simulated_microgravity"],
+        "evidence_types": ["primary_research", "review"],
+        "should_be_answerable": true,
+        "candidate_publication_ids": ["pub_001", "pub_002", "pub_006", "pub_020"],
+        "notes": "Must explicitly separate human spaceflight vs rodent HU evidence; note model limitations."
+      }
+    },
+    {
+      "id": "rq_06",
+      "style": "comparison",
+      "question": "Do different partial-gravity levels (for example ~0.33g vs ~0.67g) produce different skeletal muscle outcomes in available studies?",
+      "expected_evidence": {
+        "organism_models": ["animal", "rodent"],
+        "exposures": ["partial_gravity", "simulated_microgravity"],
+        "evidence_types": ["primary_research"],
+        "should_be_answerable": true,
+        "candidate_publication_ids": ["pub_014"],
+        "notes": "Anchor on partial-g study; if sparse, may be marginal sufficiency with warnings."
+      }
+    },
+    {
+      "id": "rq_07",
+      "style": "comparison",
+      "question": "How do radiation plus unloading models differ from unloading alone for skeletal muscle outcomes in rodents?",
+      "expected_evidence": {
+        "organism_models": ["mouse", "rodent"],
+        "exposures": ["hindlimb_unloading", "radiation", "combined"],
+        "evidence_types": ["primary_research"],
+        "should_be_answerable": true,
+        "candidate_publication_ids": ["pub_004", "pub_005"],
+        "notes": "Compare combined stressors vs unloading-only; preserve experimental conditions."
+      }
+    },
+    {
+      "id": "rq_08",
+      "style": "sufficiency",
+      "question": "What is the recommended clinical drug regimen to reverse astronaut sarcopenia during a Mars transit?",
+      "expected_evidence": {
+        "organism_models": [],
+        "exposures": [],
+        "evidence_types": [],
+        "should_be_answerable": false,
+        "candidate_publication_ids": [],
+        "notes": "Out of corpus scope / medical recommendation. Expect insufficient evidence; do not invent clinical guidance."
+      }
+    },
+    {
+      "id": "rq_09",
+      "style": "sufficiency",
+      "question": "Did microgravity exposure change cardiac ejection fraction in the August MVP skeletal-muscle corpus?",
+      "expected_evidence": {
+        "organism_models": [],
+        "exposures": [],
+        "evidence_types": [],
+        "should_be_answerable": false,
+        "candidate_publication_ids": [],
+        "notes": "Off-topic for microgravity_skeletal_muscle corpus. Expect insufficient evidence path."
+      }
+    },
+    {
+      "id": "rq_10",
+      "style": "factual_lookup",
+      "question": "What interventions or countermeasures (exercise preconditioning, ultrasound, extracellular vesicles, or similar) have been tested against unloading- or microgravity-related muscle atrophy in the corpus?",
+      "expected_evidence": {
+        "organism_models": ["mouse", "human", "in_vitro"],
+        "exposures": ["hindlimb_unloading", "simulated_microgravity"],
+        "evidence_types": ["primary_research"],
+        "should_be_answerable": true,
+        "candidate_publication_ids": ["pub_012", "pub_013", "pub_018", "pub_021", "pub_022"],
+        "notes": "Group by intervention type; do not claim efficacy beyond what passages support."
+      }
+    }
+  ]
+}
