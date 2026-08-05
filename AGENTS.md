@@ -22,8 +22,9 @@ Before starting work, read:
 4. docs/architecture/ARCHITECTURE.md
 5. docs/architecture/RAG_ARCHITECTURE.md
 6. docs/development/AGENT_WORKFLOW.md
-7. docs/development/DEFINITION_OF_DONE.md
-8. Documentation specific to the affected component
+7. docs/development/ACTIVE_BOARD.md — Mermaid live board + next-task menu; keep current with `make refresh-board`
+8. docs/development/DEFINITION_OF_DONE.md
+9. Documentation specific to the affected component
 
 ## Task Rules
 
@@ -37,32 +38,36 @@ Before starting work, read:
 8. Create follow-up issues for unrelated findings.
 9. Link the pull request to the issue.
 10. Provide a handoff note if work is incomplete.
+11. Keep [ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md) current with `make refresh-board` when claiming or opening a PR so parallel agents see the tree move.
+12. Follow [PARALLEL_WORK.md](docs/development/PARALLEL_WORK.md) when more than one agent is active.
 
 ## Task Claiming System
 
 The source of truth for task state is the GitHub issue and the [GitHub Project board](https://github.com/users/bluefate/projects/6) ([issues](https://github.com/bluefate/spacebio-evidence-engine/issues), [backlog index](docs/governance/BACKLOG.md)). To prevent multiple agents from modifying the same component, follow this claiming procedure:
 
 1. Read AGENTS.md.
-2. Select an issue in `Ready`.
-3. If the selected task is blocked because it requires human approval, automatically look for the next `Ready`, dependency-free, parallel-safe task. Only stop when no such task exists.
-4. Check dependencies.
-5. Check `Parallel Safe` in the issue.
-6. Check active pull requests for overlapping files.
-7. Assign the issue to yourself when supported.
-8. Post a claim comment using the template in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
-9. Move the issue to `Claimed`.
-10. Create a branch.
-11. Post the branch name.
-12. Move the issue to `In Progress`.
-13. Implement only the defined scope.
-14. Post progress comments for long tasks.
-15. Run required validation.
-16. Open a pull request.
-17. Move the issue to `PR Open`.
-18. Respond to review comments.
-19. Do not approve or merge.
-20. Wait for human approval and merge.
-21. Issue moves to `Done`.
+2. Read [ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md). Prefer an unclaimed row from **Next options**; present that menu if asking the human what to do next. Run `make refresh-board` when asking “what’s next?” or when the snapshot looks stale.
+3. Select an issue in `Ready`.
+4. If the selected task is blocked because it requires human approval, automatically look for the next `Ready`, dependency-free, parallel-safe task. Only stop when no such task exists.
+5. Check dependencies.
+6. Check `Parallel Safe` in the issue.
+7. Check active pull requests for overlapping files.
+8. Assign the issue to yourself when supported.
+9. Post a claim comment using the template in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
+10. Move the issue to `Claimed`.
+11. Create a branch.
+12. Post the branch name.
+13. Move the issue to `In Progress`.
+14. Run `make refresh-board` and include `docs/development/ACTIVE_BOARD.md` in the working branch.
+15. Implement only the defined scope.
+16. Post progress comments for long tasks.
+17. Run required validation.
+18. Run `make refresh-board` again, open a pull request (include refreshed ACTIVE_BOARD.md).
+19. Move the issue to `PR Open`.
+20. Respond to review comments.
+21. Do not approve or merge.
+22. Wait for human approval and merge.
+23. Issue moves to `Done` (next agent runs `make refresh-board` if the tree still shows the issue in flight).
 
 Standard comment templates (claiming, progress, handoff, blocked) are in [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
 
@@ -199,6 +204,12 @@ Full validation:
 make validate
 ```
 
+Refresh the shared Mermaid task board from GitHub Project + open PRs:
+
+```bash
+make refresh-board
+```
+
 Update these commands when repository tooling changes.
 
 ## Completion
@@ -228,6 +239,7 @@ Stop and request human direction when:
 
 ## Related documents
 
+- [Active board (Mermaid + next options)](docs/development/ACTIVE_BOARD.md)
 - [Agent workflow](docs/development/AGENT_WORKFLOW.md)
 - [Definition of done](docs/development/DEFINITION_OF_DONE.md)
 - [Local setup](docs/operations/LOCAL_SETUP.md)

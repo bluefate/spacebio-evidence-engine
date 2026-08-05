@@ -31,50 +31,54 @@ Claim and implement from Project status `Ready` per [AGENT_WORKFLOW.md](docs/dev
 
 ## What to work next (and what can run in parallel)
 
-**Source of truth for status:** [Project board #6](https://github.com/users/bluefate/projects/6).  
-**Rule:** one owner per issue; do not edit files owned by another active `parallel-unsafe` issue.
+**Live Mermaid board (agents must use this):** [docs/development/ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md)  
+**Refresh command:** `make refresh-board` (pulls Project #6 Status + open PR branches into the Mermaid tree)  
+**Project board:** [Project #6](https://github.com/users/bluefate/projects/6)
 
-### Critical path (mostly serial — keep moving the MVP)
+### Parallel agents — do this every time
 
-Do these in order unless a dependency is already Done:
+1. `make refresh-board`
+2. Read **Next options** in [ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md)
+3. Claim **one** issue that is not **Do not claim** / not In flight
+4. Claim comment + Project Status + branch ([AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md))
+5. `make refresh-board` again and commit `docs/development/ACTIVE_BOARD.md` in the same PR
+
+**Rule:** one owner per issue; do not edit files owned by another active issue.
+
+### Critical path (mostly serial)
 
 | Order | Issue | Notes |
 |------:|-------|-------|
 | 1 | [#27](https://github.com/bluefate/spacebio-evidence-engine/issues/27) Publication metadata schema | **Done** (PR #84) |
-| 2 | [#28](https://github.com/bluefate/spacebio-evidence-engine/issues/28) PDF storage abstraction | Devin track (`parallel-safe`) |
+| 2 | [#28](https://github.com/bluefate/spacebio-evidence-engine/issues/28) PDF storage abstraction | `parallel-safe` — check board before claiming |
 | 3 | [#29](https://github.com/bluefate/spacebio-evidence-engine/issues/29) → [#30](https://github.com/bluefate/spacebio-evidence-engine/issues/30) → [#31](https://github.com/bluefate/spacebio-evidence-engine/issues/31) | PDF extract → sections → page mapping (after #28) |
 | 4 | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) / [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33) | Chunking + chunk schema (`parallel-unsafe`) |
-| 5 | **[#39](https://github.com/bluefate/spacebio-evidence-engine/issues/39)** → [#40](https://github.com/bluefate/spacebio-evidence-engine/issues/40) → [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) → [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) → [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) | Embeddings → vector schema/index → search (**#39 in progress**) |
+| 5 | [#39](https://github.com/bluefate/spacebio-evidence-engine/issues/39) → [#40](https://github.com/bluefate/spacebio-evidence-engine/issues/40) → [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) → [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) → [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) | Embeddings → vector schema/index → search (**#39 Done**) |
 | 6 | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51)–[#60](https://github.com/bluefate/spacebio-evidence-engine/issues/60) | Grounded answer / `/ask` API |
 | 7 | [#61](https://github.com/bluefate/spacebio-evidence-engine/issues/61)–[#66](https://github.com/bluefate/spacebio-evidence-engine/issues/66) | Web ask / evidence / citation UI |
 
-### Safe to run in parallel **right now** (while #28 / #39 run)
+### Typical parallel-safe picks
 
-Pick **one** issue per agent. Prefer Project status `Ready` + label `parallel-safe`:
+Use the refreshed board for what is free **now**. Common safe lanes:
 
-| Issue | Why it is parallel-safe |
-|-------|-------------------------|
-| [#26](https://github.com/bluefate/spacebio-evidence-engine/issues/26) Ten reference research questions | Docs/eval data only |
-| [#23](https://github.com/bluefate/spacebio-evidence-engine/issues/23) License/access spot-check | Corpus rights review |
-| [#24](https://github.com/bluefate/spacebio-evidence-engine/issues/24) Duplicate detection | Inventory tooling/docs |
-| [#25](https://github.com/bluefate/spacebio-evidence-engine/issues/25) PDF quality assessment | Corpus QA notes |
-| [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | Interface stubs (not `embeddings/`) |
-| [#57](https://github.com/bluefate/spacebio-evidence-engine/issues/57) Grounded answer response schema | Pydantic schemas only |
-| [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient-evidence behavior | Spec/module without ingest tables |
-| [#49](https://github.com/bluefate/spacebio-evidence-engine/issues/49) / [#47](https://github.com/bluefate/spacebio-evidence-engine/issues/47) / [#50](https://github.com/bluefate/spacebio-evidence-engine/issues/50) | Retrieval logging / filters / eval harness (design + stubs OK) |
-| [#6](https://github.com/bluefate/spacebio-evidence-engine/issues/6) / [#10](https://github.com/bluefate/spacebio-evidence-engine/issues/10) / [#11](https://github.com/bluefate/spacebio-evidence-engine/issues/11) | Local setup / pytest / ruff polish |
+| Issue | Why parallel-safe |
+|-------|-------------------|
+| [#40](https://github.com/bluefate/spacebio-evidence-engine/issues/40) Local embeddings | After #39; owns concrete provider files |
+| [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | Interface stubs (avoid `embeddings/` if #40 active) |
+| [#26](https://github.com/bluefate/spacebio-evidence-engine/issues/26) Reference questions | Docs/eval only |
+| [#23](https://github.com/bluefate/spacebio-evidence-engine/issues/23)–[#25](https://github.com/bluefate/spacebio-evidence-engine/issues/25) | Corpus QA / licenses / duplicates |
+| [#57](https://github.com/bluefate/spacebio-evidence-engine/issues/57) / [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) | Answer schema / insufficient evidence |
+| [#6](https://github.com/bluefate/spacebio-evidence-engine/issues/6) / [#10](https://github.com/bluefate/spacebio-evidence-engine/issues/10) / [#11](https://github.com/bluefate/spacebio-evidence-engine/issues/11) | Setup / pytest / ruff polish |
 
 ### Do **not** parallelize without coordination
 
-These are `parallel-unsafe` and/or share Alembic/ORM/ingest ownership:
-
 - [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32), [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33), [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42), [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43)
-- Active owners of [#28](https://github.com/bluefate/spacebio-evidence-engine/issues/28) (PDF storage) and [#39](https://github.com/bluefate/spacebio-evidence-engine/issues/39) (`embeddings/`)
-- Any second agent on `alembic/`, `src/spacebio_evidence_engine/db/`, or the same ingest pipeline modules
+- Anything already in ACTIVE_BOARD **In flight**
+- Second agent on `alembic/`, `src/spacebio_evidence_engine/db/`, or the same package path
 
 ### Human gate (does not block parallel coding)
 
-Corpus list rows are still `human_approval=pending`. Approve on [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) before bulk ingest; parallel **schema/interface** work can continue.
+Corpus list rows may still be `human_approval=pending`. Approve on [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) before bulk ingest; parallel interface/schema work can continue.
 
 More detail: [docs/development/PARALLEL_WORK.md](docs/development/PARALLEL_WORK.md).
 
@@ -109,6 +113,7 @@ Accepted stack for the August MVP:
 - [RAG architecture](docs/architecture/RAG_ARCHITECTURE.md)
 - [Development guide](docs/development/DEVELOPMENT_GUIDE.md)
 - [Agent workflow](docs/development/AGENT_WORKFLOW.md)
+- [Active board (Mermaid + next options)](docs/development/ACTIVE_BOARD.md)
 - [Parallel work guide](docs/development/PARALLEL_WORK.md)
 
 ## Related documents

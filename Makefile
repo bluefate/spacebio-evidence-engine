@@ -1,7 +1,7 @@
 # Makefile for Space Biology Evidence Engine
 # Keep targets aligned with AGENTS.md. Update AGENTS.md when tooling changes.
 
-.PHONY: setup api web services db-bootstrap migrate lint typecheck test validate help
+.PHONY: setup api web services db-bootstrap migrate lint typecheck test validate refresh-board help
 
 PYTHON ?= python3
 PIP ?= pip
@@ -12,7 +12,7 @@ UVICORN ?= uvicorn
 ALEMBIC ?= alembic
 
 help:
-	@echo "Targets: setup api web services db-bootstrap migrate lint typecheck test validate"
+	@echo "Targets: setup api web services db-bootstrap migrate lint typecheck test validate refresh-board"
 
 setup:
 	@test -f .env || cp .env.example .env
@@ -53,3 +53,7 @@ test:
 
 validate: lint typecheck test
 	@echo "Validation passed."
+
+refresh-board:
+	@$(PYTHON) scripts/refresh_active_board.py
+	@echo "ACTIVE_BOARD.md refreshed. Commit docs/development/ACTIVE_BOARD.md with your task PR."
