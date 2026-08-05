@@ -24,6 +24,7 @@ Aligned with [AGENTS.md](../../AGENTS.md):
 make setup         # .env, venv, editable install, web npm install, pre-commit, Compose DB, pgvector bootstrap
 make services      # PostgreSQL + pgvector via Docker Compose
 make db-bootstrap  # Idempotent CREATE EXTENSION IF NOT EXISTS vector
+make migrate       # Alembic upgrade head (publications table, …)
 make api           # uvicorn on http://localhost:8000 (GET /health)
 make web           # Next.js on http://localhost:3000
 make lint

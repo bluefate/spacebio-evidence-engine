@@ -169,6 +169,12 @@ Bootstrap pgvector extension (idempotent):
 make db-bootstrap
 ```
 
+Apply database migrations:
+
+```bash
+make migrate
+```
+
 Lint:
 
 ```bash
