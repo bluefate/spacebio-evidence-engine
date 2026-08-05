@@ -59,12 +59,13 @@ Source PDFs are persisted through a storage abstraction before extraction.
 
 ## PDF text extraction (issue #29)
 
-Page-ordered plain text is extracted with PyMuPDF (`fitz`). Install the optional extra:
+Page-ordered plain text is extracted with PyMuPDF (`fitz`). Install via `dev` (CI / local validate) or the feature extra:
 
 ```bash
+pip install -e ".[dev]"
+# or
 pip install -e ".[ingestion]"
 ```
-
 API surface (`spacebio_evidence_engine.ingestion`):
 
 - `extract_pdf_bytes(data)` — extract from in-memory PDF bytes

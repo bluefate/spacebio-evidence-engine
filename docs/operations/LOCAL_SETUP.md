@@ -84,9 +84,11 @@ The ingestion pipeline stores source PDFs through a backend selected by `PDF_STO
 
 ## PDF text extraction (issue #29)
 
-Install the optional ingestion extra (PyMuPDF):
+PyMuPDF is included in the `dev` extra (so `make setup` / CI `.[dev]` can typecheck and test extraction) and also in the `ingestion` extra for feature-scoped installs:
 
 ```bash
+pip install -e ".[dev]"
+# or
 pip install -e ".[ingestion]"
 ```
 
