@@ -48,6 +48,9 @@ dev = [
 embeddings = [
   "sentence-transformers>=3.0",
 ]
+ingestion = [
+  "pymupdf>=1.24",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/spacebio_evidence_engine"]

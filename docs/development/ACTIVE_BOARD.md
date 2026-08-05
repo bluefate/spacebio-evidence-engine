@@ -64,6 +64,7 @@ flowchart TB
     i20["#20 Corpus inventory"]
     i26["#26 Reference questions"]
     i27["#27 Publication schema"]
+    i28["#28 PDF storage"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
     i51["#51 LLM provider interface"]
@@ -71,10 +72,10 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i28["#28 PDF storage<br/>branch: feature/28-pdf-storage-abstraction<br/>PR #91<br/>status: PR Open"]
+    i29["#29 PDF extract<br/>owner: bluefate<br/>status: In Progress"]
+    i55["#55 Insufficient evidence<br/>status: In Progress"]
   end
   subgraph nextCritical [Critical path — available / blocked]
-    i29["#29 PDF extract"]
     i30["#30 Sections"]
     i31["#31 Page map"]
     i32["#32 Chunking strategy"]
@@ -84,7 +85,7 @@ flowchart TB
     i44["#44 Semantic search"]
   end
   subgraph nextParallel [Parallel-safe picks — available now]
-    i55["#55 Insufficient evidence"]
+    nextParallel_empty["(none)"]
   end
   i20 --> i27
   i27 --> i28
@@ -107,7 +108,6 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#29](https://github.com/bluefate/spacebio-evidence-engine/issues/29) PDF extract | Planning | Wait on #28 | Blocked |
 | — | [#30](https://github.com/bluefate/spacebio-evidence-engine/issues/30) Sections | Planning | Wait on #29 | Blocked |
 | — | [#31](https://github.com/bluefate/spacebio-evidence-engine/issues/31) Page map | Planning | Wait on #30 | Blocked |
 | — | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) Chunking strategy | Planning | Wait on #31 | Blocked |
@@ -115,8 +115,9 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 | — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Wait on #33 | Blocked |
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| 1 | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | Planning | Parallel-safe now | Overlap with in-flight files |
-| — | [#28](https://github.com/bluefate/spacebio-evidence-engine/issues/28) PDF storage | PR Open | In flight (see claim comment; `feature/28-pdf-storage-abstraction`) | **Do not claim** |
+| — | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | In Progress | Already claimed | **Do not claim** |
+| — | [#29](https://github.com/bluefate/spacebio-evidence-engine/issues/29) PDF extract | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
+| — | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | In Progress | In flight (see claim comment; `(branch on issue claim)`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
