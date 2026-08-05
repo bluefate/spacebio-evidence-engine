@@ -18,6 +18,17 @@ Initial strategy.
 - Avoid medical or mission recommendations.
 - Version prompts and evaluate prompt changes.
 
+## Insufficient evidence handling
+
+Before any prompt is sent to the language model, the pipeline evaluates whether the retrieved evidence is strong enough to ground an answer.
+
+- **Sufficiency policy (MVP default):** at least 3 retrieved passages and at least 2 distinct supporting publications. This is intentionally conservative to prevent the model from generalizing from sparse or single-study evidence.
+- If retrieval is **empty** or **below the threshold**, the system must not call the LLM.
+- The response is a fixed, citation-free `GroundedAnswerResponse` with `sufficiency.status = "insufficient"` and an explanatory `reason`.
+- The answer text is: "Insufficient evidence in the controlled corpus to answer this question."
+
+This rule is enforced by `spacebio_evidence_engine.rag.sufficiency` (issue #55).
+
 ## Provider abstraction
 Prompts must not assume a single LLM provider. OpenAI models may be used when configured, but the application must isolate provider-specific code.
 

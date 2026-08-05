@@ -17,6 +17,7 @@ Initial strategy.
 - Omit unsupported claims.
 - Warn when evidence is based on few passages or few studies.
 - Preserve limitations when relevant.
+- **When evidence is insufficient, return no citations and no generated answer.** The system must not fabricate citations or fill gaps with model knowledge. Instead, it returns an `EvidenceSufficiency` status of `insufficient` with a clear reason (issue #55).
 
 ## Citation validation
 The system should verify that cited passage IDs were present in retrieved context before returning the answer.
