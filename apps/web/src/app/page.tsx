@@ -13,7 +13,6 @@ export default function HomePage() {
         className={styles.heroImage}
         sizes="100vw"
       />
-      <div className={styles.veil} aria-hidden />
       <section className={styles.content}>
         <Image
           src="/brand/logo-wordmark.png"

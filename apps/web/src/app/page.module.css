@@ -14,33 +14,35 @@
   z-index: 0;
 }
 
-.veil {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    90deg,
-    rgba(244, 247, 250, 0.96) 0%,
-    rgba(244, 247, 250, 0.82) 38%,
-    rgba(244, 247, 250, 0.28) 68%,
-    rgba(244, 247, 250, 0.05) 100%
-  );
-}
-
+/* Shared soft white bloom behind the whole content group */
 .content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   width: min(40rem, calc(100% - 3rem));
   margin: 0;
   padding: clamp(2rem, 6vw, 5rem);
   padding-bottom: clamp(3rem, 8vw, 6rem);
   display: grid;
   gap: 1.25rem;
+  filter:
+    drop-shadow(0 0 28px rgba(255, 255, 255, 1))
+    drop-shadow(0 0 70px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 130px rgba(255, 255, 255, 0.8))
+    drop-shadow(0 0 200px rgba(255, 255, 255, 0.55))
+    drop-shadow(0 0 280px rgba(255, 255, 255, 0.35));
 }
 
+/* Tight white outline + local glow on each piece */
 .wordmark {
   width: min(26rem, 100%);
   height: auto;
+  filter:
+    drop-shadow(1px 0 0 #fff)
+    drop-shadow(-1px 0 0 #fff)
+    drop-shadow(0 1px 0 #fff)
+    drop-shadow(0 -1px 0 #fff)
+    drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+    drop-shadow(0 0 14px rgba(255, 255, 255, 0.9));
 }
 
 .tagline {
@@ -49,6 +51,15 @@
   color: var(--muted);
   font-size: clamp(1rem, 2.2vw, 1.2rem);
   line-height: 1.5;
+  -webkit-text-stroke: 1px #fff;
+  paint-order: stroke fill;
+  text-shadow:
+    1px 0 0 #fff,
+    -1px 0 0 #fff,
+    0 1px 0 #fff,
+    0 -1px 0 #fff,
+    0 0 6px rgba(255, 255, 255, 1),
+    0 0 14px rgba(255, 255, 255, 0.9);
 }
 
 .actions {
@@ -69,6 +80,10 @@
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 0.01em;
+  border: 1px solid #0b1f33;
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 1),
+    0 0 16px rgba(255, 255, 255, 0.85);
 }
 
 .primary {
@@ -81,27 +96,17 @@
 }
 
 .secondary {
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.72);
+  background: #ffffff;
   color: var(--fg);
 }
 
 .secondary:hover {
-  border-color: rgba(11, 31, 51, 0.28);
+  border-color: #0b1f33;
 }
 
 @media (max-width: 720px) {
   .hero {
     align-items: center;
-  }
-
-  .veil {
-    background: linear-gradient(
-      180deg,
-      rgba(244, 247, 250, 0.55) 0%,
-      rgba(244, 247, 250, 0.88) 48%,
-      rgba(244, 247, 250, 0.96) 100%
-    );
   }
 
   .content {

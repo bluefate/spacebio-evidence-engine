@@ -32,6 +32,16 @@ export default function CorpusPage() {
 
   return (
     <main className={styles.page}>
+      <div className={styles.heroBackdrop} aria-hidden>
+        <Image
+          src="/brand/hero-atmosphere.png"
+          alt=""
+          fill
+          priority
+          className={styles.heroImage}
+          sizes="100vw"
+        />
+      </div>
       <header className={styles.header}>
         <Link href="/" className={styles.brand}>
           <Image
