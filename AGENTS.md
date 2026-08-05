@@ -163,6 +163,12 @@ Run services:
 make services
 ```
 
+Bootstrap pgvector extension (idempotent):
+
+```bash
+make db-bootstrap
+```
+
 Lint:
 
 ```bash

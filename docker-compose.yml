@@ -15,6 +15,8 @@ services:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - spacebio_pgdata:/var/lib/postgresql/data
+      # Runs only on first volume init; use `make db-bootstrap` for existing volumes.
+      - ./scripts/db/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-spacebio} -d ${POSTGRES_DB:-spacebio}"]
       interval: 10s
