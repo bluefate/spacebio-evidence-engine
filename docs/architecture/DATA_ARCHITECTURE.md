@@ -44,7 +44,8 @@ Local Compose uses the `pgvector/pgvector:pg16` image (`docker-compose.yml`).
 
 1. **Fresh volumes:** SQL under `scripts/db/init/` is mounted at `/docker-entrypoint-initdb.d` and runs once on first init. It enables `CREATE EXTENSION IF NOT EXISTS vector` only — no application tables yet.
 2. **Existing volumes / smoke check:** run `make db-bootstrap` (`scripts/bootstrap_pgvector.py`). The script is idempotent and uses `DATABASE_URL` or `POSTGRES_*` from `.env`.
-3. **Later schema:** Alembic migrations will add publication/chunk/embedding tables in follow-up issues. Do not put app schema in the #8 bootstrap scripts.
+3. **Publication schema (issue #27):** Alembic revision `20260805_0001` creates the `publications` table (identifiers, license, paths, ingest/approval state). ORM: `spacebio_evidence_engine.db.models.Publication`. Apply with `make migrate`. No passage/chunk/embedding tables in this revision.
+4. **Later schema:** Follow-on issues add passage/chunk/embedding tables. Do not put those in the #8 bootstrap scripts.
 
 Connection settings are documented in `.env.example` (`DATABASE_URL`, `POSTGRES_*`).
 
