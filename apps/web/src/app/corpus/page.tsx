@@ -47,32 +47,48 @@ export default function CorpusPage() {
         </div>
       </header>
 
-      <ol className={styles.list}>
-        {publications.map((pub) => (
-          <li key={pub.id} className={styles.item}>
-            <div className={styles.meta}>
-              <span className={styles.id}>{pub.id}</span>
-              <span className={styles.year}>{pub.year}</span>
-              <span className={styles.license}>{formatLicense(pub.license)}</span>
-            </div>
-            <h2 className={styles.title}>{pub.title}</h2>
-            <p className={styles.details}>
-              <span>{formatLabel(pub.organism)}</span>
-              <span aria-hidden>·</span>
-              <span>{formatLabel(pub.exposure)}</span>
-            </p>
-            <p className={styles.notes}>{pub.notes}</p>
-            <div className={styles.links}>
-              <a href={pub.sourceUrl} target="_blank" rel="noreferrer">
-                View at DOI
-              </a>
-              <span className={styles.status}>
-                {pub.approval} · {formatLabel(pub.ingestion)}
-              </span>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <div className={styles.tableWrap}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Year</th>
+              <th scope="col">Title</th>
+              <th scope="col">Model</th>
+              <th scope="col">Exposure</th>
+              <th scope="col">License</th>
+              <th scope="col">Status</th>
+              <th scope="col">DOI</th>
+            </tr>
+          </thead>
+          <tbody>
+            {publications.map((pub) => (
+              <tr key={pub.id}>
+                <td className={styles.idCell}>{pub.id}</td>
+                <td>{pub.year}</td>
+                <td className={styles.titleCell}>
+                  <span className={styles.title}>{pub.title}</span>
+                  <span className={styles.notes}>{pub.notes}</span>
+                </td>
+                <td>{formatLabel(pub.organism)}</td>
+                <td>{formatLabel(pub.exposure)}</td>
+                <td className={styles.licenseCell}>{formatLicense(pub.license)}</td>
+                <td className={styles.statusCell}>
+                  {pub.approval}
+                  <span className={styles.statusSub}>
+                    {formatLabel(pub.ingestion)}
+                  </span>
+                </td>
+                <td>
+                  <a href={pub.sourceUrl} target="_blank" rel="noreferrer">
+                    Open
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </main>
   );
 }
