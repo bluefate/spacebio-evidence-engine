@@ -40,6 +40,46 @@ class ExtractionResult:
         """Concatenate page texts in page order with blank-line separators."""
         return "\n\n".join(page.text for page in self.pages if page.text)
 
+    @property
+    def page_map(self) -> PageOffsetMap:
+        """Return a reusable page-to-offset map for this extraction."""
+        return PageOffsetMap.from_extraction(self)
+
+
+@dataclass(frozen=True, slots=True)
+class PageOffsetMap:
+    """Page lookup for character offsets in an extracted document."""
+
+    page_starts: tuple[tuple[int, int], ...]
+
+    @classmethod
+    def from_extraction(cls, extraction: ExtractionResult) -> PageOffsetMap:
+        """Build a page map from an extraction result."""
+        page_starts: list[tuple[int, int]] = []
+        offset = 0
+        first = True
+        for page in extraction.pages:
+            if not page.text:
+                continue
+            if not first:
+                offset += 2
+            page_starts.append((offset, page.page_number))
+            offset += len(page.text)
+            first = False
+        return cls(page_starts=tuple(page_starts))
+
+    def page_number_for_offset(self, offset: int) -> int | None:
+        """Return the 1-based page covering ``offset`` when known."""
+        if not self.page_starts:
+            return None
+        current: int | None = self.page_starts[0][1]
+        for start, page in self.page_starts:
+            if offset >= start:
+                current = page
+            else:
+                break
+        return current
+
 
 def extract_pdf_bytes(data: bytes, *, source_key: str | None = None) -> ExtractionResult:
     """Extract page-ordered text from PDF bytes.

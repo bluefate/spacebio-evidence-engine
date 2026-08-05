@@ -8,6 +8,7 @@ from spacebio_evidence_engine.ingestion.errors import (
 from spacebio_evidence_engine.ingestion.extract import (
     ExtractedPage,
     ExtractionResult,
+    PageOffsetMap,
     extract_pdf_bytes,
     extract_pdf_from_storage,
     extract_pdf_path,
@@ -24,6 +25,7 @@ from spacebio_evidence_engine.ingestion.sections import (
 __all__ = [
     "ExtractedPage",
     "ExtractionResult",
+    "PageOffsetMap",
     "PDFEmptyError",
     "PDFExtractionError",
     "PDFOpenError",

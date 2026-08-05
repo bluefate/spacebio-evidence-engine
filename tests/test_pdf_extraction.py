@@ -46,6 +46,8 @@ def test_extract_returns_page_ordered_text(sample_pdf: Path) -> None:
     result = extract_pdf_path(sample_pdf)
     assert result.page_count == 2
     assert [p.page_number for p in result.pages] == [1, 2]
+    assert result.page_map.page_starts[0] == (0, 1)
+    assert result.page_map.page_number_for_offset(0) == 1
     texts = page_texts(result)
     assert "page one" in texts[0].lower()
     assert "page two" in texts[1].lower()
@@ -58,6 +60,7 @@ def test_extract_pdf_bytes_and_storage(sample_pdf: Path, tmp_path: Path) -> None
     from_bytes = extract_pdf_bytes(data, source_key="inline")
     assert from_bytes.page_count == 2
     assert from_bytes.source_key == "inline"
+    assert from_bytes.page_map.page_number_for_offset(9999) == 2
 
     storage = LocalFileStorage(tmp_path)
     key = storage.put("pub_test", "sample.pdf", data)

@@ -215,33 +215,13 @@ def detect_sections_from_text(
 
 def detect_sections(extraction: ExtractionResult) -> SectionDetectionResult:
     """Detect sections from a page-ordered extraction result."""
-    full_text, page_starts = _full_text_with_page_starts(extraction)
+    full_text = extraction.full_text
+    page_starts = extraction.page_map.page_starts
     return detect_sections_from_text(
         full_text,
         page_starts=page_starts,
         source_key=extraction.source_key,
     )
-
-
-def _full_text_with_page_starts(
-    extraction: ExtractionResult,
-) -> tuple[str, tuple[tuple[int, int], ...]]:
-    """Rebuild ``full_text`` and record the char offset where each page begins."""
-    parts: list[str] = []
-    page_starts: list[tuple[int, int]] = []
-    offset = 0
-    first = True
-    for page in extraction.pages:
-        if not page.text:
-            continue
-        if not first:
-            parts.append("\n\n")
-            offset += 2
-        page_starts.append((offset, page.page_number))
-        parts.append(page.text)
-        offset += len(page.text)
-        first = False
-    return "".join(parts), tuple(page_starts)
 
 
 def _find_headings(text: str) -> list[_HeadingMatch]:
