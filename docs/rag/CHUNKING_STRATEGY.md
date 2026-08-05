@@ -29,6 +29,7 @@ Implemented in `spacebio_evidence_engine.ingestion.chunking` (issue #32). Persis
 | Max tokens | 900 | Soft cap; sentence boundaries may slightly overshoot |
 | Overlap | 15% | Applied when a single section exceeds max |
 | Token estimate | whitespace words | No tokenizer dependency in MVP |
+| Oversized units | whitespace expand | Sentence/line spans above max are split on words so punctuation-free text still respects max |
 
 API entry points:
 

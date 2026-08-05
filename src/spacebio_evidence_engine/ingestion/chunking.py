@@ -276,7 +276,7 @@ def _split_with_overlap(
     policy: ChunkingPolicy,
 ) -> list[tuple[int, int, str]]:
     """Return (local_start, local_end, substring) windows with overlap."""
-    units = _sentence_units(text)
+    units = _sentence_units(text, max_tokens=policy.max_tokens)
     if not units:
         return [(0, len(text), text)] if text else []
 
@@ -288,10 +288,13 @@ def _split_with_overlap(
     while index < len(units):
         token_sum = 0
         end = index
-        while end < len(units) and token_sum < target:
-            token_sum += units[end][2]
+        while end < len(units):
+            next_tokens = units[end][2]
+            if token_sum > 0 and token_sum + next_tokens > policy.max_tokens:
+                break
+            token_sum += next_tokens
             end += 1
-            if token_sum >= policy.max_tokens:
+            if token_sum >= target:
                 break
 
         # Always advance at least one unit to avoid infinite loops.
@@ -316,22 +319,44 @@ def _split_with_overlap(
     return windows
 
 
-def _sentence_units(text: str) -> list[tuple[int, int, int]]:
-    """Split into (start, end, token_estimate) units preferring sentence ends."""
+def _whitespace_units(
+    text: str,
+    *,
+    abs_start: int = 0,
+) -> list[tuple[int, int, int]]:
+    """Split ``text`` into word-sized (start, end, token_estimate) units."""
     units: list[tuple[int, int, int]] = []
+    for match in re.finditer(r"\S+(?:\s+|$)", text):
+        start = abs_start + match.start()
+        end = abs_start + match.end()
+        units.append((start, end, estimate_tokens(text[match.start() : match.end()])))
+    return units
+
+
+def _sentence_units(text: str, *, max_tokens: int) -> list[tuple[int, int, int]]:
+    """Split into units preferring sentence ends; enlarge via whitespace if needed.
+
+    A punctuation-free section used to match as one ``[^.!?]+$`` blob and exceed
+    ``max_tokens``. Oversized matches (or no sentence matches) are expanded into
+    whitespace/word units so ``_split_with_overlap`` can enforce the size policy.
+    """
+    raw: list[tuple[int, int, int]] = []
     pattern = re.compile(r"[^.!?]*[.!?]+(?:\s+|$)|[^.!?]+$", re.MULTILINE)
     for match in pattern.finditer(text):
         start, end = match.start(), match.end()
         piece = text[start:end]
         if not piece.strip():
             continue
-        units.append((start, end, estimate_tokens(piece)))
+        raw.append((start, end, estimate_tokens(piece)))
 
-    if units:
-        return units
+    if not raw:
+        return _whitespace_units(text)
 
-    # Whitespace fallback when no sentence punctuation exists.
-    for match in re.finditer(r"\S+(?:\s+|$)", text):
-        start, end = match.start(), match.end()
-        units.append((start, end, estimate_tokens(text[start:end])))
+    units: list[tuple[int, int, int]] = []
+    for start, end, tokens in raw:
+        if tokens <= max_tokens:
+            units.append((start, end, tokens))
+            continue
+        expanded = _whitespace_units(text[start:end], abs_start=start)
+        units.extend(expanded if expanded else [(start, end, tokens)])
     return units

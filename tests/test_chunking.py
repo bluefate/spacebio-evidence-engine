@@ -121,6 +121,18 @@ def test_large_section_splits_with_overlap_and_size_policy() -> None:
     assert methods[0].end_offset > methods[1].start_offset
 
 
+def test_long_punctuation_free_methods_respects_max_tokens() -> None:
+    """Regression: no .!? must not emit one oversized chunk (PR #104 peer review)."""
+    words = " ".join(f"token{i}" for i in range(400))
+    body = "Methods\n" + words
+    policy = ChunkingPolicy(target_tokens=80, min_tokens=40, max_tokens=100, overlap_ratio=0.2)
+    result = chunk_text(body, publication_id="pub_nopunct", policy=policy)
+    methods = [c for c in result.chunks if c.section is SectionLabel.METHODS]
+    assert len(methods) >= 3
+    for chunk in methods:
+        assert estimate_tokens(chunk.chunk_text) <= policy.max_tokens
+
+
 def test_chunk_sections_api_uses_detection_result() -> None:
     detection = detect_sections_from_text(SYNTHETIC_PAPER)
     result = chunk_sections(detection, publication_id="pub_api")
