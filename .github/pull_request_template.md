@@ -2,6 +2,24 @@
 
 Closes #
 
+<!-- Use Closes/Fixes for the primary issue. List additional related issues below. -->
+
+## Related issues
+
+| Relationship | Issue | Notes |
+| --- | --- | --- |
+| Primary | # | This PR implements |
+| Related | # | Optional — docs, deps, follow-ups |
+| Blocked by / assumes | # | Optional — upstream work this PR relies on |
+
+## Issue items
+
+<!-- REQUIRED for agent PRs. Copy acceptance criteria / follow-up bullets / task list from the linked issue. Mark each item. -->
+
+- [ ] Item 1 from the issue
+- [ ] Item 2 from the issue
+- [ ] Deferred / out of scope (link follow-up issue if needed): 
+
 ## Summary
 
 <!-- One short paragraph: what this PR does. -->
@@ -73,8 +91,9 @@ make test
 
 ## Human review checklist
 
-- [ ] Issue linked and scope respected
-- [ ] Acceptance criteria addressed
+- [ ] Issue linked and **Issue items** checklist filled from the issue
+- [ ] Related issues listed (or marked none)
+- [ ] Acceptance criteria / follow-up items addressed or deferred with links
 - [ ] Tests, lint, and type checks reported
 - [ ] Documentation current
 - [ ] No secrets committed

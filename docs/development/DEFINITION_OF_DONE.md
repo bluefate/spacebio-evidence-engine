@@ -19,7 +19,7 @@ Active completion checklist. Root contract: [AGENTS.md](../../AGENTS.md).
 - RAG changes include retrieval/citation evaluation notes.
 - Citation identifiers, sections, pages, and passages remain intact.
 - Security-sensitive changes called out for human review.
-- PR opened against `main` with issue link, validation report, and human review requested.
+- PR opened against `main` with issue link, **Issue items** checklist from the issue, related-issues list, validation report, and human review requested.
 - No secrets committed; `.env.example` updated if new config keys were added.
 
 ## Related documents
