@@ -33,15 +33,17 @@ export default function CorpusPage() {
             priority
           />
         </Link>
+        <h1 className={styles.heading}>Corpus</h1>
         <p className={styles.lede}>
-          Proposed August MVP corpus — microgravity and skeletal muscle. Pending
-          human approval before ingest.
+          Metadata for the proposed August MVP corpus (microgravity and skeletal
+          muscle). This app does not host publication PDFs or full text — open
+          the DOI for the publisher copy.
         </p>
         <div className={styles.stats}>
           <span>{publications.length} publications</span>
           <span>{byCount} CC BY</span>
           <span>{ncndCount} CC BY-NC-ND</span>
-          <span>non-commercial engine</span>
+          <span>DOI links only</span>
         </div>
       </header>
 
@@ -62,13 +64,8 @@ export default function CorpusPage() {
             <p className={styles.notes}>{pub.notes}</p>
             <div className={styles.links}>
               <a href={pub.sourceUrl} target="_blank" rel="noreferrer">
-                DOI
+                View at DOI
               </a>
-              {pub.pdfUrl ? (
-                <a href={pub.pdfUrl} target="_blank" rel="noreferrer">
-                  PDF
-                </a>
-              ) : null}
               <span className={styles.status}>
                 {pub.approval} · {formatLabel(pub.ingestion)}
               </span>
