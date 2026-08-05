@@ -21,6 +21,8 @@ Initial strategy.
 ## Provider abstraction
 Prompts must not assume a single LLM provider. OpenAI models may be used when configured, but the application must isolate provider-specific code.
 
+Application code should call `spacebio_evidence_engine.llm.LanguageModelProvider` (`generate` / `chat`) with prompt text assembled elsewhere. Optional structured outputs use `GenerateRequest.structured_output` / `ChatRequest.structured_output` (JSON Schema maps). Token usage, when reported, lands in `GenerationResult.usage` (`UsageMetadata`) for the $50/mo LLM cap (D4). Concrete OpenAI (or other) clients are follow-on issues — not imported from the interface module (issue #51).
+
 ## Related documents
 - [Citation strategy](CITATION_STRATEGY.md)
 - [Evaluation strategy](EVALUATION_STRATEGY.md)

@@ -64,11 +64,12 @@ flowchart TB
     i20["#20 Corpus inventory"]
     i27["#27 Publication schema"]
     i39["#39 EmbeddingProvider interface"]
+    i40["#40 Local embeddings"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
     i28["#28 PDF storage<br/>status: In Progress"]
-    i40["#40 Local embeddings<br/>branch: feature/40-local-embedding-provider<br/>PR #88<br/>owner: bluefate<br/>status: PR Open"]
+    i51["#51 LLM provider interface<br/>owner: bluefate<br/>status: In Progress"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     i29["#29 PDF extract"]
@@ -82,7 +83,6 @@ flowchart TB
   end
   subgraph nextParallel [Parallel-safe picks — available now]
     i26["#26 Reference questions"]
-    i51["#51 LLM provider interface"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
   end
@@ -111,15 +111,15 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 | — | [#31](https://github.com/bluefate/spacebio-evidence-engine/issues/31) Page map | Planning | Wait on #30 | Blocked |
 | — | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) Chunking strategy | Planning | Wait on #31 | Blocked |
 | — | [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33) Chunk metadata schema | Planning | Wait on #32 | Blocked |
-| — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Wait on #40 | Blocked |
+| 1 | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Next on critical path | Overlap on same files |
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| 1 | [#26](https://github.com/bluefate/spacebio-evidence-engine/issues/26) Reference questions | Planning | Parallel-safe now | Overlap with in-flight files |
-| 2 | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | Planning | Parallel-safe now | Overlap with in-flight files |
+| 2 | [#26](https://github.com/bluefate/spacebio-evidence-engine/issues/26) Reference questions | Planning | Parallel-safe now | Overlap with in-flight files |
+| — | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | In Progress | Already claimed | **Do not claim** |
 | 3 | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | Planning | Parallel-safe now | Overlap with in-flight files |
 | 4 | [#57](https://github.com/bluefate/spacebio-evidence-engine/issues/57) Answer response schema | Planning | Parallel-safe now | Overlap with in-flight files |
 | — | [#28](https://github.com/bluefate/spacebio-evidence-engine/issues/28) PDF storage | In Progress | In flight (see claim comment; `(branch on issue claim)`) | **Do not claim** |
-| — | [#40](https://github.com/bluefate/spacebio-evidence-engine/issues/40) Local embeddings | PR Open | In flight (bluefate; `feature/40-local-embedding-provider`) | **Do not claim** |
+| — | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 

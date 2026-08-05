@@ -7,7 +7,7 @@ Define how retrieval-augmented generation grounds answers in controlled publicat
 Ingestion, retrieval, answer generation, citations, and sufficiency behavior.
 
 ## Current status
-Initial RAG architecture. Embedding **provider interface** is defined (issue #39). **Local** Sentence Transformers provider is implemented (issue #40, `LocalEmbeddingProvider`). Optional OpenAI embeddings remain issue #41.
+Initial RAG architecture. Embedding **provider interface** is defined (issue #39). **Local** Sentence Transformers provider is implemented (issue #40, `LocalEmbeddingProvider`). Optional OpenAI embeddings remain issue #41. **LLM provider interface** is defined (issue #51, `LanguageModelProvider`); concrete OpenAI/local chat providers are follow-on work.
 
 ## Embedding provider interface
 
@@ -35,6 +35,34 @@ flowchart LR
   iface --> openai[#41 OpenAI optional]
   local --> vectors[(Vectors + model_name)]
   openai --> vectors
+```
+
+## Language model provider interface
+
+Grounded generation goes through `spacebio_evidence_engine.llm.LanguageModelProvider` only:
+
+| Member / type | Role |
+| --- | --- |
+| `model_name` | Stable model id for logs / cost tracking |
+| `generate(GenerateRequest)` | Single-prompt completion |
+| `chat(ChatRequest)` | Multi-turn chat completion |
+| `GenerateRequest` / `ChatRequest` | Optional `structured_output` (JSON Schema map) |
+| `GenerationResult` | `text`, optional `structured`, optional `UsageMetadata` |
+| `UsageMetadata` | Optional `prompt_tokens` / `completion_tokens` / `total_tokens` (+ `extra`) |
+
+Rules:
+
+- Call sites depend on the ABC, not on OpenAI or other vendor SDKs.
+- The interface module must not import provider-specific packages.
+- MVP default remains optional OpenAI `gpt-4o-mini` behind a future concrete provider (D4 / ADR-006); local/$0 mode may use a stub or disabled path.
+
+```mermaid
+flowchart LR
+  ask["/ask grounded path"] --> llm[LanguageModelProvider]
+  llm --> openaiChat[OpenAI chat optional]
+  llm --> stub[Test / local stub]
+  openaiChat --> result[GenerationResult + usage]
+  stub --> result
 ```
 
 ## Ingestion sequence
