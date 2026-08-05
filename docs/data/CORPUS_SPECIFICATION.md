@@ -9,7 +9,7 @@ August MVP controlled corpus of open-access publications on **microgravity and s
 ## Current status
 **Topic and selection rules approved** (D1, 2026-08-04).  
 **License policy for NC-ND approved** (D10, 2026-08-04): CC BY-NC-ND allowed because the engine is non-commercial.  
-**Proposed inventory of 22 publications** pending human list approval — see [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md) and [august_mvp_corpus_manifest.csv](../../data/inventory/august_mvp_corpus_manifest.csv).
+**Proposed inventory of 23 publications** pending human list approval — see [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md) and [august_mvp_corpus_manifest.csv](../../data/inventory/august_mvp_corpus_manifest.csv).
 
 ## Approved initial topic
 **Microgravity and skeletal muscle.**
@@ -45,7 +45,7 @@ Every manifest row must record `license` and `license_status`. Ingest pipelines 
 4. NC-ND items require the non-commercial use affirmation in [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md).
 
 ## August MVP inventory (proposed)
-- Count: **22** publications (16 CC BY + 6 CC BY-NC-ND).
+- Count: **23** publications (17 CC BY + 6 CC BY-NC-ND).
 - Machine-readable manifest: `data/inventory/august_mvp_corpus_manifest.csv`.
 - Narrative checklist and table: [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md).
 - Ingestion status: **not started** until human approval of the list.

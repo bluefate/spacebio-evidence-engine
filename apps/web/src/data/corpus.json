@@ -306,5 +306,19 @@
     "notes": "hBMSC-EVs for weightlessness-induced muscle atrophy",
     "approval": "pending",
     "ingestion": "not_ingested"
+  },
+  {
+    "id": "pub_023",
+    "title": "Mouse hindlimb unloading, as a model of simulated microgravity, leads to dysregulated iron homeostasis in liver and skeletal muscle cells.",
+    "doi": "10.1016/j.lssr.2025.01.003",
+    "year": "2025",
+    "license": "cc-by",
+    "organism": "mouse",
+    "exposure": "hindlimb_unloading",
+    "sourceUrl": "https://doi.org/10.1016/j.lssr.2025.01.003",
+    "pdfUrl": "https://doi.org/10.1016/j.lssr.2025.01.003",
+    "notes": "HU simulated microgravity; skeletal muscle and liver iron homeostasis (Rah et al., 2025)",
+    "approval": "pending",
+    "ingestion": "not_ingested"
   }
 ]

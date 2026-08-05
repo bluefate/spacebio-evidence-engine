@@ -9,6 +9,16 @@ Covers product, architecture, data, RAG, development, operations, and governance
 ## Current status
 Initial documentation package for multi-agent engineering.
 
+## Backlog and project (source of truth)
+
+| Resource | URL |
+|----------|-----|
+| **GitHub Project** | [Space Biology Evidence Engine (project #6)](https://github.com/users/bluefate/projects/6) |
+| **Issues** | [bluefate/spacebio-evidence-engine/issues](https://github.com/bluefate/spacebio-evidence-engine/issues) |
+| **Backlog index** | [governance/BACKLOG.md](governance/BACKLOG.md) |
+
+Claim work from Project status `Ready` per [AGENT_WORKFLOW.md](development/AGENT_WORKFLOW.md).
+
 ## Index
 - Product: [requirements](product/PRODUCT_REQUIREMENTS.md), [user stories](product/USER_STORIES.md)
 - Architecture: [overview](architecture/ARCHITECTURE.md), [system context](architecture/SYSTEM_CONTEXT.md), [containers](architecture/CONTAINER_ARCHITECTURE.md), [components](architecture/COMPONENT_ARCHITECTURE.md), [deployment](architecture/DEPLOYMENT_ARCHITECTURE.md), [RAG](architecture/RAG_ARCHITECTURE.md), [data](architecture/DATA_ARCHITECTURE.md), [security](architecture/SECURITY_ARCHITECTURE.md), [observability](architecture/OBSERVABILITY.md)

@@ -13,6 +13,15 @@ Locked decisions: [`docs/governance/DECISION_LOG.md`](docs/governance/DECISION_L
 | **Principal / development** | [bluefate/spacebio-evidence-engine](https://github.com/bluefate/spacebio-evidence-engine) |
 | **Course submission (GitHub Classroom)** | [FAU-AI-HootCamp-Summer-2026/buildphase-bluefate](https://github.com/FAU-AI-HootCamp-Summer-2026/buildphase-bluefate) |
 
+## Backlog and project (source of truth)
+
+| Resource | URL |
+|----------|-----|
+| **GitHub Project** | [Space Biology Evidence Engine (project #6)](https://github.com/users/bluefate/projects/6) |
+| **Issues** | [bluefate/spacebio-evidence-engine/issues](https://github.com/bluefate/spacebio-evidence-engine/issues) |
+| **Backlog index** | [docs/governance/BACKLOG.md](docs/governance/BACKLOG.md) |
+| **Build plan** | [plan.md](plan.md) |
+
 ---
 
 ## 1. Design goals
