@@ -17,8 +17,8 @@ Monorepo scaffold started: FastAPI under `apps/api`, Next.js under `apps/web`, s
 - Pydantic / pydantic-settings for API schemas and settings.
 - Next.js with TypeScript for frontend (`apps/web`).
 - Docker Compose for local Postgres.
-- Pytest for Python tests.
-- Ruff for linting and formatting.
+- Pytest for Python tests (`make test` / `pytest -q`).
+- Ruff for linting and formatting (`make lint` / `ruff check .` / `ruff format --check .`).
 - **Pyright** for type checking.
 - GitHub Actions for CI.
 
@@ -41,6 +41,7 @@ Monorepo scaffold started: FastAPI under `apps/api`, Next.js under `apps/web`, s
 - Keep ingestion repeatable and observable.
 - Keep prompts versioned.
 - Follow the root [AGENTS.md](../../AGENTS.md) contract on every task.
+- If you add new Python tests, keep them under `tests/` in the concern-based layout described in [TESTING_STRATEGY.md](TESTING_STRATEGY.md).
 
 ## Related documents
 - [Local setup](../operations/LOCAL_SETUP.md)
@@ -49,4 +50,3 @@ Monorepo scaffold started: FastAPI under `apps/api`, Next.js under `apps/web`, s
 
 ## Decision status
 Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
-
