@@ -11,7 +11,7 @@ Monorepo scaffold is in place: `apps/api` (FastAPI), `apps/web` (Next.js), Compo
 
 ## Expected tools
 - Python 3.12 or newer.
-- Node.js 20+.
+- Node.js 22+.
 - Docker and Docker Compose.
 - GNU Make.
 - `pre-commit`, Ruff, Pytest, Pyright.
