@@ -34,13 +34,14 @@ Accepted baseline for the end-of-August 2026 MVP. Single-file decision log (no p
 | D7 | August MVP deployment | Accepted | Local Docker Compose only; public hosting deferred |
 | D8 | Authentication | Accepted | Out of August MVP; anonymous local use |
 | D9 | ADR file format | Accepted | Keep this single decision log; no per-file ADRs for now |
+| D10 | Corpus licenses including CC BY-NC-ND | Accepted | Engine is non-commercial (education/research/HootCamp). CC BY preferred; CC BY-NC-ND allowed for retrieval + attributed quotation with no commercial full-text redistribution. Re-review NC-ND if the project becomes commercial. See CORPUS_SPECIFICATION.md and CORPUS_INVENTORY.md. |
 
 ## End-of-August MVP scope (D6)
 
 **Must ship by 2026-08-31**
 
 1. Scaffold: FastAPI + Next.js + PostgreSQL/pgvector via Docker Compose
-2. Controlled corpus (~10–15 OA papers)
+2. Controlled corpus of OA papers (proposed inventory; see corpus docs; size may exceed original 10–15 when owner adds high-relevance OA studies)
 3. Ingest → chunk → embed → store lineage
 4. Semantic search API
 5. Grounded `/ask` with passage citations and insufficient-evidence path
