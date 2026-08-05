@@ -77,7 +77,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i32["#32 Chunking strategy<br/>owner: bluefate<br/>status: In Progress"]
+    i32["#32 Chunking strategy<br/>branch: feature/32-publication-chunking<br/>PR #104<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     i33["#33 Chunk metadata schema"]
@@ -113,7 +113,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 | — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Wait on #33 | Blocked |
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) Chunking strategy | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
+| — | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) Chunking strategy | PR Open | In flight (bluefate; `feature/32-publication-chunking`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
