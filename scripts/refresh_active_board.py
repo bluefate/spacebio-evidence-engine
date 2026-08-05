@@ -37,6 +37,7 @@ CRITICAL_EDGES: list[tuple[int, int]] = [
     (30, 31),
     (31, 32),
     (32, 33),
+    (33, 42),  # vector schema needs chunk metadata (#33) first
     (27, 39),
     (39, 40),
     (40, 42),
