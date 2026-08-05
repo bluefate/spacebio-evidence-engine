@@ -65,19 +65,19 @@ flowchart TB
     i26["#26 Reference questions"]
     i27["#27 Publication schema"]
     i28["#28 PDF storage"]
+    i29["#29 PDF extract"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
     i51["#51 LLM provider interface"]
+    i55["#55 Insufficient evidence<br/>branch: chore/55-refresh-active-board<br/>PR #99"]
     i57["#57 Answer response schema"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i29["#29 PDF extract<br/>branch: feature/29-pdf-text-extraction<br/>PR #93<br/>owner: bluefate<br/>status: PR Open"]
-    i55["#55 Insufficient evidence<br/>status: In Progress"]
+    i30["#30 Sections<br/>branch: feature/30-section-detection<br/>PR #100<br/>status: PR Open"]
+    i31["#31 Page map<br/>branch: feature/31-page-map<br/>PR #101<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
-    i30["#30 Sections"]
-    i31["#31 Page map"]
     i32["#32 Chunking strategy"]
     i33["#33 Chunk metadata schema"]
     i42["#42 Vector storage schema"]
@@ -108,16 +108,13 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#30](https://github.com/bluefate/spacebio-evidence-engine/issues/30) Sections | Planning | Wait on #29 | Blocked |
-| — | [#31](https://github.com/bluefate/spacebio-evidence-engine/issues/31) Page map | Planning | Wait on #30 | Blocked |
 | — | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) Chunking strategy | Planning | Wait on #31 | Blocked |
 | — | [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33) Chunk metadata schema | Planning | Wait on #32 | Blocked |
 | — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Wait on #33 | Blocked |
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | In Progress | Already claimed | **Do not claim** |
-| — | [#29](https://github.com/bluefate/spacebio-evidence-engine/issues/29) PDF extract | PR Open | In flight (bluefate; `feature/29-pdf-text-extraction`) | **Do not claim** |
-| — | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | In Progress | In flight (see claim comment; `(branch on issue claim)`) | **Do not claim** |
+| — | [#30](https://github.com/bluefate/spacebio-evidence-engine/issues/30) Sections | PR Open | In flight (see claim comment; `feature/30-section-detection`) | **Do not claim** |
+| — | [#31](https://github.com/bluefate/spacebio-evidence-engine/issues/31) Page map | PR Open | In flight (see claim comment; `feature/31-page-map`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
