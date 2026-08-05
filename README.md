@@ -53,6 +53,8 @@ Accepted stack for the August MVP:
 - [Technical design](design.md)
 - [Decision log](docs/governance/DECISION_LOG.md)
 - [Documentation index](docs/README.md)
+- [GitHub Project board](https://github.com/users/bluefate/projects/6)
+- [Backlog index](docs/governance/BACKLOG.md)
 - [Product requirements](docs/product/PRODUCT_REQUIREMENTS.md)
 - [Architecture overview](docs/architecture/ARCHITECTURE.md)
 - [RAG architecture](docs/architecture/RAG_ARCHITECTURE.md)

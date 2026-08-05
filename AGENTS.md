@@ -40,7 +40,7 @@ Before starting work, read:
 
 ## Task Claiming System
 
-The source of truth for task state is the GitHub issue and the GitHub Project. To prevent multiple agents from modifying the same component, follow this claiming procedure:
+The source of truth for task state is the GitHub issue and the [GitHub Project board](https://github.com/users/bluefate/projects/6) ([issues](https://github.com/bluefate/spacebio-evidence-engine/issues), [backlog index](docs/governance/BACKLOG.md)). To prevent multiple agents from modifying the same component, follow this claiming procedure:
 
 1. Read AGENTS.md.
 2. Select an issue in `Ready`.
@@ -226,3 +226,5 @@ Stop and request human direction when:
 - [Definition of done](docs/development/DEFINITION_OF_DONE.md)
 - [Local setup](docs/operations/LOCAL_SETUP.md)
 - [Citation strategy](docs/rag/CITATION_STRATEGY.md)
+- [GitHub Project board](https://github.com/users/bluefate/projects/6)
+- [Backlog index](docs/governance/BACKLOG.md)

@@ -10,8 +10,9 @@ Task claiming, conflict prevention, implementation, review, handoff, and blocked
 
 ## Source of truth
 
-- **GitHub issue:** Scope, acceptance criteria, dependencies, linked PRs, and claim status.
-- **GitHub Project:** Issue status (`Planning`, `Human Review`, `Ready`, `Claimed`, `In Progress`, `PR Open`, `Done`).
+- **GitHub issue:** Scope, acceptance criteria, dependencies, linked PRs, and claim status. [Issues](https://github.com/bluefate/spacebio-evidence-engine/issues)
+- **GitHub Project:** Issue status (`Planning`, `Human Review`, `Ready`, `Claimed`, `In Progress`, `PR Open`, `Done`). Board: [Space Biology Evidence Engine (project #6)](https://github.com/users/bluefate/projects/6)
+- **Backlog index:** [BACKLOG.md](../governance/BACKLOG.md)
 - **Branch name:** One branch per issue, using [BRANCHING_STRATEGY](BRANCHING_STRATEGY.md).
 - **This document:** The canonical claiming procedure and standard comment templates.
 

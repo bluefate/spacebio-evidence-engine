@@ -30,8 +30,8 @@ The Space Biology Evidence Engine is a **non-commercial**, educational / researc
 
 | Metric | Value |
 |--------|-------|
-| Proposed count | **22** |
-| CC BY | 16 |
+| Proposed count | **23** |
+| CC BY | 17 |
 | CC BY-NC-ND | 6 |
 | Topic | microgravity_skeletal_muscle |
 | Machine-readable manifest | [august_mvp_corpus_manifest.csv](../../data/inventory/august_mvp_corpus_manifest.csv) |
@@ -73,18 +73,30 @@ The Space Biology Evidence Engine is a **non-commercial**, educational / researc
 | pub_020 | 2025 | CC BY-NC-ND | mouse | flight vs HU | Simulated microgravity accurately models long-duration spaceflight effects on bone and skeletal muscle in skeletally immature mice | [10.1016/j.bonr.2025.101871](https://doi.org/10.1016/j.bonr.2025.101871) |
 | pub_021 | 2025 | CC BY-NC-ND | mouse | simulated microgravity | Abdominal LIPUS ameliorates simulated microgravity induced skeletal muscle atrophy via the gut-muscle axis | [10.1038/s41526-025-00514-8](https://doi.org/10.1038/s41526-025-00514-8) |
 | pub_022 | 2025 | CC BY-NC-ND | mouse / C2C12 | hindlimb unloading | hBMSC-EVs alleviate weightlessness-induced skeletal muscle atrophy by suppressing oxidative stress and inflammation | [10.1186/s13287-025-04175-y](https://doi.org/10.1186/s13287-025-04175-y) |
+| pub_023 | 2025 | CC BY | mouse | hindlimb unloading | Mouse hindlimb unloading, as a model of simulated microgravity, leads to dysregulated iron homeostasis in liver and skeletal muscle cells | [10.1016/j.lssr.2025.01.003](https://doi.org/10.1016/j.lssr.2025.01.003) |
 
 ## Hold (not added yet)
 
-- https://doi.org/10.1016/j.lssr.2025.01.003 — confirm publisher OA/license in Europe PMC / publisher page before adding.
+None currently.
 
 ## Human approval request
 
-Please review and either approve as-is on [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20), or request DOI swaps.
+Please review the proposed list on [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) and approve it as the August MVP corpus (or request DOI swaps).
 
-After approval: set `human_approval=approved` in the CSV and proceed to PDF staging / ingest.
+**How to approve (owner):**
+
+1. Spot-check a few DOIs/licenses if desired (especially NC-ND rows and Elsevier hybrid OA).
+2. Comment on [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) with an explicit approval, for example:
+   > **Approved** — August MVP corpus list accepted as in `data/inventory/august_mvp_corpus_manifest.csv` (including pub_023).
+3. In a follow-up PR (or ask an agent), set every row’s `human_approval` from `pending` → `approved` in the CSV and matching `approval` fields in `apps/web/src/data/corpus.json`, and change this document’s **Status** to **Approved**.
+4. Issue #20 is already closed for delivery of the inventory artifact; list approval is recorded by that comment + the `human_approval=approved` manifest update.
+
+After approval: proceed to PDF staging / ingest.
 
 ## Related documents
 - [Corpus specification](CORPUS_SPECIFICATION.md)
 - [Decision log](../governance/DECISION_LOG.md) (D10)
 - [Metadata schema](METADATA_SCHEMA.md)
+- [GitHub Project board](https://github.com/users/bluefate/projects/6)
+- [Issue #20](https://github.com/bluefate/spacebio-evidence-engine/issues/20)
+- Rah et al. (2025): [https://doi.org/10.1016/j.lssr.2025.01.003](https://doi.org/10.1016/j.lssr.2025.01.003)
