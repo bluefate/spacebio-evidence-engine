@@ -16,6 +16,16 @@ function formatLabel(value: string): string {
   return value.replaceAll("_", " ");
 }
 
+function Badge({
+  children,
+  tone = "default",
+}: {
+  children: React.ReactNode;
+  tone?: "default" | "accent" | "license" | "status";
+}) {
+  return <span className={`${styles.badge} ${styles[tone]}`}>{children}</span>;
+}
+
 export default function CorpusPage() {
   const byCount = publications.filter((item) => item.license === "cc-by").length;
   const ncndCount = publications.length - byCount;
@@ -40,54 +50,34 @@ export default function CorpusPage() {
           the DOI for the publisher copy.
         </p>
         <div className={styles.stats}>
-          <span>{publications.length} publications</span>
-          <span>{byCount} CC BY</span>
-          <span>{ncndCount} CC BY-NC-ND</span>
-          <span>DOI links only</span>
+          <Badge tone="accent">{publications.length} publications</Badge>
+          <Badge>{byCount} CC BY</Badge>
+          <Badge>{ncndCount} CC BY-NC-ND</Badge>
+          <Badge>DOI links only</Badge>
         </div>
       </header>
 
-      <div className={styles.tableWrap}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Year</th>
-              <th scope="col">Title</th>
-              <th scope="col">Model</th>
-              <th scope="col">Exposure</th>
-              <th scope="col">License</th>
-              <th scope="col">Status</th>
-              <th scope="col">DOI</th>
-            </tr>
-          </thead>
-          <tbody>
-            {publications.map((pub) => (
-              <tr key={pub.id}>
-                <td className={styles.idCell}>{pub.id}</td>
-                <td>{pub.year}</td>
-                <td className={styles.titleCell}>
-                  <span className={styles.title}>{pub.title}</span>
-                  <span className={styles.notes}>{pub.notes}</span>
-                </td>
-                <td>{formatLabel(pub.organism)}</td>
-                <td>{formatLabel(pub.exposure)}</td>
-                <td className={styles.licenseCell}>{formatLicense(pub.license)}</td>
-                <td className={styles.statusCell}>
-                  {pub.approval}
-                  <span className={styles.statusSub}>
-                    {formatLabel(pub.ingestion)}
-                  </span>
-                </td>
-                <td>
-                  <a href={pub.sourceUrl} target="_blank" rel="noreferrer">
-                    Open
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className={styles.grid}>
+        {publications.map((pub) => (
+          <article key={pub.id} className={styles.card}>
+            <div className={styles.badges}>
+              <Badge tone="accent">{pub.id}</Badge>
+              <Badge>{pub.year}</Badge>
+              <Badge tone="license">{formatLicense(pub.license)}</Badge>
+              <Badge tone="status">{pub.approval}</Badge>
+            </div>
+            <h2 className={styles.title}>{pub.title}</h2>
+            <div className={styles.badges}>
+              <Badge>{formatLabel(pub.organism)}</Badge>
+              <Badge>{formatLabel(pub.exposure)}</Badge>
+              <Badge>{formatLabel(pub.ingestion)}</Badge>
+            </div>
+            <p className={styles.notes}>{pub.notes}</p>
+            <a className={styles.doi} href={pub.sourceUrl} target="_blank" rel="noreferrer">
+              View at DOI
+            </a>
+          </article>
+        ))}
       </div>
     </main>
   );
