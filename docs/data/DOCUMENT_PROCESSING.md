@@ -7,7 +7,7 @@ Define how source publications become searchable, citable evidence.
 MVP PDF-first processing using PyMuPDF, with future extraction improvements.
 
 ## Current status
-PDF storage (#28) and page-level text extraction (#29) are implemented for the MVP path. Section-aware chunking and embedding remain downstream.
+PDF storage (#28), page-level text extraction (#29), and section detection (#30) are implemented for the MVP path. Page mapping, chunking, and embedding remain downstream.
 
 ## Document state flow
 ```mermaid
@@ -85,6 +85,24 @@ Security:
 - Do not execute JavaScript, launch embedded files, or run content derived from the PDF.
 
 Fixture coverage: `tests/fixtures/sample_two_page.pdf` and `tests/test_pdf_extraction.py`.
+
+## Section detection (issue #30)
+
+Heuristic heading detection over extracted plain text (`spacebio_evidence_engine.ingestion.sections`).
+
+- `detect_sections(extraction)` — from `ExtractionResult` (page offsets preserved)
+- `detect_sections_from_text(text, page_starts=...)` — from a string (tests / callers)
+- Returns `SectionDetectionResult` with ordered `SectionSpan` values: `label`, `text`, `start_offset` / `end_offset`, optional `start_page` / `end_page`, `heading_text`, `heading_matched`
+
+Labels: `abstract`, `introduction`, `methods`, `results`, `discussion`, `conclusion`, `references`, `acknowledgements`, `supplementary`, and `unknown`.
+
+Rules:
+
+- Only label a span when a heading line matches; **do not invent** missing Methods/Results/etc.
+- Leading text before the first heading is `unknown` (safe catch-all).
+- `abstract_is_not_full_study` is always `True` — downstream must not treat abstract spans as a complete study.
+
+Fixture coverage: `tests/test_section_detection.py`.
 
 ## Related documents
 - [Chunking strategy](../rag/CHUNKING_STRATEGY.md)

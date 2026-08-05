@@ -69,7 +69,7 @@ flowchart TB
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
     i51["#51 LLM provider interface"]
-    i55["#55 Insufficient evidence<br/>branch: chore/55-refresh-active-board<br/>PR #99"]
+    i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
     i86["#86 ACTIVE_BOARD.md"]
   end
