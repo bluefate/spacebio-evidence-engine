@@ -10,7 +10,7 @@ MVP evaluation using benchmark questions, automated checks, and human review.
 August MVP reference question set drafted (issue #26). Machine fixture:
 [`evals/fixtures/reference_questions.json`](../../evals/fixtures/reference_questions.json).
 Human-readable index: [REFERENCE_QUESTIONS.md](REFERENCE_QUESTIONS.md).
-**Scientific review of questions is pending owner approval.**
+**Scientific review of questions is approved** (`human_scientific_review=approved` in the fixture; follow-up [#94](https://github.com/bluefate/spacebio-evidence-engine/issues/94)).
 
 ## Evaluation areas
 - Retrieval relevance.

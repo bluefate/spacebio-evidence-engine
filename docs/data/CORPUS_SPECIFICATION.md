@@ -9,7 +9,7 @@ August MVP controlled corpus of open-access publications on **microgravity and s
 ## Current status
 **Topic and selection rules approved** (D1, 2026-08-04).  
 **License policy for NC-ND approved** (D10, 2026-08-04): CC BY-NC-ND allowed because the engine is non-commercial.  
-**Proposed inventory of 23 publications** pending human list approval — see [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md) and [august_mvp_corpus_manifest.csv](../../data/inventory/august_mvp_corpus_manifest.csv).
+**Owner-approved inventory of 23 publications** — see [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md) and [august_mvp_corpus_manifest.csv](../../data/inventory/august_mvp_corpus_manifest.csv).
 
 ## Approved initial topic
 **Microgravity and skeletal muscle.**
@@ -44,14 +44,13 @@ Every manifest row must record `license` and `license_status`. Ingest pipelines 
 3. Corpus-changing PRs require owner scientific/license review.
 4. NC-ND items require the non-commercial use affirmation in [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md).
 
-## August MVP inventory (proposed)
+## August MVP inventory (approved)
 - Count: **23** publications (17 CC BY + 6 CC BY-NC-ND).
 - Machine-readable manifest: `data/inventory/august_mvp_corpus_manifest.csv`.
 - Narrative checklist and table: [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md).
-- Ingestion status: **not started** until human approval of the list.
+- List approval: **approved** (`human_approval=approved` on all rows; issue #20 closed).
 
 ## Follow-on work
-- Human approval of the proposed list (issue #20).
 - Per-item PDF quality assessment (#25) and license spot-check on publisher pages (#23).
 - Ingest approved PDFs through the document pipeline.
 

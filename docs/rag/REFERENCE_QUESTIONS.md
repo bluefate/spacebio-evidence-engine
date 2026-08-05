@@ -6,13 +6,13 @@ Provide ten evaluation questions for retrieval and grounded-answer testing on th
 
 ## Status
 
-**Draft — pending human scientific review.** Machine-readable source of truth:
+**Owner-approved** (human scientific review). Machine-readable source of truth:
 
 [`evals/fixtures/reference_questions.json`](../../evals/fixtures/reference_questions.json)
 
 | Field | Meaning |
 | --- | --- |
-| `human_scientific_review` | `pending` until the owner approves scientific appropriateness |
+| `human_scientific_review` | `approved` after owner scientific review (was `pending`) |
 | `style` | `factual_lookup` \| `comparison` \| `sufficiency` |
 | `expected_evidence.should_be_answerable` | Whether the controlled corpus should support an answer in principle |
 | `candidate_publication_ids` | Likely inventory anchors (not gold passage IDs until ingest) |
@@ -47,12 +47,12 @@ Provide ten evaluation questions for retrieval and grounded-answer testing on th
 
 ## Human review checklist
 
-Owner should confirm:
+Owner confirmed (PR [#92](https://github.com/bluefate/spacebio-evidence-engine/pull/92) comment; follow-up [#94](https://github.com/bluefate/spacebio-evidence-engine/issues/94)):
 
-- [ ] Questions are scientifically appropriate for the topic
-- [ ] Candidate publication anchors are reasonable
-- [ ] Sufficiency negatives are fair (not answerable from this corpus)
-- [ ] Flip `human_scientific_review` to `approved` in the JSON after review
+- [x] Questions are scientifically appropriate for the topic
+- [x] Candidate publication anchors are reasonable
+- [x] Sufficiency negatives are fair (not answerable from this corpus)
+- [x] `human_scientific_review` set to `approved` in the JSON
 
 ## Related documents
 

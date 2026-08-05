@@ -4,7 +4,7 @@
 Propose the initial controlled corpus for the August 2026 MVP (issue [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20)).
 
 ## Status
-**Proposed — pending human owner approval.** Do not ingest until `human_approval` is set to `approved` in the manifest and this document is updated.
+**Owner-approved** (issue [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) closed; manifest `human_approval=approved`). Ingest may proceed subject to per-item license/PDF QA.
 
 ## Topic
 Microgravity and skeletal muscle (approved D1).
@@ -30,7 +30,7 @@ The Space Biology Evidence Engine is a **non-commercial**, educational / researc
 
 | Metric | Value |
 |--------|-------|
-| Proposed count | **23** |
+| Approved count | **23** |
 | CC BY | 17 |
 | CC BY-NC-ND | 6 |
 | Topic | microgravity_skeletal_muscle |

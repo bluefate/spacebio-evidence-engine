@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "topic": "microgravity_skeletal_muscle",
-  "human_scientific_review": "pending",
+  "human_scientific_review": "approved",
   "notes": "Questions are authored for retrieval/answer eval against the August MVP controlled corpus. They must not be answered from general model knowledge in product mode. Expected publication IDs are candidate evidence anchors, not gold passage IDs (passages do not exist until ingest).",
   "questions": [
     {
