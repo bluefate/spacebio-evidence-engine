@@ -1,4 +1,4 @@
-"""Ingestion pipeline components (PDF extract, later sections/chunking)."""
+"""Ingestion pipeline components (PDF extract, section detection, later chunking)."""
 
 from spacebio_evidence_engine.ingestion.errors import (
     PDFEmptyError,
@@ -13,6 +13,13 @@ from spacebio_evidence_engine.ingestion.extract import (
     extract_pdf_path,
     page_texts,
 )
+from spacebio_evidence_engine.ingestion.sections import (
+    SectionDetectionResult,
+    SectionLabel,
+    SectionSpan,
+    detect_sections,
+    detect_sections_from_text,
+)
 
 __all__ = [
     "ExtractedPage",
@@ -20,6 +27,11 @@ __all__ = [
     "PDFEmptyError",
     "PDFExtractionError",
     "PDFOpenError",
+    "SectionDetectionResult",
+    "SectionLabel",
+    "SectionSpan",
+    "detect_sections",
+    "detect_sections_from_text",
     "extract_pdf_bytes",
     "extract_pdf_from_storage",
     "extract_pdf_path",
