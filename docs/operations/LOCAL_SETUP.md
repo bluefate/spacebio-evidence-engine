@@ -75,6 +75,13 @@ Integration smoke (optional, needs DB up):
 SPACEBIO_REQUIRE_DB=1 pytest -q -m integration tests/test_pgvector_bootstrap.py
 ```
 
+## PDF storage
+
+The ingestion pipeline stores source PDFs through a backend selected by `PDF_STORAGE_BACKEND`.
+
+- `PDF_STORAGE_BACKEND` — backend type (`local` for the default filesystem store).
+- `PDF_STORAGE_LOCAL_ROOT` — root directory for local PDF files. Default: `data/pdfs`.
+
 ## Expected local services
 - PostgreSQL with pgvector (Compose) on port `5432`.
 - FastAPI backend (`apps/api`) on port `8000`.

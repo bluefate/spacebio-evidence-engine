@@ -62,6 +62,7 @@ Edit `TRACKED` and `CRITICAL_EDGES` in [`scripts/refresh_active_board.py`](../..
 flowchart TB
   subgraph done [Done]
     i20["#20 Corpus inventory"]
+    i26["#26 Reference questions"]
     i27["#27 Publication schema"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
@@ -70,7 +71,6 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i26["#26 Reference questions<br/>branch: feature/26-reference-research-questions<br/>PR #92<br/>owner: bluefate<br/>status: PR Open"]
     i28["#28 PDF storage<br/>branch: feature/28-pdf-storage-abstraction<br/>PR #91<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
@@ -115,9 +115,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 | — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Wait on #33 | Blocked |
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#26](https://github.com/bluefate/spacebio-evidence-engine/issues/26) Reference questions | PR Open | Already claimed | **Do not claim** |
 | 1 | [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) Insufficient evidence | Planning | Parallel-safe now | Overlap with in-flight files |
-| — | [#26](https://github.com/bluefate/spacebio-evidence-engine/issues/26) Reference questions | PR Open | In flight (bluefate; `feature/26-reference-research-questions`) | **Do not claim** |
 | — | [#28](https://github.com/bluefate/spacebio-evidence-engine/issues/28) PDF storage | PR Open | In flight (see claim comment; `feature/28-pdf-storage-abstraction`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->

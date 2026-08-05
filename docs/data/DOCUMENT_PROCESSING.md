@@ -47,6 +47,15 @@ stateDiagram-v2
 - Generate embeddings.
 - Store lineage and processing status.
 
+## PDF storage
+
+Source PDFs are persisted through a storage abstraction before extraction.
+
+- `PDFStorage` protocol defines `put`, `get`, `exists`, and `delete`.
+- The default `local` backend (`LocalFileStorage`) writes files under `PDF_STORAGE_LOCAL_ROOT` (default `data/pdfs`) and requires no cloud SDK.
+- The storage key returned by `put` is recorded on the publication record for later retrieval.
+- Cloud/object backends can be added behind the same protocol but are not required for the MVP.
+
 ## Related documents
 - [Chunking strategy](../rag/CHUNKING_STRATEGY.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
