@@ -4,19 +4,21 @@
 Define rules for selecting and maintaining the controlled publication corpus.
 
 ## Scope
-August MVP corpus of approximately **10 to 15** open-access publications (compressed from the earlier 20–30 target for the 2026-08-31 deadline).
+August MVP controlled corpus of open-access publications on **microgravity and skeletal muscle**. Initial planning target was ~10–15 papers; the proposed inventory is larger because newer high-relevance OA studies were added by owner request.
 
 ## Current status
-**Topic and selection rules approved** (D1, 2026-08-04). Publication list not yet selected.
+**Topic and selection rules approved** (D1, 2026-08-04).  
+**License policy for NC-ND approved** (D10, 2026-08-04): CC BY-NC-ND allowed because the engine is non-commercial.  
+**Proposed inventory of 22 publications** pending human list approval — see [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md) and [august_mvp_corpus_manifest.csv](../../data/inventory/august_mvp_corpus_manifest.csv).
 
 ## Approved initial topic
 **Microgravity and skeletal muscle.**
 
 ## Inclusion criteria (approved corpus selection rules)
-- Open-access publication with legal permission for ingestion.
+- Open-access publication with legal permission for ingestion under this project's use model.
 - Relevant to the approved initial topic.
-- Contains extractable methods, results, or findings.
-- Has sufficient metadata for citation (title, source, page/section where available).
+- Contains extractable methods, results, or findings (or citable mission/methods design detail).
+- Has sufficient metadata for citation (title, source, DOI/PMCID where available).
 
 ## Exclusion criteria (approved)
 - Paywalled or unclear rights.
@@ -24,15 +26,37 @@ August MVP corpus of approximately **10 to 15** open-access publications (compre
 - No usable text extraction path.
 - Non-scientific commentary unless explicitly approved.
 
+## License policy (D10)
+
+The evidence engine is **non-commercial** (education / research / HootCamp Build Phase).
+
+| License | Allowed in corpus? | Use constraints |
+|---------|--------------------|-----------------|
+| CC BY | Yes (preferred) | Attribute; retrieve; quote with citation; link to source |
+| CC BY-NC-ND | Yes | Same retrieval/citation use. No commercial redistribution of full texts; no selling adapted full-text derivatives. Re-review if the project becomes commercial |
+| Other / unclear / paywalled | No | Exclude until clarified |
+
+Every manifest row must record `license` and `license_status`. Ingest pipelines must preserve license metadata with the publication record.
+
 ## License review workflow (approved)
 1. Record source URL, DOI if any, and stated license/access terms in the corpus manifest.
 2. Owner reviews rights before ingestion; unclear rights block ingest.
 3. Corpus-changing PRs require owner scientific/license review.
+4. NC-ND items require the non-commercial use affirmation in [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md).
+
+## August MVP inventory (proposed)
+- Count: **22** publications (16 CC BY + 6 CC BY-NC-ND).
+- Machine-readable manifest: `data/inventory/august_mvp_corpus_manifest.csv`.
+- Narrative checklist and table: [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md).
+- Ingestion status: **not started** until human approval of the list.
 
 ## Follow-on work
-- Select the final ~10–15 publications that satisfy the rules above.
+- Human approval of the proposed list (issue #20).
+- Per-item PDF quality assessment (#25) and license spot-check on publisher pages (#23).
+- Ingest approved PDFs through the document pipeline.
 
 ## Related documents
+- [Corpus inventory](CORPUS_INVENTORY.md)
 - [Product requirements](../product/PRODUCT_REQUIREMENTS.md)
 - [Document processing](DOCUMENT_PROCESSING.md)
 - [Metadata schema](METADATA_SCHEMA.md)
