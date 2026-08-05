@@ -1,5 +1,7 @@
 # Space Biology Evidence Engine
 
+![Space Biology Evidence Engine](docs/brand/logo-wordmark.png)
+
 ## Purpose
 Define and build a citation-first evidence engine for a controlled corpus of open-access space biology publications.
 

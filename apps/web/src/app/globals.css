@@ -1,0 +1,25 @@
+:root {
+  --bg: #061018;
+  --fg: #e8eef4;
+  --muted: #9db0c3;
+  --accent: #2ec4b6;
+  --font-display: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  color: var(--fg);
+  background: var(--bg);
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+}

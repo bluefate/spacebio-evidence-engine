@@ -1,11 +1,44 @@
+import Image from "next/image";
+
+import styles from "./page.module.css";
+
 export default function HomePage() {
   return (
-    <main>
-      <h1>Space Biology Evidence Engine</h1>
-      <p>
-        August MVP scaffold. Ask / citation UI will land on later foundation and
-        web-interface issues.
-      </p>
+    <main className={styles.hero}>
+      <Image
+        src="/brand/hero-atmosphere.png"
+        alt=""
+        fill
+        priority
+        className={styles.heroImage}
+        sizes="100vw"
+      />
+      <div className={styles.veil} aria-hidden />
+      <section className={styles.content}>
+        <Image
+          src="/brand/logo-wordmark.png"
+          alt="Space Biology Evidence Engine"
+          width={420}
+          height={120}
+          className={styles.wordmark}
+          priority
+        />
+        <p className={styles.tagline}>
+          Citation-first answers from a controlled corpus of space biology
+          publications.
+        </p>
+        <div className={styles.actions}>
+          <a className={styles.primary} href="#ask">
+            Ask a question
+          </a>
+          <a
+            className={styles.secondary}
+            href="https://github.com/bluefate/spacebio-evidence-engine/blob/main/docs/data/CORPUS_INVENTORY.md"
+          >
+            View corpus
+          </a>
+        </div>
+      </section>
     </main>
   );
 }
