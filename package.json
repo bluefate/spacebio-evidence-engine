@@ -12,6 +12,6 @@
     "lint:web": "npm run lint -w @spacebio/web"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }
