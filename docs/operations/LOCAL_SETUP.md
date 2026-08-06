@@ -61,6 +61,31 @@ from spacebio_evidence_engine.embeddings import LocalEmbeddingProvider
 provider = LocalEmbeddingProvider()  # or LocalEmbeddingProvider(model_name=...)
 ```
 
+## Optional OpenAI embeddings (issue #41)
+
+OpenAI embeddings are disabled unless `OPENAI_API_KEY` is present. Keep keys in
+your local `.env` only; `.env.example` documents the variable names without real
+secrets.
+
+```bash
+# .env
+OPENAI_API_KEY=sk-...
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+```
+
+Construct through `from_env()` so CI and local-only runs skip the provider when
+credentials are absent:
+
+```python
+from spacebio_evidence_engine.embeddings import OpenAIEmbeddingProvider
+
+provider = OpenAIEmbeddingProvider.from_env()
+if provider is None:
+    ...
+```
+
+Unit tests use an injected fake client and do not call the network.
+
 ## Database / pgvector
 
 1. Copy `.env.example` to `.env` and set `POSTGRES_PASSWORD` / `DATABASE_URL` (keep them consistent).
