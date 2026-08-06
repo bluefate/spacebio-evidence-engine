@@ -69,6 +69,7 @@ flowchart TB
     i29["#29 PDF extract"]
     i30["#30 Sections"]
     i31["#31 Page map"]
+    i32["#32 Chunking strategy"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
     i51["#51 LLM provider interface"]
@@ -77,10 +78,9 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i32["#32 Chunking strategy<br/>branch: feature/32-publication-chunking<br/>PR #104<br/>owner: bluefate<br/>status: PR Open"]
+    i33["#33 Chunk metadata schema<br/>owner: bluefate<br/>status: In Progress"]
   end
   subgraph nextCritical [Critical path — available / blocked]
-    i33["#33 Chunk metadata schema"]
     i42["#42 Vector storage schema"]
     i43["#43 Vector indexing"]
     i44["#44 Semantic search"]
@@ -109,11 +109,10 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33) Chunk metadata schema | Planning | Wait on #32 | Blocked |
 | — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Wait on #33 | Blocked |
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) Chunking strategy | PR Open | In flight (bluefate; `feature/32-publication-chunking`) | **Do not claim** |
+| — | [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33) Chunk metadata schema | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
