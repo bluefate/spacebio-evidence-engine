@@ -32,8 +32,17 @@ RETRY_DELAY = float(os.environ.get("SPACEBIO_PDF_RETRY_DELAY", "5.0"))
 
 
 def _row_quality_status(result: PDFQualityResult) -> str:
-    """Map a quality category to a pipeline status value."""
-    if result.category in (PDFQualityCategory.CORRUPT, PDFQualityCategory.MISSING):
+    """Map a quality category to a pipeline status value.
+
+    ``needs_ocr``, ``corrupt``, and ``missing`` block extraction until a human
+    or OCR follow-up clears the publication. ``poor_text`` stays eligible with
+    a caution note in ``pdf_quality``.
+    """
+    if result.category in (
+        PDFQualityCategory.CORRUPT,
+        PDFQualityCategory.MISSING,
+        PDFQualityCategory.NEEDS_OCR,
+    ):
         return "pdf_quality_blocked"
     return "not_ingested"
 
@@ -71,15 +80,26 @@ def _assess_row(row: dict[str, str]) -> tuple[str, PDFQualityResult]:
 
 
 def _ensure_columns(fieldnames: list[str]) -> list[str]:
-    """Add pdf_quality and pdf_quality_notes columns if absent."""
-    for column in ("pdf_quality", "pdf_quality_notes"):
-        if column not in fieldnames:
-            # Insert after fulltext_url so quality sits near source URLs.
-            try:
-                index = fieldnames.index("fulltext_url") + 1
-            except ValueError:
-                index = len(fieldnames)
-            fieldnames.insert(index, column)
+    """Add pdf_quality then pdf_quality_notes after fulltext_url when absent."""
+    try:
+        insert_at = fieldnames.index("fulltext_url") + 1
+    except ValueError:
+        insert_at = len(fieldnames)
+
+    if "pdf_quality" not in fieldnames:
+        fieldnames.insert(insert_at, "pdf_quality")
+        insert_at += 1
+    else:
+        insert_at = fieldnames.index("pdf_quality") + 1
+
+    if "pdf_quality_notes" not in fieldnames:
+        fieldnames.insert(insert_at, "pdf_quality_notes")
+    elif "pdf_quality" in fieldnames and fieldnames.index(
+        "pdf_quality_notes"
+    ) < fieldnames.index("pdf_quality"):
+        # Normalize legacy order (notes before key) to key-then-notes.
+        fieldnames.remove("pdf_quality_notes")
+        fieldnames.insert(fieldnames.index("pdf_quality") + 1, "pdf_quality_notes")
     return fieldnames
 
 

@@ -63,7 +63,10 @@ def _categorize(
     if text_chars == 0:
         if image_pages > 0:
             return PDFQualityCategory.NEEDS_OCR, f"{base}; image-only PDF, OCR required"
-        return PDFQualityCategory.POOR_TEXT, f"{base}; no extractable text or images"
+        return (
+            PDFQualityCategory.NEEDS_OCR,
+            f"{base}; no extractable text; OCR or replacement PDF required",
+        )
 
     if empty_ratio >= POOR_EMPTY_PAGE_RATIO or density < POOR_TEXT_DENSITY:
         return (

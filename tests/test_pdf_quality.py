@@ -107,6 +107,18 @@ def test_needs_ocr_many_blank_pages(tmp_path: Path) -> None:
     assert result.empty_pages / result.page_count >= 0.6
 
 
+def test_needs_ocr_blank_pdf(tmp_path: Path) -> None:
+    """Blank pages with no images -> needs_ocr (not poor_text)."""
+    path = tmp_path / "blank.pdf"
+    _write_text_pdf(path, texts=["", ""])
+    result = assess_pdf_path(path)
+    assert result.category == PDFQualityCategory.NEEDS_OCR
+    assert result.page_count == 2
+    assert result.text_chars == 0
+    assert result.image_pages == 0
+    assert not result.has_text_layer
+
+
 def test_corrupt_bytes() -> None:
     result = assess_pdf_bytes(b"not-a-pdf")
     assert result.category == PDFQualityCategory.CORRUPT
@@ -171,3 +183,50 @@ def test_score_publication_pdf_with_fallback() -> None:
         assert result.category == PDFQualityCategory.GOOD
     finally:
         pdf_quality.assess_pdf_url = original
+
+
+def test_row_quality_status_blocks_needs_ocr() -> None:
+    import importlib.util
+    from pathlib import Path as PathLib
+
+    spec = importlib.util.spec_from_file_location(
+        "assess_corpus_pdf_quality",
+        PathLib(__file__).resolve().parents[1] / "scripts" / "assess_corpus_pdf_quality.py",
+    )
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    assert (
+        mod._row_quality_status(_dummy_result(PDFQualityCategory.NEEDS_OCR, "ocr"))
+        == "pdf_quality_blocked"
+    )
+    assert (
+        mod._row_quality_status(_dummy_result(PDFQualityCategory.GOOD, "ok"))
+        == "not_ingested"
+    )
+    assert (
+        mod._row_quality_status(_dummy_result(PDFQualityCategory.POOR_TEXT, "thin"))
+        == "not_ingested"
+    )
+
+
+def test_ensure_columns_orders_quality_before_notes() -> None:
+    import importlib.util
+    from pathlib import Path as PathLib
+
+    spec = importlib.util.spec_from_file_location(
+        "assess_corpus_pdf_quality",
+        PathLib(__file__).resolve().parents[1] / "scripts" / "assess_corpus_pdf_quality.py",
+    )
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    fresh = mod._ensure_columns(["fulltext_url", "corpus_topic"])
+    assert fresh == ["fulltext_url", "pdf_quality", "pdf_quality_notes", "corpus_topic"]
+
+    legacy = mod._ensure_columns(
+        ["fulltext_url", "pdf_quality_notes", "pdf_quality", "corpus_topic"]
+    )
+    assert legacy == ["fulltext_url", "pdf_quality", "pdf_quality_notes", "corpus_topic"]

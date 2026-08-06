@@ -122,7 +122,7 @@ Before a publication is committed to ingestion, its source PDF is assessed for e
 |---|---|---|
 | `good` | Readable text layer, page density >= 300 chars/page, <= 25% empty pages | Proceed to extraction |
 | `poor_text` | Text present but low density (100-300 chars/page) or 25-60% empty pages | Proceed with caution; note in manifest |
-| `needs_ocr` | Image-only or >60% empty pages or density < 100 chars/page | Flag for OCR follow-up; do not extract |
+| `needs_ocr` | Image-only, blank (no text/images), >60% empty pages, or density < 100 chars/page | Block ingestion (`pdf_quality_blocked`); flag for OCR follow-up |
 | `corrupt` | Cannot be opened or parsed as a PDF | Block ingestion (`pdf_quality_blocked`) |
 | `missing` | URL unreachable, returned non-PDF, or no PDF URL | Block ingestion (`pdf_quality_blocked`) |
 
@@ -154,7 +154,9 @@ Run the corpus-wide assessment script to populate the manifest:
 python3 scripts/assess_corpus_pdf_quality.py
 ```
 
-This updates `data/inventory/august_mvp_corpus_manifest.csv` with `pdf_quality` and `pdf_quality_notes` for each row.
+This updates `data/inventory/august_mvp_corpus_manifest.csv` with `pdf_quality`
+and `pdf_quality_notes` for each row, and sets `ingestion_status` to
+`pdf_quality_blocked` for `needs_ocr`, `corrupt`, and `missing` categories.
 
 
 ## Related documents

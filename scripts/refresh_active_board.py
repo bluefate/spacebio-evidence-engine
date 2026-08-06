@@ -335,8 +335,11 @@ def build_next_options(issues: dict[int, IssueState]) -> str:
         )
         priority += 1
 
-    # In-flight critical (do not claim).
+    # In-flight critical (do not claim). Non-critical in-flight rows are
+    # already listed above under parallel picks as "Already claimed".
     for number, issue in sorted(issues.items()):
+        if not issue.critical:
+            continue
         if bucket(issue.status) != "inflight":
             continue
         owner = issue.owner_label or "see claim comment"
