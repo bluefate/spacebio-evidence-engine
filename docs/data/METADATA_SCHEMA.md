@@ -5,11 +5,12 @@ Define required and recommended metadata fields for persistence and citation.
 
 ## Scope
 Publication, passage, chunk, entity, relationship, and evaluation metadata.
-**Issue #27** implements `publications`. **Issue #33** implements `chunks`. Passage and embedding tables remain follow-on work.
+**Issue #27** implements `publications`. **Issue #33** implements `chunks`. **Issue #42** implements `chunk_embeddings`. Passage tables remain follow-on work.
 
 ## Current status
 Publication persistence schema implemented (SQLAlchemy + Alembic revision `20260805_0001`).
 Chunk persistence schema implemented (SQLAlchemy + Alembic revision `20260806_0002`).
+Chunk embedding vector schema implemented (SQLAlchemy + Alembic revision `20260806_0003`).
 
 ## Required publication fields
 
@@ -93,6 +94,20 @@ Chunk page mapping note:
 ORM: `spacebio_evidence_engine.db.models.Chunk`  
 Migration: `alembic/versions/20260806_0002_create_chunks.py`  
 Apply: `make migrate` (or `alembic upgrade head`)
+
+## Required chunk embedding fields (issue #42)
+
+| Field | DB column | Notes |
+|-------|-----------|-------|
+| `chunk_id` | `chunk_embeddings.chunk_id` (PK, FK → `chunks`) | 1:1 with chunk; `ON DELETE CASCADE` |
+| `embedding` | `embedding` | PostgreSQL `vector(384)`; SQLite CI uses JSON text |
+| `model_name` | `model_name` | e.g. `sentence-transformers/all-MiniLM-L6-v2` |
+| `dimension` | `dimension` | Constrained to **384** (MVP MiniLM) |
+
+Extension dependency: PostgreSQL `vector` (#8). Migration also runs `CREATE EXTENSION IF NOT EXISTS vector`.
+
+ORM: `spacebio_evidence_engine.db.models.ChunkEmbedding`  
+Migration: `alembic/versions/20260806_0003_create_chunk_embeddings.py`
 
 ## Related documents
 - [Data dictionary](DATA_DICTIONARY.md)

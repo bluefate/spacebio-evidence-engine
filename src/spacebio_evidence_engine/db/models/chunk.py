@@ -1,7 +1,6 @@
 """Chunk persistence model (issue #33).
 
-Stores retrieval chunks produced by section-aware chunking (#32). Embedding
-vectors and passage tables remain follow-on work.
+Embedding vectors live in ``ChunkEmbedding`` (issue #42). Passage tables remain later.
 """
 
 from __future__ import annotations

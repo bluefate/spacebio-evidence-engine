@@ -7,13 +7,15 @@ Define core domain terms consistently.
 MVP data entities and evidence concepts.
 
 ## Current status
-Initial dictionary. Publication persistence fields are defined in [METADATA_SCHEMA.md](METADATA_SCHEMA.md) and the `publications` table (issue #27). Chunk persistence fields are in the same schema doc and the `chunks` table (issue #33).
+Initial dictionary. Publication persistence fields are defined in [METADATA_SCHEMA.md](METADATA_SCHEMA.md) and the `publications` table (issue #27). Chunk persistence fields are in the same schema doc and the `chunks` table (issue #33). Chunk embedding vectors are stored in `chunk_embeddings` (issue #42).
 
 ## Terms
 - Publication: A scientific article included in the controlled corpus. Persisted in PostgreSQL table `publications` with identifiers, license, paths, and ingest/approval state.
 - Source: The original access location, DOI, repository URL, PDF, or HTML source (`source_url`, `pdf_url`, `fulltext_url`, optional `pdf_path`).
 - Passage: A citation-addressable text span with page or section metadata.
 - Chunk: A retrieval unit derived from publication text (section-aware). Persisted in `chunks` with `chunk_id`, FK `publication_id`, `section`, `chunk_text`, `content_hash`, offsets, optional pages, and `chunking_strategy_version`.
+- Chunk embedding: Dense vector for a chunk, stored in `chunk_embeddings` (`embedding vector(384)` on PostgreSQL). MVP dimension **384** for local MiniLM; requires the `vector` extension (#8).
+- Embedding model: Stable model id recorded on the embedding row (`model_name`) and optionally on `chunks.embedding_model`.
 - Citation: A link from an answer claim to a supporting passage.
 - Organism: Biological organism studied (`organism_model` free-text in August MVP).
 - Model system: Experimental model such as rodent, cell culture, tissue, or human sample.

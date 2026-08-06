@@ -92,6 +92,7 @@ Unit tests use an injected fake client and do not call the network.
 2. `make services` starts Compose Postgres (`pgvector/pgvector:pg16` on port `5432`).
 3. `make db-bootstrap` enables the `vector` extension (needed if the data volume already existed before init scripts were added).
 4. Fresh volumes also apply `scripts/db/init/01_pgvector.sql` automatically.
+5. `make migrate` applies Alembic revisions through `chunk_embeddings` (`vector(384)` on Postgres; issue #42).
 5. Application tables are **not** created here — only the extension (see issue #8).
 
 Integration smoke (optional, needs DB up):
