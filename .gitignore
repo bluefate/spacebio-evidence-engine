@@ -203,3 +203,4 @@ corpus/files/
 tmp/
 temp/
 .cache/
+.worktrees/

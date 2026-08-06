@@ -24,9 +24,27 @@ Human-readable index: [REFERENCE_QUESTIONS.md](REFERENCE_QUESTIONS.md).
 ## MVP artifacts
 - Benchmark question set (**10** reference questions; styles: factual lookup, comparison, sufficiency).
 - Expected source publications or passages (candidate publication IDs in the fixture; passage IDs after ingest).
-- Evaluation notebooks (follow-on).
+- Offline hallucination check (`evals/hallucination_check.py`) for fixture
+  `GroundedAnswerResponse` payloads. The MVP metric flags claim-like answer
+  sentences that lack citation markers when evidence is sufficient or marginal,
+  and verifies insufficient-evidence responses clearly decline without citations.
+- Machine-readable hallucination metrics: `unsupported_claim_count`,
+  `claim_sentence_count`, `cited_claim_sentence_count`, and `cited_claim_rate`.
 - Automated tests for citation integrity (follow-on).
 - Human review notes for scientific correctness (`human_scientific_review` in the fixture).
+
+## Hallucination check
+
+Run the deterministic fixture check:
+
+```bash
+python evals/hallucination_check.py evals/fixtures/hallucination_answers.json --json
+```
+
+The command exits non-zero when unsupported claims are detected, making failures
+actionable in CI or local reports. It is not a substitute for human scientific
+review: it checks citation-marker discipline and insufficient-evidence behavior,
+while deeper citation support precision/recall remains issue #59.
 
 ## Reference question rules
 - Questions target topic `microgravity_skeletal_muscle` only.
