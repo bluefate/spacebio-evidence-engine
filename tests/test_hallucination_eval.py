@@ -6,6 +6,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 from spacebio_evidence_engine.evaluation.hallucination import (
     HallucinationMetrics,
     evaluate_answer,
@@ -55,6 +57,21 @@ def test_uncited_claim_fails_actionably() -> None:
     assert not result.passed
     assert result.findings[0].code == "unsupported_claim"
     assert "Unloading decreased" in result.findings[0].text
+
+
+@pytest.mark.parametrize(
+    "answer_text",
+    [
+        "Astronauts lose soleus mass.",
+        "Unloading induces muscle atrophy.",
+        "Radiation impaired muscle function.",
+    ],
+)
+def test_expanded_claim_lexicon_flags_uncited_verbs(answer_text: str) -> None:
+    result = evaluate_answer(_answer(answer_text))
+    assert not result.passed
+    assert result.findings[0].code == "unsupported_claim"
+    assert answer_text in result.findings[0].text
 
 
 def test_unknown_citation_marker_fails() -> None:

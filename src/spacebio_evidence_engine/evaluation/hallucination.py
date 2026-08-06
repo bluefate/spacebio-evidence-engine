@@ -23,9 +23,10 @@ _CITATION_MARKER_RE = re.compile(r"\[(C[0-9A-Za-z_-]+)\]")
 _SENTENCE_RE = re.compile(r"[^.!?]+(?:[.!?]+|$)")
 _CLAIM_WORD_RE = re.compile(
     r"\b("
-    r"affect(?:s|ed|ing)?|alter(?:s|ed|ing)?|associate(?:s|d)?|caus(?:e|es|ed|ing)|"
-    r"chang(?:e|es|ed|ing)|decreas(?:e|es|ed|ing)|increas(?:e|es|ed|ing)|"
-    r"induc(?:e|es|ed|ing)|inhibit(?:s|ed|ing)?|reduc(?:e|es|ed|ing)|"
+    r"affect(?:s|ed|ing)?|alter(?:s|ed|ing)?|associate(?:s|d)?|atroph(?:y|ies|ied|ying)|"
+    r"caus(?:e|es|ed|ing)|chang(?:e|es|ed|ing)|decreas(?:e|es|ed|ing)|"
+    r"impair(?:s|ed|ing)?|increas(?:e|es|ed|ing)|induc(?:e|es|ed|ing)|"
+    r"inhibit(?:s|ed|ing)?|los(?:e|es|t|ing)|reduc(?:e|es|ed|ing)|"
     r"report(?:s|ed|ing)?|show(?:s|ed|ing)?|suggest(?:s|ed|ing)?|"
     r"support(?:s|ed|ing)?|lead(?:s|ing)?|led|result(?:s|ed|ing)?|"
     r"improv(?:e|es|ed|ing)|worsen(?:s|ed|ing)?"
