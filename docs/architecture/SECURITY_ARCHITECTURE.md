@@ -13,6 +13,8 @@ Initial baseline for local August MVP; full threat modeling before any public de
 - Environment-based secret configuration.
 - Anonymous local use (authentication out of August MVP scope).
 - Server-side model provider calls.
+- Optional OpenAI embeddings disabled unless `OPENAI_API_KEY` is set; API keys
+  must stay in environment/local secret storage and must not be logged.
 - Parameterized SQL through ORM/query builders.
 - Least-privilege database users when practical.
 - Dependency scanning in GitHub Actions.
@@ -32,4 +34,3 @@ Initial baseline for local August MVP; full threat modeling before any public de
 
 ## Decision status
 Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
-

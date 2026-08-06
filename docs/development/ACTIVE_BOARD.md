@@ -70,6 +70,7 @@ flowchart TB
     i30["#30 Sections"]
     i31["#31 Page map"]
     i32["#32 Chunking strategy"]
+    i33["#33 Chunk metadata schema"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
     i51["#51 LLM provider interface"]
@@ -78,7 +79,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i33["#33 Chunk metadata schema<br/>owner: bluefate<br/>status: In Progress"]
+    inflight_empty["(none)"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     i42["#42 Vector storage schema"]
@@ -109,10 +110,9 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Wait on #33 | Blocked |
+| 1 | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | Planning | Next on critical path | Overlap on same files |
 | — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33) Chunk metadata schema | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
