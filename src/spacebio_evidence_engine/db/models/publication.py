@@ -1,6 +1,6 @@
 """Publication persistence model (issue #27).
 
-Chunk, passage, and embedding tables are intentionally out of scope here.
+Chunk table is issue #33 (`Chunk`). Passage and embedding tables remain later.
 """
 
 from __future__ import annotations
