@@ -5,10 +5,11 @@ Define required and recommended metadata fields for persistence and citation.
 
 ## Scope
 Publication, passage, chunk, entity, relationship, and evaluation metadata.
-**Issue #27 implements the `publications` table only.** Passage/chunk tables come later.
+**Issue #27** implements `publications`. **Issue #33** implements `chunks`. Passage and embedding tables remain follow-on work.
 
 ## Current status
 Publication persistence schema implemented (SQLAlchemy + Alembic revision `20260805_0001`).
+Chunk persistence schema implemented (SQLAlchemy + Alembic revision `20260806_0002`).
 
 ## Required publication fields
 
@@ -63,20 +64,35 @@ Page mapping note:
 *(Not persisted yet — follow-on issues.)*
 
 ## Required chunk fields
-- `chunk_id`
-- `publication_id`
-- `passage_ids`
-- `chunk_text`
-- `page_start` / `page_end`
-- `embedding_model`
-- `chunking_strategy_version`
+
+| Field | DB column | Notes |
+|-------|-----------|-------|
+| `chunk_id` | `chunks.chunk_id` (PK) | Stable id from chunker (`chk_…`) |
+| `publication_id` | `publication_id` (FK → `publications`) | Required; `ON DELETE RESTRICT` |
+| `section` | `section` | Section label (e.g. `methods`, `unknown`) |
+| `chunk_text` | `chunk_text` | Retrieval text |
+| `content_hash` | `content_hash` | SHA-256 hex of `chunk_text` |
+| `start_offset` / `end_offset` | `start_offset`, `end_offset` | Char offsets in full document text |
+| `page_start` / `page_end` | `page_start`, `page_end` | 1-based pages or `NULL` |
+| `chunking_strategy_version` | `chunking_strategy_version` | e.g. `1.0.0` |
+
+## Recommended / implemented chunk fields
+
+| Field | DB column | Notes |
+|-------|-----------|-------|
+| `passage_ids` | `passage_ids` | Optional text (JSON array) until passages table exists |
+| `embedding_model` | `embedding_model` | Null until vectors are written |
+| `section_heading` | `section_heading` | Optional matched heading |
+| timestamps | `created_at`, `updated_at` | Timezone-aware |
 
 Chunk page mapping note:
 
 - Preserve page bounds on chunks whenever they can be derived from source passages.
 - Missing page bounds must stay explicit as `null`; never synthesize a page.
 
-*(Not persisted yet — follow-on issues.)*
+ORM: `spacebio_evidence_engine.db.models.Chunk`  
+Migration: `alembic/versions/20260806_0002_create_chunks.py`  
+Apply: `make migrate` (or `alembic upgrade head`)
 
 ## Related documents
 - [Data dictionary](DATA_DICTIONARY.md)

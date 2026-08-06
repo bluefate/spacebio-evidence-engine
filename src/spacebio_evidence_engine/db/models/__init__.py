@@ -1,5 +1,6 @@
 """ORM models for the evidence engine."""
 
+from spacebio_evidence_engine.db.models.chunk import Chunk
 from spacebio_evidence_engine.db.models.publication import Publication
 
-__all__ = ["Publication"]
+__all__ = ["Chunk", "Publication"]

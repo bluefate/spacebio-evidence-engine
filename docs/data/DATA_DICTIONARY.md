@@ -7,13 +7,13 @@ Define core domain terms consistently.
 MVP data entities and evidence concepts.
 
 ## Current status
-Initial dictionary. Publication persistence fields are defined in [METADATA_SCHEMA.md](METADATA_SCHEMA.md) and the `publications` table (issue #27).
+Initial dictionary. Publication persistence fields are defined in [METADATA_SCHEMA.md](METADATA_SCHEMA.md) and the `publications` table (issue #27). Chunk persistence fields are in the same schema doc and the `chunks` table (issue #33).
 
 ## Terms
 - Publication: A scientific article included in the controlled corpus. Persisted in PostgreSQL table `publications` with identifiers, license, paths, and ingest/approval state.
 - Source: The original access location, DOI, repository URL, PDF, or HTML source (`source_url`, `pdf_url`, `fulltext_url`, optional `pdf_path`).
 - Passage: A citation-addressable text span with page or section metadata.
-- Chunk: A retrieval unit derived from one or more passages.
+- Chunk: A retrieval unit derived from publication text (section-aware). Persisted in `chunks` with `chunk_id`, FK `publication_id`, `section`, `chunk_text`, `content_hash`, offsets, optional pages, and `chunking_strategy_version`.
 - Citation: A link from an answer claim to a supporting passage.
 - Organism: Biological organism studied (`organism_model` free-text in August MVP).
 - Model system: Experimental model such as rodent, cell culture, tissue, or human sample.
@@ -25,6 +25,7 @@ Initial dictionary. Publication persistence fields are defined in [METADATA_SCHE
 - Candidate conflict: A possible disagreement requiring human/scientific review.
 - Ingestion status: Pipeline state for a publication (`not_ingested`, and later processing states).
 - Human approval: Owner approval of a corpus row (`pending`, `approved`, `rejected`).
+- Content hash: SHA-256 hex digest of `chunk_text` used for integrity / dedupe checks (`chunks.content_hash`).
 
 ## Related documents
 - [Metadata schema](METADATA_SCHEMA.md)
