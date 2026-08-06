@@ -112,6 +112,53 @@ Fixture coverage: `tests/test_section_detection.py`.
 - `page_number_for_offset(offset)`: 1-based page, or `None` when offset is unknown / out of range
 - Section detection reuses `extraction.page_map.page_starts` (no duplicate join logic)
 
+## PDF quality assessment (issue #25)
+
+Before a publication is committed to ingestion, its source PDF is assessed for extractability. This is a lightweight, local-only check over the downloaded bytes; it does not perform OCR.
+
+### Quality rubric
+
+| Category | Criteria | Ingestion disposition |
+|---|---|---|
+| `good` | Readable text layer, page density >= 300 chars/page, <= 25% empty pages | Proceed to extraction |
+| `poor_text` | Text present but low density (100-300 chars/page) or 25-60% empty pages | Proceed with caution; note in manifest |
+| `needs_ocr` | Image-only, blank (no text/images), >60% empty pages, or density < 100 chars/page | Block ingestion (`pdf_quality_blocked`); flag for OCR follow-up |
+| `corrupt` | Cannot be opened or parsed as a PDF | Block ingestion (`pdf_quality_blocked`) |
+| `missing` | URL unreachable, returned non-PDF, or no PDF URL | Block ingestion (`pdf_quality_blocked`) |
+
+### Usage
+
+Assess a single PDF:
+
+```python
+from spacebio_evidence_engine.ingestion.pdf_quality import assess_pdf_path
+
+result = assess_pdf_path("data/pdfs/pub_001.pdf")
+print(result.category, result.notes)
+```
+
+Assess a publication by URL with a EuropePMC fallback:
+
+```python
+from spacebio_evidence_engine.ingestion.pdf_quality import score_publication_pdf
+
+result = score_publication_pdf(
+    "https://www.nature.com/articles/s41526-024-00406-3.pdf",
+    pmcid="PMC11153545",
+)
+```
+
+Run the corpus-wide assessment script to populate the manifest:
+
+```bash
+python3 scripts/assess_corpus_pdf_quality.py
+```
+
+This updates `data/inventory/august_mvp_corpus_manifest.csv` with `pdf_quality`
+and `pdf_quality_notes` for each row, and sets `ingestion_status` to
+`pdf_quality_blocked` for `needs_ocr`, `corrupt`, and `missing` categories.
+
+
 ## Related documents
 - [Chunking strategy](../rag/CHUNKING_STRATEGY.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)

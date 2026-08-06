@@ -51,6 +51,7 @@ CRITICAL_EDGES: list[tuple[int, int]] = [
 # Issues always shown on the board (August MVP spine + common parallel picks).
 TRACKED: dict[int, dict[str, str | bool]] = {
     20: {"title": "Corpus inventory", "critical": True},
+    25: {"title": "Assess PDF quality", "critical": False},
     26: {"title": "Reference questions", "critical": False},
     27: {"title": "Publication schema", "critical": True},
     28: {"title": "PDF storage", "critical": True},
@@ -334,8 +335,11 @@ def build_next_options(issues: dict[int, IssueState]) -> str:
         )
         priority += 1
 
-    # In-flight critical (do not claim).
+    # In-flight critical (do not claim). Non-critical in-flight rows are
+    # already listed above under parallel picks as "Already claimed".
     for number, issue in sorted(issues.items()):
+        if not issue.critical:
+            continue
         if bucket(issue.status) != "inflight":
             continue
         owner = issue.owner_label or "see claim comment"

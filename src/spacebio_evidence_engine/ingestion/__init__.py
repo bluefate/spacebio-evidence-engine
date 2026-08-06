@@ -1,4 +1,4 @@
-"""Ingestion pipeline components (PDF extract, section detection, chunking)."""
+"""Ingestion pipeline components (PDF extract, section detection, chunking, quality)."""
 
 from spacebio_evidence_engine.ingestion.chunking import (
     CHUNKING_STRATEGY_VERSION,
@@ -25,6 +25,14 @@ from spacebio_evidence_engine.ingestion.extract import (
     extract_pdf_path,
     page_texts,
 )
+from spacebio_evidence_engine.ingestion.pdf_quality import (
+    PDFQualityCategory,
+    PDFQualityResult,
+    assess_pdf_bytes,
+    assess_pdf_path,
+    assess_pdf_url,
+    score_publication_pdf,
+)
 from spacebio_evidence_engine.ingestion.sections import (
     SectionDetectionResult,
     SectionLabel,
@@ -43,10 +51,15 @@ __all__ = [
     "PDFEmptyError",
     "PDFExtractionError",
     "PDFOpenError",
+    "PDFQualityCategory",
+    "PDFQualityResult",
     "SectionDetectionResult",
     "SectionLabel",
     "SectionSpan",
     "TextChunk",
+    "assess_pdf_bytes",
+    "assess_pdf_path",
+    "assess_pdf_url",
     "chunk_extraction",
     "chunk_sections",
     "chunk_text",
@@ -58,4 +71,5 @@ __all__ = [
     "extract_pdf_path",
     "make_chunk_id",
     "page_texts",
+    "score_publication_pdf",
 ]
