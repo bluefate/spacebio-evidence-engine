@@ -16,7 +16,7 @@ from __future__ import annotations
 import csv
 import os
 import sys
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 from pathlib import Path
 
 from spacebio_evidence_engine.ingestion.pdf_quality import (
@@ -27,7 +27,8 @@ from spacebio_evidence_engine.ingestion.pdf_quality import (
 
 MANIFEST_PATH = Path("data/inventory/august_mvp_corpus_manifest.csv")
 DEFAULT_TIMEOUT = float(os.environ.get("SPACEBIO_PDF_TIMEOUT", "30.0"))
-MAX_WORKERS = 4
+REQUEST_DELAY = float(os.environ.get("SPACEBIO_PDF_DELAY", "1.5"))
+RETRY_DELAY = float(os.environ.get("SPACEBIO_PDF_RETRY_DELAY", "5.0"))
 
 
 def _row_quality_status(result: PDFQualityResult) -> str:
@@ -38,7 +39,10 @@ def _row_quality_status(result: PDFQualityResult) -> str:
 
 
 def _assess_row(row: dict[str, str]) -> tuple[str, PDFQualityResult]:
-    """Assess one publication, returning its id and result."""
+    """Assess one publication, returning its id and result.
+
+    Sleeps between requests and retries once on HTTP 429 rate limits.
+    """
     pub_id = row["publication_id"]
     pdf_url = row.get("pdf_url", "").strip()
     pmcid = row.get("pmcid", "").strip() or None
@@ -54,7 +58,15 @@ def _assess_row(row: dict[str, str]) -> tuple[str, PDFQualityResult]:
             notes="No pdf_url in manifest",
             error="missing pdf_url",
         )
+
     result = score_publication_pdf(pdf_url, pmcid=pmcid, timeout=DEFAULT_TIMEOUT)
+    time.sleep(REQUEST_DELAY)
+
+    if result.category == PDFQualityCategory.MISSING and "429" in (result.error or ""):
+        print(f"{pub_id}: rate limited, retrying after {RETRY_DELAY}s")
+        time.sleep(RETRY_DELAY)
+        result = score_publication_pdf(pdf_url, pmcid=pmcid, timeout=DEFAULT_TIMEOUT)
+
     return pub_id, result
 
 
@@ -82,14 +94,10 @@ def main() -> int:
         rows = list(reader)
 
     results: dict[str, PDFQualityResult] = {}
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_to_id = {
-            executor.submit(_assess_row, row): row["publication_id"] for row in rows
-        }
-        for future in as_completed(future_to_id):
-            pub_id, result = future.result()
-            results[pub_id] = result
-            print(f"{pub_id}: {result.category} ({result.notes})")
+    for row in rows:
+        pub_id, result = _assess_row(row)
+        results[pub_id] = result
+        print(f"{pub_id}: {result.category} ({result.notes})")
 
     for row in rows:
         pub_id = row["publication_id"]
