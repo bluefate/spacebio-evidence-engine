@@ -46,25 +46,23 @@ class AuditSummary:
     rows: list[dict[str, str]]
 
 
-_BY_VERSIONS = {
-    "cc-by",
-    "cc-by-4.0",
-    "cc-by-3.0",
-    "cc-by-2.0",
-    "cc-by-2.5",
-    "cc-by-1.0",
-}
-
-_BY_NC_ND_VERSIONS = {
-    "cc-by-nc-nd",
-    "cc-by-nc-nd-4.0",
-    "cc-by-nc-nd-3.0",
-    "cc-by-nc-nd-2.0",
-    "cc-by-nc-nd-2.5",
-    "cc-by-nc-nd-1.0",
-}
-
 _PUBLIC_DOMAIN = {"cc0", "cc-0", "public-domain", "pddl"}
+
+
+def _is_cc_by_family(normalized: str) -> bool:
+    """Match CC BY and versioned CC BY-x.y (e.g. cc-by, cc-by-4.0, cc-by-5.0)."""
+    parts = normalized.split("-")
+    return parts[:2] == ["cc", "by"] and (
+        len(parts) == 2 or (len(parts) == 3 and parts[2][0].isdigit())
+    )
+
+
+def _is_cc_by_nc_nd_family(normalized: str) -> bool:
+    """Match CC BY-NC-ND and versioned CC BY-NC-ND-x.y."""
+    parts = normalized.split("-")
+    return parts[:4] == ["cc", "by", "nc", "nd"] and (
+        len(parts) == 4 or (len(parts) == 5 and parts[4][0].isdigit())
+    )
 
 
 def classify_license(license_id: str) -> LicenseClassification:
@@ -76,7 +74,7 @@ def classify_license(license_id: str) -> LicenseClassification:
     if not normalized:
         return _blocked("No license declared.")
 
-    if normalized in _BY_VERSIONS:
+    if _is_cc_by_family(normalized):
         return _allowed(
             access_restriction_notes=(
                 "Attribution (BY) required. Passages may be retrieved and quoted "
@@ -88,7 +86,7 @@ def classify_license(license_id: str) -> LicenseClassification:
             ),
         )
 
-    if normalized in _BY_NC_ND_VERSIONS:
+    if _is_cc_by_nc_nd_family(normalized):
         return _allowed(
             access_restriction_notes=(
                 "Attribution (BY), non-commercial (NC), and no-derivatives (ND) required. "
@@ -110,7 +108,8 @@ def classify_license(license_id: str) -> LicenseClassification:
             redistribution_notes="No redistribution restrictions.",
         )
 
-    if any(prefix in normalized for prefix in ("cc-by-sa", "cc-by-nc", "cc-by-nd")):
+    has_cc_variant = any(prefix in normalized for prefix in ("cc-by-sa", "cc-by-nc", "cc-by-nd"))
+    if has_cc_variant or normalized.startswith("cc-by"):
         return _needs_review(
             f"License variant '{license_id}' is not in the pre-approved allow-list. "
             "Requires human license review before ingest."
@@ -155,14 +154,22 @@ def _needs_review(reason: str) -> LicenseClassification:
 def audit_manifest(path: Path | None = None) -> AuditSummary:
     """Read the corpus manifest and classify every row by license.
 
+    Verifies that `access_restriction_notes` and `redistribution_notes` match the
+    output of `classify_license` so the manifest cannot drift from the code.
+
     Raises:
-        ValueError: if required columns are missing.
+        ValueError: if required columns are missing or note values are inconsistent.
     """
     path = path or MANIFEST_PATH
     with path.open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
         fieldnames = reader.fieldnames or []
-        required = {"license", "exclusion_flags"}
+        required = {
+            "license",
+            "exclusion_flags",
+            "access_restriction_notes",
+            "redistribution_notes",
+        }
         missing = required - set(fieldnames)
         if missing:
             raise ValueError(f"manifest missing columns: {sorted(missing)}")
@@ -172,6 +179,18 @@ def audit_manifest(path: Path | None = None) -> AuditSummary:
         for row in reader:
             rows.append(row)
             classification = classify_license(row["license"])
+            pub_id = row.get("publication_id") or "?"
+
+            if row["exclusion_flags"] != classification.exclusion_flags:
+                raise ValueError(
+                    f"exclusion_flags mismatch for {pub_id}: "
+                    f"expected {classification.exclusion_flags!r}, got {row['exclusion_flags']!r}"
+                )
+            if row.get("access_restriction_notes") != classification.access_restriction_notes:
+                raise ValueError(f"access_restriction_notes mismatch for {pub_id}")
+            if row.get("redistribution_notes") != classification.redistribution_notes:
+                raise ValueError(f"redistribution_notes mismatch for {pub_id}")
+
             if classification.status == LicenseStatus.ALLOWED:
                 allowed += 1
             elif classification.status == LicenseStatus.BLOCKED:
