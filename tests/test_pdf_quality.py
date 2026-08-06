@@ -201,10 +201,7 @@ def test_row_quality_status_blocks_needs_ocr() -> None:
         mod._row_quality_status(_dummy_result(PDFQualityCategory.NEEDS_OCR, "ocr"))
         == "pdf_quality_blocked"
     )
-    assert (
-        mod._row_quality_status(_dummy_result(PDFQualityCategory.GOOD, "ok"))
-        == "not_ingested"
-    )
+    assert mod._row_quality_status(_dummy_result(PDFQualityCategory.GOOD, "ok")) == "not_ingested"
     assert (
         mod._row_quality_status(_dummy_result(PDFQualityCategory.POOR_TEXT, "thin"))
         == "not_ingested"
