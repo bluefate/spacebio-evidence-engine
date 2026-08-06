@@ -25,6 +25,8 @@ The Space Biology Evidence Engine is a **non-commercial**, educational / researc
 3. Do not ship a standalone commercial republishing of NC-ND full texts.
 4. If the project later becomes commercial, **re-review NC-ND items** before continued use or remove them.
 5. Paywalled or unclear-rights works remain excluded.
+The manifest now records `access_restriction_notes` and `redistribution_notes` for each publication, derived from the license identifier by `spacebio_evidence_engine.corpus.licenses.classify_license`. These fields operationalize the D10 license policy and make redistribution constraints explicit before ingestion.
+
 
 ## Selection summary
 

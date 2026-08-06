@@ -38,6 +38,19 @@ The evidence engine is **non-commercial** (education / research / HootCamp Build
 
 Every manifest row must record `license` and `license_status`. Ingest pipelines must preserve license metadata with the publication record.
 
+## Access and redistribution notes
+
+Every manifest row must record `access_restriction_notes` and `redistribution_notes` derived from the declared license.
+
+| License | `access_restriction_notes` | `redistribution_notes` |
+|---|---|---|
+| CC BY | Attribution (BY) required; passages may be quoted with citation and source link. | Passage quoting allowed; full-text redistribution requires attribution. |
+| CC BY-NC-ND | Attribution (BY), non-commercial (NC), and no-derivatives (ND) required. | Quote passages for non-commercial citation-first answers; do not sell the corpus or publish adapted full-text versions. |
+| CC0 / public domain | No known copyright restrictions; attribution is good practice. | No redistribution restrictions. |
+| Unknown / paywalled | Exclude until clarified. | Do not download or redistribute. |
+
+`spacebio_evidence_engine.corpus.licenses.classify_license` automates this mapping and flags `blocked` or `needs_review` licenses.
+
 ## License review workflow (approved)
 1. Record source URL, DOI if any, and stated license/access terms in the corpus manifest.
 2. Owner reviews rights before ingestion; unclear rights block ingest.
