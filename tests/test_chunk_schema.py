@@ -178,6 +178,8 @@ def test_chunk_model_round_trip(tmp_path: Path) -> None:
 
 
 def test_chunk_foreign_key_rejects_missing_publication(tmp_path: Path) -> None:
+    from sqlalchemy.exc import IntegrityError
+
     db_path = tmp_path / "chunk_fk.sqlite3"
     database_url = f"sqlite+pysqlite:///{db_path}"
     cfg = _alembic_config(database_url)
@@ -186,7 +188,8 @@ def test_chunk_foreign_key_rejects_missing_publication(tmp_path: Path) -> None:
     # SQLite only enforces FKs when PRAGMA foreign_keys=ON.
     with engine.connect() as conn:
         conn.execute(text("PRAGMA foreign_keys=ON"))
-        with pytest.raises(Exception):  # noqa: B017 — dialect-specific IntegrityError
+        conn.commit()
+        with pytest.raises(IntegrityError):
             with conn.begin():
                 conn.execute(
                     text(
