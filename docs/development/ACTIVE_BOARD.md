@@ -73,13 +73,14 @@ flowchart TB
     i33["#33 Chunk metadata schema"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
+    i42["#42 Vector storage schema"]
     i51["#51 LLM provider interface"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i42["#42 Vector storage schema<br/>owner: bluefate<br/>status: In Progress"]
+    i25["#25 Assess PDF quality<br/>branch: feature/25-pdf-quality<br/>PR #113<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     i43["#43 Vector indexing"]
@@ -109,9 +110,10 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Wait on #42 | Blocked |
+| 1 | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Next on critical path | Overlap on same files |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) Vector storage schema | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
+| — | [#25](https://github.com/bluefate/spacebio-evidence-engine/issues/25) Assess PDF quality | PR Open | Already claimed | **Do not claim** |
+| — | [#25](https://github.com/bluefate/spacebio-evidence-engine/issues/25) Assess PDF quality | PR Open | In flight (see claim comment; `feature/25-pdf-quality`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
