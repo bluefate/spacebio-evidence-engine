@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "answers": [
+    {
+      "question": "How does hindlimb unloading alter skeletal muscle?",
+      "answer_text": "Hindlimb unloading decreased soleus muscle mass in the cited fixture [C1].",
+      "citations": [
+        {
+          "citation_id": "C1",
+          "chunk_id": "chk_fixture_001",
+          "publication_id": "pub_002",
+          "title": "Fixture unloading study",
+          "section": "Results",
+          "page": 4,
+          "excerpt": "Soleus muscle mass decreased after hindlimb unloading."
+        }
+      ],
+      "sufficiency": {
+        "status": "sufficient",
+        "retrieved_chunk_count": 3,
+        "supporting_publication_count": 2
+      },
+      "model_name": "fixture-llm"
+    },
+    {
+      "question": "What did the controlled corpus say about a non-corpus intervention?",
+      "answer_text": "Insufficient evidence in the controlled corpus to answer this question.",
+      "citations": [],
+      "sufficiency": {
+        "status": "insufficient",
+        "reason": "No on-topic passages were retrieved from the controlled corpus.",
+        "retrieved_chunk_count": 0,
+        "supporting_publication_count": 0
+      },
+      "model_name": null
+    }
+  ]
+}
