@@ -46,6 +46,8 @@ def semantic_search(
     *,
     k: int = DEFAULT_TOP_K,
     filters: RetrievalFilters | Mapping[str, Any] | None = None,
+    log_retrieval: bool | None = None,
+    verbose_logging: bool | None = None,
 ) -> list[SemanticSearchHit]:
     """Return top-k chunks by cosine similarity to the query embedding.
 
@@ -67,20 +69,31 @@ def semantic_search(
     bind = session.get_bind()
     dialect_name = bind.dialect.name if bind is not None else ""
     if dialect_name == "postgresql":
-        return _search_pgvector(
+        hits = _search_pgvector(
             session,
             provider=provider,
             query_vector=query_vector,
             k=k,
             filters=parsed_filters,
         )
-    return _search_python(
-        session,
-        provider=provider,
-        query_vector=query_vector,
-        k=k,
+    else:
+        hits = _search_python(
+            session,
+            provider=provider,
+            query_vector=query_vector,
+            k=k,
+            filters=parsed_filters,
+        )
+    _log_semantic_retrieval(
+        query=query,
+        top_k=k,
         filters=parsed_filters,
+        hits=hits,
+        provider=provider,
+        enabled=log_retrieval,
+        verbose=verbose_logging,
     )
+    return hits
 
 
 def cosine_similarity(left: list[float], right: list[float]) -> float:
@@ -196,3 +209,27 @@ def _validate_vector(vector: list[float], provider: EmbeddingProvider) -> None:
         raise ValueError(
             f"provider returned vector length {len(vector)} for dimension {provider.dimension}"
         )
+
+
+def _log_semantic_retrieval(
+    *,
+    query: str,
+    top_k: int,
+    filters: RetrievalFilters | None,
+    hits: list[SemanticSearchHit],
+    provider: EmbeddingProvider,
+    enabled: bool | None,
+    verbose: bool | None,
+) -> None:
+    from spacebio_evidence_engine.retrieval.logging import log_semantic_retrieval
+
+    log_semantic_retrieval(
+        query=query,
+        top_k=top_k,
+        filters=filters,
+        hits=hits,
+        embedding_model=provider.model_name,
+        embedding_dimension=provider.dimension,
+        enabled=enabled,
+        verbose=verbose,
+    )
