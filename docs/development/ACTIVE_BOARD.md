@@ -82,12 +82,13 @@ flowchart TB
     i47["#47 Retrieval metadata filters"]
     i50["#50 Retrieval eval harness"]
     i51["#51 LLM provider interface"]
+    i52["#52 Context assembly"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i52["#52 Context assembly<br/>branch: feature/52-context-assembly<br/>PR #123<br/>owner: bluefate<br/>status: PR Open"]
+    i53["#53 Grounded answer prompt<br/>owner: bluefate<br/>status: In Progress"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -116,7 +117,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#52](https://github.com/bluefate/spacebio-evidence-engine/issues/52) Context assembly | PR Open | Already claimed | **Do not claim** |
+| — | [#53](https://github.com/bluefate/spacebio-evidence-engine/issues/53) Grounded answer prompt | In Progress | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
