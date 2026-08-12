@@ -52,6 +52,7 @@ CRITICAL_EDGES: list[tuple[int, int]] = [
 TRACKED: dict[int, dict[str, str | bool]] = {
     6: {"title": "Document and script local development setup", "critical": False},
     20: {"title": "Corpus inventory", "critical": True},
+    22: {"title": "Corpus inventory notebook", "critical": False},
     25: {"title": "Assess PDF quality", "critical": False},
     26: {"title": "Reference questions", "critical": False},
     27: {"title": "Publication schema", "critical": True},
