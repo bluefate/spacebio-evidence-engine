@@ -80,11 +80,11 @@ describe("AskClient", () => {
     fireEvent.click(screen.getByRole("button", { name: "Ask question" }));
 
     await waitFor(() => {
-      expect(screen.getByText(sufficientAnswer.answer_text)).toBeInTheDocument();
+      expect(screen.getByTestId("citation-linked-text")).toBeInTheDocument();
     });
 
     expect(screen.getByText("Claims and citations")).toBeInTheDocument();
-    expect(screen.getAllByText("C1").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByTestId("citation-marker-C1")).toBeInTheDocument();
     expect(screen.getByTestId("evidence-panel")).toBeInTheDocument();
     expect(screen.getByText("Soleus muscle mass declined after unloading in flight mice.")).toBeInTheDocument();
   });

@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 
-import { EvidencePanel } from "@/components/evidence";
+import { CitationLinkedText, EvidencePanel } from "@/components/evidence";
+import type { CitationLinkLookup } from "@/components/evidence";
 import { askQuestion, type GroundedAnswerResponse } from "@/data/ask";
 
 import styles from "./ask.module.css";
@@ -60,6 +61,21 @@ export function AskClient() {
   const hasAnswer = response.answer_text.trim().length > 0;
   const hasCitations = response.citations.length > 0;
   const hasClaims = response.claims.length > 0;
+
+  const citationLookup = useMemo(() => {
+    const map = new Map<string, CitationLinkLookup>();
+    for (const citation of response.citations) {
+      map.set(citation.citation_id, {
+        known: true,
+        publicationId: citation.publication_id,
+      });
+    }
+    return map;
+  }, [response.citations]);
+
+  function resolveCitation(citationId: string): CitationLinkLookup {
+    return citationLookup.get(citationId) ?? { known: false };
+  }
 
   return (
     <section className={styles.askPanel} aria-labelledby="ask-heading">
@@ -133,7 +149,13 @@ export function AskClient() {
         <div className={styles.answerLayout}>
           <section className={styles.answerColumn} aria-labelledby="answer-heading">
             <h3 id="answer-heading">Answer</h3>
-            <p className={styles.answerText}>{response.answer_text}</p>
+            <CitationLinkedText
+              text={response.answer_text}
+              activeCitationId={activeCitationId}
+              onSelectCitation={setActiveCitationId}
+              resolveCitation={resolveCitation}
+              className={styles.answerText}
+            />
 
             {hasClaims && (
               <div className={styles.claimsSection}>
