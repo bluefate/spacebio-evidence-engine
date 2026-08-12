@@ -84,7 +84,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i36["#36 Ingestion error reporting<br/>owner: bluefate<br/>status: In Progress"]
+    i36["#36 Ingestion error reporting<br/>branch: feature/36-ingestion-error-reporting<br/>PR #119<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -113,7 +113,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#36](https://github.com/bluefate/spacebio-evidence-engine/issues/36) Ingestion error reporting | In Progress | Already claimed | **Do not claim** |
+| — | [#36](https://github.com/bluefate/spacebio-evidence-engine/issues/36) Ingestion error reporting | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
