@@ -72,6 +72,7 @@ flowchart TB
     i31["#31 Page map"]
     i32["#32 Chunking strategy"]
     i33["#33 Chunk metadata schema"]
+    i34["#34 Ingestion status tracking"]
     i36["#36 Ingestion error reporting"]
     i37["#37 Ingestion unit tests"]
     i39["#39 EmbeddingProvider interface"]
@@ -89,7 +90,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i34["#34 Ingestion status tracking<br/>branch: feature/34-ingestion-status-tracking<br/>PR #125<br/>owner: bluefate<br/>status: PR Open"]
+    i54["#54 Passage citation emission<br/>branch: feature/54-passage-citation-emission<br/>PR #126<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -118,7 +119,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#34](https://github.com/bluefate/spacebio-evidence-engine/issues/34) Ingestion status tracking | PR Open | Already claimed | **Do not claim** |
+| — | [#54](https://github.com/bluefate/spacebio-evidence-engine/issues/54) Passage citation emission | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
