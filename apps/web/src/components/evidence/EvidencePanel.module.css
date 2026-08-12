@@ -176,6 +176,11 @@
   border-bottom: 1px solid rgba(0, 143, 186, 0.35);
 }
 
+.brokenPublication {
+  color: #7a3b00;
+  font-weight: 650;
+}
+
 .publicationLink:hover,
 .externalLink:hover {
   border-bottom-color: var(--accent-strong);
