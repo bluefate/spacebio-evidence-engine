@@ -92,11 +92,12 @@ flowchart TB
     i57["#57 Answer response schema"]
     i60["#60 Grounded answer API endpoint"]
     i63["#63 Evidence panel for cited passages"]
+    i66["#66 Wire citation links to evidence and publications"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i62["#62 Question answering page<br/>owner: bluefate<br/>status: In Progress"]
-    i66["#66 Wire citation links to evidence and publications<br/>branch: feature/66-citation-links<br/>PR #134<br/>owner: bluefate<br/>status: PR Open"]
+    i6["#6 Document and script local development setup<br/>owner: bluefate<br/>status: In Progress"]
+    i62["#62 Question answering page<br/>branch: feature/62-question-answering-page<br/>PR #137<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -125,8 +126,8 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | In Progress | Already claimed | **Do not claim** |
-| — | [#66](https://github.com/bluefate/spacebio-evidence-engine/issues/66) Wire citation links to evidence and publications | PR Open | Already claimed | **Do not claim** |
+| — | [#6](https://github.com/bluefate/spacebio-evidence-engine/issues/6) Document and script local development setup | In Progress | Already claimed | **Do not claim** |
+| — | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 

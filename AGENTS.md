@@ -188,10 +188,14 @@ Agents may review and comment. Only humans may approve or merge.
 
 ## Commands
 
+Full clean-machine checklist, ports, and env notes:
+[docs/operations/LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
+
 Setup:
 
 ```bash
 make setup
+make setup-check
 ```
 
 Run API:

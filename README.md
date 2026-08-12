@@ -112,6 +112,18 @@ More detail: [docs/development/PARALLEL_WORK.md](docs/development/PARALLEL_WORK.
 
 Supporting deep-dive documentation lives under [docs/](docs/README.md).
 
+## Local setup
+
+```bash
+make setup
+make setup-check
+make api    # http://localhost:8000
+make web    # http://localhost:3000
+```
+
+Details (tools, ports, `.env.example`, clean-machine checklist):
+[docs/operations/LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
+
 ## Current status
 Documentation-first project with locked Build Phase decisions and an **end-of-August 2026 MVP** (deadline 2026-08-31). Implementation scaffolding is next. See [plan.md](plan.md) and [decision log](docs/governance/DECISION_LOG.md).
 
