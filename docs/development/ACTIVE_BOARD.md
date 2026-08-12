@@ -84,7 +84,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i47["#47 Retrieval metadata filters<br/>owner: bluefate<br/>status: In Progress"]
+    i47["#47 Retrieval metadata filters<br/>branch: feature/47-retrieval-metadata-filters<br/>PR #118<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -113,7 +113,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#47](https://github.com/bluefate/spacebio-evidence-engine/issues/47) Retrieval metadata filters | In Progress | Already claimed | **Do not claim** |
+| — | [#47](https://github.com/bluefate/spacebio-evidence-engine/issues/47) Retrieval metadata filters | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
