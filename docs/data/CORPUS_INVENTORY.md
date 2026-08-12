@@ -39,6 +39,21 @@ The manifest now records `access_restriction_notes` and `redistribution_notes` f
 | Machine-readable manifest | [august_mvp_corpus_manifest.csv](../../data/inventory/august_mvp_corpus_manifest.csv) |
 | Duplicate-screen result | No duplicate candidates detected by normalized DOI or title/year version keys |
 
+## Source discovery status
+
+Approved source discovery is documented in
+[CORPUS_SPECIFICATION.md](CORPUS_SPECIFICATION.md#approved-publication-source-discovery).
+For the August MVP inventory, official publisher DOI pages and PubMed Central /
+Europe PMC open-access records are approved primary source locations when the
+row is already owner-approved and license fields remain allowed. Discovery must
+preserve `source_url`, `pdf_url`, `fulltext_url`, DOI/PMID/PMCID identifiers
+where available, `license`, `license_status`, access restriction notes, and
+redistribution notes.
+
+No additional publications are added by the source-discovery policy. Paywalled
+copies, unauthorized mirrors, abstract-only records, and unclear-rights uploads
+remain excluded until owner review explicitly approves them.
+
 ## Inclusion / exclusion checklist
 
 | Check | Result |
