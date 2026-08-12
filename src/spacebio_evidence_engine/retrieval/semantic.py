@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import math
+from collections.abc import Mapping
 from dataclasses import dataclass
+from typing import Any
 
 from sqlalchemy import Select, select
 from sqlalchemy.orm import Session
@@ -11,20 +13,13 @@ from sqlalchemy.orm import Session
 from spacebio_evidence_engine.db.models import Chunk, ChunkEmbedding, Publication
 from spacebio_evidence_engine.db.vector_types import MVP_EMBEDDING_DIMENSION
 from spacebio_evidence_engine.embeddings import EmbeddingProvider
+from spacebio_evidence_engine.retrieval.filters import (
+    RetrievalFilters,
+    apply_retrieval_filters,
+    parse_retrieval_filters,
+)
 
 DEFAULT_TOP_K = 8
-
-
-@dataclass(frozen=True)
-class SemanticSearchFilters:
-    """Optional metadata filters applied before ranking."""
-
-    corpus_topic: str | None = None
-    organism_model: str | None = None
-    exposure: str | None = None
-    publication_id: str | None = None
-    section: str | None = None
-    license_status: str | None = None
 
 
 @dataclass(frozen=True)
@@ -50,12 +45,13 @@ def semantic_search(
     query: str,
     *,
     k: int = DEFAULT_TOP_K,
-    filters: SemanticSearchFilters | None = None,
+    filters: RetrievalFilters | Mapping[str, Any] | None = None,
 ) -> list[SemanticSearchHit]:
     """Return top-k chunks by cosine similarity to the query embedding.
 
     Always restricts to ``chunk_embeddings.model_name == provider.model_name``
-    so vectors from other models are never compared. No LLM generation.
+    so vectors from other models are never compared. Optional metadata filters
+    are validated via ``parse_retrieval_filters`` (#47). No LLM generation.
     """
 
     if not query.strip():
@@ -63,6 +59,7 @@ def semantic_search(
     if k < 1:
         raise ValueError("k must be at least 1")
     _validate_provider(provider)
+    parsed_filters = parse_retrieval_filters(filters)
 
     query_vector = provider.embed_query(query)
     _validate_vector(query_vector, provider)
@@ -75,14 +72,14 @@ def semantic_search(
             provider=provider,
             query_vector=query_vector,
             k=k,
-            filters=filters,
+            filters=parsed_filters,
         )
     return _search_python(
         session,
         provider=provider,
         query_vector=query_vector,
         k=k,
-        filters=filters,
+        filters=parsed_filters,
     )
 
 
@@ -109,7 +106,7 @@ def _search_python(
     provider: EmbeddingProvider,
     query_vector: list[float],
     k: int,
-    filters: SemanticSearchFilters | None,
+    filters: RetrievalFilters | None,
 ) -> list[SemanticSearchHit]:
     rows = list(session.execute(_candidate_query(provider, filters)))
     scored: list[tuple[float, Chunk, Publication, ChunkEmbedding]] = []
@@ -129,7 +126,7 @@ def _search_pgvector(
     provider: EmbeddingProvider,
     query_vector: list[float],
     k: int,
-    filters: SemanticSearchFilters | None,
+    filters: RetrievalFilters | None,
 ) -> list[SemanticSearchHit]:
     """Rank with pgvector cosine distance (``<=>``); score = 1 - distance."""
 
@@ -154,7 +151,7 @@ def _search_pgvector(
 
 def _candidate_query(
     provider: EmbeddingProvider,
-    filters: SemanticSearchFilters | None,
+    filters: RetrievalFilters | None,
 ) -> Select[tuple[Chunk, Publication, ChunkEmbedding]]:
     stmt = (
         select(Chunk, Publication, ChunkEmbedding)
@@ -162,22 +159,7 @@ def _candidate_query(
         .join(Publication, Publication.publication_id == Chunk.publication_id)
         .where(ChunkEmbedding.model_name == provider.model_name)
     )
-    if filters is None:
-        return stmt
-
-    if filters.corpus_topic is not None:
-        stmt = stmt.where(Publication.corpus_topic == filters.corpus_topic)
-    if filters.organism_model is not None:
-        stmt = stmt.where(Publication.organism_model == filters.organism_model)
-    if filters.exposure is not None:
-        stmt = stmt.where(Publication.exposure == filters.exposure)
-    if filters.publication_id is not None:
-        stmt = stmt.where(Publication.publication_id == filters.publication_id)
-    if filters.section is not None:
-        stmt = stmt.where(Chunk.section == filters.section)
-    if filters.license_status is not None:
-        stmt = stmt.where(Publication.license_status == filters.license_status)
-    return stmt
+    return apply_retrieval_filters(stmt, filters)
 
 
 def _to_hit(

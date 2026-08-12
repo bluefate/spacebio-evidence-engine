@@ -14,6 +14,8 @@ Initial observability guidance.
 - Retrieval inputs and ranked chunk IDs.
 - Answer generation model, prompt version, and citation IDs.
 - Ingestion run summaries.
+- Structured ingestion error records with publication ID, stage, sanitized message,
+  timestamp, and a failed status linked to the latest error.
 - Evaluation run outputs.
 - Error logs with secret redaction.
 
@@ -31,4 +33,3 @@ Initial observability guidance.
 
 ## Decision status
 Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
-
