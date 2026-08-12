@@ -62,6 +62,20 @@ Claim-level mapping is handled by `spacebio_evidence_engine.rag.claims`.
 
 The system must not return claim mappings for unsupported scientific claims.
 
+## UI evidence panel
+
+The web app renders cited passages with
+`apps/web/src/components/evidence/EvidencePanel` (issue #63):
+
+- Shows passage text plus publication id/title, section, page, and chunk id.
+- Highlights the active citation via `activeCitationId` (and optional
+  `onSelectCitation` for answer→evidence wiring in #62/#66).
+- Missing states stay explicit: empty citation lists, unknown active ids, and
+  absent passage text or provenance fields render graceful placeholders rather
+  than inventing content.
+- Accepts UI `EvidencePassage` objects or API-shaped `PassageCitation` rows
+  through `toEvidencePassage`.
+
 ## Page mapping
 - Extraction should preserve a page map from source PDFs to text offsets (`ExtractionResult.page_map` / `PageOffsetMap`).
 - Section spans and later chunks should reuse that map rather than inventing page numbers.

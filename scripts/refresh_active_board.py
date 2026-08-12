@@ -78,6 +78,9 @@ TRACKED: dict[int, dict[str, str | bool]] = {
     51: {"title": "LLM provider interface", "critical": False},
     55: {"title": "Insufficient evidence", "critical": False},
     57: {"title": "Answer response schema", "critical": False},
+    60: {"title": "Grounded answer API endpoint", "critical": False},
+    62: {"title": "Question answering page", "critical": False},
+    63: {"title": "Evidence panel for cited passages", "critical": False},
     86: {"title": "ACTIVE_BOARD.md", "critical": False},
 }
 
