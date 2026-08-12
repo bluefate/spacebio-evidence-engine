@@ -79,6 +79,22 @@ Typed failures:
 - `PDFEmptyError` — opens but has no pages or no extractable text
 - `PDFExtractionError` — base class / unexpected extraction failures
 
+## Ingestion error reporting (issue #36)
+
+Structured ingestion errors are created through
+`spacebio_evidence_engine.ingestion.error_reporting`.
+
+- `IngestionErrorRecord` stores `publication_id`, ingestion `stage`, sanitized
+  `message`, UTC `occurred_at`, stable `error_id`, and optional redacted details.
+- `InMemoryIngestionErrorStore` provides a local operator-visible store for
+  deterministic jobs and tests.
+- `failure_status_for_publication(publication_id)` returns a failed status linked
+  to the latest stored error record.
+- Common secret-bearing fields and token-like values are redacted before storage.
+
+Durable status-transition persistence remains separate from this local reporting
+surface and is tracked by issue #34.
+
 Security:
 
 - Treat PDF bytes as untrusted. Extraction uses `fitz.open(..., filetype="pdf")` and `page.get_text("text")` only.
@@ -166,4 +182,3 @@ and `pdf_quality_notes` for each row, and sets `ingestion_status` to
 
 ## Decision status
 Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
-
