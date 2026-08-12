@@ -22,7 +22,7 @@ Retrieval metadata filter API documented for search (#47).
 | `source_url` | `source_url` | Canonical DOI or landing URL |
 | `license_status` | `license_status` | Review state (e.g. `approved_oa_candidate`) |
 | `corpus_topic` | `corpus_topic` | e.g. `microgravity_skeletal_muscle` |
-| `ingestion_status` | `ingestion_status` | Default `not_ingested` |
+| `ingestion_status` | `ingestion_status` | Enum-backed string (#34): `not_ingested`, `pending`, `processing`, `succeeded`, `failed`, `pdf_quality_blocked` |
 
 ## Recommended / implemented publication fields
 

@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from enum import StrEnum
 
-FAILED_INGESTION_STATUS = "failed"
+from spacebio_evidence_engine.ingestion.status import FAILED_INGESTION_STATUS
 
 
 class IngestionStage(StrEnum):
