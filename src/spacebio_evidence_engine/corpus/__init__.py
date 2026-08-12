@@ -17,12 +17,22 @@ from spacebio_evidence_engine.corpus.licenses import (
     audit_manifest,
     classify_license,
 )
+from spacebio_evidence_engine.corpus.notebook_inventory import (
+    INVENTORY_FIELDNAMES,
+    InventorySummary,
+    load_inventory_review,
+    records_to_csv_rows,
+    summarize_inventory,
+    write_inventory_manifest,
+)
 
 __all__ = [
     "AuditSummary",
     "CorpusInventoryRecord",
     "HumanApproval",
+    "INVENTORY_FIELDNAMES",
     "IngestionStatus",
+    "InventorySummary",
     "LicenseClassification",
     "LicenseStatus",
     "MANIFEST_PATH",
@@ -30,4 +40,8 @@ __all__ = [
     "audit_manifest",
     "classify_license",
     "load_inventory_manifest",
+    "load_inventory_review",
+    "records_to_csv_rows",
+    "summarize_inventory",
+    "write_inventory_manifest",
 ]

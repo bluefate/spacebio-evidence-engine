@@ -88,19 +88,21 @@ flowchart TB
     i53["#53 Grounded answer prompt"]
     i54["#54 Passage citation emission"]
     i55["#55 Insufficient evidence"]
+    i56["#56 Claim-source mapping"]
     i57["#57 Answer response schema"]
+    i60["#60 Grounded answer API endpoint"]
     i63["#63 Evidence panel for cited passages"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i56["#56 Claim-source mapping<br/>branch: feature/56-claim-source-mapping<br/>PR #130<br/>owner: bluefate<br/>status: PR Open"]
-    i60["#60 Grounded answer API endpoint<br/>owner: bluefate<br/>status: In Progress"]
+    i22["#22 Corpus inventory notebook<br/>owner: bluefate<br/>status: In Progress"]
+    i62["#62 Question answering page<br/>owner: bluefate<br/>status: In Progress"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
   end
   subgraph nextParallel [Parallel-safe picks — available now]
-    i62["#62 Question answering page"]
+    nextParallel_empty["(none)"]
   end
   i20 --> i27
   i27 --> i28
@@ -123,9 +125,8 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#56](https://github.com/bluefate/spacebio-evidence-engine/issues/56) Claim-source mapping | PR Open | Already claimed | **Do not claim** |
-| — | [#60](https://github.com/bluefate/spacebio-evidence-engine/issues/60) Grounded answer API endpoint | In Progress | Already claimed | **Do not claim** |
-| 1 | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | Planning | Parallel-safe now | Overlap with in-flight files |
+| — | [#22](https://github.com/bluefate/spacebio-evidence-engine/issues/22) Corpus inventory notebook | In Progress | Already claimed | **Do not claim** |
+| — | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | In Progress | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
