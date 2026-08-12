@@ -93,7 +93,7 @@ flowchart TB
   end
   subgraph inflight [In flight — do not claim]
     i60["#60 Grounded answer API endpoint<br/>owner: bluefate<br/>status: In Progress"]
-    i63["#63 Evidence panel for cited passages<br/>owner: bluefate<br/>status: PR Open"]
+    i63["#63 Evidence panel for cited passages<br/>branch: feature/63-evidence-panel<br/>PR #128<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
