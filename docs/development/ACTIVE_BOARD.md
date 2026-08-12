@@ -62,6 +62,7 @@ Edit `TRACKED` and `CRITICAL_EDGES` in [`scripts/refresh_active_board.py`](../..
 ```mermaid
 flowchart TB
   subgraph done [Done]
+    i6["#6 Document and script local development setup"]
     i20["#20 Corpus inventory"]
     i25["#25 Assess PDF quality"]
     i26["#26 Reference questions"]
@@ -96,7 +97,6 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i6["#6 Document and script local development setup<br/>branch: docs/6-local-setup<br/>PR #139<br/>owner: bluefate<br/>status: PR Open"]
     i62["#62 Question answering page<br/>branch: feature/62-question-answering-page<br/>PR #137<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
@@ -126,7 +126,6 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#6](https://github.com/bluefate/spacebio-evidence-engine/issues/6) Document and script local development setup | PR Open | Already claimed | **Do not claim** |
 | — | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
