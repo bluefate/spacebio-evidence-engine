@@ -82,7 +82,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i37["#37 Ingestion unit tests<br/>owner: bluefate<br/>status: In Progress"]
+    i37["#37 Ingestion unit tests<br/>branch: test/37-ingestion-unit-tests<br/>PR #115<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     i44["#44 Semantic search"]
@@ -112,7 +112,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
 | 1 | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Next on critical path | Overlap on same files |
-| — | [#37](https://github.com/bluefate/spacebio-evidence-engine/issues/37) Ingestion unit tests | In Progress | Already claimed | **Do not claim** |
+| — | [#37](https://github.com/bluefate/spacebio-evidence-engine/issues/37) Ingestion unit tests | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
