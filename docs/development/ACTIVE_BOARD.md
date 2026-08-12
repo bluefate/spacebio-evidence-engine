@@ -95,13 +95,14 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i66["#66 Wire citation links to evidence and publications<br/>owner: bluefate<br/>status: In Progress"]
+    i62["#62 Question answering page<br/>owner: bluefate<br/>status: In Progress"]
+    i66["#66 Wire citation links to evidence and publications<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
   end
   subgraph nextParallel [Parallel-safe picks — available now]
-    i62["#62 Question answering page"]
+    nextParallel_empty["(none)"]
   end
   i20 --> i27
   i27 --> i28
@@ -124,8 +125,8 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| 1 | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | Planning | Parallel-safe now | Overlap with in-flight files |
-| — | [#66](https://github.com/bluefate/spacebio-evidence-engine/issues/66) Wire citation links to evidence and publications | In Progress | Already claimed | **Do not claim** |
+| — | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | In Progress | Already claimed | **Do not claim** |
+| — | [#66](https://github.com/bluefate/spacebio-evidence-engine/issues/66) Wire citation links to evidence and publications | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
