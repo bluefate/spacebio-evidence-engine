@@ -83,12 +83,13 @@ flowchart TB
     i50["#50 Retrieval eval harness"]
     i51["#51 LLM provider interface"]
     i52["#52 Context assembly"]
+    i53["#53 Grounded answer prompt"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i53["#53 Grounded answer prompt<br/>branch: feature/53-grounded-answer-prompt<br/>PR #124<br/>owner: bluefate<br/>status: PR Open"]
+    i34["#34 Ingestion status tracking<br/>branch: feature/34-ingestion-status-tracking<br/>PR #125<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -117,7 +118,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#53](https://github.com/bluefate/spacebio-evidence-engine/issues/53) Grounded answer prompt | PR Open | Already claimed | **Do not claim** |
+| — | [#34](https://github.com/bluefate/spacebio-evidence-engine/issues/34) Ingestion status tracking | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
