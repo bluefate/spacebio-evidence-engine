@@ -37,6 +37,7 @@ The manifest now records `access_restriction_notes` and `redistribution_notes` f
 | CC BY-NC-ND | 6 |
 | Topic | microgravity_skeletal_muscle |
 | Machine-readable manifest | [august_mvp_corpus_manifest.csv](../../data/inventory/august_mvp_corpus_manifest.csv) |
+| Duplicate-screen result | No duplicate candidates detected by normalized DOI or title/year version keys |
 
 ## Inclusion / exclusion checklist
 
@@ -46,6 +47,7 @@ The manifest now records `access_restriction_notes` and `redistribution_notes` f
 | On approved topic | Pass |
 | Extractable methods/results/findings (or citable methods/design for mission papers) | Pass |
 | Sufficient citation metadata | Pass |
+| Duplicate publication screen | Pass |
 | Paywalled / unclear rights | Excluded |
 | Non-scientific commentary | Excluded |
 
