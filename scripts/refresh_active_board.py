@@ -82,6 +82,7 @@ TRACKED: dict[int, dict[str, str | bool]] = {
     60: {"title": "Grounded answer API endpoint", "critical": False},
     62: {"title": "Question answering page", "critical": False},
     63: {"title": "Evidence panel for cited passages", "critical": False},
+    66: {"title": "Wire citation links to evidence and publications", "critical": False},
     86: {"title": "ACTIVE_BOARD.md", "critical": False},
 }
 

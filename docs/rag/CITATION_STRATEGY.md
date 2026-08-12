@@ -76,6 +76,22 @@ The web app renders cited passages with
 - Accepts UI `EvidencePassage` objects or API-shaped `PassageCitation` rows
   through `toEvidencePassage`.
 
+## UI citation links
+
+Answer citation markers are wired by
+`apps/web/src/components/evidence/CitationLinkedText` and
+`AnswerEvidenceView` (issue #66):
+
+- Clicking a known `[C1]` marker focuses / highlights the matching evidence
+  panel passage (`scrollIntoView` + `activeCitationId`).
+- Each known marker exposes a publication detail link
+  (`/publications/{publication_id}`) when the publication id is available.
+- Broken links stay explicit: unknown citation markers are non-interactive and
+  struck through; unavailable publication ids render “Publication unavailable”
+  instead of navigating to a dead route.
+- The ask page (#62) can mount `AnswerEvidenceView` once grounded answers are
+  rendered; this issue does not own the ask page itself.
+
 ## Citation correctness evaluation
 
 `evals/citation_correctness.py` evaluates grounded-answer fixtures against the
