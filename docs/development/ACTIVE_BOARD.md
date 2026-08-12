@@ -81,7 +81,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i43["#43 Vector indexing<br/>owner: bluefate<br/>status: In Progress"]
+    i43["#43 Vector indexing<br/>branch: feature/43-vector-indexing<br/>PR #114<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     i44["#44 Semantic search"]
@@ -111,7 +111,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
+| — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | PR Open | In flight (bluefate; `feature/43-vector-indexing`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
