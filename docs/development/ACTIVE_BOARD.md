@@ -62,6 +62,7 @@ Edit `TRACKED` and `CRITICAL_EDGES` in [`scripts/refresh_active_board.py`](../..
 ```mermaid
 flowchart TB
   subgraph done [Done]
+    i6["#6 Document and script local development setup"]
     i20["#20 Corpus inventory"]
     i25["#25 Assess PDF quality"]
     i26["#26 Reference questions"]
