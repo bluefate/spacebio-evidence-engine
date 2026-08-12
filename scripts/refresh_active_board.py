@@ -70,6 +70,7 @@ TRACKED: dict[int, dict[str, str | bool]] = {
     47: {"title": "Retrieval metadata filters", "critical": False},
     50: {"title": "Retrieval eval harness", "critical": False},
     52: {"title": "Context assembly", "critical": False},
+    53: {"title": "Grounded answer prompt", "critical": False},
     51: {"title": "LLM provider interface", "critical": False},
     55: {"title": "Insufficient evidence", "critical": False},
     57: {"title": "Answer response schema", "critical": False},
