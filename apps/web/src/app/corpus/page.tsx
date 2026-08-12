@@ -2,19 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 import corpus from "@/data/corpus.json";
-import type { CorpusPublication } from "@/data/corpus";
+import {
+  formatLabel,
+  formatLicense,
+  type CorpusPublication,
+} from "@/data/corpus";
 
 import styles from "./corpus.module.css";
 
 const publications = corpus as CorpusPublication[];
-
-function formatLicense(license: string): string {
-  return license.toUpperCase().replaceAll("-", " ");
-}
-
-function formatLabel(value: string): string {
-  return value.replaceAll("_", " ");
-}
 
 function Badge({
   children,
@@ -83,9 +79,19 @@ export default function CorpusPage() {
               <Badge>{formatLabel(pub.ingestion)}</Badge>
             </div>
             <p className={styles.notes}>{pub.notes}</p>
-            <a className={styles.doi} href={pub.sourceUrl} target="_blank" rel="noreferrer">
-              View at DOI
-            </a>
+            <div className={styles.actions}>
+              <Link className={styles.detailLink} href={`/publications/${pub.id}`}>
+                Publication details
+              </Link>
+              <a
+                className={styles.doi}
+                href={pub.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View at DOI
+              </a>
+            </div>
           </article>
         ))}
       </div>

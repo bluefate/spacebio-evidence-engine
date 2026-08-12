@@ -196,8 +196,16 @@
   line-height: 1.45;
 }
 
-.doi {
-  justify-self: start;
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+  margin-top: 0.15rem;
+}
+
+.doi,
+.detailLink {
   margin-top: 0.15rem;
   color: var(--accent-strong);
   text-decoration: none;
@@ -206,7 +214,8 @@
   font-weight: 600;
 }
 
-.doi:hover {
+.doi:hover,
+.detailLink:hover {
   border-bottom-color: var(--accent-strong);
   color: var(--accent);
 }

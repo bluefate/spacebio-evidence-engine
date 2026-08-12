@@ -11,4 +11,14 @@ export type CorpusPublication = {
   notes: string;
   approval: string;
   ingestion: string;
+  sections?: string[];
+  chunks?: unknown[];
 };
+
+export function formatLicense(license: string): string {
+  return license.toUpperCase().replaceAll("-", " ");
+}
+
+export function formatLabel(value: string): string {
+  return value.replaceAll("_", " ");
+}
