@@ -89,11 +89,12 @@ flowchart TB
     i54["#54 Passage citation emission"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
+    i63["#63 Evidence panel for cited passages"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
+    i56["#56 Claim-source mapping<br/>branch: feature/56-claim-source-mapping<br/>PR #130<br/>owner: bluefate<br/>status: PR Open"]
     i60["#60 Grounded answer API endpoint<br/>owner: bluefate<br/>status: In Progress"]
-    i63["#63 Evidence panel for cited passages<br/>branch: feature/63-evidence-panel<br/>PR #128<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -122,9 +123,9 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
+| — | [#56](https://github.com/bluefate/spacebio-evidence-engine/issues/56) Claim-source mapping | PR Open | Already claimed | **Do not claim** |
 | — | [#60](https://github.com/bluefate/spacebio-evidence-engine/issues/60) Grounded answer API endpoint | In Progress | Already claimed | **Do not claim** |
 | 1 | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | Planning | Parallel-safe now | Overlap with in-flight files |
-| — | [#63](https://github.com/bluefate/spacebio-evidence-engine/issues/63) Evidence panel for cited passages | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 

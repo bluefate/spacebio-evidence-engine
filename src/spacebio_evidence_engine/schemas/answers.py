@@ -34,6 +34,24 @@ class PassageCitation(BaseModel):
     )
 
 
+class AnswerClaim(BaseModel):
+    """Individual answer claim mapped to supporting passage citations."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    claim_id: str = Field(
+        ...,
+        description="Stable claim id for UI/evaluation traceability.",
+        min_length=1,
+    )
+    text: str = Field(..., description="Single answer claim.", min_length=1)
+    citation_ids: list[str] = Field(
+        ...,
+        description="Passage citation ids supporting this claim.",
+        min_length=1,
+    )
+
+
 class EvidenceSufficiency(BaseModel):
     """Whether retrieved evidence is enough to answer."""
 
@@ -97,6 +115,10 @@ class GroundedAnswerResponse(BaseModel):
     answer_text: str = Field(
         ...,
         description="Answer prose; cite with citation_id markers when evidence exists.",
+    )
+    claims: list[AnswerClaim] = Field(
+        default_factory=list,
+        description="Claim-level source mapping for UI and evaluation.",
     )
     citations: list[PassageCitation] = Field(default_factory=list)
     sufficiency: EvidenceSufficiency

@@ -44,6 +44,24 @@ Citation emission is handled by `spacebio_evidence_engine.rag.citations`.
 
 The system must verify that cited passage IDs were present in retrieved context before returning the answer.
 
+## Claim-to-source mapping
+
+Claim-level mapping is handled by `spacebio_evidence_engine.rag.claims`.
+
+- `AnswerClaim` rows identify a single answer claim and list the citation IDs
+  supporting that claim.
+- `GroundedAnswerResponse.claims` carries the claim list alongside
+  `GroundedAnswerResponse.citations`; clients resolve each claim's
+  `citation_ids` through the passage citations, preserving chunk ID,
+  publication ID, title, section, page, source URL, and excerpt provenance.
+- `validate_claim_source_mapping(claims, context)` accepts only claims whose
+  citation IDs resolve through retrieved context included by `assemble_context`.
+- Claims with no sources, unknown citation IDs, or citations tied to chunks
+  outside `ContextAssemblyResult.included_chunk_ids` are rejected and returned
+  with `AnswerWarning` signals for downstream answer assembly or evaluation.
+
+The system must not return claim mappings for unsupported scientific claims.
+
 ## UI evidence panel
 
 The web app renders cited passages with
