@@ -18,7 +18,8 @@ Monorepo scaffold started: FastAPI under `apps/api`, Next.js under `apps/web`, s
 - Next.js with TypeScript for frontend (`apps/web`).
 - Docker Compose for local Postgres.
 - Pytest for Python tests (`make test` / `pytest -q`).
-- Ruff for linting and formatting (`make lint` / `ruff check .` / `ruff format --check .`).
+- Ruff for linting and formatting (`make lint` / `ruff check .` / `ruff format --check .`);
+  pre-commit runs `ruff --fix` and `ruff-format` on staged Python files.
 - **Pyright** for type checking.
 - GitHub Actions for CI.
 
