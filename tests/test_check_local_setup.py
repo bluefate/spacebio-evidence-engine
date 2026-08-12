@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from check_local_setup import (  # noqa: E402
+from check_local_setup import (  # noqa: E402  # pyright: ignore[reportMissingImports]
     REQUIRED_ENV_KEYS,
     check_env_example,
     check_make_targets,
