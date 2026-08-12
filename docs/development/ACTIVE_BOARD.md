@@ -96,7 +96,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i6["#6 Document and script local development setup<br/>owner: bluefate<br/>status: PR Open"]
+    i6["#6 Document and script local development setup<br/>branch: docs/6-local-setup<br/>PR #139<br/>owner: bluefate<br/>status: PR Open"]
     i62["#62 Question answering page<br/>branch: feature/62-question-answering-page<br/>PR #137<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
