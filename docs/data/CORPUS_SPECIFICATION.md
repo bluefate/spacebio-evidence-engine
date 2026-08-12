@@ -57,6 +57,34 @@ Every manifest row must record `access_restriction_notes` and `redistribution_no
 3. Corpus-changing PRs require owner scientific/license review.
 4. NC-ND items require the non-commercial use affirmation in [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md).
 
+## Duplicate publication policy
+
+Candidate manifests must be screened for duplicate publications before ingest.
+Duplicate checks are applied to corpus candidates only and must preserve the
+original source/provenance fields for every row.
+
+Detection rules:
+
+- Normalize DOI values by stripping DOI URL / `doi:` prefixes, lowercasing, and
+  trimming trailing punctuation. Matching normalized DOIs are duplicates.
+- Normalize titles by lowercasing, removing punctuation/accent variants, folding
+  whitespace, and removing common version labels such as `preprint`, `accepted
+  manuscript`, `author manuscript`, and `version of record`. Matching normalized
+  title + year keys are treated as version variants.
+- Choose the canonical record by stable lowest `publication_id` within the
+  duplicate set so the earliest assigned corpus ID remains the citable source of
+  truth.
+- Flag every duplicate-set member with the duplicate set ID, canonical
+  publication ID, whether the row is canonical, and match reason(s). Do not
+  delete candidate rows silently; exclusions or replacements require owner
+  review.
+
+Utility:
+
+```bash
+python scripts/detect_corpus_duplicates.py data/inventory/august_mvp_corpus_manifest.csv
+```
+
 ## August MVP inventory (approved)
 - Count: **23** publications (17 CC BY + 6 CC BY-NC-ND).
 - Machine-readable manifest: `data/inventory/august_mvp_corpus_manifest.csv`.
