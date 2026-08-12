@@ -92,6 +92,7 @@ flowchart TB
     i57["#57 Answer response schema"]
     i60["#60 Grounded answer API endpoint"]
     i63["#63 Evidence panel for cited passages"]
+    i66["#66 Wire citation links to evidence and publications"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
