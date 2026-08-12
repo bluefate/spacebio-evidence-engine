@@ -80,6 +80,7 @@ flowchart TB
     i42["#42 Vector storage schema"]
     i43["#43 Vector indexing"]
     i44["#44 Semantic search"]
+    i45["#45 PostgreSQL full-text search for chunks"]
     i47["#47 Retrieval metadata filters"]
     i50["#50 Retrieval eval harness"]
     i51["#51 LLM provider interface"]
@@ -91,13 +92,14 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i45["#45 PostgreSQL full-text search for chunks<br/>branch: feature/45-postgres-full-text-search<br/>PR #127<br/>owner: bluefate<br/>status: PR Open"]
+    i60["#60 Grounded answer API endpoint<br/>owner: bluefate<br/>status: In Progress"]
+    i63["#63 Evidence panel for cited passages<br/>branch: feature/63-evidence-panel<br/>PR #128<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
   end
   subgraph nextParallel [Parallel-safe picks — available now]
-    nextParallel_empty["(none)"]
+    i62["#62 Question answering page"]
   end
   i20 --> i27
   i27 --> i28
@@ -120,7 +122,9 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#45](https://github.com/bluefate/spacebio-evidence-engine/issues/45) PostgreSQL full-text search for chunks | PR Open | Already claimed | **Do not claim** |
+| — | [#60](https://github.com/bluefate/spacebio-evidence-engine/issues/60) Grounded answer API endpoint | In Progress | Already claimed | **Do not claim** |
+| 1 | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | Planning | Parallel-safe now | Overlap with in-flight files |
+| — | [#63](https://github.com/bluefate/spacebio-evidence-engine/issues/63) Evidence panel for cited passages | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
