@@ -88,7 +88,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i53["#53 Grounded answer prompt<br/>owner: bluefate<br/>status: In Progress"]
+    i53["#53 Grounded answer prompt<br/>branch: feature/53-grounded-answer-prompt<br/>PR #124<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -117,7 +117,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#53](https://github.com/bluefate/spacebio-evidence-engine/issues/53) Grounded answer prompt | In Progress | Already claimed | **Do not claim** |
+| — | [#53](https://github.com/bluefate/spacebio-evidence-engine/issues/53) Grounded answer prompt | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
