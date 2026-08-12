@@ -8,4 +8,6 @@ make web
 # http://localhost:3000
 ```
 
-Ask / citation screens land on later web-interface issues.
+Ask / citation screens land on later web-interface issues. The reusable
+`EvidencePanel` component (`src/components/evidence`) is ready for the
+question-answering page (#62) to mount cited passages.
