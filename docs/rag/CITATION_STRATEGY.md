@@ -7,7 +7,8 @@ Ensure every scientific answer can be verified against source passages.
 Passage-level citation model for MVP.
 
 ## Current status
-Initial strategy.
+Initial strategy. Context assembly preserves chunk IDs and provenance when
+packing retrieved evidence for generation (issue #52).
 
 ## Requirements
 - Cite at passage level, not only publication level.
@@ -18,6 +19,14 @@ Initial strategy.
 - Warn when evidence is based on few passages or few studies.
 - Preserve limitations when relevant.
 - **When evidence is insufficient, return no citations and no generated answer.** The system must not fabricate citations or fill gaps with model knowledge. Instead, it returns an `EvidenceSufficiency` status of `insufficient` with a clear reason (issue #55).
+
+## Context assembly and citation IDs
+
+`assemble_context` assigns stable citation ids (`C1`…`Cn`) to included
+retrieved chunks and emits matching `PassageCitation` rows. Budget pressure
+may omit later hits, but omitted `chunk_id` values are listed explicitly in
+`omitted_chunk_ids`. Included evidence blocks always retain `chunk_id` and
+publication provenance in the packed context — never strip IDs to save tokens.
 
 ## Citation validation
 The system should verify that cited passage IDs were present in retrieved context before returning the answer.
