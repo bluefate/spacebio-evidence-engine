@@ -123,7 +123,9 @@ Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_by
 ## Expected local services
 - PostgreSQL with pgvector (Compose) on port `5432`.
 - FastAPI backend (`apps/api`) on port `8000`.
-- Next.js frontend (`apps/web`) on port `3000`.
+- Next.js frontend (`apps/web`) on port `3000`; `/search` calls the web app
+  `/api/search` route for stored publication metadata and any exposed passage
+  records.
 - CLI jobs for ingestion and evaluation (no always-on worker for August MVP).
 
 ## Related documents
