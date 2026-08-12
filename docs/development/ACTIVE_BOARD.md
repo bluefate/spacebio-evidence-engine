@@ -89,16 +89,17 @@ flowchart TB
     i54["#54 Passage citation emission"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
+    i63["#63 Evidence panel for cited passages"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    inflight_empty["(none)"]
+    i60["#60 Grounded answer API endpoint<br/>owner: bluefate<br/>status: In Progress"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
   end
   subgraph nextParallel [Parallel-safe picks — available now]
-    nextParallel_empty["(none)"]
+    i62["#62 Question answering page"]
   end
   i20 --> i27
   i27 --> i28
@@ -121,6 +122,8 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
+| — | [#60](https://github.com/bluefate/spacebio-evidence-engine/issues/60) Grounded answer API endpoint | In Progress | Already claimed | **Do not claim** |
+| 1 | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | Planning | Parallel-safe now | Overlap with in-flight files |
 
 <!-- ACTIVE_BOARD:END -->
 
