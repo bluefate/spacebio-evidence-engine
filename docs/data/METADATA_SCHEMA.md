@@ -12,6 +12,92 @@ Publication persistence schema implemented (SQLAlchemy + Alembic revision `20260
 Chunk persistence schema implemented (SQLAlchemy + Alembic revision `20260806_0002`).
 Chunk embedding vector schema implemented (SQLAlchemy + Alembic revision `20260806_0003`).
 Retrieval metadata filter API documented for search (#47).
+Corpus inventory CSV schema implemented in `spacebio_evidence_engine.corpus.inventory` (#21).
+
+## Corpus inventory CSV schema
+
+The August MVP corpus is described by a machine-readable manifest:
+
+- **File:** `data/inventory/august_mvp_corpus_manifest.csv`
+- **Python model:** `spacebio_evidence_engine.corpus.inventory.CorpusInventoryRecord`
+- **Loader:** `spacebio_evidence_engine.corpus.inventory.load_inventory_manifest`
+
+### Required fields
+
+| Field | Type | Constraint | Description |
+|-------|------|------------|-------------|
+| `publication_id` | string | `min_length=1` | Stable corpus ID, e.g. `pub_001`. |
+| `title` | string | `min_length=1` | Full publication title. |
+| `doi` | string | `10.xxxx/...` | DOI identifier. |
+| `year` | integer | `1900 <= year <= 2100` | Publication year. |
+| `authors` | string | `min_length=1` | Author list string. |
+| `license` | string | `min_length=1` | License identifier, e.g. `cc-by`, `cc-by-nc-nd`. |
+| `license_status` | string | `min_length=1` | Project review label, e.g. `approved_oa_candidate`. |
+| `access_restriction_notes` | string | `min_length=1` | Attribution/access constraints derived from the license. |
+| `redistribution_notes` | string | `min_length=1` | Redistribution/derivative constraints derived from the license. |
+| `source_url` | URL | `https://doi.org/...` | Canonical DOI landing page. |
+| `pdf_url` | URL | `http(s)://...` | PDF URL or render link. |
+| `fulltext_url` | URL | `http(s)://...` | Full-text landing URL. |
+| `pdf_quality` | enum | `good`, `poor_text`, `needs_ocr`, `corrupt`, `missing` | PDF extraction quality assessment. |
+| `corpus_topic` | string | `min_length=1` | Approved topic, e.g. `microgravity_skeletal_muscle`. |
+| `organism_model` | string | `min_length=1` | Organism or model system. |
+| `exposure` | string | `min_length=1` | Exposure or condition, e.g. `spaceflight`. |
+| `inclusion_pass` | enum | `yes` / `no` | Whether the row passed inclusion criteria. |
+| `exclusion_flags` | string | `min_length=1` | Comma-separated flags or `none`. |
+| `ingestion_status` | enum | `not_ingested`, `pending`, `processing`, `succeeded`, `failed`, `pdf_quality_blocked` | Pipeline state. |
+| `human_approval` | enum | `pending`, `approved`, `rejected` | Owner approval state. |
+
+### Optional fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `pmcid` | string | PubMed Central identifier. |
+| `pmid` | integer | PubMed numeric identifier. |
+| `journal` | string | Journal or venue name. |
+| `pdf_quality_notes` | string | Structured QA notes (page count, text density, issues). |
+| `selection_notes` | string | Curation notes explaining selection. |
+
+### Example inventory record
+
+```json
+{
+  "publication_id": "pub_001",
+  "title": "Spaceflight on the ISS changed the skeletal muscle proteome of two astronauts.",
+  "doi": "10.1038/s41526-024-00406-3",
+  "pmcid": "PMC11153545",
+  "pmid": 38839773,
+  "year": 2024,
+  "journal": null,
+  "authors": "Murgia M, Rittweger J, Reggiani C, Bottinelli R, Mann M, Schiaffino S, Narici MV.",
+  "license": "cc-by",
+  "license_status": "approved_oa_candidate",
+  "access_restriction_notes": "Attribution (BY) required. Passages may be retrieved and quoted with citation and link to source.",
+  "redistribution_notes": "Passage quoting with source link is allowed. Full-text redistribution or derivative works require attribution; do not remove copyright notices.",
+  "source_url": "https://doi.org/10.1038/s41526-024-00406-3",
+  "pdf_url": "https://europepmc.org/articles/PMC11153545?pdf=render",
+  "fulltext_url": "https://doi.org/10.1038/s41526-024-00406-3",
+  "pdf_quality": "good",
+  "pdf_quality_notes": "page_count=13, text_chars=81723, empty_pages=0, image_pages=0, text_density=6286.4; text layer present and dense",
+  "corpus_topic": "microgravity_skeletal_muscle",
+  "organism_model": "human",
+  "exposure": "spaceflight",
+  "selection_notes": "astronaut skeletal muscle proteome",
+  "inclusion_pass": "yes",
+  "exclusion_flags": "none",
+  "ingestion_status": "not_ingested",
+  "human_approval": "approved"
+}
+```
+
+### Validation
+
+Use the loader to validate the whole manifest:
+
+```python
+from spacebio_evidence_engine.corpus import load_inventory_manifest
+
+records = load_inventory_manifest()
+```
 
 ## Required publication fields
 
