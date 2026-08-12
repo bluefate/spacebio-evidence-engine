@@ -64,6 +64,7 @@ flowchart TB
   subgraph done [Done]
     i6["#6 Document and script local development setup"]
     i20["#20 Corpus inventory"]
+    i22["#22 Corpus inventory notebook"]
     i25["#25 Assess PDF quality"]
     i26["#26 Reference questions"]
     i27["#27 Publication schema"]
@@ -98,7 +99,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i22["#22 Corpus inventory notebook<br/>branch: feature/22-corpus-inventory-notebook<br/>PR #140<br/>owner: bluefate<br/>status: PR Open"]
+    inflight_empty["(none)"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -127,7 +128,6 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#22](https://github.com/bluefate/spacebio-evidence-engine/issues/22) Corpus inventory notebook | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
