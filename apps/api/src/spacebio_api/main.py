@@ -6,10 +6,15 @@ from fastapi import FastAPI, HTTPException, status
 
 from spacebio_api import __version__
 from spacebio_api.config import Settings, get_settings
+from spacebio_evidence_engine.rag import GroundedAnswerError, GroundedAnswerService
 from spacebio_evidence_engine.schemas import AskRequest, GroundedAnswerResponse
 
 
-def create_app(settings: Settings | None = None) -> FastAPI:
+def create_app(
+    settings: Settings | None = None,
+    *,
+    grounded_answer_service: GroundedAnswerService | None = None,
+) -> FastAPI:
     """Build the FastAPI application."""
     _settings = settings or get_settings()
     app = FastAPI(
@@ -18,6 +23,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         docs_url="/docs" if _settings.app_env != "production" else None,
     )
     app.state.settings = _settings
+    app.state.grounded_answer_service = grounded_answer_service
 
     @app.get("/health")
     def health() -> dict[str, str]:
@@ -27,23 +33,35 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         "/ask",
         response_model=GroundedAnswerResponse,
         status_code=status.HTTP_200_OK,
-        summary="Ask a grounded question (schema registered; behavior TBD)",
+        summary="Ask a grounded question",
         tags=["ask"],
         responses={
-            status.HTTP_501_NOT_IMPLEMENTED: {
-                "description": "Grounded ask pipeline not implemented yet.",
-            }
+            status.HTTP_503_SERVICE_UNAVAILABLE: {
+                "description": "Grounded answer service is not configured.",
+            },
+            status.HTTP_502_BAD_GATEWAY: {
+                "description": "Generated answer failed grounding validation.",
+            },
         },
     )
-    def ask(_body: AskRequest) -> GroundedAnswerResponse:
-        """OpenAPI registers AskRequest / GroundedAnswerResponse (issue #57).
-
-        Full retrieval + generation lands in later grounded-answer issues.
-        """
-        raise HTTPException(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED,
-            detail="Grounded /ask is not implemented yet; response schema is registered.",
-        )
+    def ask(body: AskRequest) -> GroundedAnswerResponse:
+        """Retrieve evidence and return a citation-validated grounded answer."""
+        service = app.state.grounded_answer_service
+        if service is None:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail=(
+                    "Grounded answer service is not configured. Configure a retriever "
+                    "and LanguageModelProvider before enabling /ask."
+                ),
+            )
+        try:
+            return service.answer(body.question, top_k=body.top_k)
+        except GroundedAnswerError as exc:
+            raise HTTPException(
+                status_code=status.HTTP_502_BAD_GATEWAY,
+                detail=str(exc),
+            ) from exc
 
     return app
 
