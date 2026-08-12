@@ -11,6 +11,15 @@ from spacebio_evidence_engine.ingestion.chunking import (
     estimate_tokens,
     make_chunk_id,
 )
+from spacebio_evidence_engine.ingestion.error_reporting import (
+    FAILED_INGESTION_STATUS,
+    IngestionErrorRecord,
+    IngestionFailureStatus,
+    IngestionStage,
+    InMemoryIngestionErrorStore,
+    create_ingestion_error_record,
+    redact_error_payload,
+)
 from spacebio_evidence_engine.ingestion.errors import (
     PDFEmptyError,
     PDFExtractionError,
@@ -47,6 +56,11 @@ __all__ = [
     "ChunkingResult",
     "ExtractedPage",
     "ExtractionResult",
+    "FAILED_INGESTION_STATUS",
+    "InMemoryIngestionErrorStore",
+    "IngestionErrorRecord",
+    "IngestionFailureStatus",
+    "IngestionStage",
     "PageOffsetMap",
     "PDFEmptyError",
     "PDFExtractionError",
@@ -63,6 +77,7 @@ __all__ = [
     "chunk_extraction",
     "chunk_sections",
     "chunk_text",
+    "create_ingestion_error_record",
     "detect_sections",
     "detect_sections_from_text",
     "estimate_tokens",
@@ -71,5 +86,6 @@ __all__ = [
     "extract_pdf_path",
     "make_chunk_id",
     "page_texts",
+    "redact_error_payload",
     "score_publication_pdf",
 ]
