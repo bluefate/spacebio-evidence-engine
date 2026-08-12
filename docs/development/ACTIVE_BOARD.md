@@ -85,7 +85,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i50["#50 Retrieval eval harness<br/>owner: bluefate<br/>status: In Progress"]
+    i50["#50 Retrieval eval harness<br/>branch: feature/50-retrieval-eval-harness<br/>PR #120<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -114,7 +114,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#50](https://github.com/bluefate/spacebio-evidence-engine/issues/50) Retrieval eval harness | In Progress | Already claimed | **Do not claim** |
+| — | [#50](https://github.com/bluefate/spacebio-evidence-engine/issues/50) Retrieval eval harness | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
