@@ -8,6 +8,11 @@ from spacebio_evidence_engine.rag.citations import (
     emit_passage_citations,
     extract_citation_markers,
 )
+from spacebio_evidence_engine.rag.claims import (
+    ClaimSourceMapping,
+    ClaimSourceMappingResult,
+    validate_claim_source_mapping,
+)
 from spacebio_evidence_engine.rag.context import (
     DEFAULT_EVIDENCE_TOKEN_BUDGET,
     DEFAULT_INSTRUCTIONS,
@@ -30,6 +35,8 @@ from spacebio_evidence_engine.rag.sufficiency import (
 __all__ = [
     "AssembledEvidenceBlock",
     "CitationEmissionResult",
+    "ClaimSourceMapping",
+    "ClaimSourceMappingResult",
     "ContextAssemblyResult",
     "DEFAULT_EVIDENCE_TOKEN_BUDGET",
     "DEFAULT_INSTRUCTIONS",
@@ -44,4 +51,5 @@ __all__ = [
     "evaluate_sufficiency",
     "extract_citation_markers",
     "render_grounded_answer_prompt",
+    "validate_claim_source_mapping",
 ]

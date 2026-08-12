@@ -2,6 +2,7 @@
 
 from spacebio_evidence_engine.schemas.answers import (
     GROUNDED_ANSWER_SCHEMA_VERSION,
+    AnswerClaim,
     AnswerWarning,
     AskRequest,
     ConflictFinding,
@@ -13,6 +14,7 @@ from spacebio_evidence_engine.schemas.answers import (
 
 __all__ = [
     "GROUNDED_ANSWER_SCHEMA_VERSION",
+    "AnswerClaim",
     "AnswerWarning",
     "AskRequest",
     "ConflictFinding",
