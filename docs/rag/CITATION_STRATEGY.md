@@ -76,6 +76,18 @@ The web app renders cited passages with
 - Accepts UI `EvidencePassage` objects or API-shaped `PassageCitation` rows
   through `toEvidencePassage`.
 
+## Citation correctness evaluation
+
+`evals/citation_correctness.py` evaluates grounded-answer fixtures against the
+retrieved citation context used to produce them. It checks that emitted
+citations reference retrieved citation/chunk IDs, that `[C1]`-style answer
+markers correspond to emitted citations, and that optional per-claim fixture
+labels produce precision/recall metrics for expected supporting citations.
+
+This is an offline correctness check, not a scientific judge. It must preserve
+publication ID, title, section, page, source URL, and chunk provenance from the
+retrieved context, and it must not fill missing support with model knowledge.
+
 ## Page mapping
 - Extraction should preserve a page map from source PDFs to text offsets (`ExtractionResult.page_map` / `PageOffsetMap`).
 - Section spans and later chunks should reuse that map rather than inventing page numbers.

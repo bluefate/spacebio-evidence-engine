@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "cases": [
+    {
+      "case_id": "soleus_atrophy_supported",
+      "answer": {
+        "question": "How does microgravity affect skeletal muscle?",
+        "answer_text": "The controlled evidence reports reduced soleus muscle mass after unloading [C1].",
+        "citations": [
+          {
+            "citation_id": "C1",
+            "chunk_id": "chunk_soleus_001",
+            "publication_id": "pub_001",
+            "title": "Microgravity skeletal muscle study",
+            "section": "Results",
+            "page": 4,
+            "source_url": "https://doi.org/10.0/example",
+            "excerpt": "Soleus muscle mass was reduced after unloading."
+          }
+        ],
+        "sufficiency": {
+          "status": "sufficient",
+          "retrieved_chunk_count": 3,
+          "supporting_publication_count": 2
+        }
+      },
+      "retrieved_context": [
+        {
+          "citation_id": "C1",
+          "chunk_id": "chunk_soleus_001",
+          "publication_id": "pub_001",
+          "title": "Microgravity skeletal muscle study",
+          "section": "Results",
+          "page": 4,
+          "source_url": "https://doi.org/10.0/example"
+        }
+      ],
+      "claim_checks": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The controlled evidence reports reduced soleus muscle mass after unloading.",
+          "expected_citation_ids": ["C1"],
+          "actual_citation_ids": ["C1"]
+        }
+      ]
+    }
+  ]
+}

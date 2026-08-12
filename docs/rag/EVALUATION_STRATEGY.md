@@ -35,7 +35,12 @@ Human-readable index: [REFERENCE_QUESTIONS.md](REFERENCE_QUESTIONS.md).
   and verifies insufficient-evidence responses clearly decline without citations.
 - Machine-readable hallucination metrics: `unsupported_claim_count`,
   `claim_sentence_count`, `cited_claim_sentence_count`, and `cited_claim_rate`.
-- Automated tests for citation integrity (follow-on).
+- Offline citation correctness check (`evals/citation_correctness.py`) for
+  fixture `GroundedAnswerResponse` payloads plus retrieved citation context.
+  The MVP check verifies emitted citation IDs are backed by retrieved chunk IDs,
+  answer citation markers reference emitted citations, and optional per-claim
+  fixture labels report citation precision/recall. It preserves publication ID,
+  title, section, page, source URL, and chunk provenance in fixtures/reports.
 - Human review notes for scientific correctness (`human_scientific_review` in the fixture).
 
 ## Retrieval evaluation
@@ -80,6 +85,27 @@ The command exits non-zero when unsupported claims are detected, making failures
 actionable in CI or local reports. It is not a substitute for human scientific
 review: it checks citation-marker discipline and insufficient-evidence behavior,
 while deeper citation support precision/recall remains issue #59.
+
+## Citation correctness check
+
+Run the deterministic citation correctness fixture check:
+
+```bash
+python evals/citation_correctness.py evals/fixtures/citation_correctness_answers.json --json
+```
+
+The command exits non-zero when an answer emits citations that were not in
+retrieved context, uses answer markers that were not emitted, emits unused
+citations, or misses/overstates expected support in fixture `claim_checks`.
+Machine-readable metrics include `citation_id_precision`,
+`answer_marker_precision`, `claim_citation_precision`, and
+`claim_citation_recall`.
+
+For August MVP this checker is deliberately bounded: it does not call an LLM,
+does not run retrieval, does not wire `/ask`, and does not infer scientific
+truth from model knowledge. Claim-level precision/recall is only computed
+against explicit fixture labels so unsupported scientific conclusions are not
+invented by the evaluator.
 
 ## Reference question rules
 - Questions target topic `microgravity_skeletal_muscle` only.
