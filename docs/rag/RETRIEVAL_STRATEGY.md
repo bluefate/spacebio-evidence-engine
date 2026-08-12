@@ -7,10 +7,11 @@ Define how relevant passages are found for search and question answering.
 MVP retrieval over PostgreSQL and pgvector.
 
 ## Current status
-Vector storage (#42), indexing (#43), semantic search (#44), and shared
-metadata retrieval filters (#47) are implemented for the August MVP. Full-text
-search (#45) and hybrid fusion scoring (#46) remain follow-on; the hybrid
-entrypoint already applies the same filter API to the semantic channel.
+Vector storage (#42), indexing (#43), semantic search (#44), full-text search
+(#45), and shared metadata retrieval filters (#47) are implemented. Hybrid
+fusion scoring (#46) remains follow-on; the hybrid entrypoint applies the same
+filter API to the semantic channel and the FTS channel can be used through
+`keyword_search`.
 
 ## MVP strategy
 - Embeddings: local Sentence Transformers (`all-MiniLM-L6-v2`).
@@ -34,14 +35,21 @@ entrypoint already applies the same filter API to the semantic channel.
   `source_url`, `chunk_text`, `model_name`). Default `k` is 8. PostgreSQL uses
   pgvector cosine distance (`<=>`); SQLite CI ranks in process over stored
   vectors.
+- Full-text search (`spacebio_evidence_engine.retrieval.keyword_search`) ranks
+  chunks using a PostgreSQL `tsvector` generated from `chunk_text` and a GIN
+  index on `chunks.search_tsv`. It works without embeddings and accepts the
+  same metadata filters. It returns `KeywordSearchHit` objects with
+  `ts_rank_cd` scores and full provenance. SQLite CI uses a substring fallback
+  with term-overlap scoring.
 - **Retrieval filter API (#47):** `RetrievalFilters` /
   `parse_retrieval_filters` / `apply_retrieval_filters` document and enforce
   approved keys: `corpus_topic`, `organism_model`, `exposure`,
   `publication_id`, `section`, `license_status`, `year`, `human_approval`.
   Unknown keys, blank strings, and invalid `year` values raise
-  `InvalidRetrievalFilterError`. `hybrid_search` applies the same filters
-  before ranking; the FTS channel raises `NotImplementedError` until #45/#46.
-- Vector-only search is the default MVP path (hybrid FTS deferred).
+  `InvalidRetrievalFilterError`. Both `semantic_search` and `keyword_search`
+  apply the same filters before ranking.
+- Vector-only search is the default MVP path; hybrid fusion scoring remains
+  post-MVP (#46).
 - Default top-k: 8; no reranker for August MVP.
 - Filter by corpus topic, organism, exposure, section, year, approval, and
   publication metadata when available.

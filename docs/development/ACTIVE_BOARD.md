@@ -85,12 +85,13 @@ flowchart TB
     i51["#51 LLM provider interface"]
     i52["#52 Context assembly"]
     i53["#53 Grounded answer prompt"]
+    i54["#54 Passage citation emission"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i54["#54 Passage citation emission<br/>branch: feature/54-passage-citation-emission<br/>PR #126<br/>owner: bluefate<br/>status: PR Open"]
+    i45["#45 PostgreSQL full-text search for chunks<br/>branch: feature/45-postgres-full-text-search<br/>PR #127<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -119,7 +120,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#54](https://github.com/bluefate/spacebio-evidence-engine/issues/54) Passage citation emission | PR Open | Already claimed | **Do not claim** |
+| — | [#45](https://github.com/bluefate/spacebio-evidence-engine/issues/45) PostgreSQL full-text search for chunks | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 

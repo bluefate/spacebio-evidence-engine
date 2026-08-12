@@ -201,7 +201,7 @@ def test_hybrid_search_applies_metadata_filters(session: Session) -> None:
 
 def test_hybrid_search_rejects_fts_channel_until_implemented(session: Session) -> None:
     provider = FixtureEmbeddingProvider(query_vectors={"q": _axis_vector(index=0)})
-    with pytest.raises(NotImplementedError, match="FTS hybrid channel"):
+    with pytest.raises(NotImplementedError, match="FTS hybrid fusion"):
         hybrid_search(session, provider, "q", channels=("semantic", "fts"))
 
 

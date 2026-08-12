@@ -28,6 +28,7 @@ Humans and AI agents who contribute implementation work are listed here. **Agent
 | Cursor Grok 4.5 | Agent (Cursor) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
 | Devin | Agent (Devin) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
 | Codex | Agent (Codex) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
+| Cascade | Agent (Cascade) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
 
 Rules for agents:
 
