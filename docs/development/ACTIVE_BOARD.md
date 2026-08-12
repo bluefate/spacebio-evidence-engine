@@ -80,6 +80,7 @@ flowchart TB
     i43["#43 Vector indexing"]
     i44["#44 Semantic search"]
     i47["#47 Retrieval metadata filters"]
+    i50["#50 Retrieval eval harness"]
     i51["#51 LLM provider interface"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
