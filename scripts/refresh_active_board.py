@@ -60,6 +60,7 @@ TRACKED: dict[int, dict[str, str | bool]] = {
     31: {"title": "Page map", "critical": True},
     32: {"title": "Chunking strategy", "critical": True},
     33: {"title": "Chunk metadata schema", "critical": True},
+    37: {"title": "Ingestion unit tests", "critical": False},
     39: {"title": "EmbeddingProvider interface", "critical": True},
     40: {"title": "Local embeddings", "critical": True},
     42: {"title": "Vector storage schema", "critical": True},

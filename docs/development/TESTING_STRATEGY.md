@@ -14,11 +14,20 @@ Initial test strategy.
 Repository tests live under `tests/` and are grouped by concern:
 
 - `tests/api/` — FastAPI settings and health checks
+- `tests/ingestion/` — PDF extraction, page mapping, section detection, and chunking
 - `tests/rag/` — retrieval and grounding behavior
 - `tests/storage/` — storage abstractions
 - `tests/` root — package smoke tests and cross-cutting behavior
 
 Fixtures live under `tests/fixtures/` when a test needs checked-in sample data.
+
+## Ingestion tests
+
+Ingestion unit tests use deterministic synthetic text and the checked-in multi-page
+PDF fixture. They should assert that extraction, sectioning, page mapping, and
+chunking preserve publication provenance fields such as source keys, section
+labels, offsets, pages, and chunking strategy lineage. They should also cover
+typed failure paths without adding new corpus publications.
 
 ## MVP tests
 - Unit tests for text processing, citation assembly, and schemas.
