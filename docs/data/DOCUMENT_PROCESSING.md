@@ -7,7 +7,7 @@ Define how source publications become searchable, citable evidence.
 MVP PDF-first processing using PyMuPDF, with future extraction improvements.
 
 ## Current status
-PDF storage (#28), page-level text extraction (#29), section detection (#30), page mapping (#31), and section-aware chunking (#32) are implemented for the MVP path. Chunk persistence (#33) and embedding remain downstream.
+PDF storage (#28), page-level text extraction (#29), section detection (#30), page mapping (#31), and section-aware chunking (#32) are implemented for the MVP path. Chunk persistence (#33), embeddings, and ingestion status tracking (#34) are in place for the MVP path.
 
 ## Document state flow
 ```mermaid
@@ -79,6 +79,50 @@ Typed failures:
 - `PDFEmptyError` — opens but has no pages or no extractable text
 - `PDFExtractionError` — base class / unexpected extraction failures
 
+
+## Ingestion status tracking (issue #34)
+
+Per-publication ingestion state is persisted on `publications.ingestion_status`
+and changed only through explicit transitions in
+`spacebio_evidence_engine.ingestion.status`.
+
+### Status enum
+
+| Status | Meaning |
+| --- | --- |
+| `not_ingested` | Default. Ingest has not started (schema default). |
+| `pending` | Queued for ingestion. |
+| `processing` | Ingest job is actively running. |
+| `succeeded` | Ingest completed successfully. |
+| `failed` | Ingest failed; see structured errors (#36). |
+| `pdf_quality_blocked` | Blocked by PDF quality assessment (#25). |
+
+### Transitions
+
+Allowed transitions are enforced by `transition_ingestion_status(...)`.
+Invalid transitions raise `InvalidIngestionStatusTransitionError` and do not
+persist. Every accepted transition is:
+
+- written to `publications.ingestion_status`
+- appended to an in-process event log (`IngestionStatusEventLog`)
+- emitted as a structured log line (`ingestion_status_transition ...`)
+
+Typical happy path: `not_ingested` → `processing` → `succeeded`.
+Reprocessing may move `succeeded` or `failed` back to `pending`/`processing`.
+
+### Operator lookup
+
+Show status for a publication ID:
+
+```bash
+python scripts/show_ingestion_status.py \
+  --database-url "$DATABASE_URL" \
+  --publication-id pub_001
+```
+
+Add `--json` for a machine-readable snapshot including recent in-process
+transitions and allowed next statuses.
+
 ## Ingestion error reporting (issue #36)
 
 Structured ingestion errors are created through
@@ -92,8 +136,8 @@ Structured ingestion errors are created through
   to the latest stored error record.
 - Common secret-bearing fields and token-like values are redacted before storage.
 
-Durable status-transition persistence remains separate from this local reporting
-surface and is tracked by issue #34.
+Durable status transitions are owned by issue #34 (`transition_ingestion_status`);
+this error store remains the local operator-visible failure detail surface.
 
 Security:
 
