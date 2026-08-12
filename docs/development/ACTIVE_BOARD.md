@@ -92,7 +92,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i56["#56 Claim-source mapping<br/>owner: bluefate<br/>status: In Progress"]
+    i56["#56 Claim-source mapping<br/>branch: feature/56-claim-source-mapping<br/>PR #130<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -121,7 +121,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#56](https://github.com/bluefate/spacebio-evidence-engine/issues/56) Claim-source mapping | In Progress | Already claimed | **Do not claim** |
+| — | [#56](https://github.com/bluefate/spacebio-evidence-engine/issues/56) Claim-source mapping | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
