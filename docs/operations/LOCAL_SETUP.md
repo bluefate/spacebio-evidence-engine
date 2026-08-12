@@ -25,7 +25,7 @@ make setup         # .env, venv, editable install, web npm install, pre-commit, 
 make services      # PostgreSQL + pgvector via Docker Compose
 make db-bootstrap  # Idempotent CREATE EXTENSION IF NOT EXISTS vector
 make migrate       # Alembic upgrade head (publications table, …)
-make api           # uvicorn on http://localhost:8000 (GET /health)
+make api           # uvicorn on http://localhost:8000 (GET /health, POST /ask schema)
 make web           # Next.js on http://localhost:3000
 make lint
 make typecheck
@@ -122,7 +122,10 @@ Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_by
 
 ## Expected local services
 - PostgreSQL with pgvector (Compose) on port `5432`.
-- FastAPI backend (`apps/api`) on port `8000`.
+- FastAPI backend (`apps/api`) on port `8000`. `POST /ask` is documented in
+  OpenAPI and returns `GroundedAnswerResponse` when the app is configured with a
+  retriever plus `LanguageModelProvider`; without that runtime service it fails
+  closed with `503` and does not use fallback model knowledge.
 - Next.js frontend (`apps/web`) on port `3000`; `/search` calls the web app
   `/api/search` route for stored publication metadata and any exposed passage
   records.

@@ -2,6 +2,12 @@
 
 from __future__ import annotations
 
+from spacebio_evidence_engine.rag.answer import (
+    DEFAULT_ANSWER_MAX_TOKENS,
+    GroundedAnswerError,
+    GroundedAnswerService,
+    RetrievedEvidenceProvider,
+)
 from spacebio_evidence_engine.rag.citations import (
     CitationEmissionResult,
     emit_citations_for_answer_text,
@@ -38,11 +44,15 @@ __all__ = [
     "ClaimSourceMapping",
     "ClaimSourceMappingResult",
     "ContextAssemblyResult",
+    "DEFAULT_ANSWER_MAX_TOKENS",
     "DEFAULT_EVIDENCE_TOKEN_BUDGET",
     "DEFAULT_INSTRUCTIONS",
     "GROUNDED_ANSWER_PROMPT_ID",
     "GROUNDED_ANSWER_PROMPT_VERSION",
     "GroundedAnswerPrompt",
+    "GroundedAnswerError",
+    "GroundedAnswerService",
+    "RetrievedEvidenceProvider",
     "assemble_context",
     "build_insufficient_evidence_response",
     "build_insufficient_evidence_response_if_needed",

@@ -81,7 +81,17 @@ Versioned Pydantic models live in `spacebio_evidence_engine.schemas` (issue #57)
 | `EvidenceSufficiency` | `sufficient` / `insufficient` / `marginal` plus counts |
 | `LimitationNote` / `ConflictFinding` / `AnswerWarning` | Optional scientific caveats |
 
-FastAPI registers these in OpenAPI via `POST /ask` (`response_model=GroundedAnswerResponse`). The route currently returns **501** until retrieval + generation are wired.
+FastAPI exposes these in OpenAPI via `POST /ask` (`response_model=GroundedAnswerResponse`). The route delegates to a configured `GroundedAnswerService`, which uses current vector-only retrieved hits, context assembly, prompt rendering, citation emission, and sufficiency checks. If no retriever/LLM service is configured, the API returns **503** instead of falling back to model memory.
+
+## Grounded answer API flow
+
+`spacebio_evidence_engine.rag.GroundedAnswerService` is the backend orchestration boundary for issue #60:
+
+1. Retrieve ranked `SemanticSearchHit` records from the controlled corpus (August MVP vector-only path; hybrid retrieval remains deferred).
+2. Assemble evidence with `assemble_context`, preserving chunk IDs, publication ID/title, section, page, source URL, and excerpts.
+3. Evaluate sufficiency before generation. Insufficient evidence returns the fixed insufficient-evidence response and does not call the LLM.
+4. Render the versioned grounded-answer prompt and call `LanguageModelProvider.chat`.
+5. Emit citations only for `[C1]`-style markers present in the retrieved context. Unknown or unretrieved citation IDs fail closed; the API returns **502** rather than returning unsupported claims.
 
 ## Ingestion sequence
 ```mermaid
@@ -137,4 +147,3 @@ sequenceDiagram
 
 ## Decision status
 Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
-
