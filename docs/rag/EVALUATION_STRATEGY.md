@@ -24,6 +24,11 @@ Human-readable index: [REFERENCE_QUESTIONS.md](REFERENCE_QUESTIONS.md).
 ## MVP artifacts
 - Benchmark question set (**10** reference questions; styles: factual lookup, comparison, sufficiency).
 - Expected source publications or passages (candidate publication IDs in the fixture; passage IDs after ingest).
+- Offline retrieval evaluation harness (`evals/retrieval_eval.py`) for an already
+  migrated and indexed corpus database. The harness runs semantic vector search
+  over the approved microgravity + skeletal muscle reference questions, records
+  retrieved chunk IDs, ranks, scores, publication IDs, section/page provenance,
+  source URLs, and computes publication-level hit-rate / rank metrics.
 - Offline hallucination check (`evals/hallucination_check.py`) for fixture
   `GroundedAnswerResponse` payloads. The MVP metric flags claim-like answer
   sentences that lack citation markers when evidence is sufficient or marginal,
@@ -32,6 +37,36 @@ Human-readable index: [REFERENCE_QUESTIONS.md](REFERENCE_QUESTIONS.md).
   `claim_sentence_count`, `cited_claim_sentence_count`, and `cited_claim_rate`.
 - Automated tests for citation integrity (follow-on).
 - Human review notes for scientific correctness (`human_scientific_review` in the fixture).
+
+## Retrieval evaluation
+
+Run the deterministic retrieval harness against an indexed local corpus:
+
+```bash
+python evals/retrieval_eval.py \
+  --database-url "$DATABASE_URL" \
+  --reference-questions evals/fixtures/reference_questions.json \
+  --output evals/artifacts/retrieval_eval.json \
+  --top-k 8
+```
+
+The default results artifact path is `evals/artifacts/retrieval_eval.json`.
+The artifact is JSON and includes:
+
+- run metadata: schema version, timestamp, topic, provider model, top-k, and
+  reference question fixture path
+- aggregate metrics: `hit_rate`, `mean_reciprocal_rank`,
+  `mean_first_relevant_rank`, `hit_count`, and unanswerable-question hit count
+- per-question metrics: expected publication IDs, first relevant rank,
+  reciprocal rank, relevant hit count, and unexpected hits for sufficiency items
+- retrieved evidence records: rank, chunk ID, score, publication ID, title,
+  section, source URL, page range, section heading, embedding model, and whether
+  the chunk came from an expected candidate publication
+
+For the August MVP, relevance is scored against the candidate publication IDs in
+the approved reference-question fixture because passage IDs are not gold labels
+until the PDFs are fully ingested and spans exist. The harness does not perform
+LLM judging, answer generation, `/ask` wiring, hybrid search, or domain expansion.
 
 ## Hallucination check
 

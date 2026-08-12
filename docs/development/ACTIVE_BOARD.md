@@ -72,6 +72,7 @@ flowchart TB
     i31["#31 Page map"]
     i32["#32 Chunking strategy"]
     i33["#33 Chunk metadata schema"]
+    i36["#36 Ingestion error reporting"]
     i37["#37 Ingestion unit tests"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
@@ -85,7 +86,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i36["#36 Ingestion error reporting<br/>branch: feature/36-ingestion-error-reporting<br/>PR #119<br/>owner: bluefate<br/>status: PR Open"]
+    i50["#50 Retrieval eval harness<br/>branch: feature/50-retrieval-eval-harness<br/>PR #120<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -114,7 +115,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#36](https://github.com/bluefate/spacebio-evidence-engine/issues/36) Ingestion error reporting | PR Open | Already claimed | **Do not claim** |
+| — | [#50](https://github.com/bluefate/spacebio-evidence-engine/issues/50) Retrieval eval harness | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 

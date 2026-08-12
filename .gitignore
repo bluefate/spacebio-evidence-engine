@@ -200,6 +200,7 @@ data/raw/
 data/processed/
 data/pdfs/
 corpus/files/
+evals/artifacts/
 tmp/
 temp/
 .cache/
