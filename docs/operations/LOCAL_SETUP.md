@@ -155,6 +155,14 @@ Integration smoke (optional, needs DB up):
 SPACEBIO_REQUIRE_DB=1 pytest -q -m integration tests/test_pgvector_bootstrap.py
 ```
 
+End-to-end ingestion integration smoke (optional, needs DB up and migrations applied):
+
+```bash
+make services
+make migrate
+SPACEBIO_REQUIRE_DB=1 pytest -q -m integration tests/integration/test_ingestion_e2e.py
+```
+
 ## PDF storage
 
 The ingestion pipeline stores source PDFs through a backend selected by `PDF_STORAGE_BACKEND`.
