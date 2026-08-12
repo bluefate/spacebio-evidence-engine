@@ -96,7 +96,7 @@ flowchart TB
   end
   subgraph inflight [In flight — do not claim]
     i62["#62 Question answering page<br/>owner: bluefate<br/>status: In Progress"]
-    i66["#66 Wire citation links to evidence and publications<br/>owner: bluefate<br/>status: PR Open"]
+    i66["#66 Wire citation links to evidence and publications<br/>branch: feature/66-citation-links<br/>PR #134<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
