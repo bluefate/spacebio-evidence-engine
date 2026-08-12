@@ -1,4 +1,4 @@
-"""Ingestion pipeline components (PDF extract, section detection, chunking, quality)."""
+"""Ingestion pipeline components (PDF extract, sections, chunking, quality, status)."""
 
 from spacebio_evidence_engine.ingestion.chunking import (
     CHUNKING_STRATEGY_VERSION,
@@ -49,6 +49,19 @@ from spacebio_evidence_engine.ingestion.sections import (
     detect_sections,
     detect_sections_from_text,
 )
+from spacebio_evidence_engine.ingestion.status import (
+    ALLOWED_INGESTION_TRANSITIONS,
+    DEFAULT_STATUS_EVENT_LOG,
+    IngestionStatus,
+    IngestionStatusEventLog,
+    IngestionStatusTransition,
+    InvalidIngestionStatusTransitionError,
+    can_transition_ingestion_status,
+    describe_ingestion_status,
+    get_ingestion_status,
+    parse_ingestion_status,
+    transition_ingestion_status,
+)
 
 __all__ = [
     "CHUNKING_STRATEGY_VERSION",
@@ -56,11 +69,17 @@ __all__ = [
     "ChunkingResult",
     "ExtractedPage",
     "ExtractionResult",
+    "ALLOWED_INGESTION_TRANSITIONS",
+    "DEFAULT_STATUS_EVENT_LOG",
     "FAILED_INGESTION_STATUS",
     "InMemoryIngestionErrorStore",
     "IngestionErrorRecord",
     "IngestionFailureStatus",
     "IngestionStage",
+    "IngestionStatus",
+    "IngestionStatusEventLog",
+    "IngestionStatusTransition",
+    "InvalidIngestionStatusTransitionError",
     "PageOffsetMap",
     "PDFEmptyError",
     "PDFExtractionError",
@@ -74,18 +93,23 @@ __all__ = [
     "assess_pdf_bytes",
     "assess_pdf_path",
     "assess_pdf_url",
+    "can_transition_ingestion_status",
     "chunk_extraction",
     "chunk_sections",
     "chunk_text",
     "create_ingestion_error_record",
+    "describe_ingestion_status",
     "detect_sections",
     "detect_sections_from_text",
     "estimate_tokens",
     "extract_pdf_bytes",
     "extract_pdf_from_storage",
     "extract_pdf_path",
+    "get_ingestion_status",
     "make_chunk_id",
     "page_texts",
+    "parse_ingestion_status",
     "redact_error_payload",
     "score_publication_pdf",
+    "transition_ingestion_status",
 ]
