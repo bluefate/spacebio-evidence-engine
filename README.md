@@ -25,6 +25,7 @@ Humans and AI agents who contribute implementation work are listed here. **Agent
 |------|------|------|-------|
 | John Hernandez ([@bluefate](https://github.com/bluefate)) | Human | Repository owner | Final authority on requirements, architecture, security, PR approval, and merge |
 | Cursor Auto (Composer) | Agent (Cursor) | Implementation contributor | Claimed/implemented multiple MVP issues; follows [AGENTS.md](AGENTS.md) |
+| Cursor Grok 4.5 | Agent (Cursor) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
 | Devin | Agent (Devin) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
 | Codex | Agent (Codex) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
 
