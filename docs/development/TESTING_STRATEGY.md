@@ -29,6 +29,21 @@ chunking preserve publication provenance fields such as source keys, section
 labels, offsets, pages, and chunking strategy lineage. They should also cover
 typed failure paths without adding new corpus publications.
 
+The end-to-end ingestion integration test composes the existing local PDF
+storage, PDF extraction, chunking, chunk persistence, and final ingestion status
+path against a migrated PostgreSQL test database. It uses only the checked-in
+`tests/fixtures/sample_two_page.pdf` fixture and deletes its own fixture rows.
+
+Run it locally with Compose PostgreSQL available:
+
+```bash
+make services
+make migrate
+SPACEBIO_REQUIRE_DB=1 pytest -q -m integration tests/integration/test_ingestion_e2e.py
+```
+
+Without `SPACEBIO_REQUIRE_DB=1`, the test skips when PostgreSQL is unavailable.
+
 ## MVP tests
 - Unit tests for text processing, citation assembly, and schemas.
 - Integration tests for database repositories and API endpoints.

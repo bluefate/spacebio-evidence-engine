@@ -9,5 +9,6 @@ make web
 ```
 
 Ask / citation screens land on later web-interface issues. The reusable
-`EvidencePanel` component (`src/components/evidence`) is ready for the
-question-answering page (#62) to mount cited passages.
+`EvidencePanel` and citation-link helpers (`CitationLinkedText`,
+`AnswerEvidenceView`) under `src/components/evidence` are ready for the
+question-answering page (#62) to mount cited answers.

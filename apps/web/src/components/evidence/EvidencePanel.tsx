@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
+import { evidenceCitationDomId, publicationDetailHref } from "./citationMarkers";
 import styles from "./EvidencePanel.module.css";
 import {
   type EvidencePassage,
@@ -14,6 +16,8 @@ export type EvidencePanelProps = {
   passages?: readonly EvidencePassage[] | readonly PassageCitationLike[];
   activeCitationId?: string | null;
   onSelectCitation?: (citationId: string) => void;
+  /** When provided, unknown publication ids render as unavailable instead of links. */
+  knownPublicationIds?: ReadonlySet<string> | readonly string[];
   heading?: string;
   className?: string;
 };
@@ -29,6 +33,15 @@ function normalizePassages(
     .filter((item): item is EvidencePassage => item !== null);
 }
 
+function toIdSet(
+  value: EvidencePanelProps["knownPublicationIds"],
+): Set<string> | null {
+  if (value == null) {
+    return null;
+  }
+  return value instanceof Set ? new Set(value) : new Set(value);
+}
+
 function displayOrUnknown(value: string | null | undefined): string {
   const trimmed = value?.trim();
   return trimmed ? trimmed : "Unknown";
@@ -42,6 +55,7 @@ export function EvidencePanel({
   passages,
   activeCitationId = null,
   onSelectCitation,
+  knownPublicationIds,
   heading = "Cited evidence",
   className,
 }: EvidencePanelProps) {
@@ -49,6 +63,21 @@ export function EvidencePanel({
   const activeId = activeCitationId?.trim() || null;
   const activeFound = activeId ? items.some((item) => item.citationId === activeId) : true;
   const selectable = typeof onSelectCitation === "function";
+  const publicationAllowList = toIdSet(knownPublicationIds);
+  const activeItemRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!activeId || !activeFound) {
+      return;
+    }
+    const node = activeItemRef.current;
+    if (node && typeof node.scrollIntoView === "function") {
+      node.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [activeId, activeFound]);
 
   return (
     <section
@@ -81,11 +110,16 @@ export function EvidencePanel({
           {items.map((passage) => {
             const isActive = activeId !== null && passage.citationId === activeId;
             const body = resolvePassageBody(passage);
-            const publicationHref = `/publications/${encodeURIComponent(passage.publicationId)}`;
+            const publicationAvailable =
+              publicationAllowList == null
+                ? true
+                : publicationAllowList.has(passage.publicationId);
 
             return (
               <li key={passage.citationId}>
                 <article
+                  id={evidenceCitationDomId(passage.citationId)}
+                  ref={isActive ? activeItemRef : null}
                   className={[styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}
                   data-testid={`evidence-item-${passage.citationId}`}
                   data-active={isActive ? "true" : "false"}
@@ -116,9 +150,23 @@ export function EvidencePanel({
                     <div className={styles.metaRow}>
                       <dt>Publication</dt>
                       <dd>
-                        <Link href={publicationHref} className={styles.publicationLink}>
-                          {passage.publicationId}
-                        </Link>
+                        {publicationAvailable ? (
+                          <Link
+                            href={publicationDetailHref(passage.publicationId)}
+                            className={styles.publicationLink}
+                            data-testid={`evidence-publication-${passage.citationId}`}
+                          >
+                            {passage.publicationId}
+                          </Link>
+                        ) : (
+                          <span
+                            className={styles.brokenPublication}
+                            data-testid={`evidence-publication-broken-${passage.citationId}`}
+                            title={`Publication ${passage.publicationId} is not available`}
+                          >
+                            {passage.publicationId} (unavailable)
+                          </span>
+                        )}
                         <span className={styles.titleSep}> — </span>
                         <span>{displayOrUnknown(passage.title)}</span>
                       </dd>
