@@ -75,16 +75,17 @@ flowchart TB
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
     i42["#42 Vector storage schema"]
+    i43["#43 Vector indexing"]
     i51["#51 LLM provider interface"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i43["#43 Vector indexing<br/>branch: feature/43-vector-indexing<br/>PR #114<br/>owner: bluefate<br/>status: PR Open"]
+    i44["#44 Semantic search<br/>owner: bluefate<br/>status: In Progress"]
   end
   subgraph nextCritical [Critical path — available / blocked]
-    i44["#44 Semantic search"]
+    nextCritical_empty["(none)"]
   end
   subgraph nextParallel [Parallel-safe picks — available now]
     nextParallel_empty["(none)"]
@@ -110,8 +111,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | PR Open | In flight (bluefate; `feature/43-vector-indexing`) | **Do not claim** |
+| — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | In Progress | In flight (bluefate; `(branch on issue claim)`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 

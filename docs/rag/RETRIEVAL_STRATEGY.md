@@ -7,8 +7,8 @@ Define how relevant passages are found for search and question answering.
 MVP retrieval over PostgreSQL and pgvector.
 
 ## Current status
-Initial strategy. The vector storage schema exists and the indexing job writes
-chunk embeddings with provider/model lineage before semantic search is wired.
+Vector storage (#42), indexing (#43), and semantic search (#44) are implemented
+for the August MVP. Hybrid keyword retrieval and API wiring remain follow-on.
 
 ## MVP strategy
 - Embeddings: local Sentence Transformers (`all-MiniLM-L6-v2`).
@@ -24,12 +24,20 @@ chunk embeddings with provider/model lineage before semantic search is wired.
 - Indexing progress is reported as a structured summary with status, scanned
   chunk count, embedded / skipped / updated counts, provider model, vector
   dimension, and indexed chunk IDs.
-- Semantic search (#44) must filter `chunk_embeddings.model_name` to the query
-  embedding provider's model so mixed-model corpora are not compared.
+- Semantic search (`spacebio_evidence_engine.retrieval.semantic_search`) embeds
+  the query with the configured provider, filters
+  `chunk_embeddings.model_name` to that provider's model, optionally applies
+  publication/chunk metadata filters (`corpus_topic`, `organism_model`,
+  `exposure`, `publication_id`, `section`, `license_status`), and returns
+  top-k hits with cosine similarity scores plus provenance
+  (`chunk_id`, `publication_id`, title, section, pages, `source_url`,
+  `chunk_text`, `model_name`). Default `k` is 8. PostgreSQL uses pgvector
+  cosine distance (`<=>`); SQLite CI ranks in process over stored vectors.
 - Vector-only search (hybrid keyword retrieval deferred post-August).
 - Default top-k: 8; no reranker for August MVP.
 - Filter by corpus topic, organism, system, exposure, and publication metadata when available.
-- Return ranked passages with citation metadata.
+- Return ranked passages with citation metadata. No LLM generation in the
+  semantic search function itself.
 
 ## Future strategy
 Reranking, query decomposition, ontology expansion, and graph-assisted retrieval may be added later.
