@@ -78,6 +78,7 @@ flowchart TB
     i42["#42 Vector storage schema"]
     i43["#43 Vector indexing"]
     i44["#44 Semantic search"]
+    i47["#47 Retrieval metadata filters"]
     i51["#51 LLM provider interface"]
     i55["#55 Insufficient evidence"]
     i57["#57 Answer response schema"]

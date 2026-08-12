@@ -67,6 +67,7 @@ TRACKED: dict[int, dict[str, str | bool]] = {
     42: {"title": "Vector storage schema", "critical": True},
     43: {"title": "Vector indexing", "critical": True},
     44: {"title": "Semantic search", "critical": True},
+    47: {"title": "Retrieval metadata filters", "critical": False},
     51: {"title": "LLM provider interface", "critical": False},
     55: {"title": "Insufficient evidence", "critical": False},
     57: {"title": "Answer response schema", "critical": False},

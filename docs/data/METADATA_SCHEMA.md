@@ -11,6 +11,7 @@ Publication, passage, chunk, entity, relationship, and evaluation metadata.
 Publication persistence schema implemented (SQLAlchemy + Alembic revision `20260805_0001`).
 Chunk persistence schema implemented (SQLAlchemy + Alembic revision `20260806_0002`).
 Chunk embedding vector schema implemented (SQLAlchemy + Alembic revision `20260806_0003`).
+Retrieval metadata filter API documented for search (#47).
 
 ## Required publication fields
 
@@ -109,9 +110,29 @@ Extension dependency: PostgreSQL `vector` (#8). Migration also runs `CREATE EXTE
 ORM: `spacebio_evidence_engine.db.models.ChunkEmbedding`  
 Migration: `alembic/versions/20260806_0003_create_chunk_embeddings.py`
 
+## Retrieval filter fields (issue #47)
+
+Approved equality filters for `parse_retrieval_filters` /
+`RetrievalFilters` (used by `semantic_search` and `hybrid_search`):
+
+| Filter key | Source column | Notes |
+|------------|---------------|-------|
+| `publication_id` | `publications.publication_id` | Exact publication |
+| `corpus_topic` | `publications.corpus_topic` | e.g. `microgravity_skeletal_muscle` |
+| `organism_model` | `publications.organism_model` | Free-text MVP organism/system label |
+| `exposure` | `publications.exposure` | Free-text MVP exposure |
+| `license_status` | `publications.license_status` | License review state |
+| `year` | `publications.year` | Integer year (`>= 1`) |
+| `human_approval` | `publications.human_approval` | `pending` / `approved` / `rejected` |
+| `section` | `chunks.section` | Chunk section label |
+
+Unknown keys and blank string values raise `InvalidRetrievalFilterError`.
+There is no separate `system` column in the MVP schema; use `organism_model`.
+
 ## Related documents
 - [Data dictionary](DATA_DICTIONARY.md)
 - [Citation strategy](../rag/CITATION_STRATEGY.md)
+- [Retrieval strategy](../rag/RETRIEVAL_STRATEGY.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
 - [Corpus inventory](CORPUS_INVENTORY.md)
 

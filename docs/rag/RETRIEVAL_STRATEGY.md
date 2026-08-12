@@ -7,8 +7,10 @@ Define how relevant passages are found for search and question answering.
 MVP retrieval over PostgreSQL and pgvector.
 
 ## Current status
-Vector storage (#42), indexing (#43), and semantic search (#44) are implemented
-for the August MVP. Hybrid keyword retrieval and API wiring remain follow-on.
+Vector storage (#42), indexing (#43), semantic search (#44), and shared
+metadata retrieval filters (#47) are implemented for the August MVP. Full-text
+search (#45) and hybrid fusion scoring (#46) remain follow-on; the hybrid
+entrypoint already applies the same filter API to the semantic channel.
 
 ## MVP strategy
 - Embeddings: local Sentence Transformers (`all-MiniLM-L6-v2`).
@@ -27,17 +29,24 @@ for the August MVP. Hybrid keyword retrieval and API wiring remain follow-on.
 - Semantic search (`spacebio_evidence_engine.retrieval.semantic_search`) embeds
   the query with the configured provider, filters
   `chunk_embeddings.model_name` to that provider's model, optionally applies
-  publication/chunk metadata filters (`corpus_topic`, `organism_model`,
-  `exposure`, `publication_id`, `section`, `license_status`), and returns
-  top-k hits with cosine similarity scores plus provenance
-  (`chunk_id`, `publication_id`, title, section, pages, `source_url`,
-  `chunk_text`, `model_name`). Default `k` is 8. PostgreSQL uses pgvector
-  cosine distance (`<=>`); SQLite CI ranks in process over stored vectors.
-- Vector-only search (hybrid keyword retrieval deferred post-August).
+  validated metadata filters, and returns top-k hits with cosine similarity
+  scores plus provenance (`chunk_id`, `publication_id`, title, section, pages,
+  `source_url`, `chunk_text`, `model_name`). Default `k` is 8. PostgreSQL uses
+  pgvector cosine distance (`<=>`); SQLite CI ranks in process over stored
+  vectors.
+- **Retrieval filter API (#47):** `RetrievalFilters` /
+  `parse_retrieval_filters` / `apply_retrieval_filters` document and enforce
+  approved keys: `corpus_topic`, `organism_model`, `exposure`,
+  `publication_id`, `section`, `license_status`, `year`, `human_approval`.
+  Unknown keys, blank strings, and invalid `year` values raise
+  `InvalidRetrievalFilterError`. `hybrid_search` applies the same filters
+  before ranking; the FTS channel raises `NotImplementedError` until #45/#46.
+- Vector-only search is the default MVP path (hybrid FTS deferred).
 - Default top-k: 8; no reranker for August MVP.
-- Filter by corpus topic, organism, system, exposure, and publication metadata when available.
+- Filter by corpus topic, organism, exposure, section, year, approval, and
+  publication metadata when available.
 - Return ranked passages with citation metadata. No LLM generation in the
-  semantic search function itself.
+  semantic/hybrid search functions themselves.
 
 ## Future strategy
 Reranking, query decomposition, ontology expansion, and graph-assisted retrieval may be added later.
