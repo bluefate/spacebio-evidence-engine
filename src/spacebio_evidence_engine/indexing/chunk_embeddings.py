@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Literal
 
-from sqlalchemy import Select, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from spacebio_evidence_engine.db.models import Chunk, ChunkEmbedding
@@ -39,9 +39,14 @@ def index_chunk_embeddings(
 ) -> ChunkEmbeddingIndexResult:
     """Embed chunks and persist vectors.
 
-    By default the job is idempotent: chunks that already have an embedding
-    row for the provider's model are skipped. Set ``reindex=True`` to rewrite
-    all selected chunks for that model.
+    By default the job is idempotent for a given provider model: chunks that
+    already have an embedding row for ``provider.model_name`` are skipped.
+    Default mode does **not** detect ``chunk_text`` / ``content_hash`` changes;
+    after re-chunking, call with ``reindex=True`` (or change models) so vectors
+    are rewritten.
+
+    Set ``reindex=True`` to force-embed every selected chunk with the current
+    provider, regardless of any prior ``model_name`` on the embedding row.
     """
 
     _validate_provider(provider)
@@ -50,13 +55,15 @@ def index_chunk_embeddings(
     if limit is not None and limit < 1:
         raise ValueError("limit must be at least 1 when provided")
 
-    chunks = list(session.scalars(_candidate_chunk_query(provider, reindex=reindex, limit=limit)))
-    if not chunks:
+    candidates, scanned, skipped = _select_candidates(
+        session, provider, reindex=reindex, limit=limit
+    )
+    if not candidates:
         return ChunkEmbeddingIndexResult(
             status="nothing_to_index",
-            scanned_chunks=0,
+            scanned_chunks=scanned,
             embedded_chunks=0,
-            skipped_chunks=0,
+            skipped_chunks=skipped,
             updated_chunks=0,
             model_name=provider.model_name,
             dimension=provider.dimension,
@@ -65,8 +72,8 @@ def index_chunk_embeddings(
     embedded = 0
     updated = 0
     chunk_ids: list[str] = []
-    for start in range(0, len(chunks), batch_size):
-        batch = chunks[start : start + batch_size]
+    for start in range(0, len(candidates), batch_size):
+        batch = candidates[start : start + batch_size]
         vectors = provider.embed_documents([chunk.chunk_text for chunk in batch])
         if len(vectors) != len(batch):
             raise ValueError(
@@ -97,9 +104,9 @@ def index_chunk_embeddings(
     session.flush()
     return ChunkEmbeddingIndexResult(
         status="completed",
-        scanned_chunks=len(chunks),
+        scanned_chunks=scanned,
         embedded_chunks=embedded,
-        skipped_chunks=0,
+        skipped_chunks=skipped,
         updated_chunks=updated,
         model_name=provider.model_name,
         dimension=provider.dimension,
@@ -107,24 +114,33 @@ def index_chunk_embeddings(
     )
 
 
-def _candidate_chunk_query(
+def _select_candidates(
+    session: Session,
     provider: EmbeddingProvider,
     *,
     reindex: bool,
     limit: int | None,
-) -> Select[tuple[Chunk]]:
-    query = select(Chunk).outerjoin(ChunkEmbedding).order_by(Chunk.chunk_id)
-    if not reindex:
-        query = query.where(
-            (ChunkEmbedding.chunk_id.is_(None)) | (ChunkEmbedding.model_name != provider.model_name)
-        )
-    else:
-        query = query.where(
-            (ChunkEmbedding.chunk_id.is_(None)) | (ChunkEmbedding.model_name == provider.model_name)
-        )
+) -> tuple[list[Chunk], int, int]:
+    """Return (chunks_to_embed, scanned_count, skipped_count)."""
+
+    query = select(Chunk).order_by(Chunk.chunk_id)
     if limit is not None:
         query = query.limit(limit)
-    return query
+
+    chunks = list(session.scalars(query))
+    scanned = len(chunks)
+    if reindex:
+        return chunks, scanned, 0
+
+    candidates: list[Chunk] = []
+    skipped = 0
+    for chunk in chunks:
+        existing = session.get(ChunkEmbedding, chunk.chunk_id)
+        if existing is not None and existing.model_name == provider.model_name:
+            skipped += 1
+            continue
+        candidates.append(chunk)
+    return candidates, scanned, skipped
 
 
 def _validate_provider(provider: EmbeddingProvider) -> None:
