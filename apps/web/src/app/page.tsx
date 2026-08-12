@@ -27,7 +27,10 @@ export default function HomePage() {
           publications.
         </p>
         <div className={styles.actions}>
-          <a className={styles.primary} href="/search">
+          <a className={styles.primary} href="/ask">
+            Ask a question
+          </a>
+          <a className={styles.secondary} href="/search">
             Search corpus
           </a>
           <a className={styles.secondary} href="/corpus">
