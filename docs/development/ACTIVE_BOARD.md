@@ -72,6 +72,7 @@ flowchart TB
     i31["#31 Page map"]
     i32["#32 Chunking strategy"]
     i33["#33 Chunk metadata schema"]
+    i36["#36 Ingestion error reporting"]
     i37["#37 Ingestion unit tests"]
     i39["#39 EmbeddingProvider interface"]
     i40["#40 Local embeddings"]
