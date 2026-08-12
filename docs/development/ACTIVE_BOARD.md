@@ -55,7 +55,7 @@ This runs `scripts/refresh_active_board.py`, which:
 Edit `TRACKED` and `CRITICAL_EDGES` in [`scripts/refresh_active_board.py`](../../scripts/refresh_active_board.py), then re-run `make refresh-board`.
 
 <!-- ACTIVE_BOARD:BEGIN -->
-**Last refreshed:** 2026-08-05 via `make refresh-board` (Project #6 + open PRs).
+**Last refreshed:** 2026-08-11 via `make refresh-board` (Project #6 + open PRs).
 
 ## Live board (auto-generated)
 
@@ -63,6 +63,7 @@ Edit `TRACKED` and `CRITICAL_EDGES` in [`scripts/refresh_active_board.py`](../..
 flowchart TB
   subgraph done [Done]
     i20["#20 Corpus inventory"]
+    i25["#25 Assess PDF quality"]
     i26["#26 Reference questions"]
     i27["#27 Publication schema"]
     i28["#28 PDF storage"]
@@ -80,10 +81,9 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i25["#25 Assess PDF quality<br/>branch: feature/25-pdf-quality<br/>PR #113<br/>status: PR Open"]
+    i43["#43 Vector indexing<br/>branch: feature/43-vector-indexing<br/>PR #114<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
-    i43["#43 Vector indexing"]
     i44["#44 Semantic search"]
   end
   subgraph nextParallel [Parallel-safe picks — available now]
@@ -110,9 +110,8 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| 1 | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | Planning | Next on critical path | Overlap on same files |
 | — | [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) Semantic search | Planning | Wait on #43 | Blocked |
-| — | [#25](https://github.com/bluefate/spacebio-evidence-engine/issues/25) Assess PDF quality | PR Open | Already claimed | **Do not claim** |
+| — | [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) Vector indexing | PR Open | In flight (bluefate; `feature/43-vector-indexing`) | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
