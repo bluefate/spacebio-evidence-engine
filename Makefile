@@ -4,7 +4,7 @@
 # Tooling prefers `.venv/bin` so `make lint|typecheck|test|validate` work from a
 # fresh shell without requiring `source .venv/bin/activate`.
 
-.PHONY: setup api web services db-bootstrap migrate lint typecheck test validate refresh-board eval-hallucination help
+.PHONY: setup setup-check api web services db-bootstrap migrate lint typecheck test validate refresh-board eval-hallucination help
 
 VENV_BIN := $(CURDIR)/.venv/bin
 SYSTEM_PYTHON ?= python3
@@ -28,7 +28,7 @@ else
 endif
 
 help:
-	@echo "Targets: setup api web services db-bootstrap migrate lint typecheck test validate refresh-board eval-hallucination"
+	@echo "Targets: setup setup-check api web services db-bootstrap migrate lint typecheck test validate refresh-board eval-hallucination"
 	@echo "Uses $(VENV_BIN) tools when .venv exists (no activate required)."
 
 setup:
@@ -41,6 +41,10 @@ setup:
 	@$(VENV_BIN)/python scripts/bootstrap_pgvector.py || true
 	@$(VENV_BIN)/alembic upgrade head || true
 	@echo "Setup complete. Optional: source .venv/bin/activate — Make targets use .venv/bin directly."
+	@echo "Next: make setup-check && make api / make web (see docs/operations/LOCAL_SETUP.md)."
+
+setup-check:
+	@$(PYTHON) scripts/check_local_setup.py
 
 api:
 	@PYTHONPATH=apps/api/src:src $(UVICORN) spacebio_api.main:app --reload --host 0.0.0.0 --port 8000

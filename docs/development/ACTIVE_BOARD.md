@@ -62,7 +62,9 @@ Edit `TRACKED` and `CRITICAL_EDGES` in [`scripts/refresh_active_board.py`](../..
 ```mermaid
 flowchart TB
   subgraph done [Done]
+    i6["#6 Document and script local development setup"]
     i20["#20 Corpus inventory"]
+    i22["#22 Corpus inventory notebook"]
     i25["#25 Assess PDF quality"]
     i26["#26 Reference questions"]
     i27["#27 Publication schema"]
@@ -91,12 +93,13 @@ flowchart TB
     i56["#56 Claim-source mapping"]
     i57["#57 Answer response schema"]
     i60["#60 Grounded answer API endpoint"]
+    i62["#62 Question answering page"]
     i63["#63 Evidence panel for cited passages"]
     i66["#66 Wire citation links to evidence and publications"]
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    i62["#62 Question answering page<br/>owner: bluefate<br/>status: In Progress"]
+    inflight_empty["(none)"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -125,7 +128,6 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| — | [#62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) Question answering page | In Progress | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 

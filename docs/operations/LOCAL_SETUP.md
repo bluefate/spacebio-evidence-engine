@@ -1,38 +1,92 @@
 # Local Setup
 
 ## Purpose
-Define the expected local development environment and Make targets used by humans and agents.
+
+Define the expected local development environment and Make targets used by
+humans and agents.
 
 ## Scope
-Setup, services, lint, typecheck, test, and API/web run commands.
+
+Setup, services, lint, typecheck, test, and API/web run commands for a clean
+developer machine.
 
 ## Current status
-Monorepo scaffold is in place: `apps/api` (FastAPI), `apps/web` (Next.js), Compose Postgres/pgvector.
+
+Monorepo scaffold is in place: `apps/api` (FastAPI), `apps/web` (Next.js),
+Compose Postgres/pgvector. `make setup` provisions `.env`, `.venv`, editable
+Python install, web npm deps, pre-commit hooks, Compose DB, pgvector bootstrap,
+and Alembic migrations (best-effort when Docker is available).
 
 ## Expected tools
-- Python 3.12 or newer.
-- Node.js 22+.
-- Docker and Docker Compose.
-- GNU Make.
-- `pre-commit`, Ruff, Pytest, Pyright.
+
+| Tool | Version / notes |
+| --- | --- |
+| Python | 3.12 or newer (`python3`) |
+| Node.js | 22+ (`node` / `npm`) |
+| Docker + Compose | Required for Postgres/pgvector |
+| GNU Make | `make` |
+| Git + `gh` | Clone, PRs, `make refresh-board` |
+| pre-commit / Ruff / Pytest / Pyright | Installed via `make setup` into `.venv` |
+
+## Ports
+
+| Service | Host port | How to start | Notes |
+| --- | ---: | --- | --- |
+| PostgreSQL + pgvector | `5432` | `make services` | Compose service `db` |
+| FastAPI | `8000` | `make api` | OpenAPI at `/docs`; `GET /health`, `POST /ask` |
+| Next.js web | `3000` | `make web` | `/search`, corpus, publication pages |
 
 ## Commands
 
 Aligned with [AGENTS.md](../../AGENTS.md):
 
 ```bash
-make setup         # .env, venv, editable install, web npm install, pre-commit, Compose DB, pgvector bootstrap
+make setup         # .env, venv, editable install, web npm install, pre-commit, Compose DB, pgvector, migrate
+make setup-check   # Dry-run checklist (tools, ports docs, .env.example hygiene; no secrets printed)
 make services      # PostgreSQL + pgvector via Docker Compose
 make db-bootstrap  # Idempotent CREATE EXTENSION IF NOT EXISTS vector
-make migrate       # Alembic upgrade head (publications table, …)
-make api           # uvicorn on http://localhost:8000 (GET /health, POST /ask schema)
+make migrate       # Alembic upgrade head
+make api           # uvicorn on http://localhost:8000
 make web           # Next.js on http://localhost:3000
 make lint
 make typecheck
 make test
-make validate      # lint + typecheck + test
+make validate      # lint + typecheck + test (+ hallucination eval)
 make refresh-board # regenerate docs/development/ACTIVE_BOARD.md from Project + PRs
 ```
+
+## Clean-machine checklist
+
+Use this on a fresh clone before claiming implementation work:
+
+1. Install expected tools (Python 3.12+, Node 22+, Docker Desktop / Engine + Compose, Make, Git).
+2. Clone the principal repo and enter the root directory.
+3. Copy env template if you prefer to edit before setup:
+   ```bash
+   cp .env.example .env
+   ```
+   Keep `POSTGRES_PASSWORD` and the password segment of `DATABASE_URL` consistent.
+   Never commit `.env`.
+4. Run setup:
+   ```bash
+   make setup
+   ```
+5. Verify the dry-run checklist (does not print secret values):
+   ```bash
+   make setup-check
+   ```
+6. Confirm services:
+   - `curl -s http://localhost:8000/health` after `make api`
+   - open `http://localhost:3000` after `make web`
+   - Postgres accepts connections on `localhost:5432`
+7. Run validation when changing code:
+   ```bash
+   make validate
+   ```
+
+`make setup` continues when Docker is unavailable (Compose/bootstrap/migrate
+steps are best-effort). Re-run `make services`, `make db-bootstrap`, and
+`make migrate` once Docker is ready.
 
 ## Local embeddings (issue #40)
 
@@ -92,8 +146,8 @@ Unit tests use an injected fake client and do not call the network.
 2. `make services` starts Compose Postgres (`pgvector/pgvector:pg16` on port `5432`).
 3. `make db-bootstrap` enables the `vector` extension (needed if the data volume already existed before init scripts were added).
 4. Fresh volumes also apply `scripts/db/init/01_pgvector.sql` automatically.
-5. `make migrate` applies Alembic revisions through `chunk_embeddings` (`vector(384)` on Postgres; issue #42).
-5. Application tables are **not** created here — only the extension (see issue #8).
+5. `make migrate` applies Alembic revisions through chunk embeddings / FTS columns as landed on `main`.
+6. Application tables are created by Alembic migrations (not by the bootstrap script alone).
 
 Integration smoke (optional, needs DB up):
 
@@ -129,6 +183,7 @@ pip install -e ".[ingestion]"
 Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_bytes` / `extract_pdf_path` / `extract_pdf_from_storage`. See [Document processing](../data/DOCUMENT_PROCESSING.md).
 
 ## Expected local services
+
 - PostgreSQL with pgvector (Compose) on port `5432`.
 - FastAPI backend (`apps/api`) on port `8000`. `POST /ask` is documented in
   OpenAPI and returns `GroundedAnswerResponse` when the app is configured with a
@@ -139,7 +194,22 @@ Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_by
   records.
 - CLI jobs for ingestion and evaluation (no always-on worker for August MVP).
 
+## Environment variables
+
+See [`.env.example`](../../.env.example). Required for local DB work:
+
+- `POSTGRES_*`, `DATABASE_URL`
+
+Optional (leave unset for local-only / $0 cloud mode):
+
+- `OPENAI_API_KEY`, `OPENAI_MODEL`, `OPENAI_EMBEDDING_MODEL`
+- `EMBEDDING_MODEL`, retrieval logging flags, PDF storage paths
+
+`make setup-check` confirms `.env.example` documents required keys and does not
+contain high-entropy secret-looking values.
+
 ## Related documents
+
 - [AGENTS](../../AGENTS.md)
 - [Development guide](../development/DEVELOPMENT_GUIDE.md)
 - [Deployment architecture](../architecture/DEPLOYMENT_ARCHITECTURE.md)
@@ -147,4 +217,6 @@ Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_by
 - [Backlog index](../governance/BACKLOG.md)
 
 ## Decision status
-Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
+
+Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See
+[decision log](../governance/DECISION_LOG.md).
