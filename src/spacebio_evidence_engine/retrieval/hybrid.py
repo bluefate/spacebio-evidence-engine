@@ -1,8 +1,8 @@
 """Hybrid retrieval entrypoint with shared metadata filters (issue #47).
 
-Full FTS fusion scoring remains #45/#46. This module applies the documented
-filter API across enabled channels so hybrid callers share one filter contract
-with semantic search.
+Keyword FTS is available via ``keyword_search`` (#45). Hybrid fusion scoring
+remains #46. This module applies the documented filter API across enabled
+channels so hybrid callers share one filter contract with semantic search.
 """
 
 from __future__ import annotations
@@ -38,9 +38,10 @@ def hybrid_search(
 ) -> list[SemanticSearchHit]:
     """Retrieve chunks with optional metadata filters across hybrid channels.
 
-    Today only the ``semantic`` channel is implemented. Requesting ``fts``
-    raises ``NotImplementedError`` until PostgreSQL full-text search (#45) and
-    fusion (#46) land. Filters are validated and applied before ranking.
+    Today only the ``semantic`` channel is implemented here. Requesting ``fts``
+    raises ``NotImplementedError`` until hybrid fusion (#46) lands; use
+    ``keyword_search`` for standalone FTS (#45). Filters are validated and
+    applied before ranking.
     """
 
     if not channels:
@@ -53,8 +54,8 @@ def hybrid_search(
 
     if "fts" in channels:
         raise NotImplementedError(
-            "FTS hybrid channel is not implemented yet (issues #45/#46); "
-            "use channels=('semantic',) or omit channels"
+            "FTS hybrid fusion is not implemented yet (issue #46); "
+            "use keyword_search for standalone FTS (#45), or channels=('semantic',)"
         )
     if "semantic" not in channels:
         raise ValueError("no implemented retrieval channel enabled")
