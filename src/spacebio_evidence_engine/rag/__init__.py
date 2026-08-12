@@ -2,6 +2,12 @@
 
 from __future__ import annotations
 
+from spacebio_evidence_engine.rag.citations import (
+    CitationEmissionResult,
+    emit_citations_for_answer_text,
+    emit_passage_citations,
+    extract_citation_markers,
+)
 from spacebio_evidence_engine.rag.context import (
     DEFAULT_EVIDENCE_TOKEN_BUDGET,
     DEFAULT_INSTRUCTIONS,
@@ -23,6 +29,7 @@ from spacebio_evidence_engine.rag.sufficiency import (
 
 __all__ = [
     "AssembledEvidenceBlock",
+    "CitationEmissionResult",
     "ContextAssemblyResult",
     "DEFAULT_EVIDENCE_TOKEN_BUDGET",
     "DEFAULT_INSTRUCTIONS",
@@ -32,6 +39,9 @@ __all__ = [
     "assemble_context",
     "build_insufficient_evidence_response",
     "build_insufficient_evidence_response_if_needed",
+    "emit_citations_for_answer_text",
+    "emit_passage_citations",
     "evaluate_sufficiency",
+    "extract_citation_markers",
     "render_grounded_answer_prompt",
 ]
