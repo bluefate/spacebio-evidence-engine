@@ -2,19 +2,32 @@
 
 from __future__ import annotations
 
+import importlib.util
 import sys
 from pathlib import Path
+from types import ModuleType
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
 
-from check_local_setup import (  # noqa: E402  # pyright: ignore[reportMissingImports]
-    REQUIRED_ENV_KEYS,
-    check_env_example,
-    check_make_targets,
-    main,
-    run_checks,
-)
+
+def _load_check_local_setup() -> ModuleType:
+    script_path = ROOT / "scripts" / "check_local_setup.py"
+    module_name = "check_local_setup"
+    spec = importlib.util.spec_from_file_location(module_name, script_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Unable to load {script_path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+check_local_setup = _load_check_local_setup()
+REQUIRED_ENV_KEYS = check_local_setup.REQUIRED_ENV_KEYS
+check_env_example = check_local_setup.check_env_example
+check_make_targets = check_local_setup.check_make_targets
+main = check_local_setup.main
+run_checks = check_local_setup.run_checks
 
 
 def test_env_example_documents_required_keys_without_secrets() -> None:

@@ -57,6 +57,71 @@ Every manifest row must record `access_restriction_notes` and `redistribution_no
 3. Corpus-changing PRs require owner scientific/license review.
 4. NC-ND items require the non-commercial use affirmation in [CORPUS_INVENTORY.md](CORPUS_INVENTORY.md).
 
+## Approved publication source discovery
+
+Publication source discovery is limited to the approved August MVP topic:
+**microgravity and skeletal muscle**. Discovery identifies legal, open-access
+source locations for candidate publications; it does not by itself approve new
+corpus content for ingest.
+
+### Approved primary sources
+
+These sources are approved for locating and verifying full-text publication
+sources when the publication is already in scope and the manifest preserves the
+source, license, and provenance fields.
+
+| Source | Access method | License / provenance notes |
+|---|---|---|
+| Publisher version-of-record DOI landing page | Resolve the DOI in the manifest and record the canonical article page as `source_url` or `fulltext_url`. | Treat the publisher page as the primary authority for article license, copyright statement, and version-of-record provenance. Ingest only when the page declares an allowed license or owner review records approval. |
+| PubMed Central / Europe PMC open-access full text | Resolve by DOI, PMID, or PMCID; record article, XML/HTML, and PDF URLs when available. | Approved for OA full text and PDFs when the record exposes an allowed license. Preserve DOI, PMID, PMCID, repository URL, PDF URL, and license terms. |
+| Journal-hosted open-access PDF | Follow the publisher article page to the official PDF URL. | Approved when the article page and PDF carry matching allowed license terms. Prefer this over mirrors because it preserves version and publisher provenance. |
+
+At least one primary source is approved for MVP use: **publisher
+version-of-record DOI pages and PubMed Central / Europe PMC open-access full
+text records** may be used to locate source URLs and PDFs for owner-approved
+manifest rows.
+
+### Supporting verification sources
+
+Supporting sources may help confirm bibliographic metadata or discover candidate
+OA locations, but they are not sufficient by themselves to approve ingest.
+
+| Source | Use | Constraint |
+|---|---|---|
+| Crossref | Confirm DOI registration metadata and license links where present. | Use as a metadata cross-check; do not rely on Crossref alone when publisher or repository license terms disagree. |
+| PubMed | Confirm PMID, title, journal, and publication metadata. | Abstract-only PubMed records are not full-text sources. |
+| Unpaywall / OpenAlex | Discover OA locations and license hints for DOI-based candidates. | Re-resolve any discovered location to the publisher or repository page before ingest approval. |
+| NASA OSDR / mission dataset pages | Support space-biology relevance checks and mission context. | Dataset pages do not replace publication license review. |
+
+### Disallowed sources
+
+The following sources are explicitly disallowed for MVP corpus ingest:
+
+- Shadow libraries, pirate sites, or unauthorized PDF mirrors.
+- Paywalled PDFs, institution-proxy downloads, or files requiring credentials.
+- ResearchGate, Academia.edu, personal websites, or lab file shares unless the
+  owner explicitly verifies that the uploaded file is legally open access under
+  an allowed license.
+- General web mirrors, scraping caches, and content aggregators that do not
+  preserve article-level license and provenance.
+- Abstract-only records used as substitutes for full-text publications.
+- AI summaries, secondary summaries, or generated text used as source evidence.
+
+### Discovery workflow
+
+1. Start from an approved candidate DOI or owner-approved candidate title in the
+   microgravity and skeletal muscle scope.
+2. Resolve the DOI landing page and record canonical bibliographic metadata.
+3. Locate an official OA full-text source, preferring the publisher article/PDF
+   or PubMed Central / Europe PMC repository copy.
+4. Record `source_url`, `pdf_url`, `fulltext_url`, `license`,
+   `license_status`, `access_restriction_notes`, and `redistribution_notes` in
+   the candidate manifest.
+5. Exclude or hold the candidate when license, provenance, or full-text access
+   is unclear.
+6. Do not ingest a discovered source until owner approval is recorded in the
+   manifest.
+
 ## Duplicate publication policy
 
 Candidate manifests must be screened for duplicate publications before ingest.
