@@ -20,6 +20,13 @@ Initial baseline for local August MVP; full threat modeling before any public de
 - Dependency scanning in GitHub Actions.
 - No restricted publications in the controlled corpus.
 - Redacted logs for prompts and provider responses.
+- Semantic retrieval logs record only structured metadata: query hash/length,
+  top-k, filters, selected chunk IDs, ranks, scores, provenance fields, and
+  embedding/search model lineage. Raw user queries, secrets, API keys, prompts,
+  provider responses, and chunk text must not be logged.
+- Production-like deployments should leave `SPACEBIO_RETRIEVAL_VERBOSE_LOGS`
+  disabled and may disable structured retrieval trace logs with
+  `SPACEBIO_RETRIEVAL_LOGGING_ENABLED=false` if logs are not permitted.
 
 ## Future controls
 - Authentication and authorization.

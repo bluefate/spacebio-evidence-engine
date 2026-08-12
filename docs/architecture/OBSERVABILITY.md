@@ -11,7 +11,17 @@ Initial observability guidance.
 
 ## MVP observability
 - API request logs.
-- Retrieval inputs and ranked chunk IDs.
+- Structured semantic retrieval logs for each search, enabled by default with
+  `SPACEBIO_RETRIEVAL_LOGGING_ENABLED=true` or unset. Records include query
+  length, query SHA-256 hash, top-k, metadata filters, selected chunk IDs,
+  ranks, scores, publication IDs, section/page provenance, source URLs,
+  embedding model, embedding dimension, search algorithm, and score kind.
+- Retrieval logs must not include raw user query text, prompts, secrets, API
+  keys, or chunk text. Use the query hash only for repeat-query correlation.
+- Verbose retrieval logging is disabled unless
+  `SPACEBIO_RETRIEVAL_VERBOSE_LOGS=true`; production-like configs should leave
+  verbose logging off and may set `SPACEBIO_RETRIEVAL_LOGGING_ENABLED=false`
+  when retrieval trace records are not permitted.
 - Answer generation model, prompt version, and citation IDs.
 - Ingestion run summaries.
 - Structured ingestion error records with publication ID, stage, sanitized message,
