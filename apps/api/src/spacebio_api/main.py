@@ -9,6 +9,11 @@ from fastapi import FastAPI, HTTPException, status
 
 from spacebio_api import __version__
 from spacebio_api.config import Settings, get_settings
+from spacebio_api.passage_search import (
+    PassageRetriever,
+    build_default_passage_retriever,
+    indexed_response_from_hits,
+)
 from spacebio_evidence_engine.rag import GroundedAnswerError, GroundedAnswerService
 from spacebio_evidence_engine.retrieval import DEFAULT_TOP_K, SemanticSearchHit
 from spacebio_evidence_engine.retrieval.diagnostics import build_retrieval_diagnostics_payload
@@ -28,6 +33,7 @@ def create_app(
     *,
     grounded_answer_service: GroundedAnswerService | None = None,
     retrieval_diagnostics_retriever: RetrievalDiagnosticsFn | None = None,
+    passage_retriever: PassageRetriever | None = None,
 ) -> FastAPI:
     """Build the FastAPI application."""
     _settings = settings or get_settings()
@@ -39,10 +45,30 @@ def create_app(
     app.state.settings = _settings
     app.state.grounded_answer_service = grounded_answer_service
     app.state.retrieval_diagnostics_retriever = retrieval_diagnostics_retriever
+    app.state.passage_retriever = passage_retriever
 
     @app.get("/health")
     def health() -> dict[str, str]:
         return {"status": "ok"}
+
+    @app.get(
+        "/search",
+        status_code=status.HTTP_200_OK,
+        summary="Search indexed passages",
+        tags=["search"],
+    )
+    def search(q: str = "", limit: int = DEFAULT_TOP_K) -> dict[str, object]:
+        """Return indexed passages when embeddings exist; otherwise inventory_only."""
+        trimmed = q.strip()
+        top_k = min(max(limit, 1), 50)
+        retriever = app.state.passage_retriever
+        if retriever is None:
+            retriever = build_default_passage_retriever(_settings)
+            app.state.passage_retriever = retriever
+        if not trimmed or retriever is None:
+            return indexed_response_from_hits(trimmed, ())
+        hits = list(retriever(trimmed, top_k=top_k))
+        return indexed_response_from_hits(trimmed, hits)
 
     @app.post(
         "/ask",

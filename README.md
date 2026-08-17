@@ -31,12 +31,13 @@ Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL
 | Home | Buttons for Ask, Search, Corpus, Compare studies |
 | [Corpus](http://localhost:3000/corpus) | Cards for each paper (title, organism, exposure, link to the publisher) |
 | A publication | Extra details and DOI links |
+| [Search](http://localhost:3000/search) | Catalog titles and labels. After `make ingest`, passages from the database if the API is running. |
 | [Compare studies](http://localhost:3000/compare) | Check two or more papers. You will see organism / system labels (for example human vs mouse). The page does **not** invent “this study found more atrophy.” |
 
 ### What will not look like a full Q&A demo yet
 
 - Paper PDFs are **not** stored in git (`data/pdfs/` is ignored).
-- There is **`make ingest`**: put `{publication_id}.pdf` in `data/pdfs/` (gitignored), load `.env`, then run ingest. Ask is still **503** until the grounded answer service is wired.
+- There is **`make ingest`**: put `{publication_id}.pdf` in `data/pdfs/` (gitignored), load `.env`, then run ingest. Search can show indexed passages when the API is up. Ask is still **503** until the grounded answer service is wired.
 - **Ask** often shows an error (**503**). The live “find passages and write an answer” service is not turned on after a plain `make setup`.
 
 A fair demo right now is **browse the library and compare papers**. A later demo would load PDFs into the local database, then Ask a question and click citations.

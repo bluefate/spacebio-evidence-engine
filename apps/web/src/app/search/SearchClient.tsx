@@ -11,6 +11,7 @@ import styles from "./search.module.css";
 const emptyResponse: SearchResponse = {
   query: "",
   total: 0,
+  source: "inventory",
   publications: [],
   passages: [],
 };
@@ -98,8 +99,8 @@ export function SearchClient() {
         {!loading &&
           !error &&
           hasResults &&
-          `${response.total} result${response.total === 1 ? "" : "s"} for "${response.query}".`}
-        {!loading && !error && !searched && "Results will show stored provenance fields only."}
+          `${response.total} result${response.total === 1 ? "" : "s"} for "${response.query}" (${response.source === "inventory" ? "catalog only" : response.source === "indexed" ? "indexed passages" : "catalog + indexed passages"}).`}
+        {!loading && !error && !searched && "Catalog titles always search. Passages appear after ingest if the API is running."}
       </div>
 
       <div className={styles.resultsGrid}>
@@ -180,7 +181,8 @@ export function SearchClient() {
             </div>
           ) : (
             <p className={styles.emptyState}>
-              No stored passage records are exposed to the web app yet.
+              No indexed passages yet. Catalog search still uses titles and labels. Run ingest, then
+              keep the API running.
             </p>
           )}
         </section>
