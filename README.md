@@ -36,7 +36,7 @@ Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL
 ### What will not look like a full Q&A demo yet
 
 - Paper PDFs are **not** stored in git (`data/pdfs/` is ignored).
-- There is **no** one-button “load all papers” (`make ingest` does not exist).
+- There is **`make ingest`**: put `{publication_id}.pdf` in `data/pdfs/` (gitignored), load `.env`, then run ingest. Ask is still **503** until the grounded answer service is wired.
 - **Ask** often shows an error (**503**). The live “find passages and write an answer” service is not turned on after a plain `make setup`.
 
 A fair demo right now is **browse the library and compare papers**. A later demo would load PDFs into the local database, then Ask a question and click citations.
@@ -89,8 +89,8 @@ Claim and implement from Project status `Ready` per [AGENT_WORKFLOW.md](docs/dev
 
 ## What to work next (and what can run in parallel)
 
-**Live Mermaid board (agents must use this):** [docs/development/ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md)  
-**Refresh command:** `make refresh-board` (pulls Project #6 Status + open PR branches into the Mermaid tree)  
+**Live Mermaid board (agents must use this):** [docs/development/ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md)
+**Refresh command:** `make refresh-board` (pulls Project #6 Status + open PR branches into the Mermaid tree)
 **Project board:** [Project #6](https://github.com/users/bluefate/projects/6)
 
 ### Parallel agents — do this every time

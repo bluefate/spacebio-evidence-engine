@@ -228,6 +228,12 @@ Apply database migrations:
 make migrate
 ```
 
+Ingest local PDFs (place `{publication_id}.pdf` under `data/pdfs/`; does not train a model):
+
+```bash
+make ingest
+```
+
 Lint:
 
 ```bash

@@ -48,8 +48,8 @@ and Alembic migrations (best-effort when Docker is available).
 
 **You should not expect:**
 
-- `make ingest` — that target does not exist
-- Corpus PDFs in git — `data/pdfs/` is gitignored
+- `make ingest` — PDFs must be placed under `data/pdfs/{publication_id}.pdf`; this does not download files or enable `/ask`
+- Corpus PDFs are **not** in git (`data/pdfs/` is gitignored)
 - Live grounded `POST /ask` answers — without a configured `GroundedAnswerService` the API **fails closed with 503** and does not use model memory
 - Web `/search` querying pgvector — it still uses static `corpus.json` via the Next.js `/api/search` route
 
@@ -59,10 +59,11 @@ and Alembic migrations (best-effort when Docker is available).
 2. `make setup` (venv, deps, Compose, migrate when Docker is up).
 3. If Docker was skipped: `make services && make db-bootstrap && make migrate`.
 4. Optional local embeddings (MiniLM download on first use): `pip install -e ".[embeddings]"`.
-5. `make api` and `make web`.
-6. `curl -s http://localhost:8000/health`
-7. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
-8. `POST /ask` returning **503** is expected until you wire retrieval + a `LanguageModelProvider` later.
+5. Optional: copy approved PDFs to `data/pdfs/{publication_id}.pdf`, then `set -a && source .env && set +a` and `make ingest`.
+6. `make api` and `make web`.
+7. `curl -s http://localhost:8000/health`
+8. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
+9. `POST /ask` returning **503** is expected until you wire retrieval + a `LanguageModelProvider` later.
 
 ## Commands
 
@@ -74,6 +75,7 @@ make setup-check   # Dry-run checklist (tools, ports docs, .env.example hygiene;
 make services      # PostgreSQL + pgvector via Docker Compose
 make db-bootstrap  # Idempotent CREATE EXTENSION IF NOT EXISTS vector
 make migrate       # Alembic upgrade head
+make ingest        # Local PDFs → chunks + embeddings (needs DATABASE_URL; optional MiniLM extra)
 make api           # uvicorn on http://localhost:8000
 make web           # Next.js on http://localhost:3000
 make lint
@@ -220,12 +222,13 @@ Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_by
   `GroundedAnswerResponse` only when the app is constructed with a
   `GroundedAnswerService` (retriever + `LanguageModelProvider`). Without that
   runtime wiring it returns **503** and does not invent answers from model
-  knowledge. There is no `make ingest`; placing PDFs under `data/pdfs/` does
-  not by itself index the corpus.
+  knowledge. `make ingest` indexes local PDFs under `data/pdfs/` into chunks
+  (and embeddings when the embeddings extra is installed). It does not enable
+  `/ask`. Placing files without running ingest does not index the corpus.
 - Next.js frontend (`apps/web`) on port `3000`: `/compare` uses corpus inventory
   fields; `/search` uses static stored metadata (`corpus.json`), not the live
   vector index.
-- Evaluation CLIs exist (`evals/`); they are not a substitute for a live ingest.
+- Evaluation CLIs exist (`evals/`); they are not a substitute for placing PDFs and running `make ingest`.
 
 ## Environment variables
 
