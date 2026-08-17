@@ -42,13 +42,14 @@ and Alembic migrations (best-effort when Docker is available).
 
 - Start Compose Postgres, bootstrap pgvector, run Alembic migrations
 - `GET /health` on the API
+- Download the 23 approved PDFs with `make fetch-pdfs` (after setup)
 - Browse corpus, publication detail, and **`/compare`** (inventory metadata only)
 - Open the ask UI (`POST /ask` may still return **503** until `OPENAI_API_KEY` is set and the embedding provider is available)
 - Run `make validate`, `make eval-hallucination`, `make eval-graph-extraction`
 
 **You should not expect:**
 
-- `make ingest` — PDFs must be placed under `data/pdfs/{publication_id}.pdf`; this does not download files or enable `/ask`
+- `make ingest` — indexes PDFs already under `data/pdfs/{publication_id}.pdf`; it does not enable `/ask` on its own
 - Corpus PDFs are **not** in git (`data/pdfs/` is gitignored)
 - Live grounded `POST /ask` answers — without a configured `GroundedAnswerService` the API **fails closed with 503** and does not use model memory
 - Web `/search` querying pgvector — it still uses static `corpus.json` via the Next.js `/api/search` route
@@ -59,12 +60,13 @@ and Alembic migrations (best-effort when Docker is available).
 2. `make setup` (venv, deps, Compose, migrate when Docker is up).
 3. If Docker was skipped: `make services && make db-bootstrap && make migrate`.
 4. Optional local embeddings (MiniLM download on first use): `pip install -e ".[embeddings]"`.
-5. Optional: copy approved PDFs to `data/pdfs/{publication_id}.pdf`, then `set -a && source .env && set +a` and `make ingest`.
-6. To enable grounded `POST /ask`, set `OPENAI_API_KEY` in `.env` and ensure the configured embedding provider (e.g. `sentence-transformers/all-MiniLM-L6-v2`) is installed (`pip install -e ".[embeddings]"`).
-7. `make api` and `make web`.
-8. `curl -s http://localhost:8000/health`
-9. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
-10. `POST /ask` returning **503** is expected when `OPENAI_API_KEY` is unset, the embedding provider is unavailable, or the index is empty.
+5. Download the 23 approved PDFs: `make fetch-pdfs`. Alternatively, copy approved PDFs to `data/pdfs/{publication_id}.pdf`.
+6. Ingest the downloaded PDFs: `set -a && source .env && set +a` and `make ingest`.
+7. To enable grounded `POST /ask`, set `OPENAI_API_KEY` in `.env` and ensure the configured embedding provider (e.g. `sentence-transformers/all-MiniLM-L6-v2`) is installed (`pip install -e ".[embeddings]"`).
+8. `make api` and `make web`.
+9. `curl -s http://localhost:8000/health`
+10. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
+11. `POST /ask` returning **503** is expected when `OPENAI_API_KEY` is unset, the embedding provider is unavailable, or the index is empty.
 
 ## Commands
 
@@ -76,6 +78,7 @@ make setup-check   # Dry-run checklist (tools, ports docs, .env.example hygiene;
 make services      # PostgreSQL + pgvector via Docker Compose
 make db-bootstrap  # Idempotent CREATE EXTENSION IF NOT EXISTS vector
 make migrate       # Alembic upgrade head
+make fetch-pdfs  # Download the 23 approved OA PDFs into data/pdfs/
 make ingest        # Local PDFs → chunks + embeddings (needs DATABASE_URL; optional MiniLM extra)
 make api           # uvicorn on http://localhost:8000
 make web           # Next.js on http://localhost:3000
