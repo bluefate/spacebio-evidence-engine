@@ -68,10 +68,14 @@ Connection settings are documented in `.env.example` (`DATABASE_URL`, `POSTGRES_
 ## Future storage
 Neo4j may be introduced when graph traversal, visualization, or relationship curation exceeds PostgreSQL adjacency-query needs.
 
+Proposed **entity types** and provenance for that graph (research only, issue #71): [GRAPH_ENTITY_TYPES.md](../data/GRAPH_ENTITY_TYPES.md). Use cases: [KNOWLEDGE_GRAPH_USE_CASES.md](KNOWLEDGE_GRAPH_USE_CASES.md).
+
 ## Related documents
 - [Data dictionary](../data/DATA_DICTIONARY.md)
 - [Metadata schema](../data/METADATA_SCHEMA.md)
 - [Corpus specification](../data/CORPUS_SPECIFICATION.md)
+- [Candidate graph entity types](../data/GRAPH_ENTITY_TYPES.md)
+- [Knowledge graph use cases](KNOWLEDGE_GRAPH_USE_CASES.md)
 
 ## Decision status
 Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).
