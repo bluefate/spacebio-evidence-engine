@@ -73,6 +73,7 @@ CI job **Node lint** also runs `npm run test -w @spacebio/web`.
 - Graph extraction labeled-sample eval (`evals/graph_extraction_eval.py`; smoke in `tests/test_graph_extraction_eval.py`).
 - Prompt regression tests for grounded answers.
 - UI tests for citation rendering and insufficient-evidence states (`make test-web`).
+- Study comparison labeling tests (`apps/web/src/app/compare/CompareClient.test.tsx`).
 - Migration tests for Alembic revisions.
 - Lint and type checks in CI.
 

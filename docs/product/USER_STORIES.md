@@ -18,8 +18,9 @@ Priority order for August MVP: researchers first, then students/educators.
 - As a student, I want grounded explanations so I can learn from cited publications.
 - As a maintainer, I want a controlled corpus manifest so ingestion is reproducible.
 - As a RAG engineer, I want benchmark questions so retrieval and citation quality can be tested.
+- As a scientist, I want to compare studies so I can inspect organisms, exposures, and inventory notes without merging organism classes or inventing findings ([/compare](../../apps/web/src/app/compare/page.tsx)).
 
-**Deferred past August MVP:** As a scientist, I want to compare studies so I can inspect organisms, exposures, methods, findings, and limitations.
+Comparison UI is post-August ([#65](https://github.com/bluefate/spacebio-evidence-engine/issues/65)). It reads corpus inventory metadata only; it does not call a `/compare` API or generate study findings.
 
 ## Future stories
 - As a curator, I want to approve extracted facts before they appear as trusted graph relationships.

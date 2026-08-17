@@ -53,7 +53,8 @@ export default function CorpusPage() {
         <p className={styles.lede}>
           Metadata for the proposed August MVP corpus (microgravity and skeletal
           muscle). This app does not host publication PDFs or full text — open
-          the DOI for the publisher copy.
+          the DOI for the publisher copy.{" "}
+          <Link href="/compare">Compare inventory fields across studies</Link>.
         </p>
         <div className={styles.stats}>
           <Badge tone="accent">{publications.length} publications</Badge>
