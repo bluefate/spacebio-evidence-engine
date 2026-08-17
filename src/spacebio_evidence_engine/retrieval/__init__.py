@@ -14,6 +14,12 @@ from spacebio_evidence_engine.retrieval.fts import (
     keyword_search,
 )
 from spacebio_evidence_engine.retrieval.hybrid import hybrid_search
+from spacebio_evidence_engine.retrieval.rerank import (
+    ChunkReranker,
+    LexicalOverlapReranker,
+    NoOpReranker,
+    reranker_from_env,
+)
 from spacebio_evidence_engine.retrieval.semantic import (
     SemanticSearchHit,
     cosine_similarity,
@@ -24,7 +30,10 @@ __all__ = [
     "ALLOWED_FILTER_KEYS",
     "DEFAULT_TOP_K",
     "InvalidRetrievalFilterError",
+    "ChunkReranker",
     "KeywordSearchHit",
+    "LexicalOverlapReranker",
+    "NoOpReranker",
     "RetrievalFilters",
     "SemanticSearchFilters",
     "SemanticSearchHit",
@@ -33,5 +42,6 @@ __all__ = [
     "hybrid_search",
     "keyword_search",
     "parse_retrieval_filters",
+    "reranker_from_env",
     "semantic_search",
 ]

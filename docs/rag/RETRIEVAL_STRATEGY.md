@@ -8,10 +8,8 @@ MVP retrieval over PostgreSQL and pgvector.
 
 ## Current status
 Vector storage (#42), indexing (#43), semantic search (#44), full-text search
-(#45), and shared metadata retrieval filters (#47) are implemented. Hybrid
-fusion scoring (#46) remains follow-on; the hybrid entrypoint applies the same
-filter API to the semantic channel and the FTS channel can be used through
-`keyword_search`.
+(#45), hybrid RRF fusion (#46), shared metadata filters (#47), and optional
+lexical reranking (#48, disabled by default) are implemented.
 
 ## MVP strategy
 - Embeddings: local Sentence Transformers (`all-MiniLM-L6-v2`).
@@ -48,16 +46,22 @@ filter API to the semantic channel and the FTS channel can be used through
   Unknown keys, blank strings, and invalid `year` values raise
   `InvalidRetrievalFilterError`. Both `semantic_search` and `keyword_search`
   apply the same filters before ranking.
-- Vector-only search is the default MVP path; hybrid fusion scoring remains
-  post-MVP (#46).
-- Default top-k: 8; no reranker for August MVP.
+- Vector-only search is the default MVP path; hybrid fusion (#46) is available
+  via `hybrid_search(..., channels=("semantic", "fts"))`.
+- Default top-k: 8.
+- **Reranking (#48) is off by default.** `ChunkReranker` is the provider
+  abstraction. `LexicalOverlapReranker` is a local, dependency-free reranker
+  that scores query-term coverage of `chunk_text`. Enable with
+  `SPACEBIO_RERANK_ENABLED=true` and optional `SPACEBIO_RERANKER=lexical_overlap`
+  (or `noop`). Pass the instance into `hybrid_search(..., reranker=...)`.
+  `reranker_from_env()` returns `None` when disabled so callers skip the stage.
 - Filter by corpus topic, organism, exposure, section, year, approval, and
   publication metadata when available.
 - Return ranked passages with citation metadata. No LLM generation in the
   semantic/hybrid search functions themselves.
 
 ## Future strategy
-Reranking, query decomposition, ontology expansion, and graph-assisted retrieval may be added later.
+Query decomposition, ontology expansion, and graph-assisted retrieval may be added later. Cross-encoder / LLM rerankers can implement `ChunkReranker` without changing the retrieval store.
 
 ## Related documents
 - [RAG architecture](../architecture/RAG_ARCHITECTURE.md)

@@ -24,6 +24,7 @@ from spacebio_evidence_engine.retrieval.fts import (
     KeywordSearchHit,
     keyword_search,
 )
+from spacebio_evidence_engine.retrieval.rerank import ChunkReranker
 from spacebio_evidence_engine.retrieval.semantic import (
     DEFAULT_TOP_K,
     SemanticSearchHit,
@@ -62,6 +63,7 @@ def hybrid_search(
     filters: RetrievalFilters | Mapping[str, Any] | None = None,
     channels: tuple[RetrievalChannel, ...] = ("semantic",),
     search_config: str = DEFAULT_SEARCH_CONFIG,
+    reranker: ChunkReranker | None = None,
 ) -> list[SemanticSearchHit]:
     """Retrieve chunks by fusing semantic and/or full-text search rankings.
 
@@ -71,9 +73,12 @@ def hybrid_search(
         rrf_score = sum(1 / (RRF_K + rank))
 
     The same metadata filters are applied to every channel. The returned
-    ``SemanticSearchHit`` uses the fused RRF score. ``model_name`` is the
-    embedding model for semantic-only results, or ``fts:<config>`` for
-    keyword-only results; mixed results keep the semantic hit's embedding model.
+    ``SemanticSearchHit`` uses the fused RRF score unless ``reranker`` is set,
+    in which case scores and order come from the reranker (issue #48).
+    ``model_name`` is the embedding model for semantic-only results, or
+    ``fts:<config>`` for keyword-only results; mixed results keep the semantic
+    hit's embedding model. Pass ``reranker=None`` (default) to disable
+    reranking.
     """
     if not channels:
         raise ValueError("channels must include at least one retrieval channel")
@@ -134,7 +139,10 @@ def hybrid_search(
         fused.append((score, chunk_id, hit))
 
     fused.sort(key=lambda item: (-item[0], item[1]))
-    return [replace(hit, score=score) for score, _, hit in fused[:k]]
+    ordered = [replace(hit, score=score) for score, _, hit in fused]
+    if reranker is not None:
+        return reranker.rerank(query, ordered, top_k=k)
+    return ordered[:k]
 
 
 __all__ = [
