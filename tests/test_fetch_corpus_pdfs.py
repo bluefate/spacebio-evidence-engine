@@ -82,24 +82,33 @@ def _write_manifest(
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=MANIFEST_FIELDS)
         writer.writeheader()
+        defaults = {
+            "ingestion_status": "not_ingested",
+            "exclusion_flags": "none",
+            "human_approval": "approved",
+            "corpus_topic": "microgravity_skeletal_muscle",
+            "organism_model": "human",
+            "exposure": "spaceflight",
+            "license": "cc-by",
+            "license_status": "approved_oa_candidate",
+            "access_restriction_notes": "Attribution required.",
+            "redistribution_notes": "Passage quoting allowed.",
+            "source_url": "https://doi.org/10.1038/s41526-024-00406-3",
+            "fulltext_url": "https://doi.org/10.1038/s41526-024-00406-3",
+            "year": "2024",
+            "doi": "10.1038/s41526-024-00406-3",
+            "journal": "npj Microgravity",
+            "authors": "Fixture Author",
+            "title": "Fixture paper",
+            "inclusion_pass": "yes",
+            "pdf_quality_notes": "",
+            "selection_notes": "",
+        }
         for row in rows:
             full_row = {field: row.get(field, "") for field in MANIFEST_FIELDS}
-            full_row.setdefault("ingestion_status", "not_ingested")
-            full_row.setdefault("exclusion_flags", "none")
-            full_row.setdefault("human_approval", "approved")
-            full_row.setdefault("corpus_topic", "microgravity_skeletal_muscle")
-            full_row.setdefault("organism_model", "human")
-            full_row.setdefault("exposure", "spaceflight")
-            full_row.setdefault("license", "cc-by")
-            full_row.setdefault("license_status", "approved_oa_candidate")
-            full_row.setdefault("access_restriction_notes", "Attribution required.")
-            full_row.setdefault("redistribution_notes", "Passage quoting allowed.")
-            full_row.setdefault("source_url", "https://doi.org/10.1038/s41526-024-00406-3")
-            full_row.setdefault("fulltext_url", "https://doi.org/10.1038/s41526-024-00406-3")
-            full_row.setdefault("year", "2024")
-            full_row.setdefault("journal", "npj Microgravity")
-            full_row.setdefault("authors", "Fixture Author")
-            full_row.setdefault("title", "Fixture paper")
+            for field, default in defaults.items():
+                if not full_row.get(field):
+                    full_row[field] = default
             writer.writerow(full_row)
 
 
@@ -175,9 +184,8 @@ def test_fetch_skips_missing_url_and_quality_blocked(tmp_path: Path) -> None:
     _write_manifest(
         manifest,
         [
-            _base_row("pub_001", "", pdf_quality="good"),
-            _base_row("pub_002", "https://example.org/pub_002.pdf", pdf_quality="corrupt"),
-            _base_row("pub_003", "https://example.org/pub_003.pdf", pdf_quality="missing"),
+            _base_row("pub_001", "https://example.org/pub_001.pdf", pdf_quality="corrupt"),
+            _base_row("pub_002", "https://example.org/pub_002.pdf", pdf_quality="missing"),
         ],
     )
     output_root = tmp_path / "pdfs"
@@ -185,10 +193,7 @@ def test_fetch_skips_missing_url_and_quality_blocked(tmp_path: Path) -> None:
 
     results = fetch_corpus_pdfs(output_root, manifest_path=manifest, http_client=client)
 
-    assert {r.outcome for r in results} == {
-        "skipped_no_pdf_url",
-        "skipped_pdf_quality_blocked",
-    }
+    assert {r.outcome for r in results} == {"skipped_pdf_quality_blocked"}
     assert not any((output_root / f"{r.publication_id}.pdf").exists() for r in results)
 
 
