@@ -5,6 +5,42 @@
 ## Purpose
 Define and build a citation-first evidence engine for a controlled corpus of open-access space biology publications.
 
+## How to demo
+
+This is a **small library of 23 approved space biology papers** (microgravity and skeletal muscle). It is **not** ChatGPT with the whole internet. Answers (when they work) must point at real passages from that library. If there is not enough evidence, the system is supposed to say so instead of guessing.
+
+### Run it on your computer
+
+You need [Docker](https://www.docker.com/) (for the database). In a terminal, from this project folder:
+
+```bash
+cp .env.example .env
+make setup
+make api    # backend — http://localhost:8000
+make web    # website — http://localhost:3000
+```
+
+Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
+
+`make setup` installs tools and starts the database. It does **not** download all the PDFs or turn on live Q&A.
+
+### What to show (works today)
+
+| Page | What you will see |
+| --- | --- |
+| Home | Buttons for Ask, Search, Corpus, Compare studies |
+| [Corpus](http://localhost:3000/corpus) | Cards for each paper (title, organism, exposure, link to the publisher) |
+| A publication | Extra details and DOI links |
+| [Compare studies](http://localhost:3000/compare) | Check two or more papers. You will see organism / system labels (for example human vs mouse). The page does **not** invent “this study found more atrophy.” |
+
+### What will not look like a full Q&A demo yet
+
+- Paper PDFs are **not** stored in git (`data/pdfs/` is ignored).
+- There is **no** one-button “load all papers” (`make ingest` does not exist).
+- **Ask** often shows an error (**503**). The live “find passages and write an answer” service is not turned on after a plain `make setup`.
+
+A fair demo right now is **browse the library and compare papers**. A later demo would load PDFs into the local database, then Ask a question and click citations.
+
 ## Scope
 The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, passage-level citations, evidence sufficiency, and a controlled corpus of **23** open-access publications on **microgravity and skeletal muscle** (see [corpus inventory](docs/data/CORPUS_INVENTORY.md)). A **post-August** inventory compare UI is at `/compare`. Auth, public hosting, and a graph database are out of product (ADR-011 for graph DB).
 
@@ -124,6 +160,8 @@ make web    # http://localhost:3000
 
 Details (tools, ports, `.env.example`, clean-machine checklist):
 [docs/operations/LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
+
+**New to the project?** See [How to demo](#how-to-demo) for a plain-language walkthrough.
 
 ## Current status
 
