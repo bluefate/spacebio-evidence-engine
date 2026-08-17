@@ -93,6 +93,7 @@ TRACKED: dict[int, dict[str, str | bool]] = {
     46: {"title": "Hybrid retrieval", "critical": False},
     48: {"title": "Retrieval reranking", "critical": False},
     74: {"title": "Graph extraction prototype", "critical": False},
+    75: {"title": "Evaluate graph extraction accuracy", "critical": False},
     86: {"title": "ACTIVE_BOARD.md", "critical": False},
 }
 

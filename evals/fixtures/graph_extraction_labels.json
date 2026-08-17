@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "labeler": "fixture-curator",
+  "notes": "Small human-labeled sample for gazetteer prototype evaluation (issue #75). Not gold labels for ingested PDFs.",
+  "passages": [
+    {
+      "chunk_id": "chk_mouse_hu_atrophy",
+      "publication_id": "pub_fixture_mouse",
+      "section": "Results",
+      "page": 4,
+      "source_url": "https://doi.org/10.0/fixture-mouse",
+      "chunk_text": "Hindlimb unloading caused skeletal muscle atrophy in mice after 14 days.",
+      "expect_finding": true
+    },
+    {
+      "chunk_id": "chk_human_iss_proteome",
+      "publication_id": "pub_fixture_human",
+      "section": "Results",
+      "page": 2,
+      "source_url": "https://doi.org/10.0/fixture-human",
+      "chunk_text": "Spaceflight on the ISS changed the skeletal muscle proteome of two astronauts.",
+      "expect_finding": false
+    },
+    {
+      "chunk_id": "chk_no_match",
+      "publication_id": "pub_fixture_empty",
+      "section": "Discussion",
+      "page": 9,
+      "source_url": "https://doi.org/10.0/fixture-empty",
+      "chunk_text": "This paragraph discusses spacecraft avionics and does not name an organism.",
+      "expect_finding": false
+    },
+    {
+      "chunk_id": "chk_c2c12_fn",
+      "publication_id": "pub_fixture_cell",
+      "section": "Results",
+      "page": 3,
+      "source_url": "https://doi.org/10.0/fixture-cell",
+      "chunk_text": "C2C12 myotubes showed atrophy under simulated microgravity.",
+      "expect_finding": true
+    },
+    {
+      "chunk_id": "chk_radiation_fp",
+      "publication_id": "pub_fixture_offtopic",
+      "section": "Introduction",
+      "page": 1,
+      "source_url": "https://doi.org/10.0/fixture-offtopic",
+      "chunk_text": "Radiation oncology is out of scope for this avionics review.",
+      "expect_finding": false
+    }
+  ],
+  "gold_mentions": [
+    {"chunk_id": "chk_mouse_hu_atrophy", "entity_type": "Exposure", "preferred_label": "hindlimb unloading"},
+    {"chunk_id": "chk_mouse_hu_atrophy", "entity_type": "AnatomicalStructure", "preferred_label": "skeletal muscle"},
+    {"chunk_id": "chk_mouse_hu_atrophy", "entity_type": "Outcome", "preferred_label": "atrophy"},
+    {"chunk_id": "chk_mouse_hu_atrophy", "entity_type": "Organism", "preferred_label": "mouse"},
+    {"chunk_id": "chk_human_iss_proteome", "entity_type": "Exposure", "preferred_label": "spaceflight"},
+    {"chunk_id": "chk_human_iss_proteome", "entity_type": "AnatomicalStructure", "preferred_label": "skeletal muscle"},
+    {"chunk_id": "chk_human_iss_proteome", "entity_type": "Assay", "preferred_label": "proteomics"},
+    {"chunk_id": "chk_human_iss_proteome", "entity_type": "Organism", "preferred_label": "human"},
+    {"chunk_id": "chk_c2c12_fn", "entity_type": "CellType", "preferred_label": "C2C12"},
+    {"chunk_id": "chk_c2c12_fn", "entity_type": "Outcome", "preferred_label": "atrophy"},
+    {"chunk_id": "chk_c2c12_fn", "entity_type": "Exposure", "preferred_label": "microgravity"}
+  ]
+}

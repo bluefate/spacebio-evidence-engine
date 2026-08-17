@@ -18,7 +18,7 @@ Human-readable index: [REFERENCE_QUESTIONS.md](REFERENCE_QUESTIONS.md).
 - Unsupported-claim rate.
 - Insufficient-evidence behavior.
 - Study comparison accuracy.
-- Entity extraction quality.
+- Entity extraction quality (experimental gazetteer; see [GRAPH_EXTRACTION_EVAL.md](GRAPH_EXTRACTION_EVAL.md)).
 - Regression stability after prompt, model, or chunking changes.
 
 ## MVP artifacts
@@ -107,6 +107,22 @@ truth from model knowledge. Claim-level precision/recall is only computed
 against explicit fixture labels so unsupported scientific conclusions are not
 invented by the evaluator.
 
+## Graph extraction check
+
+Run the labeled-sample harness against the gazetteer prototype:
+
+```bash
+python evals/graph_extraction_eval.py evals/fixtures/graph_extraction_labels.json --json
+```
+
+The command reports mention precision/recall/F1 and Finding precision/recall,
+plus error categories (`false_positive_mention`, `false_negative_mention`,
+`false_positive_finding`, `false_negative_finding`). It always exits zero when
+the fixture is valid: this is a measurement report, not a CI fail gate.
+Results for the checked-in sample are recorded in
+[GRAPH_EXTRACTION_EVAL.md](GRAPH_EXTRACTION_EVAL.md). The extractor is still
+experimental and is not wired to `/ask`.
+
 ## Reference question rules
 - Questions target topic `microgravity_skeletal_muscle` only.
 - `should_be_answerable: false` items must exercise the insufficient-evidence path.
@@ -118,6 +134,7 @@ invented by the evaluator.
 - [Testing strategy](../development/TESTING_STRATEGY.md)
 - [Retrieval strategy](RETRIEVAL_STRATEGY.md)
 - [Citation strategy](CITATION_STRATEGY.md)
+- [Graph extraction evaluation](GRAPH_EXTRACTION_EVAL.md)
 - [Corpus inventory](../data/CORPUS_INVENTORY.md)
 
 ## Decision status

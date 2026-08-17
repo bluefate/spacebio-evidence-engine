@@ -70,6 +70,7 @@ CI job **Node lint** also runs `npm run test -w @spacebio/web`.
 - Unit tests for text processing, citation assembly, and schemas.
 - Integration tests for database repositories and API endpoints.
 - Retrieval evaluation against benchmark questions.
+- Graph extraction labeled-sample eval (`evals/graph_extraction_eval.py`; smoke in `tests/test_graph_extraction_eval.py`).
 - Prompt regression tests for grounded answers.
 - UI tests for citation rendering and insufficient-evidence states (`make test-web`).
 - Migration tests for Alembic revisions.
