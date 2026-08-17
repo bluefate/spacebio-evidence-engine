@@ -6,9 +6,15 @@ Next.js TypeScript scaffold for the citation-first UI.
 # from repo root
 make web
 # http://localhost:3000
+
+make test-web
+# or: cd apps/web && npm test
 ```
 
-Ask / citation screens land on later web-interface issues. The reusable
-`EvidencePanel` and citation-link helpers (`CitationLinkedText`,
-`AnswerEvidenceView`) under `src/components/evidence` are ready for the
-question-answering page (#62) to mount cited answers.
+Citation and answer UI tests live next to the components:
+
+- `src/app/ask/AskClient.test.tsx`
+- `src/components/evidence/CitationLinks.test.tsx`
+- `src/components/evidence/EvidencePanel.test.tsx`
+
+See [TESTING_STRATEGY.md](../../docs/development/TESTING_STRATEGY.md).
