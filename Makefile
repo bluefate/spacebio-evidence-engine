@@ -4,7 +4,7 @@
 # Tooling prefers `.venv/bin` so `make lint|typecheck|test|validate` work from a
 # fresh shell without requiring `source .venv/bin/activate`.
 
-.PHONY: setup setup-check api web services db-bootstrap migrate lint typecheck test test-web validate refresh-board eval-hallucination help
+.PHONY: setup setup-check api web services db-bootstrap migrate lint typecheck test test-web validate refresh-board eval-hallucination eval-graph-extraction help
 
 VENV_BIN := $(CURDIR)/.venv/bin
 SYSTEM_PYTHON ?= python3
@@ -28,7 +28,7 @@ else
 endif
 
 help:
-	@echo "Targets: setup setup-check api web services db-bootstrap migrate lint typecheck test test-web validate refresh-board eval-hallucination"
+	@echo "Targets: setup setup-check api web services db-bootstrap migrate lint typecheck test test-web validate refresh-board eval-hallucination eval-graph-extraction"
 	@echo "Uses $(VENV_BIN) tools when .venv exists (no activate required)."
 
 setup:
@@ -77,6 +77,9 @@ test-web:
 
 eval-hallucination:
 	@$(PYTHON) evals/hallucination_check.py evals/fixtures/hallucination_answers.json
+
+eval-graph-extraction:
+	@$(PYTHON) evals/graph_extraction_eval.py evals/fixtures/graph_extraction_labels.json --json
 
 validate: eval-hallucination lint typecheck test test-web
 	@echo "Validation passed."
