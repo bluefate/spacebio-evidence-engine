@@ -27,7 +27,7 @@ export default function CorpusPage() {
   const ncndCount = publications.length - byCount;
 
   return (
-    <main className={styles.page}>
+    <main id="main-content" className={styles.page} tabIndex={-1}>
       <div className={styles.heroBackdrop} aria-hidden>
         <Image
           src="/brand/hero-atmosphere.png"

@@ -44,7 +44,7 @@ SPACEBIO_REQUIRE_DB=1 pytest -q -m integration tests/integration/test_ingestion_
 
 Without `SPACEBIO_REQUIRE_DB=1`, the test skips when PostgreSQL is unavailable.
 
-## Frontend tests (issue #69)
+## Frontend tests (issues #69 and #68)
 
 The Next.js app uses **Vitest** + Testing Library (`apps/web`). Coverage for
 citation-first UI:
@@ -55,6 +55,14 @@ citation-first UI:
   publication links
 - `apps/web/src/components/evidence/EvidencePanel.test.tsx` — passage provenance,
   empty list, missing active citation
+- `apps/web/src/components/a11y/a11y.test.tsx` — keyboard/skip-link, labeled
+  search/ask/evidence controls, **jest-axe** on those trees
+
+`jest-axe` runs in jsdom. **color-contrast is disabled** there because jsdom
+cannot compute real CSS contrast. Contrast for core controls is handled with
+tokens: `--muted` (`#3d4f61` on `#f4f7fa`) and primary buttons using
+`--accent-strong` (`#006888`) with white text. Use a browser axe extension for
+full-page contrast after visual changes.
 
 CI job **Node lint** also runs `npm run test -w @spacebio/web`.
 

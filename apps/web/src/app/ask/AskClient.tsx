@@ -93,6 +93,7 @@ export function AskClient() {
         </label>
         <textarea
           id="ask-question"
+          name="question"
           value={question}
           onChange={(event) => setQuestion(event.target.value)}
           placeholder="How does microgravity affect skeletal muscle proteome changes in astronauts?"
@@ -115,7 +116,12 @@ export function AskClient() {
           />
         </div>
 
-        <button className={styles.button} type="submit" disabled={loading}>
+        <button
+          className={styles.button}
+          type="submit"
+          disabled={loading}
+          aria-busy={loading}
+        >
           {loading ? "Asking" : "Ask question"}
         </button>
       </form>
@@ -172,6 +178,7 @@ export function AskClient() {
                             className={styles.citationChip}
                             onClick={() => setActiveCitationId(citationId)}
                             aria-pressed={activeCitationId === citationId}
+                            aria-label={`Show evidence for citation ${citationId}`}
                           >
                             {citationId}
                           </button>

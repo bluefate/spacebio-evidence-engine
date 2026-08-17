@@ -133,6 +133,11 @@ export function EvidencePanel({
                         className={styles.selectButton}
                         onClick={() => onSelectCitation(passage.citationId)}
                         aria-pressed={isActive}
+                        aria-label={
+                          isActive
+                            ? `Citation ${passage.citationId} is active`
+                            : `Show cited passage ${passage.citationId}`
+                        }
                       >
                         {isActive ? "Active citation" : "Show citation"}
                       </button>
@@ -163,6 +168,7 @@ export function EvidencePanel({
                             className={styles.brokenPublication}
                             data-testid={`evidence-publication-broken-${passage.citationId}`}
                             title={`Publication ${passage.publicationId} is not available`}
+                            aria-label={`Publication ${passage.publicationId} is not available`}
                           >
                             {passage.publicationId} (unavailable)
                           </span>
