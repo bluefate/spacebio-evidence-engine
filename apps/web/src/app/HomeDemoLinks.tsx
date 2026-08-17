@@ -1,3 +1,4 @@
+import { FetchMissingPdfs } from "@/app/corpus/FetchMissingPdfs";
 import { askDemoHref, DEMO_ASK_QUESTIONS, DEMO_SEARCH_TERMS, searchDemoHref } from "@/data/demo";
 
 import styles from "./page.module.css";
@@ -22,6 +23,7 @@ export function HomeDemoLinks() {
           Index a registered paper
         </a>
       </p>
+      <FetchMissingPdfs className={styles.fetchPanel} />
       <div className={styles.demoColumns}>
         <div>
           <h3 className={styles.demoSubheading} id="demo-search-heading">

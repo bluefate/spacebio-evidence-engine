@@ -8,6 +8,7 @@ import {
   type CorpusPublication,
 } from "@/data/corpus";
 
+import { FetchMissingPdfs } from "./FetchMissingPdfs";
 import styles from "./corpus.module.css";
 
 const publications = corpus as CorpusPublication[];
@@ -52,12 +53,12 @@ export default function CorpusPage() {
         <h1 className={styles.heading}>Corpus</h1>
         <p className={styles.lede}>
           Metadata for the proposed August MVP corpus (microgravity and skeletal
-          muscle). This app does not host publication PDFs or full text — open
-          the DOI for the publisher copy.{" "}
+          muscle). The 23 cards are **inventory**, not files on disk. Use **Download missing PDFs** on Corpus or Home if `data/pdfs/` is empty, then ingest.
           <Link href="/compare">Compare inventory fields across studies</Link>.{" "}
           <Link href="/add">Add a local extra (DOI or PDF)</Link> — not one of
           the approved 23.
         </p>
+        <FetchMissingPdfs className={styles.fetchPanel} />
         <div className={styles.stats}>
           <Badge tone="accent">{publications.length} publications</Badge>
           <Badge>{byCount} CC BY</Badge>

@@ -163,6 +163,31 @@
   line-height: 1.35;
 }
 
+.fetchPanel {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.fetchPanel p {
+  margin: 0;
+}
+
+.fetchPanel button {
+  justify-self: start;
+  min-height: 2.5rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid #0b1f33;
+  border-radius: 0.35rem;
+  background: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fetchPanel button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 @media (max-width: 720px) {
   .hero {
     align-items: center;

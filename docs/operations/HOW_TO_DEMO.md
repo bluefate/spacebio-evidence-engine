@@ -26,7 +26,7 @@ make web
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Optional, before Ask/passage Search: `make fetch-pdfs`, `pip install -e ".[embeddings]"`, `make ingest`, and local **Ollama** (`ollama pull llama3.2:1b`, `ollama serve`, `LLM_PROVIDER=ollama` in `.env`). Paid `OPENAI_API_KEY` is optional. Without ingest + a chat model, Ask should **fail closed** (often 503), not guess.
+Optional, before Ask/passage Search: on **Corpus** or **Home**, click **Download missing PDFs** (same as `make fetch-pdfs`), then `make ingest`. Also `pip install -e ".[embeddings]"` and local **Ollama**. Without ingest + a chat model, Ask should **fail closed**, not guess.
 
 ## What to click first (no ingest required)
 

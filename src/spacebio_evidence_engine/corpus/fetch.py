@@ -151,3 +151,29 @@ def fetch_corpus_pdfs(
         results.append(FetchResult(record.publication_id, "downloaded", path=output_path))
 
     return results
+
+
+def corpus_pdf_disk_status(
+    output_root: Path,
+    *,
+    manifest_path: Path | None = None,
+) -> dict[str, object]:
+    """Report which approved catalog PDFs exist under ``output_root``."""
+    output_root.mkdir(parents=True, exist_ok=True)
+    records = load_inventory_manifest(manifest_path)
+    present: list[str] = []
+    missing: list[str] = []
+    for record in records:
+        path = output_root / f"{record.publication_id}.pdf"
+        if path.is_file():
+            present.append(record.publication_id)
+        else:
+            missing.append(record.publication_id)
+    return {
+        "catalog_count": len(records),
+        "on_disk": present,
+        "missing": missing,
+        "on_disk_count": len(present),
+        "missing_count": len(missing),
+        "output_root": str(output_root),
+    }

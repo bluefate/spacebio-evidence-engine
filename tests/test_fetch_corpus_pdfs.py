@@ -8,6 +8,7 @@ from pathlib import Path
 
 from spacebio_evidence_engine.corpus.fetch import (
     _HTTPResponse,
+    corpus_pdf_disk_status,
     fetch_corpus_pdfs,
 )
 
@@ -211,3 +212,24 @@ def test_fetch_rejects_non_pdf_response(tmp_path: Path) -> None:
     assert results[0].outcome == "failed_download"
     assert "magic bytes" in results[0].message.lower()
     assert not (output_root / "pub_001.pdf").exists()
+
+
+def test_disk_status_lists_missing_and_present(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.csv"
+    _write_manifest(
+        manifest,
+        [
+            _base_row("pub_001", "https://example.org/a.pdf"),
+            _base_row("pub_002", "https://example.org/b.pdf"),
+        ],
+    )
+    output_root = tmp_path / "pdfs"
+    output_root.mkdir()
+    (output_root / "pub_001.pdf").write_bytes(SAMPLE_PDF.read_bytes())
+
+    status = corpus_pdf_disk_status(output_root, manifest_path=manifest)
+
+    assert status["catalog_count"] == 2
+    assert status["on_disk"] == ["pub_001"]
+    assert status["missing"] == ["pub_002"]
+    assert status["missing_count"] == 1
