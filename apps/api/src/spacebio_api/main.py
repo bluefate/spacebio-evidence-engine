@@ -14,6 +14,7 @@ from spacebio_api.passage_search import (
     build_default_passage_retriever,
     indexed_response_from_hits,
 )
+from spacebio_api.register_routes import router as publications_router
 from spacebio_api.services import build_grounded_answer_service
 from spacebio_evidence_engine.rag import GroundedAnswerError, GroundedAnswerService
 from spacebio_evidence_engine.retrieval import DEFAULT_TOP_K, SemanticSearchHit
@@ -51,6 +52,7 @@ def create_app(
     )
     app.state.retrieval_diagnostics_retriever = retrieval_diagnostics_retriever
     app.state.passage_retriever = passage_retriever
+    app.include_router(publications_router)
 
     @app.get("/health")
     def health() -> dict[str, str]:

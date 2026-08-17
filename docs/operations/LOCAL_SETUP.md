@@ -226,9 +226,10 @@ Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_by
   `GroundedAnswerResponse` only when the app is constructed with a
   `GroundedAnswerService` (retriever + `LanguageModelProvider`). Without that
   runtime wiring it returns **503** and does not invent answers from model
-  knowledge. `make ingest` indexes local PDFs under `data/pdfs/` into chunks
-  (and embeddings when the embeddings extra is installed). It does not enable
-  `/ask`. Placing files without running ingest does not index the corpus.
+  knowledge. `POST /publications/from-doi` and `POST /publications/from-pdf`
+  register **local extras** (`local_*`, pending review), not the approved 23.
+  Paywalled licenses are rejected. `POST /publications/{id}/index` runs ingest
+  for a stored PDF. `make ingest` indexes catalog PDFs under `data/pdfs/`.
 - Next.js frontend (`apps/web`) on port `3000`: `/compare` uses corpus inventory
   fields; `/search` uses static stored metadata (`corpus.json`), not the live
   vector index.
