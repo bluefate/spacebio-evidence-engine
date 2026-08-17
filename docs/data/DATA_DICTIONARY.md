@@ -25,7 +25,8 @@ Initial dictionary. Publication persistence fields are defined in [METADATA_SCHE
 - Limitation: A sourced statement about study limits or uncertainty.
 - Evidence gap: A corpus-limited area where evidence is absent, sparse, or inconsistent.
 - Candidate conflict: A possible disagreement requiring human/scientific review.
-- Graph entity (proposed, #71): A typed node in a future evidence graph (organism, exposure, outcome, and related types). Proposed catalog and provenance: [GRAPH_ENTITY_TYPES.md](GRAPH_ENTITY_TYPES.md). Not stored in August MVP tables.
+- Graph entity (proposed, #71): A typed node in a future evidence graph. Catalog: [GRAPH_ENTITY_TYPES.md](GRAPH_ENTITY_TYPES.md). Not stored in August MVP tables.
+- Graph relationship (proposed, #72): A typed edge that must cite a source passage. Catalog: [GRAPH_RELATIONSHIP_TYPES.md](GRAPH_RELATIONSHIP_TYPES.md).
 - Ingestion status: Pipeline state for a publication (`not_ingested`, and later processing states).
 - Human approval: Owner approval of a corpus row (`pending`, `approved`, `rejected`).
 - Content hash: SHA-256 hex digest of `chunk_text` used for integrity / dedupe checks (`chunks.content_hash`).
@@ -34,6 +35,7 @@ Initial dictionary. Publication persistence fields are defined in [METADATA_SCHE
 - [Metadata schema](METADATA_SCHEMA.md)
 - [Corpus specification](CORPUS_SPECIFICATION.md)
 - [Candidate graph entity types](GRAPH_ENTITY_TYPES.md)
+- [Candidate graph relationship types](GRAPH_RELATIONSHIP_TYPES.md)
 - [Citation strategy](../rag/CITATION_STRATEGY.md)
 
 ## Decision status

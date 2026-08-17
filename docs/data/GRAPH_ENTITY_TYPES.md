@@ -13,8 +13,8 @@ extraction jobs, or a graph store. It does not choose Neo4j versus PostgreSQL
 ([#73](https://github.com/bluefate/spacebio-evidence-engine/issues/73),
 [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77)).
 
-Relationship types are specified in [#72](https://github.com/bluefate/spacebio-evidence-engine/issues/72).
-This note only names the nodes those edges would connect.
+Relationship types are specified in [GRAPH_RELATIONSHIP_TYPES.md](GRAPH_RELATIONSHIP_TYPES.md)
+([#72](https://github.com/bluefate/spacebio-evidence-engine/issues/72)).
 
 Use cases that motivate these types are in
 [KNOWLEDGE_GRAPH_USE_CASES.md](../architecture/KNOWLEDGE_GRAPH_USE_CASES.md)
@@ -135,6 +135,7 @@ infiltration in skeletal muscle.
 ## Related documents
 
 - [Knowledge graph use cases](../architecture/KNOWLEDGE_GRAPH_USE_CASES.md)
+- [Candidate graph relationship types](GRAPH_RELATIONSHIP_TYPES.md)
 - [Data dictionary](DATA_DICTIONARY.md)
 - [Metadata schema](METADATA_SCHEMA.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
