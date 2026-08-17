@@ -199,10 +199,21 @@ def test_hybrid_search_applies_metadata_filters(session: Session) -> None:
     assert [hit.chunk_id for hit in hits] == ["chk_muscle"]
 
 
-def test_hybrid_search_rejects_fts_channel_until_implemented(session: Session) -> None:
-    provider = FixtureEmbeddingProvider(query_vectors={"q": _axis_vector(index=0)})
-    with pytest.raises(NotImplementedError, match="FTS hybrid fusion"):
-        hybrid_search(session, provider, "q", channels=("semantic", "fts"))
+def test_hybrid_search_combines_semantic_and_fts(session: Session) -> None:
+    _seed(session)
+    # Make semantic prefer chk_other, while FTS matches chk_muscle.
+    provider = FixtureEmbeddingProvider(query_vectors={"soleus": _axis_vector(index=1)})
+    hits = hybrid_search(
+        session,
+        provider,
+        "soleus",
+        k=2,
+        channels=("semantic", "fts"),
+    )
+    chunk_ids = {hit.chunk_id for hit in hits}
+    assert "chk_other" in chunk_ids
+    assert "chk_muscle" in chunk_ids
+    assert all(hit.score > 0 for hit in hits)
 
 
 def test_hybrid_search_rejects_empty_channels(session: Session) -> None:
