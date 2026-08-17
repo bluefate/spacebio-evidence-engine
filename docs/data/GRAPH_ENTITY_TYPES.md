@@ -33,7 +33,8 @@ Use cases that motivate these types are in
    publication labels. Graph `Organism` / `Exposure` instances are finer and
    must cite a passage, not only the inventory CSV.
 4. **Extracted entities are unverified** until a human or a documented
-   validation workflow ([#76](https://github.com/bluefate/spacebio-evidence-engine/issues/76))
+   validation workflow ([validation workflow doc](../governance/VALIDATION_WORKFLOW.md),
+   [#76](https://github.com/bluefate/spacebio-evidence-engine/issues/76))
    marks them verified.
 5. **Keep the type list small.** Prefer a few types with attributes over a
    large uncontrolled ontology for the first extraction prototype ([#74](https://github.com/bluefate/spacebio-evidence-engine/issues/74)).
