@@ -207,6 +207,7 @@ Optional (leave unset for local-only / $0 cloud mode):
 - `EMBEDDING_MODEL`, retrieval logging flags, PDF storage paths
 - Developer retrieval diagnostics (off by default): `SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS`,
   `NEXT_PUBLIC_ENABLE_RETRIEVAL_DIAGNOSTICS` — see [Observability](../architecture/OBSERVABILITY.md)
+- Optional retrieval rerank (off by default): `SPACEBIO_RERANK_ENABLED`, `SPACEBIO_RERANKER`
 
 `make setup-check` confirms `.env.example` documents required keys and does not
 contain high-entropy secret-looking values.

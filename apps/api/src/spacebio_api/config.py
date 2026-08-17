@@ -37,6 +37,9 @@ class Settings(BaseSettings):
         default=False,
         alias="SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS",
     )
+    # Optional lexical rerank after retrieval (issue #48). Off by default.
+    rerank_enabled: bool = Field(default=False, alias="SPACEBIO_RERANK_ENABLED")
+    reranker: str = Field(default="lexical_overlap", alias="SPACEBIO_RERANKER")
 
 
 @lru_cache
