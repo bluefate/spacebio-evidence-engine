@@ -229,7 +229,9 @@ Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_by
   for a stored PDF. `make ingest` indexes catalog PDFs under `data/pdfs/`.
 - Next.js frontend (`apps/web`) on port `3000`: `/compare` uses corpus inventory
   fields; `/search` uses static stored metadata (`corpus.json`), not the live
-  vector index.
+  vector index; `/add` registers local extras via the API (`from-doi`,
+  `from-pdf`) and a separate Index action (`POST /publications/{id}/index`).
+  Status text distinguishes registered vs indexed vs failed.
 - Evaluation CLIs exist (`evals/`); they are not a substitute for placing PDFs and running `make ingest`.
 
 ## Environment variables

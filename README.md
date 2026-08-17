@@ -28,8 +28,9 @@ Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL
 
 | Page | What you will see |
 | --- | --- |
-| Home | Buttons for Ask, Search, Corpus, Compare studies |
+| Home | Buttons for Ask, Search, Corpus, Compare studies, Add paper |
 | [Corpus](http://localhost:3000/corpus) | Cards for each paper (title, organism, exposure, link to the publisher) |
+| [Add paper](http://localhost:3000/add) | Register a **local extra** by DOI or PDF, then **Index**. This does **not** add to the approved 23. Index extracts, chunks, and embeds — it does not train a model. Register success is not the same as indexed. |
 | A publication | Extra details and DOI links |
 | [Search](http://localhost:3000/search) | Catalog titles and labels. After `make ingest`, passages from the database if the API is running. |
 | [Compare studies](http://localhost:3000/compare) | Check two or more papers. You will see organism / system labels (for example human vs mouse). The page does **not** invent “this study found more atrophy.” |
@@ -37,8 +38,9 @@ Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL
 ### What will not look like a full Q&A demo yet
 
 - Paper PDFs are **not** stored in git (`data/pdfs/` is ignored).
-- There is **`make ingest`**: put `{publication_id}.pdf` in `data/pdfs/` (gitignored), load `.env`, then run ingest. Search can show indexed passages when the API is up. Ask is still **503** until the grounded answer service is wired.
-- **Ask** often shows an error (**503**). The live “find passages and write an answer” service is not turned on after a plain `make setup`.
+- There is **`make ingest`**: put `{publication_id}.pdf` in `data/pdfs/` (gitignored), load `.env`, then run ingest. Search can show indexed passages when the API is up.
+- **Ask** needs ingest plus embeddings (and usually `OPENAI_API_KEY` for generation). Without that it reports a failure instead of inventing an answer.
+- **Add paper** (`/add`) needs the #165 register API. Paywalled licenses are rejected. Papers land as `local_*` extras pending review.
 
 A fair demo right now is **browse the library and compare papers**. A later demo would load PDFs into the local database, then Ask a question and click citations.
 

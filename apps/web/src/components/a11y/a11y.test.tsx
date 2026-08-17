@@ -2,6 +2,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 
+import { AddPaperClient } from "@/app/add/AddPaperClient";
 import { AskClient } from "@/app/ask/AskClient";
 import { CompareClient } from "@/app/compare/CompareClient";
 import { SearchClient } from "@/app/search/SearchClient";
@@ -94,6 +95,18 @@ describe("core flow accessibility", () => {
     const link = screen.getByRole("link", { name: /Source \(opens in a new tab\)/ });
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
+
+  it("labels add-paper DOI, PDF, and Index controls", async () => {
+    const { container } = render(<AddPaperClient />);
+    expect(screen.getByLabelText("DOI")).toBeTruthy();
+    expect(screen.getByLabelText("Title")).toBeTruthy();
+    expect(screen.getByLabelText("PDF file")).toBeTruthy();
+    expect(screen.getByLabelText("Publication id to index")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Register DOI" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Upload and register PDF" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Index" })).toBeTruthy();
+    await expectNoAxeViolations(container);
   });
 
   it("labels compare publication checkboxes", async () => {

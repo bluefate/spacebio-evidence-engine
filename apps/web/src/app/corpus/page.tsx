@@ -54,7 +54,9 @@ export default function CorpusPage() {
           Metadata for the proposed August MVP corpus (microgravity and skeletal
           muscle). This app does not host publication PDFs or full text — open
           the DOI for the publisher copy.{" "}
-          <Link href="/compare">Compare inventory fields across studies</Link>.
+          <Link href="/compare">Compare inventory fields across studies</Link>.{" "}
+          <Link href="/add">Add a local extra (DOI or PDF)</Link> — not one of
+          the approved 23.
         </p>
         <div className={styles.stats}>
           <Badge tone="accent">{publications.length} publications</Badge>
