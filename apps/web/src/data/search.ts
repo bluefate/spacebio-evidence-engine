@@ -33,6 +33,7 @@ export type PassageSearchResult = {
 export type SearchResponse = {
   query: string;
   total: number;
+  source: "inventory" | "indexed" | "mixed";
   publications: PublicationSearchResult[];
   passages: PassageSearchResult[];
 };
@@ -57,7 +58,7 @@ const publications = corpus as CorpusPublication[];
 export function searchStoredCorpus(query: string, limit = 20): SearchResponse {
   const normalizedQuery = query.trim();
   if (!normalizedQuery) {
-    return { query: "", total: 0, publications: [], passages: [] };
+    return { query: "", total: 0, source: "inventory", publications: [], passages: [] };
   }
 
   const terms = normalizedQuery.toLowerCase().split(/\s+/).filter(Boolean);
@@ -83,8 +84,69 @@ export function searchStoredCorpus(query: string, limit = 20): SearchResponse {
   return {
     query: normalizedQuery,
     total: publicationMatches.length + passageMatches.length,
+    source: passageMatches.length > 0 ? "mixed" : "inventory",
     publications: publicationMatches,
     passages: passageMatches,
+  };
+}
+
+type IndexedPassagePayload = {
+  chunk_id?: unknown;
+  chunkId?: unknown;
+  publication_id?: unknown;
+  publicationId?: unknown;
+  title?: unknown;
+  section?: unknown;
+  page_start?: unknown;
+  pageStart?: unknown;
+  page_end?: unknown;
+  pageEnd?: unknown;
+  source_url?: unknown;
+  sourceUrl?: unknown;
+  excerpt?: unknown;
+};
+
+export function mergeInventoryAndIndexedSearch(
+  inventory: SearchResponse,
+  indexed: { source?: unknown; passages?: unknown },
+): SearchResponse {
+  const indexedPassages = Array.isArray(indexed.passages)
+    ? indexed.passages.flatMap((item) => {
+        const mapped = toIndexedPassage(item as IndexedPassagePayload);
+        return mapped ? [mapped] : [];
+      })
+    : [];
+  const usedIndexed = indexed.source === "indexed" && indexedPassages.length > 0;
+  const passages = usedIndexed ? indexedPassages : inventory.passages;
+  return {
+    query: inventory.query,
+    publications: inventory.publications,
+    passages,
+    total: inventory.publications.length + passages.length,
+    source: usedIndexed ? (inventory.publications.length > 0 ? "mixed" : "indexed") : inventory.source,
+  };
+}
+
+function toIndexedPassage(stored: IndexedPassagePayload): PassageSearchResult | null {
+  const chunkId = stringValue(stored.chunk_id) ?? stringValue(stored.chunkId);
+  const publicationId = stringValue(stored.publication_id) ?? stringValue(stored.publicationId);
+  const title = stringValue(stored.title);
+  const section = stringValue(stored.section);
+  const excerpt = stringValue(stored.excerpt);
+  const sourceUrl = stringValue(stored.source_url) ?? stringValue(stored.sourceUrl);
+  if (!chunkId || !publicationId || !title || !section || !excerpt || !sourceUrl) {
+    return null;
+  }
+  return {
+    kind: "passage",
+    chunkId,
+    publicationId,
+    title,
+    section,
+    pageStart: numberValue(stored.page_start) ?? numberValue(stored.pageStart),
+    pageEnd: numberValue(stored.page_end) ?? numberValue(stored.pageEnd),
+    sourceUrl,
+    excerpt,
   };
 }
 
