@@ -66,7 +66,14 @@ Apply: `make migrate` (or `alembic upgrade head`) after `make db-bootstrap` on C
 Connection settings are documented in `.env.example` (`DATABASE_URL`, `POSTGRES_*`).
 
 ## Future storage
-Neo4j may be introduced when graph traversal, visualization, or relationship curation exceeds PostgreSQL adjacency-query needs.
+
+Prefer **PostgreSQL entity/relationship tables** with foreign keys to
+publications and chunks (ADR-010 draft, issue #73). See
+[GRAPH_STORE_COMPARISON.md](GRAPH_STORE_COMPARISON.md).
+
+Neo4j remains optional later if curator visualization or multi-hop traversal
+exceeds SQL, and only after [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
+Do not add Neo4j as a Compose or application dependency in this increment.
 
 Proposed **entity types** (#71) and **relationship types** (#72) for that graph
 (research only): [GRAPH_ENTITY_TYPES.md](../data/GRAPH_ENTITY_TYPES.md),
@@ -80,6 +87,7 @@ Use cases: [KNOWLEDGE_GRAPH_USE_CASES.md](KNOWLEDGE_GRAPH_USE_CASES.md).
 - [Candidate graph entity types](../data/GRAPH_ENTITY_TYPES.md)
 - [Candidate graph relationship types](../data/GRAPH_RELATIONSHIP_TYPES.md)
 - [Knowledge graph use cases](KNOWLEDGE_GRAPH_USE_CASES.md)
+- [Graph store comparison](GRAPH_STORE_COMPARISON.md)
 
 ## Decision status
 Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).

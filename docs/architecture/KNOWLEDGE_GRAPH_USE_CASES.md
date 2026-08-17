@@ -6,7 +6,10 @@ Identify concrete, user-facing scenarios where a knowledge graph would improve h
 
 ## Scope
 
-This document is **post-August MVP** exploratory work. It does not commit to building a graph database or extraction pipeline; it defines the problems a graph would solve and the value it would add. Implementation choices are tracked in [#73](../governance/BACKLOG.md), [#74](../governance/BACKLOG.md), and [#77](../governance/BACKLOG.md).
+This document is **post-August MVP** exploratory work. It does not commit to
+building a graph database. Store comparison is
+[GRAPH_STORE_COMPARISON.md](GRAPH_STORE_COMPARISON.md) (#73). Productization
+is [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
 
 ## Use cases
 
@@ -49,9 +52,13 @@ This document is **post-August MVP** exploratory work. It does not commit to bui
 
 - Real-time graph queries in the August MVP.
 - Automated entity extraction from PDFs.
-- Committing to Neo4j versus PostgreSQL graph extensions.
+- Committing to Neo4j versus PostgreSQL graph extensions — comparison drafted in
+  [GRAPH_STORE_COMPARISON.md](GRAPH_STORE_COMPARISON.md) (issue #73). Store
+  productization remains [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
 
-These decisions are deferred to [#73](../governance/BACKLOG.md), [#74](../governance/BACKLOG.md), and [#77](../governance/BACKLOG.md).
+These remaining decisions are [#74](https://github.com/bluefate/spacebio-evidence-engine/issues/74)
+(extractor, already prototyped), human validation [#76](https://github.com/bluefate/spacebio-evidence-engine/issues/76),
+and whether to ship a graph product [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
 
 ## Success criteria for future graph work
 
@@ -67,4 +74,5 @@ A knowledge graph should be added only if at least one of the following becomes 
 - [Traceability matrix](../governance/TRACEABILITY_MATRIX.md) — tracks deferred knowledge graph work.
 - [Candidate graph entity types](../data/GRAPH_ENTITY_TYPES.md) — node catalog and provenance (#71).
 - [Candidate graph relationship types](../data/GRAPH_RELATIONSHIP_TYPES.md) — edges, passage linkage, and conflict/qualification (#72).
+- [Graph store comparison](GRAPH_STORE_COMPARISON.md) — Neo4j vs PostgreSQL (#73).
 - [Backlog](../governance/BACKLOG.md) — follow-up issues: [#70](https://github.com/bluefate/spacebio-evidence-engine/issues/70), [#71](https://github.com/bluefate/spacebio-evidence-engine/issues/71), [#72](https://github.com/bluefate/spacebio-evidence-engine/issues/72), [#73](https://github.com/bluefate/spacebio-evidence-engine/issues/73).
