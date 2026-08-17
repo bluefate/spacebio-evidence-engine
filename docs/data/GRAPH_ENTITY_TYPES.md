@@ -66,6 +66,19 @@ Publication-level seeds copied from the inventory (`organism_model`,
 `source_span`, and remain **unverified as graph nodes** until a passage
 confirms them.
 
+## Verification model
+
+Candidate entity instances are draft research artifacts, not trusted facts.
+The only accepted source-of-truth path for a graph entity is:
+
+1. a source passage identifies the entity or relation,
+2. the extracted instance records the required provenance fields,
+3. a human validation workflow marks the instance verified,
+4. downstream answers only consume verified instances.
+
+If a candidate entity cannot be tied back to a chunk, page, and source span, it
+must stay provisional and may be used only for research or evaluation.
+
 ## Entity type catalog
 
 | Type | Definition | Type-specific fields | Typical use case |
