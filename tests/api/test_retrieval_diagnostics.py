@@ -84,7 +84,9 @@ def test_retrieval_diagnostics_returns_chunk_ids_and_scores_without_secrets() ->
 
 
 def test_retrieval_diagnostics_503_when_enabled_without_retriever() -> None:
-    client = TestClient(create_app(Settings(APP_ENV="test", SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS=True)))
+    client = TestClient(
+        create_app(Settings(APP_ENV="test", SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS=True))
+    )
 
     response = client.post(
         "/dev/retrieval-diagnostics",
