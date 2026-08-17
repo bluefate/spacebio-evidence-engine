@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 
 import { AskClient } from "@/app/ask/AskClient";
+import { CompareClient } from "@/app/compare/CompareClient";
 import { SearchClient } from "@/app/search/SearchClient";
 import { CitationLinkedText } from "@/components/evidence/CitationLinkedText";
 import { EvidencePanel } from "@/components/evidence/EvidencePanel";
@@ -93,5 +94,30 @@ describe("core flow accessibility", () => {
     const link = screen.getByRole("link", { name: /Source \(opens in a new tab\)/ });
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
+
+  it("labels compare publication checkboxes", async () => {
+    const { container } = render(
+      <CompareClient
+        publications={[
+          {
+            id: "pub_a",
+            title: "Human spaceflight muscle",
+            doi: "10.0/a",
+            year: "2024",
+            license: "cc-by",
+            organism: "human",
+            exposure: "spaceflight",
+            sourceUrl: "https://doi.org/10.0/a",
+            pdfUrl: "https://example.test/a.pdf",
+            notes: "note a",
+            approval: "pending",
+            ingestion: "not_ingested",
+          },
+        ]}
+      />,
+    );
+    expect(screen.getByLabelText(/pub_a/i)).toHaveAttribute("type", "checkbox");
+    await expectNoAxeViolations(container);
   });
 });
