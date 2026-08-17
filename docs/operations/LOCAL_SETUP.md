@@ -33,7 +33,7 @@ and Alembic migrations (best-effort when Docker is available).
 | Service | Host port | How to start | Notes |
 | --- | ---: | --- | --- |
 | PostgreSQL + pgvector | `5432` | `make services` | Compose service `db` |
-| FastAPI | `8000` | `make api` | OpenAPI at `/docs`; `GET /health`; `POST /ask` is **503** until a `GroundedAnswerService` is configured |
+| FastAPI | `8000` | `make api` | OpenAPI at `/docs`; `GET /health`; `POST /ask` is enabled when `OPENAI_API_KEY` is set and the configured embedding provider can load; otherwise **503** |
 | Next.js web | `3000` | `make web` | `/`, `/corpus`, `/publications/[id]`, `/compare`, `/ask`, `/search` |
 
 ## What works after `make setup` (honest)
@@ -43,7 +43,7 @@ and Alembic migrations (best-effort when Docker is available).
 - Start Compose Postgres, bootstrap pgvector, run Alembic migrations
 - `GET /health` on the API
 - Browse corpus, publication detail, and **`/compare`** (inventory metadata only)
-- Open the ask UI (the API may return **503**)
+- Open the ask UI (`POST /ask` may still return **503** until `OPENAI_API_KEY` is set and the embedding provider is available)
 - Run `make validate`, `make eval-hallucination`, `make eval-graph-extraction`
 
 **You should not expect:**
@@ -60,10 +60,11 @@ and Alembic migrations (best-effort when Docker is available).
 3. If Docker was skipped: `make services && make db-bootstrap && make migrate`.
 4. Optional local embeddings (MiniLM download on first use): `pip install -e ".[embeddings]"`.
 5. Optional: copy approved PDFs to `data/pdfs/{publication_id}.pdf`, then `set -a && source .env && set +a` and `make ingest`.
-6. `make api` and `make web`.
-7. `curl -s http://localhost:8000/health`
-8. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
-9. `POST /ask` returning **503** is expected until you wire retrieval + a `LanguageModelProvider` later.
+6. To enable grounded `POST /ask`, set `OPENAI_API_KEY` in `.env` and ensure the configured embedding provider (e.g. `sentence-transformers/all-MiniLM-L6-v2`) is installed (`pip install -e ".[embeddings]"`).
+7. `make api` and `make web`.
+8. `curl -s http://localhost:8000/health`
+9. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
+10. `POST /ask` returning **503** is expected when `OPENAI_API_KEY` is unset, the embedding provider is unavailable, or the index is empty.
 
 ## Commands
 
