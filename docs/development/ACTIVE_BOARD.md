@@ -55,7 +55,7 @@ This runs `scripts/refresh_active_board.py`, which:
 Edit `TRACKED` and `CRITICAL_EDGES` in [`scripts/refresh_active_board.py`](../../scripts/refresh_active_board.py), then re-run `make refresh-board`.
 
 <!-- ACTIVE_BOARD:BEGIN -->
-**Last refreshed:** 2026-08-11 via `make refresh-board` (Project #6 + open PRs).
+**Last refreshed:** 2026-08-17 via `make refresh-board` (Project #6 + open PRs).
 
 ## Live board (auto-generated)
 
@@ -105,7 +105,7 @@ flowchart TB
     nextCritical_empty["(none)"]
   end
   subgraph nextParallel [Parallel-safe picks — available now]
-    nextParallel_empty["(none)"]
+    i67["#67 Developer retrieval diagnostics"]
   end
   i20 --> i27
   i27 --> i28
@@ -128,6 +128,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
+| 1 | [#67](https://github.com/bluefate/spacebio-evidence-engine/issues/67) Developer retrieval diagnostics | Planning | Parallel-safe now | Overlap with in-flight files |
 
 <!-- ACTIVE_BOARD:END -->
 

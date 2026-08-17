@@ -32,6 +32,11 @@ class Settings(BaseSettings):
         default="sentence-transformers/all-MiniLM-L6-v2",
         alias="EMBEDDING_MODEL",
     )
+    # Developer retrieval diagnostics UI/API (issue #67). Off by default.
+    dev_retrieval_diagnostics: bool = Field(
+        default=False,
+        alias="SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS",
+    )
 
 
 @lru_cache

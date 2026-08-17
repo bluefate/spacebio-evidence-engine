@@ -22,6 +22,15 @@ Initial observability guidance.
   `SPACEBIO_RETRIEVAL_VERBOSE_LOGS=true`; production-like configs should leave
   verbose logging off and may set `SPACEBIO_RETRIEVAL_LOGGING_ENABLED=false`
   when retrieval trace records are not permitted.
+- Developer retrieval diagnostics (issue #67) are **off by default**. Enable
+  both `SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS=true` (API) and
+  `NEXT_PUBLIC_ENABLE_RETRIEVAL_DIAGNOSTICS=true` (web) to expose
+  `/dev/retrieval` and `POST /dev/retrieval-diagnostics`. The payload reuses
+  retrieval-log fields: query SHA-256, query length, top-k, chunk IDs, ranks,
+  scores, citation IDs (`C1`…), publication/section/page, and embedding model.
+  It must not include raw query text, chunk text, prompts, secrets, or API keys.
+  Leave both flags unset in production-like runs so the route 404s and the
+  home-page link is hidden.
 - Answer generation model, prompt version, and citation IDs.
 - Ingestion run summaries.
 - Structured ingestion error records with publication ID, stage, sanitized message,
