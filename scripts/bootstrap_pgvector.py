@@ -18,7 +18,14 @@ from __future__ import annotations
 
 import os
 import sys
+from pathlib import Path
 from urllib.parse import urlparse, unquote
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
+
+from spacebio_evidence_engine.env_loader import load_dotenv  # noqa: E402
 
 
 def _libpq_url_from_database_url(database_url: str) -> str:
@@ -85,6 +92,7 @@ def ensure_pgvector() -> str:
 
 
 def main() -> int:
+    load_dotenv(ROOT / ".env")
     version = ensure_pgvector()
     print(f"pgvector extension ready (version {version})")
     return 0

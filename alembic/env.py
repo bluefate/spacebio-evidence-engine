@@ -17,6 +17,9 @@ if str(SRC) not in sys.path:
 
 from spacebio_evidence_engine.db import models as _models  # noqa: E402, F401
 from spacebio_evidence_engine.db.base import Base  # noqa: E402
+from spacebio_evidence_engine.env_loader import load_dotenv  # noqa: E402
+
+load_dotenv(ROOT / ".env")
 
 config = context.config
 

@@ -57,11 +57,11 @@ and Alembic migrations (best-effort when Docker is available).
 ## What to run locally
 
 1. `cp .env.example .env` and keep `POSTGRES_PASSWORD` aligned with `DATABASE_URL`.
-2. `make setup` (venv, deps, Compose, migrate when Docker is up).
+2. `make setup` (venv, deps, Compose, `pgvector` bootstrap, and Alembic migrate — all read `.env` automatically; no secret values are printed).
 3. If Docker was skipped: `make services && make db-bootstrap && make migrate`.
 4. Optional local embeddings (MiniLM download on first use): `pip install -e ".[embeddings]"`.
 5. Download the 23 approved PDFs: `make fetch-pdfs`. Alternatively, copy approved PDFs to `data/pdfs/{publication_id}.pdf`.
-6. Ingest the downloaded PDFs: `set -a && source .env && set +a` and `make ingest`.
+6. Ingest the downloaded PDFs: `make ingest` (loads `.env` automatically).
 7. To enable grounded `POST /ask`, set `OPENAI_API_KEY` in `.env` and ensure the configured embedding provider (e.g. `sentence-transformers/all-MiniLM-L6-v2`) is installed (`pip install -e ".[embeddings]"`).
 8. `make api` and `make web`.
 9. `curl -s http://localhost:8000/health`
@@ -76,8 +76,8 @@ Aligned with [AGENTS.md](../../AGENTS.md):
 make setup         # .env, venv, editable install, web npm install, pre-commit, Compose DB, pgvector, migrate
 make setup-check   # Dry-run checklist (tools, ports docs, .env.example hygiene; no secrets printed)
 make services      # PostgreSQL + pgvector via Docker Compose
-make db-bootstrap  # Idempotent CREATE EXTENSION IF NOT EXISTS vector
-make migrate       # Alembic upgrade head
+make db-bootstrap  # Idempotent CREATE EXTENSION IF NOT EXISTS vector; loads .env
+make migrate       # Alembic upgrade head; loads .env
 make fetch-pdfs  # Download the 23 approved OA PDFs into data/pdfs/
 make ingest        # Local PDFs → chunks + embeddings (needs DATABASE_URL; optional MiniLM extra)
 make api           # uvicorn on http://localhost:8000
