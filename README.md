@@ -28,8 +28,9 @@ Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL
 
 | Page | What you will see |
 | --- | --- |
-| Home | Buttons for Ask, Search, Corpus, Compare studies |
+| Home | Buttons for Ask, Search, Corpus, Compare studies, Add paper |
 | [Corpus](http://localhost:3000/corpus) | Cards for each paper (title, organism, exposure, link to the publisher) |
+| [Add paper](http://localhost:3000/add) | Register a **local extra** by DOI or PDF, then **Index**. This does **not** add to the approved 23. Index extracts, chunks, and embeds — it does not train a model. Register success is not the same as indexed. |
 | A publication | Extra details and DOI links |
 | [Search](http://localhost:3000/search) | Catalog titles and labels. After `make ingest`, passages from the database if the API is running. |
 | [Compare studies](http://localhost:3000/compare) | Check two or more papers. You will see organism / system labels (for example human vs mouse). The page does **not** invent “this study found more atrophy.” |
@@ -38,7 +39,8 @@ Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL
 
 - Paper PDFs are **not** stored in git (`data/pdfs/` is ignored).
 - There is **`make fetch-pdfs`**: download the 23 approved OA PDFs into `data/pdfs/` from `august_mvp_corpus_manifest.csv`. Then **`make ingest`** indexes them into chunks. Search can show indexed passages when the API is up.
-- **Ask** is still **503** until `OPENAI_API_KEY` and the embedding provider are configured.
+- **Ask** needs ingest plus embeddings (and usually `OPENAI_API_KEY` for generation). Without that it reports a failure instead of inventing an answer.
+- **Add paper** (`/add`) registers **local extras** (`local_*`, pending review), not the approved 23. Paywalled licenses are rejected. Register success is not the same as indexed.
 
 A fair demo right now is **browse the library and compare papers**. A later demo would load PDFs into the local database, then Ask a question and click citations.
 

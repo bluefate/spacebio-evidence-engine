@@ -38,6 +38,9 @@ export default function HomePage() {
           <a className={styles.secondary} href="/corpus">
             View corpus
           </a>
+          <a className={styles.secondary} href="/add">
+            Add paper
+          </a>
           <a className={styles.secondary} href="/compare">
             Compare studies
           </a>
