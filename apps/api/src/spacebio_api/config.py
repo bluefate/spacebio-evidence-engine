@@ -40,6 +40,10 @@ class Settings(BaseSettings):
     # Optional lexical rerank after retrieval (issue #48). Off by default.
     rerank_enabled: bool = Field(default=False, alias="SPACEBIO_RERANK_ENABLED")
     reranker: str = Field(default="lexical_overlap", alias="SPACEBIO_RERANKER")
+    pdf_storage_local_root: str = Field(
+        default="data/pdfs",
+        alias="PDF_STORAGE_LOCAL_ROOT",
+    )
 
 
 @lru_cache
