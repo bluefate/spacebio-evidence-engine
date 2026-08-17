@@ -33,7 +33,7 @@ and Alembic migrations (best-effort when Docker is available).
 | Service | Host port | How to start | Notes |
 | --- | ---: | --- | --- |
 | PostgreSQL + pgvector | `5432` | `make services` | Compose service `db` |
-| FastAPI | `8000` | `make api` | OpenAPI at `/docs`; `GET /health`; `POST /ask` is enabled when `OPENAI_API_KEY` is set and the configured embedding provider can load; otherwise **503** |
+| FastAPI | `8000` | `make api` | OpenAPI at `/docs`; `GET /health`; `POST /ask` is enabled when `LLM_PROVIDER=ollama` (local) or `OPENAI_API_KEY` is set, and the embedding provider can load; otherwise **503** |
 | Next.js web | `3000` | `make web` | `/`, `/corpus`, `/publications/[id]`, `/compare`, `/ask`, `/search` |
 
 ## What works after `make setup` (honest)
@@ -44,7 +44,7 @@ and Alembic migrations (best-effort when Docker is available).
 - `GET /health` on the API
 - Download the 23 approved PDFs with `make fetch-pdfs` (after setup)
 - Browse corpus, publication detail, and **`/compare`** (inventory metadata only)
-- Open the ask UI (`POST /ask` may still return **503** until `OPENAI_API_KEY` is set and the embedding provider is available)
+- Open the ask UI (`POST /ask` needs Ollama or `OPENAI_API_KEY`, plus embeddings)
 - Run `make validate`, `make eval-hallucination`, `make eval-graph-extraction`
 
 **You should not expect:**
@@ -62,7 +62,7 @@ and Alembic migrations (best-effort when Docker is available).
 4. Optional local embeddings (MiniLM download on first use): `pip install -e ".[embeddings]"`.
 5. Download the 23 approved PDFs: `make fetch-pdfs`. Alternatively, copy approved PDFs to `data/pdfs/{publication_id}.pdf`.
 6. Ingest the downloaded PDFs: `make ingest` (loads `.env` automatically).
-7. To enable grounded `POST /ask`, set `OPENAI_API_KEY` in `.env` and ensure the configured embedding provider (e.g. `sentence-transformers/all-MiniLM-L6-v2`) is installed (`pip install -e ".[embeddings]"`).
+7. For grounded `POST /ask` without paying: install [Ollama](https://ollama.com), run `ollama pull llama3.2:1b` and `ollama serve`. `.env.example` sets `LLM_PROVIDER=ollama` and `OLLAMA_MODEL=llama3.2:1b` (fastest default). Also `pip install -e ".[embeddings]"`. Optional: set `OPENAI_API_KEY` and `LLM_PROVIDER=openai` instead.
 8. Start the API in **one terminal** and leave it running: `make api`. Stop with Ctrl-C, not Ctrl-Z.
 9. In a **new terminal** (same repo folder), start the website and leave it running: `make web`.
 10. `curl -s http://localhost:8000/health`
@@ -244,8 +244,9 @@ See [`.env.example`](../../.env.example). Required for local DB work:
 
 - `POSTGRES_*`, `DATABASE_URL`
 
-Optional (leave unset for local-only / $0 cloud mode):
+Optional (leave unset for catalog-only / no Ask):
 
+- `LLM_PROVIDER` (`ollama` or `openai`), `OLLAMA_BASE_URL`, `OLLAMA_MODEL` (default `llama3.2:1b`)
 - `OPENAI_API_KEY`, `OPENAI_MODEL`, `OPENAI_EMBEDDING_MODEL`
 - `EMBEDDING_MODEL`, retrieval logging flags, PDF storage paths
 - Developer retrieval diagnostics (off by default): `SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS`,

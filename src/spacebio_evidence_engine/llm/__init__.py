@@ -18,6 +18,7 @@ from spacebio_evidence_engine.llm.openai import (
     OPENAI_MODEL_ENV,
     OpenAILanguageModelError,
     OpenAILanguageModelProvider,
+    chat_completions_url,
 )
 
 __all__ = [
@@ -32,4 +33,5 @@ __all__ = [
     "OpenAILanguageModelError",
     "OpenAILanguageModelProvider",
     "UsageMetadata",
+    "chat_completions_url",
 ]

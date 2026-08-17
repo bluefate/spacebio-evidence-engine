@@ -154,3 +154,13 @@ def test_package_exports_openai_provider() -> None:
     from spacebio_evidence_engine import llm
 
     assert llm.OpenAILanguageModelProvider is OpenAILanguageModelProvider
+
+
+def test_chat_completions_url_appends_path_for_ollama_base() -> None:
+    from spacebio_evidence_engine.llm.openai import chat_completions_url
+
+    assert chat_completions_url(None) == "https://api.openai.com/v1/chat/completions"
+    assert (
+        chat_completions_url("http://127.0.0.1:11434/v1")
+        == "http://127.0.0.1:11434/v1/chat/completions"
+    )

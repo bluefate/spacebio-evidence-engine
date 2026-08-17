@@ -51,7 +51,7 @@ Open **http://localhost:3000** in a browser. Click-through script (10 search ter
 
 - Paper PDFs are **not** stored in git (`data/pdfs/` is ignored).
 - There is **`make fetch-pdfs`**: download the 23 approved OA PDFs into `data/pdfs/` from `august_mvp_corpus_manifest.csv`. Then **`make ingest`** indexes them into chunks. Search can show indexed passages when the API is up.
-- **Ask** needs ingest plus embeddings (and usually `OPENAI_API_KEY` for generation). Without that it reports a failure instead of inventing an answer.
+- **Ask** needs ingest plus embeddings, then a chat model. Default is **local Ollama** (`LLM_PROVIDER=ollama`, model `llama3.2:1b` — fastest small model). Install Ollama, run `ollama pull llama3.2:1b` and `ollama serve`, then restart `make api`. Paid `OPENAI_API_KEY` is optional. Without a model or an empty index, Ask fails closed instead of inventing an answer.
 - **Add paper** (`/add`) registers **local extras** (`local_*`, pending review), not the approved 23. Paywalled licenses are rejected. Register success is not the same as indexed.
 
 A fair demo right now is **browse the library and compare papers**. A later demo would load PDFs into the local database, then Ask a question and click citations.
@@ -195,9 +195,8 @@ citation UI, study compare (`/compare`), optional hybrid retrieval and rerank
 database** (ADR-011).
 
 Local `make setup` does **not** ingest the 23 PDFs. For live Ask, run
-`make fetch-pdfs`, `make ingest`, and set `OPENAI_API_KEY`. Without that,
-`POST /ask` fails closed (often **503**) instead of inventing answers. See
-[LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
+`make fetch-pdfs`, `make ingest`, install embeddings, and run **Ollama**
+(`LLM_PROVIDER=ollama`, `ollama pull llama3.2:1b`). Paid OpenAI is optional.
 
 ## Architecture position
 Accepted stack for the August MVP:

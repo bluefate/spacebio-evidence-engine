@@ -26,7 +26,7 @@ make web
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Optional, before Ask/passage Search: `make fetch-pdfs`, `pip install -e ".[embeddings]"`, `make ingest`, and set `OPENAI_API_KEY` in `.env`. Without ingest + a generation key, Ask should **fail closed** (often 503), not guess.
+Optional, before Ask/passage Search: `make fetch-pdfs`, `pip install -e ".[embeddings]"`, `make ingest`, and local **Ollama** (`ollama pull llama3.2:1b`, `ollama serve`, `LLM_PROVIDER=ollama` in `.env`). Paid `OPENAI_API_KEY` is optional. Without ingest + a chat model, Ask should **fail closed** (often 503), not guess.
 
 ## What to click first (no ingest required)
 
@@ -77,7 +77,7 @@ These expected answers are **not** gold wording from the PDFs. If the model stat
 | rq_09 | Did microgravity exposure change cardiac ejection fraction in the August MVP skeletal-muscle corpus? | **Insufficient evidence** (off-topic) | none | Refuses; this corpus is skeletal muscle, not EF |
 | rq_10 | What interventions or countermeasures (exercise preconditioning, ultrasound, extracellular vesicles, or similar) have been tested against unloading- or microgravity-related muscle atrophy in the corpus? | Answerable from intervention papers | pub_012, pub_013, pub_018, pub_021, pub_022 | Groups by intervention; no efficacy beyond cited passages |
 
-**Without ingest or `OPENAI_API_KEY`:** the Ask UI/API failing closed (503 or a clear error) is a **pass**. A confident paragraph with no citations is a **fail**.
+**Without ingest or a chat model (Ollama / OpenAI):** the Ask UI/API failing closed (503 or a clear error) is a **pass**. A confident paragraph with no citations is a **fail**.
 
 ## Related documents
 
