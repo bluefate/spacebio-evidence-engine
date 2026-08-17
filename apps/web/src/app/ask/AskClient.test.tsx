@@ -106,6 +106,23 @@ describe("AskClient", () => {
     ).toBeInTheDocument();
   });
 
+  it("shows the default insufficient-evidence copy when the question is empty", async () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    render(<AskClient />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Ask question" }));
+
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(screen.getByText("Insufficient evidence")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "The corpus does not contain enough relevant evidence to answer this question confidently.",
+      ),
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId("citation-linked-text")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("evidence-panel")).not.toBeInTheDocument();
+  });
+
   it("selecting a citation chip highlights the evidence panel item", async () => {
     mockFetch(new Response(JSON.stringify(sufficientAnswer), { status: 200 }));
     render(<AskClient />);

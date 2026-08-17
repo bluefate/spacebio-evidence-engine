@@ -44,20 +44,36 @@ SPACEBIO_REQUIRE_DB=1 pytest -q -m integration tests/integration/test_ingestion_
 
 Without `SPACEBIO_REQUIRE_DB=1`, the test skips when PostgreSQL is unavailable.
 
+## Frontend tests (issue #69)
+
+The Next.js app uses **Vitest** + Testing Library (`apps/web`). Coverage for
+citation-first UI:
+
+- `apps/web/src/app/ask/AskClient.test.tsx` — grounded answer citations, claims,
+  evidence panel, insufficient-evidence banner, empty submit, API errors
+- `apps/web/src/components/evidence/CitationLinks.test.tsx` — `[C1]` markers and
+  publication links
+- `apps/web/src/components/evidence/EvidencePanel.test.tsx` — passage provenance,
+  empty list, missing active citation
+
+CI job **Node lint** also runs `npm run test -w @spacebio/web`.
+
 ## MVP tests
 - Unit tests for text processing, citation assembly, and schemas.
 - Integration tests for database repositories and API endpoints.
 - Retrieval evaluation against benchmark questions.
 - Prompt regression tests for grounded answers.
-- UI tests for citation rendering when frontend exists.
+- UI tests for citation rendering and insufficient-evidence states (`make test-web`).
 - Migration tests for Alembic revisions.
 - Lint and type checks in CI.
 
 ## Running tests locally
 
 - `make test` runs the Python test suite with `pytest -q`.
-- `make validate` runs lint, type check, and tests together.
-- `pytest tests/<path> -q` is useful for focused runs during implementation.
+- `make test-web` runs Vitest for `apps/web` (`npm run test:web`).
+- `make validate` runs lint, type check, Python tests, and web tests together.
+- `cd apps/web && npm test` is equivalent to `make test-web`.
+- `pytest tests/<path> -q` is useful for focused Python runs during implementation.
 - `pytest -m integration` runs the optional integration-marked tests when local services are available.
 
 ## Related documents

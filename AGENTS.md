@@ -244,6 +244,7 @@ Test:
 
 ```bash
 make test
+make test-web
 ```
 
 Full validation:

@@ -51,7 +51,8 @@ make web           # Next.js on http://localhost:3000
 make lint
 make typecheck
 make test
-make validate      # lint + typecheck + test (+ hallucination eval)
+make test-web      # Vitest: citation and ask UI (apps/web)
+make validate      # lint + typecheck + Python tests + web tests (+ hallucination eval)
 make refresh-board # regenerate docs/development/ACTIVE_BOARD.md from Project + PRs
 ```
 
