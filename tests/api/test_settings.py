@@ -8,10 +8,12 @@ from spacebio_api.config import Settings, get_settings
 
 
 def test_settings_defaults() -> None:
-    settings = Settings(APP_ENV="test")
+    settings = Settings(APP_ENV="test", LLM_PROVIDER="openai")
     assert settings.app_env == "test"
     assert settings.api_port == 8000
     assert settings.openai_model == "gpt-4o-mini"
+    assert settings.llm_provider == "openai"
+    assert settings.ollama_model == "llama3.2:1b"
     assert "all-MiniLM-L6-v2" in settings.embedding_model
 
 

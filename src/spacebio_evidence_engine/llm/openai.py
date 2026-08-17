@@ -25,8 +25,20 @@ from spacebio_evidence_engine.llm.base import (
 )
 
 DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
+DEFAULT_OPENAI_CHAT_URL = "https://api.openai.com/v1/chat/completions"
 OPENAI_API_KEY_ENV = "OPENAI_API_KEY"
 OPENAI_MODEL_ENV = "OPENAI_MODEL"
+OPENAI_API_BASE_ENV = "OPENAI_API_BASE"
+
+
+def chat_completions_url(api_base: str | None) -> str:
+    """Return a chat-completions URL, including Ollama's OpenAI-compatible path."""
+    if api_base is None or not api_base.strip():
+        return DEFAULT_OPENAI_CHAT_URL
+    base = api_base.strip().rstrip("/")
+    if base.endswith("/chat/completions"):
+        return base
+    return f"{base}/chat/completions"
 
 
 class OpenAILanguageModelError(RuntimeError):
@@ -51,7 +63,8 @@ class _OpenAIChatClient(Protocol):
 class _HTTPChatClient:
     """Small stdlib HTTP client to avoid requiring the OpenAI SDK in CI."""
 
-    endpoint = "https://api.openai.com/v1/chat/completions"
+    def __init__(self, endpoint: str = DEFAULT_OPENAI_CHAT_URL) -> None:
+        self.endpoint = endpoint
 
     def create_chat_completion(
         self,
@@ -107,6 +120,7 @@ class OpenAILanguageModelProvider(LanguageModelProvider):
         model_name: str = DEFAULT_OPENAI_MODEL,
         client: _OpenAIChatClient | None = None,
         timeout_seconds: float = 60.0,
+        api_base: str | None = None,
     ) -> None:
         if not api_key.strip():
             raise ValueError("api_key must be provided for OpenAI chat")
@@ -116,7 +130,8 @@ class OpenAILanguageModelProvider(LanguageModelProvider):
             raise ValueError("timeout_seconds must be positive")
         self._api_key = api_key
         self._model_name = model_name
-        self._client = client or _HTTPChatClient()
+        self._api_base = api_base
+        self._client = client or _HTTPChatClient(endpoint=chat_completions_url(api_base))
         self._timeout_seconds = timeout_seconds
 
     @property
@@ -136,7 +151,8 @@ class OpenAILanguageModelProvider(LanguageModelProvider):
         if not api_key:
             return None
         model_name = env.get(OPENAI_MODEL_ENV, DEFAULT_OPENAI_MODEL)
-        return cls(api_key=api_key, model_name=model_name, client=client)
+        api_base = env.get(OPENAI_API_BASE_ENV, "").strip() or None
+        return cls(api_key=api_key, model_name=model_name, client=client, api_base=api_base)
 
     def _to_api_messages(self, messages: Sequence[ChatMessage]) -> list[dict[str, str]]:
         return [{"role": message.role, "content": message.content} for message in messages]

@@ -40,18 +40,28 @@ def build_grounded_answer_service(
 ) -> GroundedAnswerService | None:
     """Build a grounded answer service from settings, or return None when disabled.
 
-    The service is constructed when an OpenAI API key is configured and the
-    embedding provider can be loaded. If any required dependency is missing,
-    the application fails closed and ``/ask`` remains unavailable.
+    The service is constructed when an OpenAI API key is configured, or when
+    ``LLM_PROVIDER=ollama`` for a local OpenAI-compatible server. If any required
+    dependency is missing, the application fails closed and ``/ask`` remains
+    unavailable.
     """
     if llm_provider is None:
-        if not settings.openai_api_key:
+        provider_name = settings.llm_provider.strip().lower()
+        if provider_name == "ollama":
+            llm_provider = OpenAILanguageModelProvider(
+                api_key=settings.openai_api_key or "ollama",
+                model_name=settings.ollama_model,
+                api_base=settings.ollama_base_url,
+                timeout_seconds=120.0,
+            )
+        elif settings.openai_api_key:
+            llm_provider = OpenAILanguageModelProvider(
+                api_key=settings.openai_api_key,
+                model_name=settings.openai_model,
+            )
+        else:
             _logger.info("OPENAI_API_KEY not configured; /ask disabled (503).")
             return None
-        llm_provider = OpenAILanguageModelProvider(
-            api_key=settings.openai_api_key,
-            model_name=settings.openai_model,
-        )
 
     if retriever is None:
         if embedding_provider is None:

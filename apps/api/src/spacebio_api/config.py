@@ -28,6 +28,12 @@ class Settings(BaseSettings):
     )
     openai_api_key: str | None = Field(default=None, alias="OPENAI_API_KEY")
     openai_model: str = Field(default="gpt-4o-mini", alias="OPENAI_MODEL")
+    llm_provider: str = Field(default="openai", alias="LLM_PROVIDER")
+    ollama_base_url: str = Field(
+        default="http://127.0.0.1:11434/v1",
+        alias="OLLAMA_BASE_URL",
+    )
+    ollama_model: str = Field(default="llama3.2:1b", alias="OLLAMA_MODEL")
     embedding_model: str = Field(
         default="sentence-transformers/all-MiniLM-L6-v2",
         alias="EMBEDDING_MODEL",

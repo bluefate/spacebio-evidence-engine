@@ -58,9 +58,23 @@ def _hit(chunk_id: str, publication_id: str) -> SemanticSearchHit:
 
 
 def test_build_service_disabled_without_openai_key() -> None:
-    settings = Settings(APP_ENV="test")
+    settings = Settings(APP_ENV="test", LLM_PROVIDER="openai")
     service = build_grounded_answer_service(settings)
     assert service is None
+
+
+def test_build_service_wires_ollama_without_openai_key() -> None:
+    settings = Settings(
+        APP_ENV="test",
+        LLM_PROVIDER="ollama",
+        OLLAMA_MODEL="llama3.2:1b",
+        OLLAMA_BASE_URL="http://127.0.0.1:11434/v1",
+    )
+    retriever = FakeRetriever([])
+    service = build_grounded_answer_service(settings, retriever=retriever)
+    assert isinstance(service, GroundedAnswerService)
+    response = service.answer("What happens to skeletal muscle in microgravity?", top_k=3)
+    assert response.sufficiency.status == "insufficient"
 
 
 def test_build_service_disabled_without_openai_key_and_injected_dependencies() -> None:
