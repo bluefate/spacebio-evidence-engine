@@ -42,6 +42,13 @@ from spacebio_evidence_engine.ingestion.pdf_quality import (
     assess_pdf_url,
     score_publication_pdf,
 )
+from spacebio_evidence_engine.ingestion.reprocess import (
+    ReprocessError,
+    ReprocessResult,
+    ReprocessStrategy,
+    UnsupportedReprocessStrategyError,
+    reprocess_publication,
+)
 from spacebio_evidence_engine.ingestion.sections import (
     SectionDetectionResult,
     SectionLabel,
@@ -110,6 +117,11 @@ __all__ = [
     "page_texts",
     "parse_ingestion_status",
     "redact_error_payload",
+    "ReprocessError",
+    "ReprocessResult",
+    "ReprocessStrategy",
+    "reprocess_publication",
     "score_publication_pdf",
     "transition_ingestion_status",
+    "UnsupportedReprocessStrategyError",
 ]

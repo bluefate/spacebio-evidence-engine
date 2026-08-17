@@ -219,6 +219,44 @@ and `pdf_quality_notes` for each row, and sets `ingestion_status` to
 `pdf_quality_blocked` for `needs_ocr`, `corrupt`, and `missing` categories.
 
 
+## Publication reprocessing (issue #35)
+
+``spacebio_evidence_engine.ingestion.reprocess_publication`` re-extracts and
+re-chunks a publication that already has a stored PDF. It is intended for
+idempotent re-runs when the chunking strategy, PDF quality gate, or extraction
+pipeline changes.
+
+### Behavior
+
+- The publication must already have ``pdf_path`` set and a PDF in storage.
+- The previous chunk set is replaced. The default strategy is ``REPLACE``.
+- New extraction and chunking are computed *before* old ``Chunk`` /
+  ``ChunkEmbedding`` rows are deleted, so a failure leaves the previous chunks
+  intact — there is no silent data loss.
+- Status transitions follow ``succeeded`` (or ``failed``) → ``processing`` →
+  ``succeeded`` or ``failed`` and are recorded by ``transition_ingestion_status``.
+- ``ARCHIVE`` and other versioning strategies are not implemented for the August
+  MVP; requesting them raises ``UnsupportedReprocessStrategyError``.
+
+### Usage
+
+```python
+from sqlalchemy.orm import Session
+from spacebio_evidence_engine.ingestion import reprocess_publication
+from spacebio_evidence_engine.storage.config import get_pdf_storage
+
+storage = get_pdf_storage()
+with Session(engine) as session:
+    result = reprocess_publication(session, "pub_001", storage=storage)
+    print(result.status, result.previous_chunk_count, result.new_chunk_count)
+```
+
+### Storage of old chunks
+
+For the MVP, old chunks are removed. A future ``ARCHIVE`` strategy may keep
+versioned rows; until then, callers that need a backup must snapshot the
+``chunks`` and ``chunk_embeddings`` tables before reprocessing.
+
 ## Related documents
 - [Chunking strategy](../rag/CHUNKING_STRATEGY.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
