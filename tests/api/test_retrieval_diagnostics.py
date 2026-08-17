@@ -38,7 +38,7 @@ def _hit(chunk_id: str, score: float) -> SemanticSearchHit:
 def test_retrieval_diagnostics_hidden_when_flag_disabled() -> None:
     client = TestClient(
         create_app(
-            Settings(APP_ENV="test", dev_retrieval_diagnostics=False),
+            Settings(APP_ENV="test", SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS=False),
             retrieval_diagnostics_retriever=FakeRetriever([_hit("chunk-1", 0.91)]),
         )
     )
@@ -56,7 +56,7 @@ def test_retrieval_diagnostics_returns_chunk_ids_and_scores_without_secrets() ->
     question = "How does microgravity affect skeletal muscle?"
     client = TestClient(
         create_app(
-            Settings(APP_ENV="test", dev_retrieval_diagnostics=True),
+            Settings(APP_ENV="test", SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS=True),
             retrieval_diagnostics_retriever=FakeRetriever(
                 [_hit("chunk-1", 0.91), _hit("chunk-2", 0.77)]
             ),
@@ -84,7 +84,7 @@ def test_retrieval_diagnostics_returns_chunk_ids_and_scores_without_secrets() ->
 
 
 def test_retrieval_diagnostics_503_when_enabled_without_retriever() -> None:
-    client = TestClient(create_app(Settings(APP_ENV="test", dev_retrieval_diagnostics=True)))
+    client = TestClient(create_app(Settings(APP_ENV="test", SPACEBIO_DEV_RETRIEVAL_DIAGNOSTICS=True)))
 
     response = client.post(
         "/dev/retrieval-diagnostics",
