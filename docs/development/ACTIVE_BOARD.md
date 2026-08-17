@@ -55,7 +55,7 @@ This runs `scripts/refresh_active_board.py`, which:
 Edit `TRACKED` and `CRITICAL_EDGES` in [`scripts/refresh_active_board.py`](../../scripts/refresh_active_board.py), then re-run `make refresh-board`.
 
 <!-- ACTIVE_BOARD:BEGIN -->
-**Last refreshed:** 2026-08-11 via `make refresh-board` (Project #6 + open PRs).
+**Last refreshed:** 2026-08-17 via `make refresh-board` (Project #6 + open PRs).
 
 ## Live board (auto-generated)
 
@@ -99,7 +99,7 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    inflight_empty["(none)"]
+    i67["#67 Developer retrieval diagnostics<br/>branch: feature/67-retrieval-diagnostics<br/>PR #141<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
@@ -128,6 +128,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
+| — | [#67](https://github.com/bluefate/spacebio-evidence-engine/issues/67) Developer retrieval diagnostics | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 

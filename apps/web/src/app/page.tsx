@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { isRetrievalDiagnosticsEnabled } from "@/config/devFlags";
+
 import styles from "./page.module.css";
 
 export default function HomePage() {
@@ -36,6 +38,11 @@ export default function HomePage() {
           <a className={styles.secondary} href="/corpus">
             View corpus
           </a>
+          {isRetrievalDiagnosticsEnabled() ? (
+            <a className={styles.secondary} href="/dev/retrieval">
+              Retrieval diagnostics
+            </a>
+          ) : null}
         </div>
       </section>
     </main>
