@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
 
 import { NewTabLink } from "@/components/a11y/NewTabLink";
 import type { SearchResponse } from "@/data/search";
@@ -17,23 +18,21 @@ const emptyResponse: SearchResponse = {
 };
 
 export function SearchClient() {
-  const [query, setQuery] = useState("");
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q")?.trim() ?? "";
+  const [query, setQuery] = useState(initialQuery);
   const [response, setResponse] = useState<SearchResponse>(emptyResponse);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const trimmed = query.trim();
+  async function runSearch(trimmed: string) {
     setSearched(true);
     setError(null);
-
     if (!trimmed) {
       setResponse(emptyResponse);
       return;
     }
-
     setLoading(true);
     try {
       const result = await fetch(`/api/search?q=${encodeURIComponent(trimmed)}`, {
@@ -49,6 +48,17 @@ export function SearchClient() {
     } finally {
       setLoading(false);
     }
+  }
+
+  useEffect(() => {
+    if (initialQuery) {
+      void runSearch(initialQuery);
+    }
+  }, [initialQuery]);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await runSearch(query.trim());
   }
 
   const hasResults = response.total > 0;

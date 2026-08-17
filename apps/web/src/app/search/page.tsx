@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { SearchClient } from "./SearchClient";
 import styles from "./search.module.css";
@@ -36,7 +37,9 @@ export default function SearchPage() {
         </p>
       </header>
 
-      <SearchClient />
+      <Suspense>
+        <SearchClient />
+      </Suspense>
     </main>
   );
 }

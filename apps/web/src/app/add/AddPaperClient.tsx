@@ -260,7 +260,7 @@ export function AddPaperClient() {
         </button>
       </form>
 
-      <div className={styles.inputRow}>
+      <div className={styles.inputRow} id="index-controls">
         <label className={styles.label} htmlFor="index-id">
           Publication id to index
         </label>

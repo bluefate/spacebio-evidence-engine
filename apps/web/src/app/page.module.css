@@ -18,7 +18,7 @@
 .content {
   position: relative;
   z-index: 1;
-  width: min(40rem, calc(100% - 3rem));
+  width: min(48rem, calc(100% - 3rem));
   margin: 0;
   padding: clamp(2rem, 6vw, 5rem);
   padding-bottom: clamp(3rem, 8vw, 6rem);
@@ -104,6 +104,64 @@
   border-color: #0b1f33;
 }
 
+.demo {
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.demoHeading,
+.demoSubheading,
+.demoLede {
+  margin: 0;
+  color: var(--fg);
+  -webkit-text-stroke: 1px #fff;
+  paint-order: stroke fill;
+  text-shadow:
+    1px 0 0 #fff,
+    -1px 0 0 #fff,
+    0 1px 0 #fff,
+    0 -1px 0 #fff;
+}
+
+.demoHeading {
+  font-size: 1.15rem;
+}
+
+.demoSubheading {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.demoLede {
+  max-width: 40rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.demoInline,
+.demoLink {
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.demoColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.demoList {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.demoList li {
+  line-height: 1.35;
+}
+
 @media (max-width: 720px) {
   .hero {
     align-items: center;
@@ -112,5 +170,9 @@
   .content {
     width: min(100%, calc(100% - 2rem));
     padding: 2rem 1rem 3rem;
+  }
+
+  .demoColumns {
+    grid-template-columns: 1fr;
   }
 }
