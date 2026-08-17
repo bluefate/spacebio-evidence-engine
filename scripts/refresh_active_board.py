@@ -92,6 +92,7 @@ TRACKED: dict[int, dict[str, str | bool]] = {
     72: {"title": "Candidate graph relationship types", "critical": False},
     46: {"title": "Hybrid retrieval", "critical": False},
     48: {"title": "Retrieval reranking", "critical": False},
+    74: {"title": "Graph extraction prototype", "critical": False},
     86: {"title": "ACTIVE_BOARD.md", "critical": False},
 }
 

@@ -14,9 +14,9 @@ Use cases are in
 
 ## Scope
 
-**Post-August MVP research.** No schema, extractors, or graph store.
-Store choice remains [#73](https://github.com/bluefate/spacebio-evidence-engine/issues/73)
-/ [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
+**Post-August MVP research.** No production graph store. Experimental
+extraction (#74) is documented in
+[GRAPH_EXTRACTION_PROTOTYPE.md](GRAPH_EXTRACTION_PROTOTYPE.md).
 
 ## Design rules
 
@@ -147,7 +147,7 @@ mixed into `contradicts` against primary Findings without a curator flag.
 
 ## Non-goals
 
-- Extraction implementation ([#74](https://github.com/bluefate/spacebio-evidence-engine/issues/74)).
+- Production or LLM extractors wired to `/ask`.
 - Accuracy metrics ([#75](https://github.com/bluefate/spacebio-evidence-engine/issues/75)).
 - Human validation UI ([#76](https://github.com/bluefate/spacebio-evidence-engine/issues/76)).
 - Causal graphs, gene-regulation edges, or citation-network scraping.
@@ -155,6 +155,7 @@ mixed into `contradicts` against primary Findings without a curator flag.
 ## Related documents
 
 - [Candidate graph entity types](GRAPH_ENTITY_TYPES.md)
+- [Graph extraction prototype](GRAPH_EXTRACTION_PROTOTYPE.md)
 - [Knowledge graph use cases](../architecture/KNOWLEDGE_GRAPH_USE_CASES.md)
 - [Citation strategy](../rag/CITATION_STRATEGY.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)

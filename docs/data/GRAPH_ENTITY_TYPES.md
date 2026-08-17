@@ -8,10 +8,10 @@ corpus. This note supports [issue #71](https://github.com/bluefate/spacebio-evid
 
 ## Scope
 
-**Post-August MVP research.** This document does not add database tables,
-extraction jobs, or a graph store. It does not choose Neo4j versus PostgreSQL
-([#73](https://github.com/bluefate/spacebio-evidence-engine/issues/73),
-[#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77)).
+**Post-August MVP research.** No production graph store. An experimental
+gazetteer extractor exists for issue #74
+([GRAPH_EXTRACTION_PROTOTYPE.md](GRAPH_EXTRACTION_PROTOTYPE.md)); it is not
+wired to `/ask`.
 
 Relationship types are specified in [GRAPH_RELATIONSHIP_TYPES.md](GRAPH_RELATIONSHIP_TYPES.md)
 ([#72](https://github.com/bluefate/spacebio-evidence-engine/issues/72)).
@@ -136,6 +136,7 @@ infiltration in skeletal muscle.
 
 - [Knowledge graph use cases](../architecture/KNOWLEDGE_GRAPH_USE_CASES.md)
 - [Candidate graph relationship types](GRAPH_RELATIONSHIP_TYPES.md)
+- [Graph extraction prototype](GRAPH_EXTRACTION_PROTOTYPE.md)
 - [Data dictionary](DATA_DICTIONARY.md)
 - [Metadata schema](METADATA_SCHEMA.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
