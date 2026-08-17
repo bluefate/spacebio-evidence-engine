@@ -6,10 +6,9 @@ Identify concrete, user-facing scenarios where a knowledge graph would improve h
 
 ## Scope
 
-This document is **post-August MVP** exploratory work. It does not commit to
-building a graph database. Store comparison is
-[GRAPH_STORE_COMPARISON.md](GRAPH_STORE_COMPARISON.md) (#73). Productization
-is [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
+This document is **post-August MVP** exploratory use cases. A graph database
+is **not** in the product (ADR-011 / #77). Store comparison:
+[GRAPH_STORE_COMPARISON.md](GRAPH_STORE_COMPARISON.md) (ADR-010).
 
 ## Use cases
 
@@ -52,13 +51,12 @@ is [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
 
 - Real-time graph queries in the August MVP.
 - Automated entity extraction from PDFs.
-- Committing to Neo4j versus PostgreSQL graph extensions — comparison drafted in
-  [GRAPH_STORE_COMPARISON.md](GRAPH_STORE_COMPARISON.md) (issue #73). Store
-  productization remains [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
+- Committing to Neo4j versus PostgreSQL graph extensions — comparison in
+  [GRAPH_STORE_COMPARISON.md](GRAPH_STORE_COMPARISON.md) (ADR-010). Product
+  go/no-go: **no graph database** (ADR-011 / #77).
 
-These remaining decisions are [#74](https://github.com/bluefate/spacebio-evidence-engine/issues/74)
-(extractor, already prototyped), human validation [#76](https://github.com/bluefate/spacebio-evidence-engine/issues/76),
-and whether to ship a graph product [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
+Extractor (#74), eval (#75), and human validation (#76) remain research
+artifacts and are not answer-path features.
 
 ## Success criteria for future graph work
 

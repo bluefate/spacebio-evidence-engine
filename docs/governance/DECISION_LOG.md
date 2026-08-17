@@ -22,7 +22,8 @@ Accepted baseline for the end-of-August 2026 MVP. Single-file decision log (no p
 | ADR-007 | Use Apache-2.0 license | Accepted | Confirmed; already in repository `LICENSE` |
 | ADR-008 | Embedding provider ABC (`EmbeddingProvider`) | Accepted | Issue #39. `embed_documents` / `embed_query` + `model_name` / `dimension`. No vendor imports in the interface module; local ST and optional OpenAI are separate implementations. |
 | ADR-009 | Language model provider ABC (`LanguageModelProvider`) | Accepted | Issue #51. `generate` / `chat` with optional `structured_output` and `UsageMetadata`. No vendor imports in the interface module; concrete OpenAI/local clients are separate implementations. |
-| ADR-010 | Post-MVP graph modeling stays in PostgreSQL; do not add Neo4j until traversal/curation needs exceed SQL | Proposed | Issue #73. Comparison: [GRAPH_STORE_COMPARISON.md](../architecture/GRAPH_STORE_COMPARISON.md). Extends ADR-003. Owner merge of the #73 PR records this decision. Whether to ship any graph product remains [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77). |
+| ADR-010 | Post-MVP graph *modeling* (if any) uses PostgreSQL adjacency tables, not Neo4j | Accepted | Issue #73 / PR #156. [GRAPH_STORE_COMPARISON.md](../architecture/GRAPH_STORE_COMPARISON.md). Extends ADR-003. |
+| ADR-011 | Do not add a graph database post-MVP | Proposed | Issue #77. No Neo4j, Apache AGE, or other graph engine in Compose or application code. Catalogs (#70–#72), experimental extractor (#74), eval (#75), and human validation workflow (#76) remain research artifacts. No follow-up implementation issues. Owner merge of the #77 PR records this decision. |
 
 ## Accepted product and delivery decisions (2026-08-04)
 
@@ -104,6 +105,31 @@ Accepted baseline for the end-of-August 2026 MVP. Single-file decision log (no p
 - User accounts / IAM
 - Final benchmark question set (start with draft 5–10)
 - Risk owners, release approvers, requirement ID freeze
+
+## ADR-011 — no graph database (issue #77)
+
+**Decision (go/no-go): no.** Do not introduce Neo4j, Apache AGE, or any other
+graph database as a product component after the August MVP.
+
+**Rationale**
+
+- Citation-first RAG already stores passages and chunks in PostgreSQL (ADR-001,
+  ADR-002). A second store would duplicate ids and can drift on reprocess.
+- ADR-010: even *if* graph rows exist later, they belong in PostgreSQL tables
+  with FKs, not Cypher.
+- Experimental gazetteer output is `unverified` (#74/#75). Human validation
+  (#76) forbids unverified claims on the answer path. There is nothing trusted
+  to load into a graph engine.
+- The corpus is 23 papers. UC1–UC5 are filter/join patterns, not a curator
+  graph UI.
+- A Neo4j (or AGE) service would add Compose, secrets, and a failure mode to a
+  local demo that is already the highest product risk.
+
+**If yes (not taken):** would have filed follow-up implementation issues off
+the August critical path. **Not filed.**
+
+Re-open only if a curator visualization or >3-hop traversal becomes an explicit
+product requirement.
 
 ## Related documents
 - [Architecture overview](../architecture/ARCHITECTURE.md)

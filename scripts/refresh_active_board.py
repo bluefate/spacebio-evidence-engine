@@ -96,6 +96,7 @@ TRACKED: dict[int, dict[str, str | bool]] = {
     75: {"title": "Evaluate graph extraction accuracy", "critical": False},
     65: {"title": "Study comparison page", "critical": False},
     73: {"title": "Neo4j vs PostgreSQL graph modeling", "critical": False},
+    77: {"title": "Graph database go/no-go", "critical": False},
     86: {"title": "ACTIVE_BOARD.md", "critical": False},
 }
 

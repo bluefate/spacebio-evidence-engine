@@ -67,13 +67,12 @@ Connection settings are documented in `.env.example` (`DATABASE_URL`, `POSTGRES_
 
 ## Future storage
 
-Prefer **PostgreSQL entity/relationship tables** with foreign keys to
-publications and chunks (ADR-010 draft, issue #73). See
+**ADR-011:** no graph database in the product. Optional later PostgreSQL
+entity/relationship *tables* (ADR-010) would still use foreign keys to
+publications and chunks if that work is ever scheduled. See
 [GRAPH_STORE_COMPARISON.md](GRAPH_STORE_COMPARISON.md).
 
-Neo4j remains optional later if curator visualization or multi-hop traversal
-exceeds SQL, and only after [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77).
-Do not add Neo4j as a Compose or application dependency in this increment.
+Do not add Neo4j or Apache AGE as a Compose or application dependency.
 
 Proposed **entity types** (#71) and **relationship types** (#72) for that graph
 (research only): [GRAPH_ENTITY_TYPES.md](../data/GRAPH_ENTITY_TYPES.md),
