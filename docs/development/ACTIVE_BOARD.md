@@ -99,13 +99,13 @@ flowchart TB
     i86["#86 ACTIVE_BOARD.md"]
   end
   subgraph inflight [In flight — do not claim]
-    inflight_empty["(none)"]
+    i67["#67 Developer retrieval diagnostics<br/>branch: feature/67-retrieval-diagnostics<br/>PR #141<br/>owner: bluefate<br/>status: PR Open"]
   end
   subgraph nextCritical [Critical path — available / blocked]
     nextCritical_empty["(none)"]
   end
   subgraph nextParallel [Parallel-safe picks — available now]
-    i67["#67 Developer retrieval diagnostics"]
+    nextParallel_empty["(none)"]
   end
   i20 --> i27
   i27 --> i28
@@ -128,7 +128,7 @@ Agents: choose **one** issue, claim it, run `make refresh-board`, commit this fi
 
 | Priority | Issue | Status | When to take it | Avoid if… |
 | ---: | --- | --- | --- | --- |
-| 1 | [#67](https://github.com/bluefate/spacebio-evidence-engine/issues/67) Developer retrieval diagnostics | Planning | Parallel-safe now | Overlap with in-flight files |
+| — | [#67](https://github.com/bluefate/spacebio-evidence-engine/issues/67) Developer retrieval diagnostics | PR Open | Already claimed | **Do not claim** |
 
 <!-- ACTIVE_BOARD:END -->
 
