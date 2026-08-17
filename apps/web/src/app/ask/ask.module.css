@@ -194,7 +194,7 @@
   padding: 0.7rem 1rem;
   border: 1px solid var(--accent-strong);
   border-radius: 0.35rem;
-  background: var(--accent);
+  background: var(--accent-strong);
   color: #fff;
   font: inherit;
   font-weight: 700;

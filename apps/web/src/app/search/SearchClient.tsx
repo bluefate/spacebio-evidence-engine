@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
+import { NewTabLink } from "@/components/a11y/NewTabLink";
 import type { SearchResponse } from "@/data/search";
 
 import styles from "./search.module.css";
@@ -67,12 +68,20 @@ export function SearchClient() {
         <div className={styles.inputRow}>
           <input
             id="corpus-search"
+            name="q"
+            type="search"
+            autoComplete="off"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="microgravity skeletal muscle"
             className={styles.input}
           />
-          <button className={styles.button} type="submit" disabled={loading}>
+          <button
+            className={styles.button}
+            type="submit"
+            disabled={loading}
+            aria-busy={loading}
+          >
             {loading ? "Searching" : "Search"}
           </button>
         </div>
@@ -128,10 +137,10 @@ export function SearchClient() {
                   </dl>
                   <p>{publication.notes}</p>
                   <div className={styles.actions}>
-                    <Link href={`/publications/${publication.publicationId}`}>Details</Link>
-                    <a href={publication.sourceUrl} target="_blank" rel="noreferrer">
-                      Source
-                    </a>
+                    <Link href={`/publications/${publication.publicationId}`}>
+                      Details for {publication.publicationId}
+                    </Link>
+                    <NewTabLink href={publication.sourceUrl}>Source</NewTabLink>
                   </div>
                 </article>
               ))}
@@ -162,9 +171,7 @@ export function SearchClient() {
                     <div>
                       <dt>Source</dt>
                       <dd>
-                        <a href={passage.sourceUrl} target="_blank" rel="noreferrer">
-                          Original publication
-                        </a>
+                        <NewTabLink href={passage.sourceUrl}>Original publication</NewTabLink>
                       </dd>
                     </div>
                   </dl>

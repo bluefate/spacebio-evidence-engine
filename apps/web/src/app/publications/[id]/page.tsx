@@ -9,6 +9,8 @@ import {
   type CorpusPublication,
 } from "@/data/corpus";
 
+import { NewTabLink } from "@/components/a11y/NewTabLink";
+
 import styles from "./publication-detail.module.css";
 
 const publications = corpus as CorpusPublication[];
@@ -34,9 +36,9 @@ function DetailRow({
 
 function ExternalLink({ href, children }: { href: string; children: string }) {
   return (
-    <a className={styles.externalLink} href={href} target="_blank" rel="noreferrer">
+    <NewTabLink className={styles.externalLink} href={href}>
       {children}
-    </a>
+    </NewTabLink>
   );
 }
 
@@ -73,7 +75,7 @@ export default async function PublicationDetailPage({
   const chunks = publication.chunks ?? [];
 
   return (
-    <main className={styles.page}>
+    <main id="main-content" className={styles.page} tabIndex={-1}>
       <div className={styles.heroBackdrop} aria-hidden>
         <Image
           src="/brand/hero-atmosphere.png"

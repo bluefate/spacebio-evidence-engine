@@ -86,7 +86,7 @@ describe("EvidencePanel", () => {
     );
 
     expect(screen.getByTestId("evidence-item-C2")).toHaveAttribute("data-active", "true");
-    fireEvent.click(screen.getByRole("button", { name: "Show citation" }));
+    fireEvent.click(screen.getByRole("button", { name: "Show cited passage C1" }));
     expect(onSelectCitation).toHaveBeenCalledWith("C1");
   });
 

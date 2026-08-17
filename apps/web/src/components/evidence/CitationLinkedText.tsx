@@ -62,6 +62,7 @@ export function CitationLinkedText({
               key={`c-${segment.citationId}-${index}`}
               className={styles.brokenMarker}
               title={`Citation ${segment.citationId} is not available in evidence`}
+              aria-label={`Citation ${segment.citationId} is not available in evidence`}
               data-testid={`citation-marker-broken-${segment.citationId}`}
             >
               {segment.raw}
@@ -90,6 +91,7 @@ export function CitationLinkedText({
                 .join(" ")}
               onClick={() => onSelectCitation?.(segment.citationId)}
               aria-pressed={isActive}
+              aria-label={`Show evidence for citation ${segment.citationId}`}
               data-testid={`citation-marker-${segment.citationId}`}
             >
               {segment.raw}
@@ -101,7 +103,7 @@ export function CitationLinkedText({
                   className={styles.publicationLink}
                   data-testid={`citation-publication-${segment.citationId}`}
                 >
-                  Publication
+                  Publication {publicationId}
                 </Link>
               ) : (
                 <span

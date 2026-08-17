@@ -72,7 +72,12 @@ export function RetrievalDiagnosticsClient() {
             className={styles.topKInput}
           />
         </div>
-        <button className={styles.button} type="submit" disabled={loading}>
+        <button
+          className={styles.button}
+          type="submit"
+          disabled={loading}
+          aria-busy={loading}
+        >
           {loading ? "Inspecting" : "Inspect retrieval"}
         </button>
       </form>
