@@ -63,10 +63,11 @@ and Alembic migrations (best-effort when Docker is available).
 5. Download the 23 approved PDFs: `make fetch-pdfs`. Alternatively, copy approved PDFs to `data/pdfs/{publication_id}.pdf`.
 6. Ingest the downloaded PDFs: `make ingest` (loads `.env` automatically).
 7. To enable grounded `POST /ask`, set `OPENAI_API_KEY` in `.env` and ensure the configured embedding provider (e.g. `sentence-transformers/all-MiniLM-L6-v2`) is installed (`pip install -e ".[embeddings]"`).
-8. `make api` and `make web`.
-9. `curl -s http://localhost:8000/health`
-10. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
-11. `POST /ask` returning **503** is expected when `OPENAI_API_KEY` is unset, the embedding provider is unavailable, or the index is empty.
+8. Start the API in **one terminal** and leave it running: `make api`. Stop with Ctrl-C, not Ctrl-Z.
+9. In a **new terminal** (same repo folder), start the website and leave it running: `make web`.
+10. `curl -s http://localhost:8000/health`
+11. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
+12. `POST /ask` returning **503** is expected when `OPENAI_API_KEY` is unset, the embedding provider is unavailable, or the index is empty.
 
 ## Commands
 

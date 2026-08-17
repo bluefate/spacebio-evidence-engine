@@ -11,18 +11,30 @@ This is a **small library of 23 approved space biology papers** (microgravity an
 
 ### Run it on your computer
 
-You need [Docker](https://www.docker.com/) (for the database). In a terminal, from this project folder:
+You need [Docker](https://www.docker.com/) (for the database). `make api` and `make web` each **keep running** until you stop them, so they cannot share one terminal. Stop a server with **Ctrl-C**. Do not use Ctrl-Z (that parks the process and can leave port 8000 or 3000 busy).
+
+**First time, in one terminal** (from this project folder). This finishes and gives the prompt back:
 
 ```bash
 cp .env.example .env
 make setup
+```
+
+`make setup` installs tools and starts the database. It does **not** download all the PDFs or turn on live Q&A.
+
+**Then leave this running in that same window:**
+
+```bash
 make api    # backend — http://localhost:8000
+```
+
+**Open a new terminal window**, `cd` into the same project folder, and run:
+
+```bash
 make web    # website — http://localhost:3000
 ```
 
 Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
-
-`make setup` installs tools and starts the database. It does **not** download all the PDFs or turn on live Q&A.
 
 ### What to show (works today)
 
@@ -157,7 +169,15 @@ Supporting deep-dive documentation lives under [docs/](docs/README.md).
 ```bash
 make setup
 make setup-check
+```
+
+Then **two windows** (each command stays running; stop with Ctrl-C, not Ctrl-Z):
+
+```bash
+# window 1
 make api    # http://localhost:8000
+
+# window 2 (new terminal, same folder)
 make web    # http://localhost:3000
 ```
 
@@ -174,8 +194,9 @@ citation UI, study compare (`/compare`), optional hybrid retrieval and rerank
 (off by default), experimental graph extractor (not on `/ask`). **No graph
 database** (ADR-011).
 
-Local `make setup` does **not** ingest the 23 PDFs or produce live answers:
-`POST /ask` is **503** until `GroundedAnswerService` is wired. See
+Local `make setup` does **not** ingest the 23 PDFs. For live Ask, run
+`make fetch-pdfs`, `make ingest`, and set `OPENAI_API_KEY`. Without that,
+`POST /ask` fails closed (often **503**) instead of inventing answers. See
 [LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
 
 ## Architecture position
