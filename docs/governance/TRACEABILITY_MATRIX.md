@@ -28,6 +28,7 @@ Aligned with [decision log](DECISION_LOG.md) and [product requirements](../produ
 | Study comparison | Cut from August MVP | e.g. [#65](https://github.com/bluefate/spacebio-evidence-engine/issues/65) (`post-august-mvp`) |
 | Hybrid / full-text / rerank retrieval | Vector-only for August | e.g. [#45](https://github.com/bluefate/spacebio-evidence-engine/issues/45), [#46](https://github.com/bluefate/spacebio-evidence-engine/issues/46), [#48](https://github.com/bluefate/spacebio-evidence-engine/issues/48) |
 | Entity inspection / extraction | Free-text metadata only in August | Post-August |
+| Human validation of extracted graph claims | Candidate claims remain unverified until review | [Validation workflow](VALIDATION_WORKFLOW.md), [#76](https://github.com/bluefate/spacebio-evidence-engine/issues/76) |
 | Knowledge graph view / Neo4j | Deferred | [Knowledge-graph milestone](https://github.com/bluefate/spacebio-evidence-engine/issues?q=label%3Amilestone%3Aknowledge-graph) |
 
 ## Project board
