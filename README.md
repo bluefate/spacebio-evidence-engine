@@ -38,9 +38,9 @@ Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL
 ### What will not look like a full Q&A demo yet
 
 - Paper PDFs are **not** stored in git (`data/pdfs/` is ignored).
-- There is **`make ingest`**: put `{publication_id}.pdf` in `data/pdfs/` (gitignored), load `.env`, then run ingest. Search can show indexed passages when the API is up.
+- There is **`make fetch-pdfs`**: download the 23 approved OA PDFs into `data/pdfs/` from `august_mvp_corpus_manifest.csv`. Then **`make ingest`** indexes them into chunks. Search can show indexed passages when the API is up.
 - **Ask** needs ingest plus embeddings (and usually `OPENAI_API_KEY` for generation). Without that it reports a failure instead of inventing an answer.
-- **Add paper** (`/add`) needs the #165 register API. Paywalled licenses are rejected. Papers land as `local_*` extras pending review.
+- **Add paper** (`/add`) registers **local extras** (`local_*`, pending review), not the approved 23. Paywalled licenses are rejected. Register success is not the same as indexed.
 
 A fair demo right now is **browse the library and compare papers**. A later demo would load PDFs into the local database, then Ask a question and click citations.
 
