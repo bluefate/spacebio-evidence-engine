@@ -6,7 +6,7 @@
 Define and build a citation-first evidence engine for a controlled corpus of open-access space biology publications.
 
 ## Scope
-The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, passage-level citations, evidence sufficiency, and a controlled corpus of **23** open-access publications on **microgravity and skeletal muscle** (see [corpus inventory](docs/data/CORPUS_INVENTORY.md)). Study comparison and several advanced features are deferred past August.
+The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, passage-level citations, evidence sufficiency, and a controlled corpus of **23** open-access publications on **microgravity and skeletal muscle** (see [corpus inventory](docs/data/CORPUS_INVENTORY.md)). A **post-August** inventory compare UI is at `/compare`. Auth, public hosting, and a graph database are out of product (ADR-011 for graph DB).
 
 ## Repositories
 
@@ -126,13 +126,24 @@ Details (tools, ports, `.env.example`, clean-machine checklist):
 [docs/operations/LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
 
 ## Current status
-Documentation-first project with locked Build Phase decisions and an **end-of-August 2026 MVP** (deadline 2026-08-31). Implementation scaffolding is next. See [plan.md](plan.md) and [decision log](docs/governance/DECISION_LOG.md).
+
+August MVP **implementation is on `main`**: FastAPI, Next.js, PostgreSQL/pgvector,
+ingestion/chunk/embed/search modules, grounded-answer schema and `/ask` route,
+citation UI, study compare (`/compare`), optional hybrid retrieval and rerank
+(off by default), experimental graph extractor (not on `/ask`). **No graph
+database** (ADR-011).
+
+Local `make setup` does **not** ingest the 23 PDFs or produce live answers:
+`POST /ask` is **503** until `GroundedAnswerService` is wired. See
+[LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
 
 ## Architecture position
 Accepted stack for the August MVP:
 
 - Python 3.12+, FastAPI, PostgreSQL, pgvector, **SQLAlchemy 2.x + Alembic**, Pydantic API schemas, PyMuPDF, Sentence Transformers (`all-MiniLM-L6-v2`), optional OpenAI (`gpt-4o-mini`, **$50/mo hard cap**), Next.js, TypeScript, Docker Compose, Pytest, Ruff, **pyright**, GitHub Actions, Mermaid.
-- Neo4j, study compare UI, hybrid retrieval, auth, and public hosting are deferred past August.
+- Study compare UI **shipped** at `/compare` (inventory fields only; no `/compare` API).
+- Hybrid retrieval and lexical rerank **exist** and are optional / off by default.
+- **No Neo4j or other graph database** (ADR-011). Auth and public hosting remain deferred.
 - Advanced multi-agent orchestration and advanced contradiction detection remain future capabilities.
 
 ## Start here

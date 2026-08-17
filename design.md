@@ -167,8 +167,8 @@ flowchart TD
 | Ask | Natural-language Q&A | Query input, submit, loading, answer, citation list |
 | Passage inspector | Verify claim | Passage excerpt, title, section, page, source link |
 | Corpus list (light) | See included papers | Title, topic, license/ingestion status |
-| Study compare | Deferred past August | — |
-| Maintainer | CLI ingest jobs | Manifest entries, status, extraction quality flags |
+| Study compare | Inventory UI at `/compare` (#65) | Organism/system labels; no `/compare` API |
+| Maintainer | CLI ingest jobs | Manifest entries, status, extraction quality flags — **no `make ingest` yet** |
 
 UI priority: **citation visibility over decorative chrome**.
 
@@ -231,7 +231,7 @@ Base: FastAPI under `/api/v1` (exact prefix finalized at scaffolding). All scien
 | `POST` | `/search` | `{ "query": str, "top_k": int, "filters"?: object }` | `{ "results": [RankedPassage...] }` |
 | `POST` | `/ask` | `{ "question": str, "top_k"?: int, "filters"?: object }` | `{ "answer": str, "citations": [...], "sufficiency": "ok"|"insufficient", "retrieval": {...} }` |
 | `GET` | `/passages/{id}` | — | `Passage` with location fields |
-| `POST` | `/compare` | — | **Deferred** past August MVP |
+| `POST` | `/compare` | — | **Not implemented** (compare is a web inventory page, not this API) |
 | CLI | `ingest` / `eval` jobs | manifest entry / benchmark run | status on stdout / DB rows |
 
 ### Example `/ask` response
@@ -356,8 +356,8 @@ CI/CD intent: GitHub Actions for lint, typecheck, tests; no secrets in repo.
 | Embeddings | `all-MiniLM-L6-v2` local | $0 cloud embeddings |
 | LLM | Optional OpenAI `gpt-4o-mini`; $50/mo hard cap | Bound spend; local $0 mode |
 | Frontend | Next.js + TypeScript | Citation inspection UX |
-| Graph DB (Neo4j) | Deferred past August | Not August-critical |
-| Study compare | Deferred past August | Schedule cut for 2026-08-31 |
+| Graph DB (Neo4j) | **No** (ADR-011 / #77) | Not in Compose or `/ask` |
+| Study compare | Inventory UI `/compare` (#65) | Does not invent findings |
 | Multi-agent orchestration | Deferred | Focus on retrieval quality and citations |
 | Auth | Out of August MVP | Anonymous local use |
 | Deploy platform | Local Compose only for August | Public host deferred |
@@ -373,8 +373,10 @@ Tracked formally in [DECISION_LOG.md](docs/governance/DECISION_LOG.md).
 - Public hosting platform
 - Production secret manager / observability stack
 - User accounts / IAM
-- Hybrid retrieval, reranking, study compare UI
+- Live corpus ingest CLI and wired `GroundedAnswerService` (local `/ask` still 503 without it)
 - Per-file ADR documents (single decision log for now)
+
+Hybrid retrieval (#46) and rerank (#48) **exist** (optional / off by default). Study compare UI **exists**. Graph database is **rejected** (ADR-011), not deferred.
 
 ---
 
@@ -383,4 +385,4 @@ Tracked formally in [DECISION_LOG.md](docs/governance/DECISION_LOG.md).
 | Date | Change |
 |------|--------|
 | 2026-08-04 | Initial Build Phase `design.md` created from existing architecture package |
-| 2026-08-04 | Locked stack and compressed August MVP scope per decision log |
+| 2026-08-17 | As-built: compare UI, optional hybrid/rerank, ADR-010/011 (no graph DB); local `/ask` still unwired |

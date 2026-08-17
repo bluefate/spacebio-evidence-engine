@@ -87,7 +87,9 @@ FastAPI exposes these in OpenAPI via `POST /ask` (`response_model=GroundedAnswer
 
 `spacebio_evidence_engine.rag.GroundedAnswerService` is the backend orchestration boundary for issue #60:
 
-1. Retrieve ranked `SemanticSearchHit` records from the controlled corpus (August MVP vector-only path; hybrid retrieval remains deferred).
+1. Retrieve ranked hits from the controlled corpus. Default August path is
+   vector search; **hybrid retrieval (#46) and optional lexical rerank (#48)
+   exist** and stay off unless configured.
 2. Assemble evidence with `assemble_context`, preserving chunk IDs, publication ID/title, section, page, source URL, and excerpts.
 3. Evaluate sufficiency before generation. Insufficient evidence returns the fixed insufficient-evidence response and does not call the LLM.
 4. Render the versioned grounded-answer prompt and call `LanguageModelProvider.chat`.
@@ -133,7 +135,8 @@ sequenceDiagram
 ## MVP RAG requirements
 - Controlled corpus only.
 - Citation-preserving chunks.
-- Vector-only semantic retrieval (default top-k 8; hybrid keyword deferred post-August).
+- Vector semantic retrieval (default top-k 8). Hybrid keyword + optional rerank
+  are implemented post-August and are not on unless flags/env enable them.
 - Grounded generation.
 - Insufficient-evidence response path.
 - Evaluation with benchmark questions.

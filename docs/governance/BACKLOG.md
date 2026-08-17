@@ -17,7 +17,7 @@ Human-readable index of GitHub issues with URLs. **Source of truth for status re
 Prioritize foundation → corpus (~10–15 papers) → ingestion → vector retrieval → grounded answers → minimal web UI.
 Issues labeled `post-august-mvp` are deferred past 2026-08-31.
 
-_Generated from repository issues (77 total). Last updated: 2026-08-17._
+_Generated from repository issues (tracked through #77 plus later docs). Last updated: 2026-08-17 (states synced to GitHub; #159 open)._
 
 ## Foundation
 
@@ -67,7 +67,7 @@ _Generated from repository issues (77 total). Last updated: 2026-08-17._
 | [32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) | CLOSED | Implement publication chunking strategy | `august-mvp` |
 | [33](https://github.com/bluefate/spacebio-evidence-engine/issues/33) | CLOSED | Define and persist chunk metadata schema | `august-mvp` |
 | [34](https://github.com/bluefate/spacebio-evidence-engine/issues/34) | CLOSED | Implement ingestion status tracking | `august-mvp` |
-| [35](https://github.com/bluefate/spacebio-evidence-engine/issues/35) | OPEN | Implement publication reprocessing workflow | |
+| [35](https://github.com/bluefate/spacebio-evidence-engine/issues/35) | CLOSED | Implement publication reprocessing workflow | |
 | [36](https://github.com/bluefate/spacebio-evidence-engine/issues/36) | CLOSED | Implement ingestion error reporting | `august-mvp` |
 | [37](https://github.com/bluefate/spacebio-evidence-engine/issues/37) | CLOSED | Add unit tests for ingestion components | `august-mvp` |
 | [38](https://github.com/bluefate/spacebio-evidence-engine/issues/38) | CLOSED | Add integration tests for end-to-end ingestion path | `august-mvp` |
@@ -83,9 +83,9 @@ _Generated from repository issues (77 total). Last updated: 2026-08-17._
 | [43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) | CLOSED | Implement vector indexing for chunk embeddings | `august-mvp` |
 | [44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) | CLOSED | Implement semantic vector search | `august-mvp` |
 | [45](https://github.com/bluefate/spacebio-evidence-engine/issues/45) | CLOSED | Implement PostgreSQL full-text search for chunks | `post-august-mvp` |
-| [46](https://github.com/bluefate/spacebio-evidence-engine/issues/46) | OPEN | Implement hybrid retrieval combining vector and full-text search | `post-august-mvp` |
+| [46](https://github.com/bluefate/spacebio-evidence-engine/issues/46) | CLOSED | Implement hybrid retrieval combining vector and full-text search | `post-august-mvp` |
 | [47](https://github.com/bluefate/spacebio-evidence-engine/issues/47) | CLOSED | Implement retrieval filtering by metadata | `august-mvp` |
-| [48](https://github.com/bluefate/spacebio-evidence-engine/issues/48) | OPEN | Implement retrieval reranking stage | `post-august-mvp` |
+| [48](https://github.com/bluefate/spacebio-evidence-engine/issues/48) | CLOSED | Implement retrieval reranking stage | `post-august-mvp` |
 | [49](https://github.com/bluefate/spacebio-evidence-engine/issues/49) | CLOSED | Implement retrieval logging for inputs, chunks, and scores | `august-mvp` |
 | [50](https://github.com/bluefate/spacebio-evidence-engine/issues/50) | CLOSED | Build retrieval evaluation harness against reference questions | `august-mvp` |
 
@@ -112,7 +112,7 @@ _Generated from repository issues (77 total). Last updated: 2026-08-17._
 | [62](https://github.com/bluefate/spacebio-evidence-engine/issues/62) | CLOSED | Build question answering page | `august-mvp` |
 | [63](https://github.com/bluefate/spacebio-evidence-engine/issues/63) | CLOSED | Build evidence panel for cited passages | `august-mvp` |
 | [64](https://github.com/bluefate/spacebio-evidence-engine/issues/64) | CLOSED | Build publication detail page | `august-mvp` |
-| [65](https://github.com/bluefate/spacebio-evidence-engine/issues/65) | OPEN | Build study comparison page | `post-august-mvp` |
+| [65](https://github.com/bluefate/spacebio-evidence-engine/issues/65) | CLOSED | Build study comparison page | `post-august-mvp` |
 | [66](https://github.com/bluefate/spacebio-evidence-engine/issues/66) | CLOSED | Wire citation links from answers to evidence and publications | `august-mvp` |
 | [67](https://github.com/bluefate/spacebio-evidence-engine/issues/67) | CLOSED | Add developer retrieval diagnostics view | `post-august-mvp` |
 | [68](https://github.com/bluefate/spacebio-evidence-engine/issues/68) | CLOSED | Improve web accessibility for core flows | `post-august-mvp` |
@@ -123,11 +123,17 @@ _Generated from repository issues (77 total). Last updated: 2026-08-17._
 | # | State | Title | Labels |
 |---|-------|-------|--------|
 | [70](https://github.com/bluefate/spacebio-evidence-engine/issues/70) | CLOSED | Define knowledge graph use cases for space biology evidence | `post-august-mvp` |
-| [71](https://github.com/bluefate/spacebio-evidence-engine/issues/71) | OPEN | Define candidate entity types for graph modeling | `post-august-mvp` |
-| [72](https://github.com/bluefate/spacebio-evidence-engine/issues/72) | OPEN | Define candidate relationship types for graph modeling | `post-august-mvp` |
-| [73](https://github.com/bluefate/spacebio-evidence-engine/issues/73) | OPEN | Compare Neo4j versus PostgreSQL graph modeling options | `post-august-mvp` |
-| [74](https://github.com/bluefate/spacebio-evidence-engine/issues/74) | OPEN | Build entity-relationship extraction prototype from passages | `post-august-mvp` |
-| [75](https://github.com/bluefate/spacebio-evidence-engine/issues/75) | OPEN | Evaluate graph extraction accuracy on sample corpus | `post-august-mvp` |
-| [76](https://github.com/bluefate/spacebio-evidence-engine/issues/76) | OPEN | Design human validation workflow for extracted graph claims | `post-august-mvp` |
-| [77](https://github.com/bluefate/spacebio-evidence-engine/issues/77) | OPEN | Decide whether to add a graph database post-MVP | `post-august-mvp` |
+| [71](https://github.com/bluefate/spacebio-evidence-engine/issues/71) | CLOSED | Define candidate entity types for graph modeling | `post-august-mvp` |
+| [72](https://github.com/bluefate/spacebio-evidence-engine/issues/72) | CLOSED | Define candidate relationship types for graph modeling | `post-august-mvp` |
+| [73](https://github.com/bluefate/spacebio-evidence-engine/issues/73) | CLOSED | Compare Neo4j versus PostgreSQL graph modeling options | `post-august-mvp` |
+| [74](https://github.com/bluefate/spacebio-evidence-engine/issues/74) | CLOSED | Build entity-relationship extraction prototype from passages | `post-august-mvp` |
+| [75](https://github.com/bluefate/spacebio-evidence-engine/issues/75) | CLOSED | Evaluate graph extraction accuracy on sample corpus | `post-august-mvp` |
+| [76](https://github.com/bluefate/spacebio-evidence-engine/issues/76) | CLOSED | Design human validation workflow for extracted graph claims | `post-august-mvp` |
+| [77](https://github.com/bluefate/spacebio-evidence-engine/issues/77) | CLOSED | Decide whether to add a graph database post-MVP | `post-august-mvp` |
+
+## Docs
+
+| # | State | Title | Labels |
+|---|-------|-------|--------|
+| [159](https://github.com/bluefate/spacebio-evidence-engine/issues/159) | OPEN | Sync docs after backlog close for local build | |
 
