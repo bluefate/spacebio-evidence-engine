@@ -25,3 +25,10 @@ variables make smoke execution deterministic:
 
 Generated notebook outputs under `notebooks/generated/` are review artifacts and
 do not need to be committed.
+
+## Graph extraction (experimental)
+
+Issue #74 is tested Python, not a notebook. See
+[experiments/graph_extraction/README.md](../experiments/graph_extraction/README.md).
+Do not use it for production answers.
+

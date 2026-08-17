@@ -1,0 +1,26 @@
+[
+  {
+    "chunk_id": "chk_mouse_hu_atrophy",
+    "publication_id": "pub_fixture_mouse",
+    "section": "Results",
+    "page": 4,
+    "source_url": "https://doi.org/10.0/fixture-mouse",
+    "chunk_text": "Hindlimb unloading caused skeletal muscle atrophy in mice after 14 days."
+  },
+  {
+    "chunk_id": "chk_human_iss_proteome",
+    "publication_id": "pub_fixture_human",
+    "section": "Results",
+    "page": 2,
+    "source_url": "https://doi.org/10.0/fixture-human",
+    "chunk_text": "Spaceflight on the ISS changed the skeletal muscle proteome of two astronauts."
+  },
+  {
+    "chunk_id": "chk_no_match",
+    "publication_id": "pub_fixture_empty",
+    "section": "Discussion",
+    "page": 9,
+    "source_url": "https://doi.org/10.0/fixture-empty",
+    "chunk_text": "This paragraph discusses spacecraft avionics and does not name an organism."
+  }
+]
