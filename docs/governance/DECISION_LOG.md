@@ -22,6 +22,7 @@ Accepted baseline for the end-of-August 2026 MVP. Single-file decision log (no p
 | ADR-007 | Use Apache-2.0 license | Accepted | Confirmed; already in repository `LICENSE` |
 | ADR-008 | Embedding provider ABC (`EmbeddingProvider`) | Accepted | Issue #39. `embed_documents` / `embed_query` + `model_name` / `dimension`. No vendor imports in the interface module; local ST and optional OpenAI are separate implementations. |
 | ADR-009 | Language model provider ABC (`LanguageModelProvider`) | Accepted | Issue #51. `generate` / `chat` with optional `structured_output` and `UsageMetadata`. No vendor imports in the interface module; concrete OpenAI/local clients are separate implementations. |
+| ADR-010 | Post-MVP graph modeling stays in PostgreSQL; do not add Neo4j until traversal/curation needs exceed SQL | Proposed | Issue #73. Comparison: [GRAPH_STORE_COMPARISON.md](../architecture/GRAPH_STORE_COMPARISON.md). Extends ADR-003. Owner merge of the #73 PR records this decision. Whether to ship any graph product remains [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77). |
 
 ## Accepted product and delivery decisions (2026-08-04)
 

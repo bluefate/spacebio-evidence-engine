@@ -159,8 +159,10 @@ mixed into `contradicts` against primary Findings without a curator flag.
 - [Knowledge graph use cases](../architecture/KNOWLEDGE_GRAPH_USE_CASES.md)
 - [Citation strategy](../rag/CITATION_STRATEGY.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
+- [Graph store comparison](../architecture/GRAPH_STORE_COMPARISON.md)
 
 ## Decision status
 
-Research proposal. Not an architecture decision and not a commitment to store
-these edges in Neo4j or PostgreSQL.
+Research catalog for edge types. Store choice: PostgreSQL-first draft in
+[GRAPH_STORE_COMPARISON.md](../architecture/GRAPH_STORE_COMPARISON.md) (ADR-010 / #73).
+Not a commitment to ship a graph product (#77).
