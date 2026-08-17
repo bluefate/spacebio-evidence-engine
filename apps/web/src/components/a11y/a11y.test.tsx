@@ -1,7 +1,8 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { HomeDemoLinks } from "@/app/HomeDemoLinks";
 import { AddPaperClient } from "@/app/add/AddPaperClient";
 import { AskClient } from "@/app/ask/AskClient";
 import { CompareClient } from "@/app/compare/CompareClient";
@@ -11,6 +12,10 @@ import { EvidencePanel } from "@/components/evidence/EvidencePanel";
 import { expectNoAxeViolations } from "@/test/axe";
 
 import { NewTabLink } from "./NewTabLink";
+
+vi.mock("next/navigation", () => ({
+  useSearchParams: () => new URLSearchParams(),
+}));
 
 afterEach(() => {
   cleanup();
@@ -95,6 +100,20 @@ describe("core flow accessibility", () => {
     const link = screen.getByRole("link", { name: /Source \(opens in a new tab\)/ });
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
+
+  it("labels home demo search and ask links", async () => {
+    const { container } = render(<HomeDemoLinks />);
+    expect(screen.getByRole("heading", { name: "Demo links" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "hindlimb unloading" })).toHaveAttribute(
+      "href",
+      "/search?q=hindlimb%20unloading",
+    );
+    expect(screen.getByRole("link", { name: "Index a registered paper" })).toHaveAttribute(
+      "href",
+      "/add#index-controls",
+    );
+    await expectNoAxeViolations(container);
   });
 
   it("labels add-paper DOI, PDF, and Index controls", async () => {

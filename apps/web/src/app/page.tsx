@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { isRetrievalDiagnosticsEnabled } from "@/config/devFlags";
 
+import { HomeDemoLinks } from "./HomeDemoLinks";
 import styles from "./page.module.css";
 
 export default function HomePage() {
@@ -50,6 +51,7 @@ export default function HomePage() {
             </a>
           ) : null}
         </div>
+        <HomeDemoLinks />
       </section>
     </main>
   );

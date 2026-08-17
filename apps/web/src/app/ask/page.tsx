@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { AskClient } from "./AskClient";
 import styles from "./ask.module.css";
@@ -37,7 +38,9 @@ export default function AskPage() {
         </p>
       </header>
 
-      <AskClient />
+      <Suspense>
+        <AskClient />
+      </Suspense>
     </main>
   );
 }

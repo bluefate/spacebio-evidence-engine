@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { CitationLinkedText, EvidencePanel } from "@/components/evidence";
 import type { CitationLinkLookup } from "@/components/evidence";
@@ -23,7 +24,8 @@ const emptyResponse: GroundedAnswerResponse = {
 };
 
 export function AskClient() {
-  const [question, setQuestion] = useState("");
+  const searchParams = useSearchParams();
+  const [question, setQuestion] = useState(searchParams.get("q")?.trim() ?? "");
   const [topK, setTopK] = useState(8);
   const [response, setResponse] = useState<GroundedAnswerResponse>(emptyResponse);
   const [loading, setLoading] = useState(false);
