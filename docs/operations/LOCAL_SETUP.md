@@ -257,6 +257,7 @@ contain high-entropy secret-looking values.
 
 ## Related documents
 
+- [How to demo script](HOW_TO_DEMO.md)
 - [AGENTS](../../AGENTS.md)
 - [Development guide](../development/DEVELOPMENT_GUIDE.md)
 - [Deployment architecture](../architecture/DEPLOYMENT_ARCHITECTURE.md)

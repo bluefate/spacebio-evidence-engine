@@ -34,7 +34,7 @@ make api    # backend — http://localhost:8000
 make web    # website — http://localhost:3000
 ```
 
-Open **http://localhost:3000** in a browser. More detail: [docs/operations/LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
+Open **http://localhost:3000** in a browser. Click-through script (10 search terms + 10 Ask questions): [docs/operations/HOW_TO_DEMO.md](docs/operations/HOW_TO_DEMO.md). Setup detail: [docs/operations/LOCAL_SETUP.md](docs/operations/LOCAL_SETUP.md).
 
 ### What to show (works today)
 
