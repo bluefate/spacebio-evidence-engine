@@ -163,6 +163,5 @@ mixed into `contradicts` against primary Findings without a curator flag.
 
 ## Decision status
 
-Research catalog for edge types. Store choice: PostgreSQL-first draft in
-[GRAPH_STORE_COMPARISON.md](../architecture/GRAPH_STORE_COMPARISON.md) (ADR-010 / #73).
-Not a commitment to ship a graph product (#77).
+Research catalog for edge types. Modeling: PostgreSQL-first (ADR-010).
+Product: no graph database (ADR-011 / #77).

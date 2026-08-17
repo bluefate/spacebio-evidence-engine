@@ -22,7 +22,7 @@ Architecture baseline **accepted**. See [decision log](../governance/DECISION_LO
 - Next.js with TypeScript: accepted for citation inspection UI.
 - Docker Compose: accepted for local PostgreSQL, API, and web; ingest via CLI/jobs.
 - **pyright**: primary type checker.
-- Neo4j: not an MVP or next-increment dependency; PostgreSQL-first graph modeling is drafted in [GRAPH_STORE_COMPARISON.md](GRAPH_STORE_COMPARISON.md) (ADR-010 / #73).
+- Neo4j / graph database: **no** (ADR-011 / #77). Modeling, if any, would be PostgreSQL tables (ADR-010).
 - Pytest, Ruff, GitHub Actions: accepted for quality gates.
 - Mermaid: accepted for architecture diagrams in documentation.
 - License: **Apache-2.0**.

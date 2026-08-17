@@ -13,8 +13,7 @@ extraction prototype that produces candidate entities, relationships, or claims
 from passages in the controlled corpus.
 
 It does **not** authorize a graph database, extraction pipeline, or answer-time
-graph reasoning. Those decisions remain deferred to the knowledge-graph issue
-set.
+graph reasoning. ADR-011 / #77: no graph database in the product.
 
 ## Workflow steps
 

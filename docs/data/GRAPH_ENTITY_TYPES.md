@@ -159,6 +159,5 @@ infiltration in skeletal muscle.
 
 ## Decision status
 
-Research proposal for post-August graph work. Not an architecture decision.
-[#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77) remains
-the human go/no-go for a graph database.
+Research proposal for post-August graph *vocabulary*. Not a graph database.
+ADR-011 / #77: no Neo4j or other graph engine in the product.

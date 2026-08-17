@@ -19,8 +19,8 @@ Options in scope:
    middle path; not recommended for the next increment (ops and provenance
    still need the same FK discipline as option 1).
 
-Out of scope: implementing a graph store, wiring gazetteer output (#74) into
-`/ask`, or deciding whether *any* graph product ships (#77).
+Out of scope: implementing a graph store or wiring gazetteer output (#74) into
+`/ask`. Product go/no-go is ADR-011 (#77): **no graph database**.
 
 ## Use cases under comparison
 
@@ -98,28 +98,27 @@ Required on extracted edges ([GRAPH_RELATIONSHIP_TYPES.md](../data/GRAPH_RELATIO
 citation-first engine. If Neo4j is added later, Postgres remains source of
 truth and Neo4j is a derived projection.
 
-## Recommendation (draft)
+## Recommendation (ADR-010) and product go/no-go (ADR-011)
 
-**Model graph entities and relationships in PostgreSQL first.** Do not add
-Neo4j as a dependency for the next graph increment.
+**Modeling:** If graph rows are stored at all, use PostgreSQL adjacency tables
+with `publication_id` / `chunk_id` foreign keys. Do not add Neo4j as a
+dependency for modeling.
 
-Suggested shape (not implemented here):
+**Product (issue #77 / ADR-011):** **No graph database.** Do not add Neo4j,
+Apache AGE, or another graph engine to Compose or application code. Catalogs,
+the experimental extractor, eval, and the validation workflow stay research
+artifacts. Grounded answers remain retrieval + citations only.
+
+Suggested PostgreSQL shape (not implemented; not required by ADR-011):
 
 - Tables aligned with #71/#72 catalogs, every text-derived row pointing at
   `publication_id` + `chunk_id`.
 - `verification_status` default `unverified`; never feed gazetteer output into
   grounded answers.
-- Recursive CTEs or application-level walks for UC1–UC5.
-- Revisit Neo4j only if [#77](https://github.com/bluefate/spacebio-evidence-engine/issues/77)
-  accepts a graph product **and** curator visualization or >3-hop traversal is
-  an explicit requirement.
-
-This extends ADR-003 (defer Neo4j for MVP) into the post-MVP research phase
-without closing #77.
 
 ## Related documents
 
-- [Decision log](../governance/DECISION_LOG.md) — ADR-010 draft
+- [Decision log](../governance/DECISION_LOG.md) — ADR-010, ADR-011
 - [Knowledge graph use cases](KNOWLEDGE_GRAPH_USE_CASES.md)
 - [Data architecture](DATA_ARCHITECTURE.md)
 - [Graph extraction prototype](../data/GRAPH_EXTRACTION_PROTOTYPE.md)
