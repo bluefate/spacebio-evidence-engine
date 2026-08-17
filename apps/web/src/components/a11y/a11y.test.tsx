@@ -19,6 +19,7 @@ vi.mock("next/navigation", () => ({
 
 afterEach(() => {
   cleanup();
+  vi.unstubAllGlobals();
 });
 
 describe("core flow accessibility", () => {
@@ -103,6 +104,18 @@ describe("core flow accessibility", () => {
   });
 
   it("labels home demo search and ask links", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          catalog_count: 23,
+          on_disk_count: 0,
+          missing_count: 23,
+          missing: ["pub_001"],
+        }),
+      }),
+    );
     const { container } = render(<HomeDemoLinks />);
     expect(screen.getByRole("heading", { name: "Demo links" })).toBeTruthy();
     expect(screen.getByRole("link", { name: "hindlimb unloading" })).toHaveAttribute(
@@ -113,6 +126,7 @@ describe("core flow accessibility", () => {
       "href",
       "/add#index-controls",
     );
+    expect(await screen.findByRole("button", { name: "Download missing PDFs" })).toBeTruthy();
     await expectNoAxeViolations(container);
   });
 

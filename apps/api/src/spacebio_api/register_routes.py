@@ -142,6 +142,46 @@ async def from_pdf(
     return _to_response(result, organism=organism_model, exposure=exposure)
 
 
+def _pdf_root(request: Request) -> Path:
+    settings: Settings = request.app.state.settings
+    root = Path(settings.pdf_storage_local_root)
+    if not root.is_absolute():
+        root = Path.cwd() / root
+    return root
+
+
+@router.get("/catalog-pdfs/status")
+def catalog_pdf_status(request: Request) -> dict[str, Any]:
+    from spacebio_evidence_engine.corpus.fetch import corpus_pdf_disk_status
+
+    return corpus_pdf_disk_status(_pdf_root(request))
+
+
+@router.post("/catalog-pdfs/fetch-missing")
+def fetch_missing_catalog_pdfs(request: Request) -> dict[str, Any]:
+    from spacebio_evidence_engine.corpus.fetch import fetch_corpus_pdfs
+
+    results = fetch_corpus_pdfs(_pdf_root(request), force=False)
+    downloaded = [item.publication_id for item in results if item.outcome == "downloaded"]
+    skipped = [item.publication_id for item in results if item.outcome.startswith("skipped_")]
+    failed = [
+        {"publication_id": item.publication_id, "message": item.message}
+        for item in results
+        if item.outcome.startswith("failed_")
+    ]
+    return {
+        "downloaded": downloaded,
+        "skipped": skipped,
+        "failed": failed,
+        "downloaded_count": len(downloaded),
+        "failed_count": len(failed),
+        "message": (
+            f"Downloaded {len(downloaded)} PDF(s). "
+            "This does not index or train. Run make ingest (or Index per paper) next."
+        ),
+    }
+
+
 @router.post("/{publication_id}/index")
 def index_publication(publication_id: str, request: Request) -> dict[str, Any]:
     session = _session(request)
