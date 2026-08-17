@@ -15,14 +15,7 @@ from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
 
 from spacebio_evidence_engine.db.models import Chunk, ChunkEmbedding, Publication
-from spacebio_evidence_engine.ingestion import (
-    ExtractionResult,
-    IngestionStatus,
-    chunk_extraction,
-    extract_pdf_from_storage,
-    transition_ingestion_status,
-)
-from spacebio_evidence_engine.ingestion.chunking import ChunkingResult, TextChunk
+from spacebio_evidence_engine.ingestion.chunking import ChunkingResult, TextChunk, chunk_extraction
 from spacebio_evidence_engine.ingestion.error_reporting import (
     IngestionErrorRecord,
     IngestionStage,
@@ -30,7 +23,12 @@ from spacebio_evidence_engine.ingestion.error_reporting import (
     create_ingestion_error_record,
 )
 from spacebio_evidence_engine.ingestion.errors import PDFExtractionError
-from spacebio_evidence_engine.ingestion.status import IngestionStatusEventLog
+from spacebio_evidence_engine.ingestion.extract import ExtractionResult, extract_pdf_from_storage
+from spacebio_evidence_engine.ingestion.status import (
+    IngestionStatus,
+    IngestionStatusEventLog,
+    transition_ingestion_status,
+)
 from spacebio_evidence_engine.storage.base import PDFStorage
 
 
