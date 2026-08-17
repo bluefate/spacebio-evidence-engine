@@ -72,5 +72,5 @@ A knowledge graph should be added only if at least one of the following becomes 
 - [Traceability matrix](../governance/TRACEABILITY_MATRIX.md) — tracks deferred knowledge graph work.
 - [Candidate graph entity types](../data/GRAPH_ENTITY_TYPES.md) — node catalog and provenance (#71).
 - [Candidate graph relationship types](../data/GRAPH_RELATIONSHIP_TYPES.md) — edges, passage linkage, and conflict/qualification (#72).
-- [Graph store comparison](GRAPH_STORE_COMPARISON.md) — Neo4j vs PostgreSQL (#73).
-- [Backlog](../governance/BACKLOG.md) — follow-up issues: [#70](https://github.com/bluefate/spacebio-evidence-engine/issues/70), [#71](https://github.com/bluefate/spacebio-evidence-engine/issues/71), [#72](https://github.com/bluefate/spacebio-evidence-engine/issues/72), [#73](https://github.com/bluefate/spacebio-evidence-engine/issues/73).
+- [Graph store comparison](GRAPH_STORE_COMPARISON.md) — Neo4j vs PostgreSQL (#73); product go/no-go ADR-011 (#77).
+- [Backlog](../governance/BACKLOG.md) — #70–#77 are **closed** (research + no graph DB).

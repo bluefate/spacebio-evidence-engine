@@ -33,8 +33,36 @@ and Alembic migrations (best-effort when Docker is available).
 | Service | Host port | How to start | Notes |
 | --- | ---: | --- | --- |
 | PostgreSQL + pgvector | `5432` | `make services` | Compose service `db` |
-| FastAPI | `8000` | `make api` | OpenAPI at `/docs`; `GET /health`, `POST /ask` |
-| Next.js web | `3000` | `make web` | `/search`, corpus, publication pages |
+| FastAPI | `8000` | `make api` | OpenAPI at `/docs`; `GET /health`; `POST /ask` is **503** until a `GroundedAnswerService` is configured |
+| Next.js web | `3000` | `make web` | `/`, `/corpus`, `/publications/[id]`, `/compare`, `/ask`, `/search` |
+
+## What works after `make setup` (honest)
+
+**You can:**
+
+- Start Compose Postgres, bootstrap pgvector, run Alembic migrations
+- `GET /health` on the API
+- Browse corpus, publication detail, and **`/compare`** (inventory metadata only)
+- Open the ask UI (the API may return **503**)
+- Run `make validate`, `make eval-hallucination`, `make eval-graph-extraction`
+
+**You should not expect:**
+
+- `make ingest` — that target does not exist
+- Corpus PDFs in git — `data/pdfs/` is gitignored
+- Live grounded `POST /ask` answers — without a configured `GroundedAnswerService` the API **fails closed with 503** and does not use model memory
+- Web `/search` querying pgvector — it still uses static `corpus.json` via the Next.js `/api/search` route
+
+## What to run locally
+
+1. `cp .env.example .env` and keep `POSTGRES_PASSWORD` aligned with `DATABASE_URL`.
+2. `make setup` (venv, deps, Compose, migrate when Docker is up).
+3. If Docker was skipped: `make services && make db-bootstrap && make migrate`.
+4. Optional local embeddings (MiniLM download on first use): `pip install -e ".[embeddings]"`.
+5. `make api` and `make web`.
+6. `curl -s http://localhost:8000/health`
+7. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
+8. `POST /ask` returning **503** is expected until you wire retrieval + a `LanguageModelProvider` later.
 
 ## Commands
 
@@ -53,7 +81,9 @@ make typecheck
 make test
 make test-web      # Vitest: citation, ask, and a11y UI (apps/web)
 make validate      # lint + typecheck + Python tests + web tests (+ hallucination eval)
-make refresh-board # regenerate docs/development/ACTIVE_BOARD.md from Project + PRs
+make eval-hallucination
+make eval-graph-extraction
+make refresh-board # regenerate docs/development/ACTIVE_BOARD.md from Project + PRs (`read:project` required)
 ```
 
 ## Clean-machine checklist
@@ -186,14 +216,16 @@ Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_by
 ## Expected local services
 
 - PostgreSQL with pgvector (Compose) on port `5432`.
-- FastAPI backend (`apps/api`) on port `8000`. `POST /ask` is documented in
-  OpenAPI and returns `GroundedAnswerResponse` when the app is configured with a
-  retriever plus `LanguageModelProvider`; without that runtime service it fails
-  closed with `503` and does not use fallback model knowledge.
-- Next.js frontend (`apps/web`) on port `3000`; `/search` calls the web app
-  `/api/search` route for stored publication metadata and any exposed passage
-  records.
-- CLI jobs for ingestion and evaluation (no always-on worker for August MVP).
+- FastAPI backend (`apps/api`) on port `8000`. `POST /ask` returns
+  `GroundedAnswerResponse` only when the app is constructed with a
+  `GroundedAnswerService` (retriever + `LanguageModelProvider`). Without that
+  runtime wiring it returns **503** and does not invent answers from model
+  knowledge. There is no `make ingest`; placing PDFs under `data/pdfs/` does
+  not by itself index the corpus.
+- Next.js frontend (`apps/web`) on port `3000`: `/compare` uses corpus inventory
+  fields; `/search` uses static stored metadata (`corpus.json`), not the live
+  vector index.
+- Evaluation CLIs exist (`evals/`); they are not a substitute for a live ingest.
 
 ## Environment variables
 

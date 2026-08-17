@@ -105,5 +105,6 @@ Every review decision should record:
 
 ## Decision status
 
-Research guidance for post-August graph work. Implementation details remain
-deferred until the extraction prototype and graph-storage decision are settled.
+Research guidance. Extraction prototype (#74) and eval (#75) exist; claims stay
+`unverified` until the [validation workflow](VALIDATION_WORKFLOW.md) is applied.
+**No graph database** (ADR-011 / #77). Do not send gazetteer output to `/ask`.
