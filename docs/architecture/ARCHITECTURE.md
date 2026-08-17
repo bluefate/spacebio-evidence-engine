@@ -38,6 +38,8 @@ Future phases may add study compare UI, hybrid retrieval, Neo4j, curator workflo
 - [Container architecture](CONTAINER_ARCHITECTURE.md)
 - [RAG architecture](RAG_ARCHITECTURE.md)
 - [Data architecture](DATA_ARCHITECTURE.md)
+- [Knowledge graph use cases](KNOWLEDGE_GRAPH_USE_CASES.md)
+- [Candidate graph entity types](../data/GRAPH_ENTITY_TYPES.md)
 - [Decision log](../governance/DECISION_LOG.md)
 - [Build plan](../../plan.md)
 - [Technical design](../../design.md)

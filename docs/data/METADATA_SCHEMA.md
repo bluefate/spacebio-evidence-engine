@@ -221,6 +221,7 @@ There is no separate `system` column in the MVP schema; use `organism_model`.
 - [Retrieval strategy](../rag/RETRIEVAL_STRATEGY.md)
 - [Data architecture](../architecture/DATA_ARCHITECTURE.md)
 - [Corpus inventory](CORPUS_INVENTORY.md)
+- [Candidate graph entity types](GRAPH_ENTITY_TYPES.md)
 
 ## Decision status
 Resolved for August MVP (deadline 2026-08-31) or deferred post-August. See [decision log](../governance/DECISION_LOG.md).

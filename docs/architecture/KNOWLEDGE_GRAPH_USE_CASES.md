@@ -65,4 +65,5 @@ A knowledge graph should be added only if at least one of the following becomes 
 
 - [Product requirements](../product/PRODUCT_REQUIREMENTS.md) — lists knowledge graph as post-August MVP.
 - [Traceability matrix](../governance/TRACEABILITY_MATRIX.md) — tracks deferred knowledge graph work.
+- [Candidate graph entity types](../data/GRAPH_ENTITY_TYPES.md) — node catalog and provenance (#71).
 - [Backlog](../governance/BACKLOG.md) — follow-up issues: [#70](https://github.com/bluefate/spacebio-evidence-engine/issues/70), [#71](https://github.com/bluefate/spacebio-evidence-engine/issues/71), [#72](https://github.com/bluefate/spacebio-evidence-engine/issues/72), [#73](https://github.com/bluefate/spacebio-evidence-engine/issues/73).
