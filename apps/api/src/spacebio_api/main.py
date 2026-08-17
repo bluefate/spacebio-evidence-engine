@@ -14,6 +14,7 @@ from spacebio_api.passage_search import (
     build_default_passage_retriever,
     indexed_response_from_hits,
 )
+from spacebio_api.services import build_grounded_answer_service
 from spacebio_evidence_engine.rag import GroundedAnswerError, GroundedAnswerService
 from spacebio_evidence_engine.retrieval import DEFAULT_TOP_K, SemanticSearchHit
 from spacebio_evidence_engine.retrieval.diagnostics import build_retrieval_diagnostics_payload
@@ -43,7 +44,11 @@ def create_app(
         docs_url="/docs" if _settings.app_env != "production" else None,
     )
     app.state.settings = _settings
-    app.state.grounded_answer_service = grounded_answer_service
+    app.state.grounded_answer_service = (
+        grounded_answer_service
+        if grounded_answer_service is not None
+        else build_grounded_answer_service(_settings)
+    )
     app.state.retrieval_diagnostics_retriever = retrieval_diagnostics_retriever
     app.state.passage_retriever = passage_retriever
 
