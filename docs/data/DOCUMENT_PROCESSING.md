@@ -123,6 +123,22 @@ python scripts/show_ingestion_status.py \
 Add `--json` for a machine-readable snapshot including recent in-process
 transitions and allowed next statuses.
 
+## Local corpus ingest (issue #163)
+
+Operators copy approved PDFs to ``data/pdfs/{publication_id}.pdf`` (or
+``data/pdfs/{publication_id}/*.pdf``). Git ignores that directory.
+
+```bash
+set -a && source .env && set +a
+make ingest
+# or: python scripts/ingest_corpus.py --publication-id pub_001 --skip-embeddings
+```
+
+The job upserts inventory rows, extracts and chunks each found PDF (idempotent
+replace via reprocess), then embeds with local MiniLM unless ``--skip-embeddings``.
+Missing PDFs are skipped and recorded; text is never invented. This does not
+train a model and does not wire ``/ask``.
+
 ## Ingestion error reporting (issue #36)
 
 Structured ingestion errors are created through
