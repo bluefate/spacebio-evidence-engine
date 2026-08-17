@@ -17,7 +17,7 @@ Human-readable index of GitHub issues with URLs. **Source of truth for status re
 Prioritize foundation → corpus (~10–15 papers) → ingestion → vector retrieval → grounded answers → minimal web UI.
 Issues labeled `post-august-mvp` are deferred past 2026-08-31.
 
-_Generated from repository issues (tracked through #77 plus later docs). Last updated: 2026-08-17 (states synced to GitHub; #159 open)._
+_Generated from repository issues (tracked through #77 plus later demo/docs). Last updated: 2026-08-17 (states synced to GitHub; no open tracked issues)._
 
 ## Foundation
 
@@ -131,9 +131,27 @@ _Generated from repository issues (tracked through #77 plus later docs). Last up
 | [76](https://github.com/bluefate/spacebio-evidence-engine/issues/76) | CLOSED | Design human validation workflow for extracted graph claims | `post-august-mvp` |
 | [77](https://github.com/bluefate/spacebio-evidence-engine/issues/77) | CLOSED | Decide whether to add a graph database post-MVP | `post-august-mvp` |
 
-## Docs
+## Docs and process
 
 | # | State | Title | Labels |
 |---|-------|-------|--------|
-| [159](https://github.com/bluefate/spacebio-evidence-engine/issues/159) | OPEN | Sync docs after backlog close for local build | |
+| [86](https://github.com/bluefate/spacebio-evidence-engine/issues/86) | CLOSED | Add ACTIVE_BOARD.md for agent next-task visibility | |
+| [94](https://github.com/bluefate/spacebio-evidence-engine/issues/94) | CLOSED | Follow up on closed PR peer-review findings | |
+| [96](https://github.com/bluefate/spacebio-evidence-engine/issues/96) | CLOSED | Require agents to list issue items and checklist in PRs | |
+| [102](https://github.com/bluefate/spacebio-evidence-engine/issues/102) | CLOSED | Require agents to list themselves on the development team | |
+| [106](https://github.com/bluefate/spacebio-evidence-engine/issues/106) | CLOSED | Require agents to isolate work on their own branch (including peer reviews) | |
+| [159](https://github.com/bluefate/spacebio-evidence-engine/issues/159) | CLOSED | Sync docs after backlog close for local build | |
+| [160](https://github.com/bluefate/spacebio-evidence-engine/issues/160) | CLOSED | Sync docs after backlog close for local build (duplicate of #159) | |
+| [177](https://github.com/bluefate/spacebio-evidence-engine/issues/177) | OPEN | Sync BACKLOG.md after closed demo ingest issues | |
 
+## Local demo ingest (post-#77)
+
+| # | State | Title | Labels |
+|---|-------|-------|--------|
+| [163](https://github.com/bluefate/spacebio-evidence-engine/issues/163) | CLOSED | CLI ingest: PDF on disk → chunks + embeddings in Postgres | |
+| [164](https://github.com/bluefate/spacebio-evidence-engine/issues/164) | CLOSED | Wire GroundedAnswerService so /ask is not 503 | |
+| [165](https://github.com/bluefate/spacebio-evidence-engine/issues/165) | CLOSED | Register a publication from DOI or uploaded PDF (API) | |
+| [166](https://github.com/bluefate/spacebio-evidence-engine/issues/166) | CLOSED | UI: add DOI or PDF, then Index corpus | |
+| [167](https://github.com/bluefate/spacebio-evidence-engine/issues/167) | CLOSED | Point web Search at indexed passages (not only corpus.json) | |
+| [171](https://github.com/bluefate/spacebio-evidence-engine/issues/171) | CLOSED | CLI: download the 23 approved OA PDFs into data/pdfs | |
+| [172](https://github.com/bluefate/spacebio-evidence-engine/issues/172) | CLOSED | make setup should load .env so bootstrap/migrate do not fail password auth | |
