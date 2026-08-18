@@ -7,7 +7,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Any
 
-from sqlalchemy import Select, select
+from sqlalchemy import Float, Select, select
 from sqlalchemy.orm import Session
 
 from spacebio_evidence_engine.db.models import Chunk, ChunkEmbedding, Publication
@@ -146,7 +146,9 @@ def _search_pgvector(
     from pgvector.sqlalchemy import Vector
     from sqlalchemy import bindparam
 
-    distance = ChunkEmbedding.embedding.op("<=>")(
+    # ``<=>`` returns a float; without return_type=Float, SQLAlchemy applies
+    # the Vector result processor to the distance and Ask/search crash.
+    distance = ChunkEmbedding.embedding.op("<=>", return_type=Float())(
         bindparam("query_vector", value=query_vector, type_=Vector(MVP_EMBEDDING_DIMENSION))
     )
     stmt = (

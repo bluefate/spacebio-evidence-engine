@@ -68,7 +68,9 @@ def _hit(chunk_id: str, publication_id: str) -> SemanticSearchHit:
 
 
 def test_ask_returns_503_when_grounded_service_not_configured() -> None:
-    client = TestClient(create_app(Settings(APP_ENV="test")))
+    app = create_app(Settings(APP_ENV="test"))
+    app.state.grounded_answer_service = None
+    client = TestClient(app)
 
     response = client.post(
         "/ask",
@@ -163,3 +165,23 @@ def test_ask_returns_502_for_uncited_invention() -> None:
 
     assert response.status_code == 502
     assert "did not cite" in response.json()["detail"].lower()
+
+
+def test_ask_returns_json_500_when_retriever_raises() -> None:
+    class BoomRetriever:
+        def __call__(self, question: str, *, top_k: int = 8) -> Sequence[SemanticSearchHit]:
+            raise TypeError("vector processor boom")
+
+    service = GroundedAnswerService(
+        retriever=BoomRetriever(),
+        llm_provider=FakeLanguageModelProvider(),
+    )
+    app = create_app(Settings(APP_ENV="test"))
+    app.state.grounded_answer_service = service
+    client = TestClient(app)
+
+    response = client.post("/ask", json={"question": "What happens to skeletal muscle?"})
+
+    assert response.status_code == 500
+    assert response.headers["content-type"].startswith("application/json")
+    assert response.json()["detail"] == "vector processor boom"

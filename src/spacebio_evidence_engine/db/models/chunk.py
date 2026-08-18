@@ -9,6 +9,7 @@ from datetime import datetime
 
 from sqlalchemy import DateTime, ForeignKey, Index, Integer, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.schema import FetchedValue
 
 from spacebio_evidence_engine.db.base import Base
 from spacebio_evidence_engine.db.fts_types import FullTextSearchVector
@@ -45,8 +46,13 @@ class Chunk(Base):
     # Filled when embeddings are written (#40/#43); null until then.
     embedding_model: Mapped[str | None] = mapped_column(String(128), nullable=True)
     section_heading: Mapped[str | None] = mapped_column(Text, nullable=True)
-    # PostgreSQL tsvector generated from chunk_text; null/SQLite stand-in (#45).
-    search_tsv: Mapped[str | None] = mapped_column(FullTextSearchVector(), nullable=True)
+    # PostgreSQL GENERATED ALWAYS tsvector; omit from INSERT/UPDATE (#45).
+    search_tsv: Mapped[str | None] = mapped_column(
+        FullTextSearchVector(),
+        nullable=True,
+        server_default=FetchedValue(),
+        server_onupdate=FetchedValue(),
+    )
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
