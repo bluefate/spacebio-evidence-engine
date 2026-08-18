@@ -52,6 +52,7 @@ def test_chunk_orm_matches_required_columns() -> None:
 
 def test_search_tsv_is_omitted_from_insert() -> None:
     """Postgres GENERATED ALWAYS search_tsv must not appear in INSERT."""
+    from sqlalchemy import insert
     from sqlalchemy.dialects import postgresql
     from sqlalchemy.schema import FetchedValue
 
@@ -61,7 +62,7 @@ def test_search_tsv_is_omitted_from_insert() -> None:
     assert isinstance(column.server_default, FetchedValue)
 
     compiled = (
-        Chunk.__table__.insert()
+        insert(Chunk)
         .values(
             chunk_id="c",
             publication_id="p",
