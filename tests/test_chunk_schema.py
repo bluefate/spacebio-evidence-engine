@@ -50,6 +50,35 @@ def test_chunk_orm_matches_required_columns() -> None:
     assert fk._get_colspec() == "publications.publication_id"
 
 
+def test_search_tsv_is_omitted_from_insert() -> None:
+    """Postgres GENERATED ALWAYS search_tsv must not appear in INSERT."""
+    from sqlalchemy import insert
+    from sqlalchemy.dialects import postgresql
+    from sqlalchemy.schema import FetchedValue
+
+    from spacebio_evidence_engine.db.models import Chunk
+
+    column = Chunk.__table__.c.search_tsv
+    assert isinstance(column.server_default, FetchedValue)
+
+    compiled = (
+        insert(Chunk)
+        .values(
+            chunk_id="c",
+            publication_id="p",
+            section="results",
+            chunk_text="microgravity atrophy",
+            content_hash="h",
+            start_offset=0,
+            end_offset=20,
+            chunking_strategy_version="1.0.0",
+        )
+        .compile(dialect=postgresql.dialect())
+    )
+    assert "search_tsv" not in str(compiled)
+    assert "search_tsv" not in compiled.params
+
+
 def test_migration_upgrade_and_downgrade(tmp_path: Path) -> None:
     db_path = tmp_path / "chunk_migration.sqlite3"
     database_url = f"sqlite+pysqlite:///{db_path}"

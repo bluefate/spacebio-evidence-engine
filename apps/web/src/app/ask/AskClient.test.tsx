@@ -1,4 +1,10 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AskClient } from "./AskClient";
@@ -59,7 +65,8 @@ const insufficientAnswer = {
   citations: [],
   sufficiency: {
     status: "insufficient",
-    reason: "The corpus focuses on skeletal muscle and does not contain plant studies.",
+    reason:
+      "The corpus focuses on skeletal muscle and does not contain plant studies.",
     retrieved_chunk_count: 0,
     supporting_publication_count: 0,
   },
@@ -80,25 +87,38 @@ describe("AskClient", () => {
     render(<AskClient />);
 
     const textarea = screen.getByLabelText("Research question");
-    fireEvent.change(textarea, { target: { value: "How does microgravity affect skeletal muscle?" } });
+    fireEvent.change(textarea, {
+      target: { value: "How does microgravity affect skeletal muscle?" },
+    });
     fireEvent.click(screen.getByRole("button", { name: "Ask question" }));
 
     await waitFor(() => {
       expect(screen.getByTestId("citation-linked-text")).toBeInTheDocument();
     });
 
-    expect(screen.getByText("Claims and citations")).toBeInTheDocument();
+    expect(screen.getByText("Answer")).toBeInTheDocument();
+    expect(screen.getByText("The grounded answer")).toBeInTheDocument();
+    expect(screen.getByText("Supporting details")).toBeInTheDocument();
+    expect(screen.getByText("Claims")).toBeInTheDocument();
     expect(screen.getByTestId("citation-marker-C1")).toBeInTheDocument();
     expect(screen.getByTestId("evidence-panel")).toBeInTheDocument();
-    expect(screen.getByText("Soleus muscle mass declined after unloading in flight mice.")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Soleus muscle mass declined after unloading in flight mice.",
+      ),
+    ).toBeInTheDocument();
   });
 
   it("shows the insufficient-evidence state when sufficiency is insufficient", async () => {
-    mockFetch(new Response(JSON.stringify(insufficientAnswer), { status: 200 }));
+    mockFetch(
+      new Response(JSON.stringify(insufficientAnswer), { status: 200 }),
+    );
     render(<AskClient />);
 
     const textarea = screen.getByLabelText("Research question");
-    fireEvent.change(textarea, { target: { value: "What is the effect of microgravity on plants?" } });
+    fireEvent.change(textarea, {
+      target: { value: "What is the effect of microgravity on plants?" },
+    });
     fireEvent.click(screen.getByRole("button", { name: "Ask question" }));
 
     await waitFor(() => {
@@ -106,7 +126,9 @@ describe("AskClient", () => {
     });
 
     expect(
-      screen.getByText("The corpus focuses on skeletal muscle and does not contain plant studies."),
+      screen.getByText(
+        "The corpus focuses on skeletal muscle and does not contain plant studies.",
+      ),
     ).toBeInTheDocument();
   });
 
@@ -123,7 +145,9 @@ describe("AskClient", () => {
         "The corpus does not contain enough relevant evidence to answer this question confidently.",
       ),
     ).toBeInTheDocument();
-    expect(screen.queryByTestId("citation-linked-text")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("citation-linked-text"),
+    ).not.toBeInTheDocument();
     expect(screen.queryByTestId("evidence-panel")).not.toBeInTheDocument();
   });
 
@@ -132,16 +156,25 @@ describe("AskClient", () => {
     render(<AskClient />);
 
     const textarea = screen.getByLabelText("Research question");
-    fireEvent.change(textarea, { target: { value: "How does microgravity affect skeletal muscle?" } });
+    fireEvent.change(textarea, {
+      target: { value: "How does microgravity affect skeletal muscle?" },
+    });
     fireEvent.click(screen.getByRole("button", { name: "Ask question" }));
 
     await waitFor(() => {
-      expect(screen.getByTestId("evidence-item-C1")).toHaveAttribute("data-active", "true");
+      expect(screen.getByTestId("evidence-item-C1")).toHaveAttribute(
+        "data-active",
+        "true",
+      );
     });
   });
 
   it("shows an error message when the API request fails", async () => {
-    mockFetch(new Response(JSON.stringify({ detail: "Service unavailable" }), { status: 503 }));
+    mockFetch(
+      new Response(JSON.stringify({ detail: "Service unavailable" }), {
+        status: 503,
+      }),
+    );
     render(<AskClient />);
 
     const textarea = screen.getByLabelText("Research question");
@@ -154,7 +187,9 @@ describe("AskClient", () => {
   });
 
   it("sends the configured top_k value", async () => {
-    const fetchSpy = mockFetch(new Response(JSON.stringify(sufficientAnswer), { status: 200 }));
+    const fetchSpy = mockFetch(
+      new Response(JSON.stringify(sufficientAnswer), { status: 200 }),
+    );
     render(<AskClient />);
 
     const textarea = screen.getByLabelText("Research question");

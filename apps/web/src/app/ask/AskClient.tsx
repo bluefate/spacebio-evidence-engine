@@ -27,7 +27,8 @@ export function AskClient() {
   const searchParams = useSearchParams();
   const [question, setQuestion] = useState(searchParams.get("q")?.trim() ?? "");
   const [topK, setTopK] = useState(8);
-  const [response, setResponse] = useState<GroundedAnswerResponse>(emptyResponse);
+  const [response, setResponse] =
+    useState<GroundedAnswerResponse>(emptyResponse);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -84,8 +85,10 @@ export function AskClient() {
       <div className={styles.panelHeader}>
         <h2 id="ask-heading">Grounded question</h2>
         <p className={styles.helpText}>
-          Answers are generated from retrieved corpus passages and include citations so you can
-          verify every claim.
+          The first block is the answer. Everything below it is supporting
+          material: claims, warnings, and quoted PDF passages for each{" "}
+          <code className={styles.inlineCode}>[C1]</code> marker. Paper titles
+          under a quote are provenance, not the evidence.
         </p>
       </div>
 
@@ -131,7 +134,11 @@ export function AskClient() {
       <div className={styles.stateLine} aria-live="polite">
         {loading && "Retrieving evidence and generating a grounded answer."}
         {!loading && error}
-        {!loading && !error && searched && !hasAnswer && !isInsufficient &&
+        {!loading &&
+          !error &&
+          searched &&
+          !hasAnswer &&
+          !isInsufficient &&
           "No answer was returned. Check that the API is running."}
       </div>
 
@@ -145,18 +152,34 @@ export function AskClient() {
           {response.sufficiency.retrieved_chunk_count > 0 && (
             <p className={styles.meta}>
               Retrieved {response.sufficiency.retrieved_chunk_count} passage
-              {response.sufficiency.retrieved_chunk_count === 1 ? "" : "s"} from{" "}
-              {response.sufficiency.supporting_publication_count} publication
-              {response.sufficiency.supporting_publication_count === 1 ? "" : "s"}.
+              {response.sufficiency.retrieved_chunk_count === 1
+                ? ""
+                : "s"} from {response.sufficiency.supporting_publication_count}{" "}
+              publication
+              {response.sufficiency.supporting_publication_count === 1
+                ? ""
+                : "s"}
+              .
             </p>
           )}
         </div>
       )}
 
       {searched && !loading && !error && hasAnswer && (
-        <div className={styles.answerLayout}>
-          <section className={styles.answerColumn} aria-labelledby="answer-heading">
-            <h3 id="answer-heading">Answer</h3>
+        <div className={styles.resultsStack}>
+          <section
+            className={styles.answerCard}
+            aria-labelledby="answer-heading"
+          >
+            <p className={styles.answerKicker}>Answer</p>
+            <h3 id="answer-heading" className={styles.answerHeading}>
+              The grounded answer
+            </h3>
+            <p className={styles.columnHint}>
+              This is the generated response. Citation chips such as{" "}
+              <code className={styles.inlineCode}>[C1]</code> point to quoted
+              passages below.
+            </p>
             <CitationLinkedText
               text={response.answer_text}
               activeCitationId={activeCitationId}
@@ -164,10 +187,21 @@ export function AskClient() {
               resolveCitation={resolveCitation}
               className={styles.answerText}
             />
+          </section>
+
+          <div className={styles.supportingList}>
+            <h3 className={styles.supportingHeading}>Supporting details</h3>
 
             {hasClaims && (
-              <div className={styles.claimsSection}>
-                <h4>Claims and citations</h4>
+              <section
+                className={styles.claimsSection}
+                aria-labelledby="claims-heading"
+              >
+                <h4 id="claims-heading">Claims</h4>
+                <p className={styles.columnHint}>
+                  Individual statements split from the answer when the API
+                  provides them. These are not paper titles.
+                </p>
                 <ol className={styles.claimsList}>
                   {response.claims.map((claim) => (
                     <li key={claim.claim_id} className={styles.claimItem}>
@@ -189,12 +223,15 @@ export function AskClient() {
                     </li>
                   ))}
                 </ol>
-              </div>
+              </section>
             )}
 
             {response.warnings && response.warnings.length > 0 && (
-              <div className={styles.warningsSection}>
-                <h4>Warnings</h4>
+              <section
+                className={styles.warningsSection}
+                aria-labelledby="warnings-heading"
+              >
+                <h4 id="warnings-heading">Warnings</h4>
                 <ul className={styles.noticeList}>
                   {response.warnings.map((warning) => (
                     <li key={warning.code} className={styles.warningItem}>
@@ -202,12 +239,15 @@ export function AskClient() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </section>
             )}
 
             {response.limitations && response.limitations.length > 0 && (
-              <div className={styles.limitationsSection}>
-                <h4>Limitations</h4>
+              <section
+                className={styles.limitationsSection}
+                aria-labelledby="limitations-heading"
+              >
+                <h4 id="limitations-heading">Limitations</h4>
                 <ul className={styles.noticeList}>
                   {response.limitations.map((limitation, index) => (
                     <li key={index} className={styles.limitationItem}>
@@ -215,12 +255,15 @@ export function AskClient() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </section>
             )}
 
             {response.conflicts && response.conflicts.length > 0 && (
-              <div className={styles.conflictsSection}>
-                <h4>Conflicting findings</h4>
+              <section
+                className={styles.conflictsSection}
+                aria-labelledby="conflicts-heading"
+              >
+                <h4 id="conflicts-heading">Conflicting findings</h4>
                 <ul className={styles.noticeList}>
                   {response.conflicts.map((conflict, index) => (
                     <li key={index} className={styles.conflictItem}>
@@ -228,21 +271,28 @@ export function AskClient() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </section>
             )}
-          </section>
 
-          {hasCitations && (
-            <section className={styles.evidenceColumn} aria-labelledby="evidence-heading">
-              <h3 id="evidence-heading">Evidence</h3>
-              <EvidencePanel
-                passages={response.citations}
-                activeCitationId={activeCitationId}
-                onSelectCitation={setActiveCitationId}
-                heading="Cited passages"
-              />
-            </section>
-          )}
+            {hasCitations && (
+              <section
+                className={styles.evidenceCard}
+                aria-labelledby="evidence-heading"
+              >
+                <h4 id="evidence-heading">Cited passages</h4>
+                <p className={styles.columnHint}>
+                  Quoted text from the indexed PDF. Paper title, publication id,
+                  section, and page are listed under each quote.
+                </p>
+                <EvidencePanel
+                  passages={response.citations}
+                  activeCitationId={activeCitationId}
+                  onSelectCitation={setActiveCitationId}
+                  showHeading={false}
+                />
+              </section>
+            )}
+          </div>
         </div>
       )}
     </section>

@@ -110,6 +110,18 @@ def create_app(
                 status_code=status.HTTP_502_BAD_GATEWAY,
                 detail=str(exc),
             ) from exc
+        except Exception as exc:
+            # Starlette's default 500 is text/plain; the Next proxy then shows
+            # "Malformed upstream response." Keep JSON so the Ask UI can render it.
+            detail = (
+                str(exc)
+                if _settings.app_env != "production"
+                else "Internal server error while generating a grounded answer."
+            )
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=detail,
+            ) from exc
 
     @app.post(
         "/dev/retrieval-diagnostics",

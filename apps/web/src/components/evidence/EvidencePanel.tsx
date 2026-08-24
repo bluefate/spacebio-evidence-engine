@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-import { evidenceCitationDomId, publicationDetailHref } from "./citationMarkers";
+import {
+  evidenceCitationDomId,
+  publicationDetailHref,
+} from "./citationMarkers";
 import styles from "./EvidencePanel.module.css";
 import {
   type EvidencePassage,
@@ -19,6 +22,7 @@ export type EvidencePanelProps = {
   /** When provided, unknown publication ids render as unavailable instead of links. */
   knownPublicationIds?: ReadonlySet<string> | readonly string[];
   heading?: string;
+  showHeading?: boolean;
   className?: string;
 };
 
@@ -57,11 +61,14 @@ export function EvidencePanel({
   onSelectCitation,
   knownPublicationIds,
   heading = "Cited evidence",
+  showHeading = true,
   className,
 }: EvidencePanelProps) {
   const items = normalizePassages(passages);
   const activeId = activeCitationId?.trim() || null;
-  const activeFound = activeId ? items.some((item) => item.citationId === activeId) : true;
+  const activeFound = activeId
+    ? items.some((item) => item.citationId === activeId)
+    : true;
   const selectable = typeof onSelectCitation === "function";
   const publicationAllowList = toIdSet(knownPublicationIds);
   const activeItemRef = useRef<HTMLElement | null>(null);
@@ -85,30 +92,42 @@ export function EvidencePanel({
       aria-label={heading}
       data-testid="evidence-panel"
     >
-      <header className={styles.header}>
-        <h2 className={styles.heading}>{heading}</h2>
-        <p className={styles.subheading}>
-          Passage text and provenance for citations in the active answer.
-        </p>
-      </header>
+      {showHeading ? (
+        <header className={styles.header}>
+          <h2 className={styles.heading}>{heading}</h2>
+          <p className={styles.subheading}>
+            Quoted PDF text. Paper titles are listed underneath as provenance
+            only.
+          </p>
+        </header>
+      ) : null}
 
       {items.length === 0 ? (
-        <p className={styles.emptyState} role="status" data-testid="evidence-empty">
+        <p
+          className={styles.emptyState}
+          role="status"
+          data-testid="evidence-empty"
+        >
           No cited passages are available for this answer.
         </p>
       ) : null}
 
       {activeId && !activeFound ? (
-        <p className={styles.missingState} role="status" data-testid="evidence-missing-active">
-          Selected citation <span className={styles.mono}>{activeId}</span> is not available
-          in the retrieved evidence.
+        <p
+          className={styles.missingState}
+          role="status"
+          data-testid="evidence-missing-active"
+        >
+          Selected citation <span className={styles.mono}>{activeId}</span> is
+          not available in the retrieved evidence.
         </p>
       ) : null}
 
       {items.length > 0 ? (
         <ul className={styles.list} data-testid="evidence-list">
           {items.map((passage) => {
-            const isActive = activeId !== null && passage.citationId === activeId;
+            const isActive =
+              activeId !== null && passage.citationId === activeId;
             const body = resolvePassageBody(passage);
             const publicationAvailable =
               publicationAllowList == null
@@ -120,13 +139,17 @@ export function EvidencePanel({
                 <article
                   id={evidenceCitationDomId(passage.citationId)}
                   ref={isActive ? activeItemRef : null}
-                  className={[styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}
+                  className={[styles.item, isActive ? styles.active : ""]
+                    .filter(Boolean)
+                    .join(" ")}
                   data-testid={`evidence-item-${passage.citationId}`}
                   data-active={isActive ? "true" : "false"}
                   aria-current={isActive ? "true" : undefined}
                 >
                   <div className={styles.itemHeader}>
-                    <span className={styles.citationBadge}>{passage.citationId}</span>
+                    <span className={styles.citationBadge}>
+                      {passage.citationId}
+                    </span>
                     {selectable ? (
                       <button
                         type="button"
@@ -144,14 +167,21 @@ export function EvidencePanel({
                     ) : null}
                   </div>
 
+                  <p className={styles.quoteLabel}>Quoted passage</p>
                   <p
-                    className={body ? styles.passageText : styles.missingPassage}
+                    className={
+                      body ? styles.passageText : styles.missingPassage
+                    }
                     data-testid={`evidence-text-${passage.citationId}`}
                   >
                     {body ?? "Passage text unavailable for this citation."}
                   </p>
 
                   <dl className={styles.meta}>
+                    <div className={styles.metaRow}>
+                      <dt>Paper title</dt>
+                      <dd>{displayOrUnknown(passage.title)}</dd>
+                    </div>
                     <div className={styles.metaRow}>
                       <dt>Publication</dt>
                       <dd>
@@ -173,8 +203,6 @@ export function EvidencePanel({
                             {passage.publicationId} (unavailable)
                           </span>
                         )}
-                        <span className={styles.titleSep}> — </span>
-                        <span>{displayOrUnknown(passage.title)}</span>
                       </dd>
                     </div>
                     <div className={styles.metaRow}>
