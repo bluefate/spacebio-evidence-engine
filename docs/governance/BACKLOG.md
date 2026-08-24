@@ -17,7 +17,7 @@ Human-readable index of GitHub issues with URLs. **Source of truth for status re
 Prioritize foundation → corpus (~10–15 papers) → ingestion → vector retrieval → grounded answers → minimal web UI.
 Issues labeled `post-august-mvp` are deferred past 2026-08-31.
 
-_Generated from repository issues (tracked through #77 plus later demo/docs). Last updated: 2026-08-17 (states synced to GitHub; no open tracked issues)._
+_Generated from repository issues (tracked through #77 plus later demo/docs). Last updated: 2026-08-24 (states synced to GitHub; #193 open for this docs/Classroom sync)._
 
 ## Foundation
 
@@ -142,7 +142,10 @@ _Generated from repository issues (tracked through #77 plus later demo/docs). La
 | [106](https://github.com/bluefate/spacebio-evidence-engine/issues/106) | CLOSED | Require agents to isolate work on their own branch (including peer reviews) | |
 | [159](https://github.com/bluefate/spacebio-evidence-engine/issues/159) | CLOSED | Sync docs after backlog close for local build | |
 | [160](https://github.com/bluefate/spacebio-evidence-engine/issues/160) | CLOSED | Sync docs after backlog close for local build (duplicate of #159) | |
-| [177](https://github.com/bluefate/spacebio-evidence-engine/issues/177) | OPEN | Sync BACKLOG.md after closed demo ingest issues | |
+| [177](https://github.com/bluefate/spacebio-evidence-engine/issues/177) | CLOSED | Sync BACKLOG.md after closed demo ingest issues | |
+| [179](https://github.com/bluefate/spacebio-evidence-engine/issues/179) | CLOSED | How to demo: one command per terminal window | |
+| [181](https://github.com/bluefate/spacebio-evidence-engine/issues/181) | CLOSED | Add HOW_TO_DEMO.md with 10 questions and 10 search terms | |
+| [193](https://github.com/bluefate/spacebio-evidence-engine/issues/193) | OPEN | Sync post-MVP docs, board, Classroom main | |
 
 ## Local demo ingest (post-#77)
 
@@ -155,3 +158,8 @@ _Generated from repository issues (tracked through #77 plus later demo/docs). La
 | [167](https://github.com/bluefate/spacebio-evidence-engine/issues/167) | CLOSED | Point web Search at indexed passages (not only corpus.json) | |
 | [171](https://github.com/bluefate/spacebio-evidence-engine/issues/171) | CLOSED | CLI: download the 23 approved OA PDFs into data/pdfs | |
 | [172](https://github.com/bluefate/spacebio-evidence-engine/issues/172) | CLOSED | make setup should load .env so bootstrap/migrate do not fail password auth | |
+| [183](https://github.com/bluefate/spacebio-evidence-engine/issues/183) | CLOSED | Home page section: demo search terms and Ask questions | |
+| [185](https://github.com/bluefate/spacebio-evidence-engine/issues/185) | CLOSED | White background on home Demo links panel | |
+| [187](https://github.com/bluefate/spacebio-evidence-engine/issues/187) | CLOSED | Wire local Ollama as free /ask language model | |
+| [189](https://github.com/bluefate/spacebio-evidence-engine/issues/189) | CLOSED | UI: download approved PDFs that are not on disk yet | |
+| [191](https://github.com/bluefate/spacebio-evidence-engine/issues/191) | CLOSED | Fix ingest/Ask crashes and clarify Ask answer layout | |

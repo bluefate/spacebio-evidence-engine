@@ -44,15 +44,15 @@ and Alembic migrations (best-effort when Docker is available).
 - `GET /health` on the API
 - Download the 23 approved PDFs with `make fetch-pdfs` (after setup)
 - Browse corpus, publication detail, and **`/compare`** (inventory metadata only)
-- Open the ask UI (`POST /ask` needs Ollama or `OPENAI_API_KEY`, plus embeddings)
+- Open the ask UI (`POST /ask` needs Ollama or `OPENAI_API_KEY`, plus embeddings and a non-empty index)
 - Run `make validate`, `make eval-hallucination`, `make eval-graph-extraction`
 
 **You should not expect:**
 
-- `make ingest` — indexes PDFs already under `data/pdfs/{publication_id}.pdf`; it does not enable `/ask` on its own
+- `make ingest` — indexes PDFs already under `data/pdfs/{publication_id}.pdf`; it does not enable `/ask` on its own (you still need a chat model)
 - Corpus PDFs are **not** in git (`data/pdfs/` is gitignored)
-- Live grounded `POST /ask` answers — without a configured `GroundedAnswerService` the API **fails closed with 503** and does not use model memory
-- Web `/search` querying pgvector — it still uses static `corpus.json` via the Next.js `/api/search` route
+- Live grounded `POST /ask` answers — without a configured `GroundedAnswerService` (Ollama or OpenAI + embeddings + ingested chunks) the API **fails closed with 503** (or JSON 500 for unhandled errors) and does not use model memory
+- Search **passages** without ingest and a running API — catalog title hits still come from `corpus.json`; indexed passages come from Postgres after `make ingest`
 
 ## What to run locally
 
@@ -62,12 +62,12 @@ and Alembic migrations (best-effort when Docker is available).
 4. Optional local embeddings (MiniLM download on first use): `pip install -e ".[embeddings]"`.
 5. Download the 23 approved PDFs: `make fetch-pdfs`. Alternatively, copy approved PDFs to `data/pdfs/{publication_id}.pdf`.
 6. Ingest the downloaded PDFs: `make ingest` (loads `.env` automatically).
-7. For grounded `POST /ask` without paying: install [Ollama](https://ollama.com), run `ollama pull llama3.2:1b` and `ollama serve`. `.env.example` sets `LLM_PROVIDER=ollama` and `OLLAMA_MODEL=llama3.2:1b` (fastest default). Also `pip install -e ".[embeddings]"`. Optional: set `OPENAI_API_KEY` and `LLM_PROVIDER=openai` instead.
+7. For grounded `POST /ask` without paying: install [Ollama](https://ollama.com), run `ollama pull llama3.2:1b` (fast default) or `ollama pull llama3.2:3b` (better citation following) and `ollama serve`. `.env.example` sets `LLM_PROVIDER=ollama` and `OLLAMA_MODEL=llama3.2:1b`. For a live demo, set `OLLAMA_MODEL=llama3.2:3b`. Also `pip install -e ".[embeddings]"`. Optional: set `OPENAI_API_KEY` and `LLM_PROVIDER=openai` instead.
 8. Start the API in **one terminal** and leave it running: `make api`. Stop with Ctrl-C, not Ctrl-Z.
 9. In a **new terminal** (same repo folder), start the website and leave it running: `make web`.
 10. `curl -s http://localhost:8000/health`
 11. Open `http://localhost:3000/compare` and `http://localhost:3000/ask`.
-12. `POST /ask` returning **503** is expected when `OPENAI_API_KEY` is unset, the embedding provider is unavailable, or the index is empty.
+12. `POST /ask` returning **503** is expected when no chat provider is reachable (Ollama down and no `OPENAI_API_KEY`), the embedding provider is unavailable, or the index is empty. With Ollama running and ingest done, Ask should return a grounded JSON body (answer first in the web UI).
 
 ## Commands
 
@@ -232,10 +232,12 @@ Extract page-ordered text via `spacebio_evidence_engine.ingestion.extract_pdf_by
   Paywalled licenses are rejected. `POST /publications/{id}/index` runs ingest
   for a stored PDF. `make ingest` indexes catalog PDFs under `data/pdfs/`.
 - Next.js frontend (`apps/web`) on port `3000`: `/compare` uses corpus inventory
-  fields; `/search` uses static stored metadata (`corpus.json`), not the live
-  vector index; `/add` registers local extras via the API (`from-doi`,
-  `from-pdf`) and a separate Index action (`POST /publications/{id}/index`).
-  Status text distinguishes registered vs indexed vs failed.
+  fields; `/search` shows catalog hits from `corpus.json` and, with the API up
+  after ingest, indexed **passages** from Postgres; `/ask` shows **Answer** then
+  **Supporting details** (cited quotes); `/add` registers local extras via the
+  API (`from-doi`, `from-pdf`) and a separate Index action
+  (`POST /publications/{id}/index`). Status text distinguishes registered vs
+  indexed vs failed.
 - Evaluation CLIs exist (`evals/`); they are not a substitute for placing PDFs and running `make ingest`.
 
 ## Environment variables

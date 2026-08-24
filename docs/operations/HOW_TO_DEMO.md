@@ -26,7 +26,7 @@ make web
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Optional, before Ask/passage Search: on **Corpus** or **Home**, click **Download missing PDFs** (same as `make fetch-pdfs`), then `make ingest`. Also `pip install -e ".[embeddings]"` and local **Ollama**. Without ingest + a chat model, Ask should **fail closed**, not guess.
+Optional, before Ask/passage Search: on **Corpus** or **Home**, click **Download missing PDFs** (same as `make fetch-pdfs`), then `make ingest`. Also `pip install -e ".[embeddings]"` and local **Ollama**. Default model is `llama3.2:1b` (fast); for citation-following demos use `OLLAMA_MODEL=llama3.2:3b` or OpenAI. Without ingest + a chat model, Ask should **fail closed**, not guess.
 
 ## What to click first (no ingest required)
 
@@ -60,7 +60,7 @@ Do not treat a catalog title match as a grounded scientific answer.
 
 ## 10 Ask questions (Ask page)
 
-Use [http://localhost:3000/ask](http://localhost:3000/ask). Copy the **Question** column. After ingest + API key, answers must cite passages. **Do not accept fluent text without citations.** Organism/model must stay labeled (human vs mouse vs engineered tissue).
+Use [http://localhost:3000/ask](http://localhost:3000/ask). Copy the **Question** column. After ingest + Ollama or OpenAI, the page should show a large **Answer** first, then **Supporting details** (claims, warnings, cited PDF quotes). Answers must cite passages. **Do not accept fluent text without citations.** Organism/model must stay labeled (human vs mouse vs engineered tissue).
 
 These expected answers are **not** gold wording from the PDFs. If the model states a numeric finding, it must appear in a cited chunk.
 
