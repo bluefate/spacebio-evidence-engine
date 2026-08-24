@@ -51,10 +51,11 @@ Open **http://localhost:3000** in a browser. Click-through script (10 search ter
 
 - Paper PDFs are **not** stored in git (`data/pdfs/` is ignored).
 - There is **`make fetch-pdfs`**: download the 23 approved OA PDFs into `data/pdfs/` from `august_mvp_corpus_manifest.csv`. Then **`make ingest`** indexes them into chunks. Search can show indexed passages when the API is up.
-- **Ask** needs ingest plus embeddings, then a chat model. Default is **local Ollama** (`LLM_PROVIDER=ollama`, model `llama3.2:1b` — fastest small model). Install Ollama, run `ollama pull llama3.2:1b` and `ollama serve`, then restart `make api`. Paid `OPENAI_API_KEY` is optional. Without a model or an empty index, Ask fails closed instead of inventing an answer.
+- **Ask** needs ingest plus embeddings, then a chat model. Default is **local Ollama** (`LLM_PROVIDER=ollama`, model `llama3.2:1b` — fastest small model). For a citation-following demo, use `llama3.2:3b` (`OLLAMA_MODEL=llama3.2:3b`) or paid `OPENAI_API_KEY`. Install Ollama, `ollama pull` the model, `ollama serve`, then restart `make api`. Without a model or an empty index, Ask fails closed instead of inventing an answer.
+- On Ask, the **Answer** block is first; cited PDF quotes sit under **Supporting details** (not mixed with the paper title).
 - **Add paper** (`/add`) registers **local extras** (`local_*`, pending review), not the approved 23. Paywalled licenses are rejected. Register success is not the same as indexed.
 
-A fair demo right now is **browse the library and compare papers**. A later demo would load PDFs into the local database, then Ask a question and click citations.
+A fair demo: Corpus + Compare (no ingest), then **Download missing PDFs** / `make fetch-pdfs`, `make ingest`, Search passages, Ask with citations.
 
 ## Scope
 The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, passage-level citations, evidence sufficiency, and a controlled corpus of **23** open-access publications on **microgravity and skeletal muscle** (see [corpus inventory](docs/data/CORPUS_INVENTORY.md)). A **post-August** inventory compare UI is at `/compare`. Auth, public hosting, and a graph database are out of product (ADR-011 for graph DB).
