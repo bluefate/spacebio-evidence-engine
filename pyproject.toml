@@ -46,6 +46,7 @@ dev = [
   "ruff>=0.11",
   "pyright>=1.1",
   "pre-commit>=4.0",
+  "python-pptx==1.0.2",
   # PDF extraction tests/typecheck import PyMuPDF (issue #29 / PR #93).
   "pymupdf>=1.24",
 ]

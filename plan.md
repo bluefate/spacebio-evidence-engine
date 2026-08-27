@@ -6,6 +6,8 @@ Supporting detail lives under [`docs/`](docs/README.md). This file is the assign
 
 **MVP deadline:** 2026-08-31. Locked decisions: [DECISION_LOG.md](docs/governance/DECISION_LOG.md).
 
+**Final status (2026-08-26):** MVP implementation and final repository artifacts are complete. The controlled inventory contains 23 approved publications; ingest, semantic/full-text/hybrid retrieval, grounded Ask, citation validation, corpus browsing, study comparison, add-paper/index workflows, evaluation harnesses, and local Ollama/OpenAI paths are implemented. The remaining submission step is recording and linking the 3–5 minute demo video. Public hosting, authentication, and graph-native persistence remain outside the local-first MVP.
+
 ## Repositories
 
 | Role | Repository |
@@ -236,3 +238,4 @@ gantt
 |------|--------|
 | 2026-08-04 | Initial Build Phase `plan.md` created from existing documentation package |
 | 2026-08-04 | Compressed to end-of-August MVP; locked stack, topic, cost, and feature cuts per decision log |
+| 2026-08-26 | Recorded final MVP completion status and remaining demo-video submission step |

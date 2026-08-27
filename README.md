@@ -5,6 +5,28 @@
 ## Purpose
 Define and build a citation-first evidence engine for a controlled corpus of open-access space biology publications.
 
+## Final submission artifacts
+
+This README is the central index for the final FAU AI HootCamp submission.
+
+| Artifact | Link | Status |
+| --- | --- | --- |
+| Deployed application | [Build and run the application locally](docs/operations/HOW_TO_DEMO.md) | Local build required; no public deployment |
+| Demo video | [One-minute demo with audio](docs/final/Space_Biology_Evidence_Engine_One_Minute_Demo_WITH_AUDIO.mp4) | Complete |
+| Pitch deck | [PowerPoint with speaker notes](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pdf) | Complete |
+| One-page project summary / showcase handout | [PowerPoint](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pdf) | Complete |
+| Project plan | [plan.md](plan.md) | Complete |
+| Technical design | [design.md](design.md) | Complete |
+| API documentation | [FastAPI OpenAPI and endpoint notes](docs/operations/LOCAL_SETUP.md#services-and-ports) | Complete |
+| Architecture diagrams and supporting design | [System architecture](docs/architecture/ARCHITECTURE.md) · [RAG architecture](docs/architecture/RAG_ARCHITECTURE.md) · [Deployment architecture](docs/architecture/DEPLOYMENT_ARCHITECTURE.md) | Complete |
+| Evaluation documentation | [Evaluation strategy](docs/rag/EVALUATION_STRATEGY.md) | Complete |
+| Testing documentation | [Testing strategy](docs/development/TESTING_STRATEGY.md) | Complete |
+| Security documentation | [Security architecture](docs/architecture/SECURITY_ARCHITECTURE.md) | Complete |
+| Cost documentation | [Model-provider and cost decisions](docs/governance/DECISION_LOG.md) | Complete |
+| Setup and deployment documentation | [Local setup](docs/operations/LOCAL_SETUP.md) · [Deployment](docs/operations/DEPLOYMENT.md) | Complete |
+| Final release document | [HTML preview](docs/final/Preview_FINAL_RELEASE.html) · [Markdown](docs/final/FINAL_RELEASE.md) · [PDF](docs/final/FINAL_RELEASE.pdf) | Complete |
+| Application screenshots | [Screenshot gallery](docs/final/screenshots/) | Complete |
+
 ## How to demo
 
 This is a **small library of 23 approved space biology papers** (microgravity and skeletal muscle). It is **not** ChatGPT with the whole internet. Answers (when they work) must point at real passages from that library. If there is not enough evidence, the system is supposed to say so instead of guessing.

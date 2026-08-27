@@ -30,7 +30,7 @@ Locked decisions: [`docs/governance/DECISION_LOG.md`](docs/governance/DECISION_L
 2. Preserve publication ID, title, section, page, and source location through the pipeline.
 3. Separate source evidence, extracted structure, and generated interpretation.
 4. Keep August MVP operable on Docker Compose with optional cloud LLM providers ($50/mo hard cap).
-5. Defer graph-native work, study compare UI, hybrid retrieval, auth, and public hosting past 2026-08-31.
+5. Keep graph-native persistence, authentication, and public hosting outside the local-first MVP; study comparison and optional hybrid retrieval are implemented without weakening provenance.
 
 ---
 
@@ -369,14 +369,13 @@ Tracked formally in [DECISION_LOG.md](docs/governance/DECISION_LOG.md).
 
 ## 11. Deferred decisions (post-August)
 
-- Final 10–15 paper titles
 - Public hosting platform
 - Production secret manager / observability stack
 - User accounts / IAM
-- Live corpus ingest CLI and wired `GroundedAnswerService` (local `/ask` still 503 without it)
+- Expert-reviewed expansion beyond the approved 23-publication corpus
 - Per-file ADR documents (single decision log for now)
 
-Hybrid retrieval (#46) and rerank (#48) **exist** (optional / off by default). Study compare UI **exists**. Graph database is **rejected** (ADR-011), not deferred.
+Corpus PDF fetch/ingest, wired `GroundedAnswerService`, hybrid retrieval (#46), optional rerank (#48), and study comparison are implemented. Graph extraction remains experimental; a graph database is rejected for the MVP (ADR-011).
 
 ---
 
@@ -386,3 +385,4 @@ Hybrid retrieval (#46) and rerank (#48) **exist** (optional / off by default). S
 |------|--------|
 | 2026-08-04 | Initial Build Phase `design.md` created from existing architecture package |
 | 2026-08-17 | As-built: compare UI, optional hybrid/rerank, ADR-010/011 (no graph DB); local `/ask` still unwired |
+| 2026-08-26 | Final as-built sync: PDF fetch/ingest, wired grounded Ask, Ollama/OpenAI paths, 23-paper corpus, and final submission artifacts |
