@@ -16,7 +16,7 @@ This README is the central index for the final FAU AI HootCamp submission.
 | Pitch deck (PowerPoint) | [12-slide deck with speaker notes](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pptx) | Complete |
 | Pitch deck (PDF) | [Pitch deck PDF](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pdf) | Complete |
 | One-page project summary | [PowerPoint](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pdf) | Complete |
-| Final release document | [Markdown](docs/final/FINAL_RELEASE.md) · [PDF](docs/final/FINAL_RELEASE.pdf) | Complete |
+| Final release document | [HTML preview](docs/final/Preview_FINAL_RELEASE.html) · [Markdown](docs/final/FINAL_RELEASE.md) · [PDF](docs/final/FINAL_RELEASE.pdf) | Complete |
 | Application screenshots | [Screenshot gallery](docs/final/screenshots/) | Complete |
 | Project plan | [plan.md](plan.md) | Complete |
 | Technical design | [design.md](design.md) | Complete |
@@ -25,8 +25,6 @@ This README is the central index for the final FAU AI HootCamp submission.
 | Setup and deployment | [Local setup](docs/operations/LOCAL_SETUP.md) · [Deployment](docs/operations/DEPLOYMENT.md) | Complete |
 | Evaluation and testing | [Evaluation strategy](docs/rag/EVALUATION_STRATEGY.md) · [Testing strategy](docs/development/TESTING_STRATEGY.md) | Complete |
 | Security and cost | [Security architecture](docs/architecture/SECURITY_ARCHITECTURE.md) · [Cost decisions](docs/governance/DECISION_LOG.md) | Complete |
-
-John Hernandez has already specified that he will not participate in the live final showcase presentation. The complete deck, one-page summary, documentation, screenshots, and backup demo plan remain available for submission and evaluation.
 
 ## How to demo
 

@@ -248,7 +248,7 @@ def build_pitch() -> None:
     add_card(slide, "Backup demo", "Use repository screenshots and this deck if network, model, Docker, or showcase equipment is unavailable.", x=6.85, y=2.15, w=5.65, h=2.0, accent=GOLD)
     add_bullets(slide, ["Documented clean-machine setup and troubleshooting", "PDF fetch/ingest commands and provenance-preserving index", "Static corpus browsing remains available without the model provider"], x=1.0, y=4.75, w=11.2, h=1.4, size=17)
     add_footer(slide, 10)
-    add_notes(slide, "Explain the live-demo sequence and backup plan. The student has already notified the program that he will not participate in the live final showcase presentation; these artifacts support evaluation and handoff.")
+    add_notes(slide, "Explain the live-demo sequence and backup plan. These committed artifacts support evaluation and handoff if the live environment is unavailable.")
 
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     add_bg(slide)
@@ -293,7 +293,7 @@ def build_summary() -> None:
     add_card(slide, "Who it serves", "Researchers, students, educators, and corpus maintainers who need inspectable evidence—not unsupported model recall.", x=0.65, y=2.75, w=3.85, h=1.45)
     add_card(slide, "Core capabilities", "Semantic + keyword search; grounded Q&A; passage citations; provenance; evidence sufficiency; study comparison.", x=4.72, y=2.75, w=3.85, h=1.45, accent=GOLD)
     add_card(slide, "Current status", "MVP complete and demo-ready locally. Code, CI, docs, ingestion, retrieval, Ask, citation UI, and evaluations are complete.", x=0.65, y=4.45, w=3.85, h=1.55, accent=BLUE)
-    add_card(slide, "Demo + participation", "Docker + indexed PDFs + Ollama/OpenAI support the live app; screenshots provide backup. Not participating live; required artifacts are submitted.", x=4.72, y=4.45, w=3.85, h=1.55, accent=CYAN)
+    add_card(slide, "Demo readiness", "Docker + indexed PDFs + Ollama/OpenAI support the live app; committed screenshots and presentation materials provide a reliable backup.", x=4.72, y=4.45, w=3.85, h=1.55, accent=CYAN)
     add_screenshot(slide, "01-home.png", x=8.85, y=1.55, w=4.05, h=2.82)
     add_screenshot(slide, "02-ask.png", x=8.85, y=4.55, w=4.05, h=2.25)
 
@@ -301,7 +301,7 @@ def build_summary() -> None:
     p = contact.text_frame.paragraphs[0]
     p.text = "John Hernandez  |  jherna65@fau.edu  |  Sponsor: FAU AI HootCamp  |  Repository: github.com/bluefate/spacebio-evidence-engine"
     p.font.name = "Aptos"; p.font.size = Pt(10); p.font.color.rgb = WHITE
-    add_notes(slide, "One-page intent/project summary. Participation status: student previously notified the program that he will not participate in the live final showcase presentation; no accommodation request is being made here.")
+    add_notes(slide, "One-page project summary covering the intended users, core capabilities, final implementation status, and demo readiness.")
     prs.save(FINAL / "Space_Biology_Evidence_Engine_One_Page_Summary.pptx")
 
 
