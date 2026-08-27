@@ -27,6 +27,8 @@ This README is the central index for the final FAU AI HootCamp submission.
 | Final release document | [HTML preview](docs/final/Preview_FINAL_RELEASE.html) · [Markdown](docs/final/FINAL_RELEASE.md) · [PDF](docs/final/FINAL_RELEASE.pdf) | Complete |
 | Application screenshots | [Screenshot gallery](docs/final/screenshots/) | Complete |
 
+The final demo video was assembled from Adobe Firefly-generated clips, repository screenshots and deck assets, and Python-based automation/scripts in this repository. The project itself was developed as a human-directed, AI-assisted build aligned with the original course goal of producing a working application with strong AI agent support.
+
 ## How to demo
 
 This is a **small library of 23 approved space biology papers** (microgravity and skeletal muscle). It is **not** ChatGPT with the whole internet. Answers (when they work) must point at real passages from that library. If there is not enough evidence, the system is supposed to say so instead of guessing.
