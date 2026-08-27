@@ -1,0 +1,34 @@
+[
+  {
+    "id": "01",
+    "text": "Space biology evidence is scattered across studies, models, and terminology."
+  },
+  {
+    "id": "02",
+    "text": "This application keeps the boundary tight: a controlled corpus of approved publications."
+  },
+  {
+    "id": "03",
+    "text": "From the home screen, researchers can move into Ask, Search, Corpus, Compare, or Add Paper."
+  },
+  {
+    "id": "04",
+    "text": "Every paper stays visible with its title, organism, exposure, and source provenance."
+  },
+  {
+    "id": "05",
+    "text": "Search returns real passages from the corpus, not generic model memory."
+  },
+  {
+    "id": "06",
+    "text": "Ask is grounded in retrieved evidence, with citations and supporting passages the user can inspect."
+  },
+  {
+    "id": "07",
+    "text": "And when the evidence is weak, the system says so instead of guessing."
+  },
+  {
+    "id": "08",
+    "text": "That makes the research faster, clearer, and more trustworthy."
+  }
+]
