@@ -12,7 +12,7 @@ This README is the central index for the final FAU AI HootCamp submission.
 | Artifact | Link | Status |
 | --- | --- | --- |
 | Deployed application | [Build and run the application locally](docs/operations/HOW_TO_DEMO.md) | Local build required; no public deployment |
-| Demo video |  | Pending — link will be added after recording |
+| Demo video | [One-minute demo with audio](docs/final/Space_Biology_Evidence_Engine_One_Minute_Demo_WITH_AUDIO.mp4) | Complete |
 | Pitch deck | [PowerPoint with speaker notes](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pdf) | Complete |
 | One-page project summary / showcase handout | [PowerPoint](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pdf) | Complete |
 | Project plan | [plan.md](plan.md) | Complete |
