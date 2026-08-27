@@ -26,8 +26,6 @@ This README is the central index for the final FAU AI HootCamp submission.
 | Evaluation and testing | [Evaluation strategy](docs/rag/EVALUATION_STRATEGY.md) · [Testing strategy](docs/development/TESTING_STRATEGY.md) | Complete |
 | Security and cost | [Security architecture](docs/architecture/SECURITY_ARCHITECTURE.md) · [Cost decisions](docs/governance/DECISION_LOG.md) | Complete |
 
-John Hernandez has already specified that he will not participate in the live final showcase presentation. The complete deck, one-page summary, documentation, screenshots, and backup demo plan remain available for submission and evaluation.
-
 ## How to demo
 
 This is a **small library of 23 approved space biology papers** (microgravity and skeletal muscle). It is **not** ChatGPT with the whole internet. Answers (when they work) must point at real passages from that library. If there is not enough evidence, the system is supposed to say so instead of guessing.
