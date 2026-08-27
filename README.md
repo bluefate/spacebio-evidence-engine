@@ -16,7 +16,7 @@ This README is the central index for the final FAU AI HootCamp submission.
 | Pitch deck (PowerPoint) | [12-slide deck with speaker notes](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pptx) | Complete |
 | Pitch deck (PDF) | [Pitch deck PDF](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pdf) | Complete |
 | One-page project summary | [PowerPoint](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pdf) | Complete |
-| Final release document | [Markdown](docs/final/FINAL_RELEASE.md) · [PDF](docs/final/FINAL_RELEASE.pdf) | Complete |
+| Final release document | [HTML preview](docs/final/Preview_FINAL_RELEASE.html) · [Markdown](docs/final/FINAL_RELEASE.md) · [PDF](docs/final/FINAL_RELEASE.pdf) | Complete |
 | Application screenshots | [Screenshot gallery](docs/final/screenshots/) | Complete |
 | Project plan | [plan.md](plan.md) | Complete |
 | Technical design | [design.md](design.md) | Complete |
