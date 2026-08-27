@@ -16,7 +16,7 @@ The Space Biology Evidence Engine is a local-first, citation-first retrieval-aug
 
 The release addresses a specific research problem: relevant space-biology publications are difficult to search, compare, and synthesize while preserving study context and passage-level provenance. The system combines PDF ingestion, local embeddings, PostgreSQL/pgvector retrieval, optional keyword/hybrid retrieval, grounded answer generation, citation validation, and a minimal Next.js research interface.
 
-The MVP is complete and ready for repository-based evaluation and a local demonstration. John Hernandez has already specified that he will not participate in the live final showcase presentation; the complete presentation, one-page summary, screenshots, documentation, and backup demo materials are included for submission.
+The MVP is complete and ready for repository-based evaluation and a local demonstration. The complete presentation, one-page summary, screenshots, documentation, and backup demo materials are included for submission.
 
 ## 2. Intended users
 
@@ -236,6 +236,6 @@ No model output is automatically treated as validated science. The interface pre
 - [ ] Final Classroom repository is synchronized with the principal repository after approval.
 - [ ] Canvas submission contains the GitHub Classroom repository URL.
 
-## 15. Participation statement
+## 15. Submission status
 
-John Hernandez has already specified that he will not participate in the live final showcase presentation. The final application, pitch deck, one-page summary, technical documentation, screenshots, and release package are provided for project submission and evaluation.
+The final application, pitch deck, one-page summary, technical documentation, screenshots, and release package are provided for project submission and evaluation.
