@@ -156,7 +156,7 @@ For a local LLM path, follow [`HOW_TO_DEMO.md`](../operations/HOW_TO_DEMO.md). F
 
 The final one-minute demo video was assembled from Adobe Firefly-generated short clips, committed screenshots, presentation assets, and Python-based helper scripts in this repository.
 
-The application itself was produced as a human-directed, AI-assisted project consistent with the original course objective: use AI tools and agent collaboration to plan, implement, document, and present a working software system rather than only a static concept.
+A main emphasis of the project was using AI tools as fully as possible to generate, manage, architect, and develop all aspects of the application. John Hernandez provided direction, architectural review, peer review, and orchestration. That matches the course objective: a working system with strong AI agent support, not a static concept only.
 
 ## 8. Verification
 
