@@ -3,6 +3,11 @@
 ![Space Biology Evidence Engine](docs/brand/logo-wordmark.png)
 
 ## Purpose
+
+This repository is a **school project for FAU AI HootCamp** (Summer 2026 Build Phase). It presents the Space Biology Evidence Engine: a citation-first research synthesis system for space biology.
+
+The work was originally based on NASA’s “Space Biology Knowledge Engine” challenge. Because that competition had already closed, the same kind of problem was continued as an **independent** course project, with a stronger focus on information retrieval, citations, traceability, and answering scientific questions directly from source material. The name **Evidence** Engine was chosen because “evidence” matches that emphasis better than the broader term “knowledge.” This is not a NASA product, submission, or affiliated contest entry.
+
 Define and build a citation-first evidence engine for a controlled corpus of open-access space biology publications.
 
 ## Final submission artifacts
