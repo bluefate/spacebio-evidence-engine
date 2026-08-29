@@ -40,6 +40,8 @@ Do not treat §3 as a substitute for claiming GitHub issues. Prefer Project colu
 
 ### Problem statement and context
 
+This is a FAU AI HootCamp school project (Summer 2026 Build Phase). It was originally based on NASA’s “Space Biology Knowledge Engine” challenge. Because that competition had already closed, the concept continued as an independent course project, with stronger emphasis on information retrieval, citations, traceability, and answering scientific questions directly from source material. The name **Space Biology Evidence Engine** uses “evidence” rather than “knowledge” to match that focus. This is not a NASA product or contest submission.
+
 Public space biology publications are difficult to search, compare, and synthesize for focused scientific questions. Generic LLM answers risk hallucinated findings, weak provenance, and collapsed experimental context (organism, exposure, methods, limitations).
 
 This project builds a trustworthy evidence engine that answers from retrieved corpus passages only, with passage-level citations and explicit insufficient-evidence behavior.
@@ -58,8 +60,8 @@ This project builds a trustworthy evidence engine that answers from retrieved co
 
 Solve **evidence search and synthesis with scientific provenance**: every claim links to a retrieved passage (publication, section, page, source location). The system must refuse to invent findings when the corpus is insufficient.
 
-**Approved topic:** microgravity and skeletal muscle.  
-**August MVP corpus size:** ~10–15 open-access publications (not 20–30).  
+**Approved topic:** microgravity and skeletal muscle.
+**August MVP corpus size:** ~10–15 open-access publications (not 20–30).
 **Corpus selection rules:** include only OA papers with clear reuse rights, on-topic content, extractable methods/results, and citable metadata; exclude paywalled/unclear rights, off-topic, unusable extraction, and unapproved commentary. The paper list itself is a follow-on selection task.
 
 **Detail:** [Product requirements](docs/product/PRODUCT_REQUIREMENTS.md), [User stories](docs/product/USER_STORIES.md), [Corpus specification](docs/data/CORPUS_SPECIFICATION.md), [Decision log](docs/governance/DECISION_LOG.md).

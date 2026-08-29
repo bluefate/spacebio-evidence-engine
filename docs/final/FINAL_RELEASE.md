@@ -2,10 +2,10 @@
 
 ## Space Biology Evidence Engine
 
-**Release:** August 2026 MVP  
-**Prepared by:** John Hernandez (`jherna65@fau.edu`)  
-**Sponsor:** FAU AI HootCamp  
-**Primary repository:** <https://github.com/bluefate/spacebio-evidence-engine>  
+**Release:** August 2026 MVP
+**Prepared by:** John Hernandez (`jherna65@fau.edu`)
+**Sponsor / course:** FAU AI HootCamp (school project, Summer 2026 Build Phase)
+**Primary repository:** <https://github.com/bluefate/spacebio-evidence-engine>
 **GitHub Classroom repository:** <https://github.com/FAU-AI-HootCamp-Summer-2026/buildphase-bluefate>
 
 ![Space Biology Evidence Engine](../brand/logo-wordmark.png)
@@ -13,6 +13,8 @@
 ## 1. Release summary
 
 The Space Biology Evidence Engine is a local-first, citation-first retrieval-augmented workspace for searching, comparing, and synthesizing evidence from a controlled corpus of 23 owner-approved open-access publications about microgravity and skeletal muscle.
+
+This is a FAU AI HootCamp school project. It was originally based on NASA’s “Space Biology Knowledge Engine” challenge. The competition had already closed, so the work continued as an independent project with a stronger focus on information retrieval, citations, traceability, and answering scientific questions from source passages. The name uses **Evidence** rather than **Knowledge** to reflect that emphasis. It is not a NASA-affiliated contest entry.
 
 The release addresses a specific research problem: relevant space-biology publications are difficult to search, compare, and synthesize while preserving study context and passage-level provenance. The system combines PDF ingestion, local embeddings, PostgreSQL/pgvector retrieval, optional keyword/hybrid retrieval, grounded answer generation, citation validation, and a minimal Next.js research interface.
 
@@ -212,19 +214,19 @@ If Docker, model weights, network access, or showcase equipment fails:
 
 ## 13. Common Q&A
 
-**Why not use a general chatbot?**  
+**Why not use a general chatbot?**
 A general chatbot does not enforce the controlled corpus or passage-level provenance. This system retrieves approved evidence first and fails closed when evidence is missing.
 
-**How are hallucinations reduced?**  
+**How are hallucinations reduced?**
 The service evaluates evidence sufficiency before generation and validates generated citation markers against retrieved chunks afterward. Unsupported outputs are rejected.
 
-**Why is the corpus small?**  
+**Why is the corpus small?**
 The MVP prioritizes curation, licensing, extractability, and provenance over volume. The controlled boundary makes evaluation and scientific review practical.
 
-**Why local-first?**  
+**Why local-first?**
 Local operation supports privacy, cost control, reproducibility, and optional use of Ollama. OpenAI remains available as a configured provider.
 
-**Is the AI output scientifically validated?**  
+**Is the AI output scientifically validated?**
 No model output is automatically treated as validated science. The interface preserves source evidence and limitations so a human can review it.
 
 ## 14. Submission checklist
