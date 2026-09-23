@@ -54,7 +54,7 @@ This runs `scripts/refresh_active_board.py`, which:
 
 Edit `TRACKED` and `CRITICAL_EDGES` in [`scripts/refresh_active_board.py`](../../scripts/refresh_active_board.py), then re-run `make refresh-board`.
 
-**Snapshot stale (2026-08-24):** `make refresh-board` may fail without Project `read:project`. **Do not treat the Mermaid below as live.** Tracked MVP and knowledge-graph issues (#1–#77) plus later demo/ingest work through **#191** are **closed**. The open docs/Classroom sync is [#193](https://github.com/bluefate/spacebio-evidence-engine/issues/193). Trust [GitHub issues](https://github.com/bluefate/spacebio-evidence-engine/issues) over the generated tree until a human refreshes with Project access.
+**Snapshot (2026-09-23):** Tracked MVP and knowledge-graph issues (#1–#77) plus later demo/ingest/finalization work through **#200** are **closed**. There are **no open repository issues**. The Mermaid tree below may still show an older Project snapshot until a human runs `make refresh-board` with Project `read:project`. Trust [GitHub issues](https://github.com/bluefate/spacebio-evidence-engine/issues) over the generated tree when they disagree.
 
 <!-- ACTIVE_BOARD:BEGIN -->
 **Last refreshed:** 2026-08-17 via `make refresh-board` (Project #6 + open PRs).

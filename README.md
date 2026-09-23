@@ -1,6 +1,6 @@
 # Space Biology Evidence Engine
 
-![Space Biology Evidence Engine](docs/brand/logo-wordmark.png)
+![Space Biology Evidence Engine — AI-powered research and evidence engine for space biology and human health](docs/brand/hero-banner.png)
 
 ## Purpose
 
@@ -14,23 +14,23 @@ Define and build a citation-first evidence engine for a controlled corpus of ope
 
 This README is the central index for the final FAU AI HootCamp submission.
 
-| Artifact | Link | Status |
-| --- | --- | --- |
-| Deployed application | [Build and run the application locally](docs/operations/HOW_TO_DEMO.md) | Local build required; no public deployment |
-| Demo video | [Space_Biology_Evidence_Engine.mp4](docs/final/Space_Biology_Evidence_Engine.mp4) · [YouTube](https://youtu.be/TWDZt0OCE5o) | Complete |
-| Pitch deck | [PowerPoint with speaker notes](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pdf) | Complete |
-| One-page project summary / showcase handout | [PowerPoint](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pdf) | Complete |
-| Project plan | [plan.md](plan.md) | Complete |
-| Technical design | [design.md](design.md) | Complete |
-| API documentation | [FastAPI OpenAPI and endpoint notes](docs/operations/LOCAL_SETUP.md#services-and-ports) | Complete |
-| Architecture diagrams and supporting design | [System architecture](docs/architecture/ARCHITECTURE.md) · [RAG architecture](docs/architecture/RAG_ARCHITECTURE.md) · [Deployment architecture](docs/architecture/DEPLOYMENT_ARCHITECTURE.md) | Complete |
-| Evaluation documentation | [Evaluation strategy](docs/rag/EVALUATION_STRATEGY.md) | Complete |
-| Testing documentation | [Testing strategy](docs/development/TESTING_STRATEGY.md) | Complete |
-| Security documentation | [Security architecture](docs/architecture/SECURITY_ARCHITECTURE.md) | Complete |
-| Cost documentation | [Model-provider and cost decisions](docs/governance/DECISION_LOG.md) | Complete |
-| Setup and deployment documentation | [Local setup](docs/operations/LOCAL_SETUP.md) · [Deployment](docs/operations/DEPLOYMENT.md) | Complete |
-| Final release document | [HTML preview](docs/final/Preview_FINAL_RELEASE.html) · [Markdown](docs/final/FINAL_RELEASE.md) · [PDF](docs/final/FINAL_RELEASE.pdf) | Complete |
-| Application screenshots | [Screenshot gallery](docs/final/screenshots/) | Complete |
+| Artifact                                    | Link                                                                                                                                                                                           | Status                                     |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| Deployed application                        | [Build and run the application locally](docs/operations/HOW_TO_DEMO.md)                                                                                                                        | Local build required; no public deployment |
+| Demo video                                  | [Space_Biology_Evidence_Engine.mp4](docs/final/Space_Biology_Evidence_Engine.mp4) · [YouTube](https://youtu.be/TWDZt0OCE5o)                                                                    | Complete                                   |
+| Pitch deck                                  | [PowerPoint with speaker notes](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_Pitch_Deck.pdf)                                     | Complete                                   |
+| One-page project summary / showcase handout | [PowerPoint](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pptx) · [PDF](docs/final/Space_Biology_Evidence_Engine_One_Page_Summary.pdf)                                            | Complete                                   |
+| Project plan                                | [plan.md](plan.md)                                                                                                                                                                             | Complete                                   |
+| Technical design                            | [design.md](design.md)                                                                                                                                                                         | Complete                                   |
+| API documentation                           | [FastAPI OpenAPI and endpoint notes](docs/operations/LOCAL_SETUP.md#services-and-ports)                                                                                                        | Complete                                   |
+| Architecture diagrams and supporting design | [System architecture](docs/architecture/ARCHITECTURE.md) · [RAG architecture](docs/architecture/RAG_ARCHITECTURE.md) · [Deployment architecture](docs/architecture/DEPLOYMENT_ARCHITECTURE.md) | Complete                                   |
+| Evaluation documentation                    | [Evaluation strategy](docs/rag/EVALUATION_STRATEGY.md)                                                                                                                                         | Complete                                   |
+| Testing documentation                       | [Testing strategy](docs/development/TESTING_STRATEGY.md)                                                                                                                                       | Complete                                   |
+| Security documentation                      | [Security architecture](docs/architecture/SECURITY_ARCHITECTURE.md)                                                                                                                            | Complete                                   |
+| Cost documentation                          | [Model-provider and cost decisions](docs/governance/DECISION_LOG.md)                                                                                                                           | Complete                                   |
+| Setup and deployment documentation          | [Local setup](docs/operations/LOCAL_SETUP.md) · [Deployment](docs/operations/DEPLOYMENT.md)                                                                                                    | Complete                                   |
+| Final release document                      | [HTML preview](docs/final/Preview_FINAL_RELEASE.html) · [Markdown](docs/final/FINAL_RELEASE.md) · [PDF](docs/final/FINAL_RELEASE.pdf)                                                          | Complete                                   |
+| Application screenshots                     | [Screenshot gallery](docs/final/screenshots/)                                                                                                                                                  | Complete                                   |
 
 The final demo video was assembled from Adobe Firefly-generated clips, repository screenshots and deck assets, and Python-based automation/scripts in this repository.
 
@@ -69,14 +69,14 @@ Open **http://localhost:3000** in a browser. Click-through script (10 search ter
 
 ### What to show (works today)
 
-| Page | What you will see |
-| --- | --- |
-| Home | Buttons for Ask, Search, Corpus, Compare studies, Add paper |
-| [Corpus](http://localhost:3000/corpus) | Cards for each paper (title, organism, exposure, link to the publisher) |
-| [Add paper](http://localhost:3000/add) | Register a **local extra** by DOI or PDF, then **Index**. This does **not** add to the approved 23. Index extracts, chunks, and embeds — it does not train a model. Register success is not the same as indexed. |
-| A publication | Extra details and DOI links |
-| [Search](http://localhost:3000/search) | Catalog titles and labels. After `make ingest`, passages from the database if the API is running. |
-| [Compare studies](http://localhost:3000/compare) | Check two or more papers. You will see organism / system labels (for example human vs mouse). The page does **not** invent “this study found more atrophy.” |
+| Page                                             | What you will see                                                                                                                                                                                                |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Home                                             | Buttons for Ask, Search, Corpus, Compare studies, Add paper                                                                                                                                                      |
+| [Corpus](http://localhost:3000/corpus)           | Cards for each paper (title, organism, exposure, link to the publisher)                                                                                                                                          |
+| [Add paper](http://localhost:3000/add)           | Register a **local extra** by DOI or PDF, then **Index**. This does **not** add to the approved 23. Index extracts, chunks, and embeds — it does not train a model. Register success is not the same as indexed. |
+| A publication                                    | Extra details and DOI links                                                                                                                                                                                      |
+| [Search](http://localhost:3000/search)           | Catalog titles and labels. After `make ingest`, passages from the database if the API is running.                                                                                                                |
+| [Compare studies](http://localhost:3000/compare) | Check two or more papers. You will see organism / system labels (for example human vs mouse). The page does **not** invent “this study found more atrophy.”                                                      |
 
 ### What will not look like a full Q&A demo yet
 
@@ -89,13 +89,14 @@ Open **http://localhost:3000** in a browser. Click-through script (10 search ter
 A fair demo: Corpus + Compare (no ingest), then **Download missing PDFs** / `make fetch-pdfs`, `make ingest`, Search passages, Ask with citations.
 
 ## Scope
+
 The August MVP (deadline 2026-08-31) focuses on retrieval-augmented generation, passage-level citations, evidence sufficiency, and a controlled corpus of **23** open-access publications on **microgravity and skeletal muscle** (see [corpus inventory](docs/data/CORPUS_INVENTORY.md)). A **post-August** inventory compare UI is at `/compare`. Auth, public hosting, and a graph database are out of product (ADR-011 for graph DB).
 
 ## Repositories
 
-| Role | Repository |
-|------|------------|
-| **Principal / development** | [bluefate/spacebio-evidence-engine](https://github.com/bluefate/spacebio-evidence-engine) |
+| Role                                     | Repository                                                                                                            |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Principal / development**              | [bluefate/spacebio-evidence-engine](https://github.com/bluefate/spacebio-evidence-engine)                             |
 | **Course submission (GitHub Classroom)** | [FAU-AI-HootCamp-Summer-2026/buildphase-bluefate](https://github.com/FAU-AI-HootCamp-Summer-2026/buildphase-bluefate) |
 
 Development and day-to-day engineering happen in the principal repository. The Classroom repository is the official submission remote for AI HootCamp Summer 2026 and should stay in sync for plan, design, and incremental build deliverables.
@@ -104,43 +105,44 @@ Development and day-to-day engineering happen in the principal repository. The C
 
 Humans and AI agents who contribute implementation work are listed here. **Agents must add themselves** the first time they open a PR for this repository (and may update their row on later PRs). Do not invent collaborators who have not contributed.
 
-| Name | Type | Role | Notes |
-|------|------|------|-------|
-| John Hernandez ([@bluefate](https://github.com/bluefate)) | Human | Repository owner | Final authority on requirements, architecture, security, PR approval, and merge |
-| Cursor Auto (Composer) | Agent (Cursor) | Implementation contributor | Claimed/implemented multiple MVP issues; follows [AGENTS.md](AGENTS.md) |
-| Cursor Grok 4.5 | Agent (Cursor) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
-| Cursor Grok 4.6 | Agent (Cursor) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
-| Devin | Agent (Devin) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
-| Codex | Agent (Codex) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
-| Cascade | Agent (Cascade) | Implementation contributor | Follows [AGENTS.md](AGENTS.md) |
+| Name                                                      | Type            | Role                       | Notes                                                                           |
+| --------------------------------------------------------- | --------------- | -------------------------- | ------------------------------------------------------------------------------- |
+| John Hernandez ([@bluefate](https://github.com/bluefate)) | Human           | Repository owner           | Final authority on requirements, architecture, security, PR approval, and merge |
+| Cursor                                                    | Agent (Cursor)  | Implementation contributor | Claimed/implemented multiple MVP issues; follows [AGENTS.md](AGENTS.md)         |
+| Devin                                                     | Agent (Devin)   | Implementation contributor | Follows [AGENTS.md](AGENTS.md)                                                  |
+| Codex                                                     | Agent (Codex)   | Implementation contributor | Follows [AGENTS.md](AGENTS.md)                                                  |
+| Cascade                                                   | Agent (Cascade) | Implementation contributor | Follows [AGENTS.md](AGENTS.md)                                                  |
 
 Rules for agents:
 
 1. On your **first** implementation PR, add a row for yourself in this table (same PR).
-2. Use a stable display name (for example `Cursor Auto (Composer)`, `Devin`, `Codex`) plus agent type.
+2. Use one row per agent product (for example `Cursor`, `Devin`, `Codex`) — do not add version- or model-specific rows.
 3. Keep the Role short (`Implementation contributor`, `Docs contributor`, etc.).
-4. Do not remove other people or agents.
-5. If you are already listed, you do not need to edit this table again unless correcting your own row.
+4. Do not remove other people or agent products.
+5. If your product is already listed, you do not need to edit this table again unless correcting that row.
 
 ## Backlog and project (source of truth)
 
 Weekly windows in [plan.md](plan.md) are **schedule targets**. Execution order, ownership, and status live on GitHub:
 
-| Resource | URL |
-|----------|-----|
-| **GitHub Project** | [Space Biology Evidence Engine (project #6)](https://github.com/users/bluefate/projects/6) |
-| **Issues** | [bluefate/spacebio-evidence-engine/issues](https://github.com/bluefate/spacebio-evidence-engine/issues) |
-| **Backlog index** | [docs/governance/BACKLOG.md](docs/governance/BACKLOG.md) |
+| Resource           | URL                                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------------------- |
+| **GitHub Project** | [Space Biology Evidence Engine (project #6)](https://github.com/users/bluefate/projects/6)              |
+| **Issues**         | [bluefate/spacebio-evidence-engine/issues](https://github.com/bluefate/spacebio-evidence-engine/issues) |
+| **Backlog index**  | [docs/governance/BACKLOG.md](docs/governance/BACKLOG.md)                                                |
 
 Claim and implement from Project status `Ready` per [AGENT_WORKFLOW.md](docs/development/AGENT_WORKFLOW.md).
 
 ## What to work next (and what can run in parallel)
 
+**August MVP status: Done.** Tracked issues through the critical path (#27–#66), corpus/ingest demo work, and final submission artifacts are closed. There are **no open GitHub issues** as of this refresh. Optional post-MVP ideas remain under [Possible follow-ups](#possible-follow-ups).
+
 **Live Mermaid board (agents must use this):** [docs/development/ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md)
 **Refresh command:** `make refresh-board` (pulls Project #6 Status + open PR branches into the Mermaid tree)
 **Project board:** [Project #6](https://github.com/users/bluefate/projects/6)
+**Backlog index:** [docs/governance/BACKLOG.md](docs/governance/BACKLOG.md)
 
-### Parallel agents — do this every time
+### Parallel agents — if new work is opened
 
 1. `make refresh-board`
 2. Read **Next options** in [ACTIVE_BOARD.md](docs/development/ACTIVE_BOARD.md)
@@ -150,49 +152,38 @@ Claim and implement from Project status `Ready` per [AGENT_WORKFLOW.md](docs/dev
 
 **Rule:** one owner per issue; do not edit files owned by another active issue.
 
-### Critical path (mostly serial)
+### Critical path (August MVP — all Done)
 
-| Order | Issue | Notes |
-|------:|-------|-------|
-| 1 | [#27](https://github.com/bluefate/spacebio-evidence-engine/issues/27) Publication metadata schema | **Done** (PR #84) |
-| 2 | [#28](https://github.com/bluefate/spacebio-evidence-engine/issues/28) PDF storage abstraction | `parallel-safe` — check board before claiming |
-| 3 | [#29](https://github.com/bluefate/spacebio-evidence-engine/issues/29) → [#30](https://github.com/bluefate/spacebio-evidence-engine/issues/30) → [#31](https://github.com/bluefate/spacebio-evidence-engine/issues/31) | PDF extract → sections → page mapping (after #28) |
-| 4 | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) / [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33) | Chunking + chunk schema (`parallel-unsafe`) |
-| 5 | [#39](https://github.com/bluefate/spacebio-evidence-engine/issues/39) → [#40](https://github.com/bluefate/spacebio-evidence-engine/issues/40) → [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) → [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) → [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) | Embeddings → vector schema/index → search (**#39 Done**) |
-| 6 | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51)–[#60](https://github.com/bluefate/spacebio-evidence-engine/issues/60) | Grounded answer / `/ask` API |
-| 7 | [#61](https://github.com/bluefate/spacebio-evidence-engine/issues/61)–[#66](https://github.com/bluefate/spacebio-evidence-engine/issues/66) | Web ask / evidence / citation UI |
-
-### Typical parallel-safe picks
-
-Use the refreshed board for what is free **now**. Common safe lanes:
-
-| Issue | Why parallel-safe |
-|-------|-------------------|
-| [#40](https://github.com/bluefate/spacebio-evidence-engine/issues/40) Local embeddings | After #39; owns concrete provider files |
-| [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51) LLM provider interface | Interface stubs (avoid `embeddings/` if #40 active) |
-| [#26](https://github.com/bluefate/spacebio-evidence-engine/issues/26) Reference questions | Docs/eval only |
-| [#23](https://github.com/bluefate/spacebio-evidence-engine/issues/23)–[#25](https://github.com/bluefate/spacebio-evidence-engine/issues/25) | Corpus QA / licenses / duplicates |
-| [#57](https://github.com/bluefate/spacebio-evidence-engine/issues/57) / [#55](https://github.com/bluefate/spacebio-evidence-engine/issues/55) | Answer schema / insufficient evidence |
-| [#6](https://github.com/bluefate/spacebio-evidence-engine/issues/6) / [#10](https://github.com/bluefate/spacebio-evidence-engine/issues/10) / [#11](https://github.com/bluefate/spacebio-evidence-engine/issues/11) | Setup / pytest / ruff polish |
+| Order | Issue                                                                                                                                                                                                                                                                                                                                                                 | Status |
+| ----: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+|     1 | [#27](https://github.com/bluefate/spacebio-evidence-engine/issues/27) Publication metadata schema                                                                                                                                                                                                                                                                     | Done   |
+|     2 | [#28](https://github.com/bluefate/spacebio-evidence-engine/issues/28) PDF storage abstraction                                                                                                                                                                                                                                                                         | Done   |
+|     3 | [#29](https://github.com/bluefate/spacebio-evidence-engine/issues/29) → [#30](https://github.com/bluefate/spacebio-evidence-engine/issues/30) → [#31](https://github.com/bluefate/spacebio-evidence-engine/issues/31)                                                                                                                                                 | Done   |
+|     4 | [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32) / [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33)                                                                                                                                                                                                                         | Done   |
+|     5 | [#39](https://github.com/bluefate/spacebio-evidence-engine/issues/39) → [#40](https://github.com/bluefate/spacebio-evidence-engine/issues/40) → [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42) → [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43) → [#44](https://github.com/bluefate/spacebio-evidence-engine/issues/44) | Done   |
+|     6 | [#51](https://github.com/bluefate/spacebio-evidence-engine/issues/51)–[#60](https://github.com/bluefate/spacebio-evidence-engine/issues/60)                                                                                                                                                                                                                           | Done   |
+|     7 | [#61](https://github.com/bluefate/spacebio-evidence-engine/issues/61)–[#66](https://github.com/bluefate/spacebio-evidence-engine/issues/66)                                                                                                                                                                                                                           | Done   |
 
 ### Do **not** parallelize without coordination
 
-- [#32](https://github.com/bluefate/spacebio-evidence-engine/issues/32), [#33](https://github.com/bluefate/spacebio-evidence-engine/issues/33), [#42](https://github.com/bluefate/spacebio-evidence-engine/issues/42), [#43](https://github.com/bluefate/spacebio-evidence-engine/issues/43)
+When new issues reopen shared paths, still avoid concurrent edits on:
+
+- Chunking / vector schema issues that share `alembic/` or chunk packages
 - Anything already in ACTIVE_BOARD **In flight**
 - Second agent on `alembic/`, `src/spacebio_evidence_engine/db/`, or the same package path
 
 ### Corpus approval
 
-The August MVP inventory (**23** publications) is owner-approved (`human_approval=approved` in the manifest; [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) closed). Bulk ingest can proceed subject to license/PDF QA issues.
+The August MVP inventory (**23** publications) is owner-approved (`human_approval=approved` in the manifest; [#20](https://github.com/bluefate/spacebio-evidence-engine/issues/20) closed). Bulk ingest can proceed subject to license/PDF QA (those QA issues are also closed).
 
 More detail: [docs/development/PARALLEL_WORK.md](docs/development/PARALLEL_WORK.md).
 
 ## Build Phase deliverables
 
-| Document | Description |
-|----------|-------------|
-| [plan.md](plan.md) | Project plan: summary, requirements, RAG/production/security topics, weekly milestones |
-| [design.md](design.md) | Technical design: architecture, data flow, user flow, schema, API, AI/RAG, deployment |
+| Document               | Description                                                                            |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| [plan.md](plan.md)     | Project plan: summary, requirements, RAG/production/security topics, weekly milestones |
+| [design.md](design.md) | Technical design: architecture, data flow, user flow, schema, API, AI/RAG, deployment  |
 
 Supporting deep-dive documentation lives under [docs/](docs/README.md).
 
@@ -220,17 +211,19 @@ Details (tools, ports, `.env.example`, clean-machine checklist):
 
 ## Current status
 
-August MVP **implementation is on `main`**: FastAPI, Next.js, PostgreSQL/pgvector,
+August MVP **implementation and submission artifacts are complete on `main`**: FastAPI, Next.js, PostgreSQL/pgvector,
 ingestion/chunk/embed/search modules, grounded-answer schema and `/ask` route,
 citation UI, study compare (`/compare`), optional hybrid retrieval and rerank
 (off by default), experimental graph extractor (not on `/ask`). **No graph
-database** (ADR-011).
+database** (ADR-011). Demo video, pitch deck, one-pager, screenshots, and final
+release docs are linked under [Final submission artifacts](#final-submission-artifacts).
 
 Local `make setup` does **not** ingest the 23 PDFs. For live Ask, run
 `make fetch-pdfs`, `make ingest`, install embeddings, and run **Ollama**
 (`LLM_PROVIDER=ollama`, `ollama pull llama3.2:1b`). Paid OpenAI is optional.
 
 ## Architecture position
+
 Accepted stack for the August MVP:
 
 - Python 3.12+, FastAPI, PostgreSQL, pgvector, **SQLAlchemy 2.x + Alembic**, Pydantic API schemas, PyMuPDF, Sentence Transformers (`all-MiniLM-L6-v2`), optional OpenAI (`gpt-4o-mini`, **$50/mo hard cap**), Next.js, TypeScript, Docker Compose, Pytest, Ruff, **pyright**, GitHub Actions, Mermaid.
@@ -240,6 +233,7 @@ Accepted stack for the August MVP:
 - Advanced multi-agent orchestration and advanced contradiction detection remain future capabilities.
 
 ## Start here
+
 - [Build plan](plan.md)
 - [Technical design](design.md)
 - [Decision log](docs/governance/DECISION_LOG.md)
@@ -256,6 +250,7 @@ Accepted stack for the August MVP:
 - [Development team](README.md#development-team)
 
 ## Related documents
+
 - [Corpus specification](docs/data/CORPUS_SPECIFICATION.md)
 - [Citation strategy](docs/rag/CITATION_STRATEGY.md)
 - [Evaluation strategy](docs/rag/EVALUATION_STRATEGY.md)
