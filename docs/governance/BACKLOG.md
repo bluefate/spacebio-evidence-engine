@@ -17,7 +17,7 @@ Human-readable index of GitHub issues with URLs. **Source of truth for status re
 Prioritize foundation → corpus (~10–15 papers) → ingestion → vector retrieval → grounded answers → minimal web UI.
 Issues labeled `post-august-mvp` are deferred past 2026-08-31.
 
-_Generated from repository issues (tracked through #77 plus later demo/docs). Last updated: 2026-08-24 (states synced to GitHub; #193 open for this docs/Classroom sync)._
+_Generated from repository issues (tracked through #77 plus later demo/docs). Last updated: 2026-09-23 (all listed issues closed; no open repository issues)._
 
 ## Foundation
 
@@ -145,7 +145,7 @@ _Generated from repository issues (tracked through #77 plus later demo/docs). La
 | [177](https://github.com/bluefate/spacebio-evidence-engine/issues/177) | CLOSED | Sync BACKLOG.md after closed demo ingest issues | |
 | [179](https://github.com/bluefate/spacebio-evidence-engine/issues/179) | CLOSED | How to demo: one command per terminal window | |
 | [181](https://github.com/bluefate/spacebio-evidence-engine/issues/181) | CLOSED | Add HOW_TO_DEMO.md with 10 questions and 10 search terms | |
-| [193](https://github.com/bluefate/spacebio-evidence-engine/issues/193) | OPEN | Sync post-MVP docs, board, Classroom main | |
+| [193](https://github.com/bluefate/spacebio-evidence-engine/issues/193) | CLOSED | Sync post-MVP docs, board, Classroom main | |
 
 ## Local demo ingest (post-#77)
 

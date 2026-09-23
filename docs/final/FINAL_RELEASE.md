@@ -8,7 +8,7 @@
 **Primary repository:** <https://github.com/bluefate/spacebio-evidence-engine>
 **GitHub Classroom repository:** <https://github.com/FAU-AI-HootCamp-Summer-2026/buildphase-bluefate>
 
-![Space Biology Evidence Engine](../brand/logo-wordmark.png)
+![Space Biology Evidence Engine — AI-powered research and evidence engine for space biology and human health](../brand/hero-banner.png)
 
 ## 1. Release summary
 
@@ -148,7 +148,7 @@ For a local LLM path, follow [`HOW_TO_DEMO.md`](../operations/HOW_TO_DEMO.md). F
 | One-page project summary (PowerPoint) | [`Space_Biology_Evidence_Engine_One_Page_Summary.pptx`](Space_Biology_Evidence_Engine_One_Page_Summary.pptx) | Complete |
 | One-page project summary (PDF) | [`Space_Biology_Evidence_Engine_One_Page_Summary.pdf`](Space_Biology_Evidence_Engine_One_Page_Summary.pdf) | Complete |
 | Final release/submission document | This document and [`FINAL_RELEASE.pdf`](FINAL_RELEASE.pdf) | Complete |
-| Demo video | README placeholder; external accessible URL to be added after recording | Pending |
+| Demo video | [`Space_Biology_Evidence_Engine.mp4`](Space_Biology_Evidence_Engine.mp4) · [YouTube](https://youtu.be/TWDZt0OCE5o) | Complete |
 | Project plan | [`plan.md`](../../plan.md) | Complete |
 | Technical design | [`design.md`](../../design.md) | Complete |
 
@@ -191,7 +191,7 @@ The project includes CI checks for Python linting, Python type checking, Python 
 - Search quality depends on corpus extraction and embedding quality.
 - Scientific correctness evaluation includes fixtures and human-review fields but is not a substitute for expert review.
 - Graph extraction is experimental; the MVP deliberately does not add a graph database.
-- The final demo video has not yet been recorded and will be completed as a separate finalization step.
+- Auth and public hosting remain out of scope for the local-first MVP.
 
 ## 11. Future improvements
 
@@ -210,7 +210,7 @@ If Docker, model weights, network access, or showcase equipment fails:
 2. Use the committed screenshots to walk through Home, Ask, Search, Corpus, Compare, and Publication details.
 3. Explain the expected Ask response using the documented grounding and citation-validation flow.
 4. Open the repository documentation and evaluation artifacts locally.
-5. Use the demo video after it is recorded and linked.
+5. Use the linked demo video ([YouTube](https://youtu.be/TWDZt0OCE5o) or [`Space_Biology_Evidence_Engine.mp4`](Space_Biology_Evidence_Engine.mp4)).
 
 ## 13. Common Q&A
 
@@ -239,11 +239,11 @@ No model output is automatically treated as validated science. The interface pre
 - [x] Architecture, API, setup, deployment, limitations, evaluation, security, and cost documentation are linked.
 - [x] Demo screenshots and a backup plan are committed.
 - [x] `plan.md` and `design.md` are linked.
-- [ ] Demo video is recorded, captioned, uploaded, and linked from README.
-- [ ] A public deployed application URL is supplied, if required; current release is local-first.
+- [x] Demo video is recorded, uploaded, and linked from README ([YouTube](https://youtu.be/TWDZt0OCE5o) · [`Space_Biology_Evidence_Engine.mp4`](Space_Biology_Evidence_Engine.mp4)).
+- [x] A public deployed application URL is not required for this local-first MVP (demo via Docker Compose).
 - [ ] Final Classroom repository is synchronized with the principal repository after approval.
 - [ ] Canvas submission contains the GitHub Classroom repository URL.
 
 ## 15. Submission status
 
-The final application, pitch deck, one-page summary, technical documentation, screenshots, and release package are provided for project submission and evaluation.
+The final application, pitch deck, one-page summary, technical documentation, screenshots, demo video, and release package are provided for project submission and evaluation. Remaining checklist items are course hand-in steps (Classroom sync / Canvas), not product gaps.

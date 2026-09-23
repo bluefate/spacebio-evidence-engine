@@ -56,35 +56,35 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } 
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.at { color: #7d9029; } 
-code span.bn { color: #40a070; } 
-code span.bu { color: #008000; } 
-code span.cf { color: #007020; font-weight: bold; } 
-code span.ch { color: #4070a0; } 
-code span.cn { color: #880000; } 
-code span.co { color: #60a0b0; font-style: italic; } 
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.do { color: #ba2121; font-style: italic; } 
-code span.dt { color: #902000; } 
-code span.dv { color: #40a070; } 
-code span.er { color: #ff0000; font-weight: bold; } 
-code span.ex { } 
-code span.fl { color: #40a070; } 
-code span.fu { color: #06287e; } 
-code span.im { color: #008000; font-weight: bold; } 
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.kw { color: #007020; font-weight: bold; } 
-code span.op { color: #666666; } 
-code span.ot { color: #007020; } 
-code span.pp { color: #bc7a00; } 
-code span.sc { color: #4070a0; } 
-code span.ss { color: #bb6688; } 
-code span.st { color: #4070a0; } 
-code span.va { color: #19177c; } 
-code span.vs { color: #4070a0; } 
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.al { color: #ff0000; font-weight: bold; }
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; }
+code span.at { color: #7d9029; }
+code span.bn { color: #40a070; }
+code span.bu { color: #008000; }
+code span.cf { color: #007020; font-weight: bold; }
+code span.ch { color: #4070a0; }
+code span.cn { color: #880000; }
+code span.co { color: #60a0b0; font-style: italic; }
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; }
+code span.do { color: #ba2121; font-style: italic; }
+code span.dt { color: #902000; }
+code span.dv { color: #40a070; }
+code span.er { color: #ff0000; font-weight: bold; }
+code span.ex { }
+code span.fl { color: #40a070; }
+code span.fu { color: #06287e; }
+code span.im { color: #008000; font-weight: bold; }
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; }
+code span.kw { color: #007020; font-weight: bold; }
+code span.op { color: #666666; }
+code span.ot { color: #007020; }
+code span.pp { color: #bc7a00; }
+code span.sc { color: #4070a0; }
+code span.ss { color: #bb6688; }
+code span.st { color: #4070a0; }
+code span.va { color: #19177c; }
+code span.vs { color: #4070a0; }
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 </style>
   <style type="text/css">@page { margin: 0.7in; }
 :root { --navy:#041839; --blue:#006f91; --cyan:#27b9cd; --light:#eff8fc; --gray:#495b74; }
@@ -339,9 +339,9 @@ and show that the system declines instead of guessing.</li>
 </tr>
 <tr>
 <td>Demo video</td>
-<td>README placeholder; external accessible URL to be added after
-recording</td>
-<td>Pending</td>
+<td><a href="Space_Biology_Evidence_Engine.mp4"><code>Space_Biology_Evidence_Engine.mp4</code></a>
+· <a href="https://youtu.be/TWDZt0OCE5o">YouTube</a></td>
+<td>Complete</td>
 </tr>
 <tr>
 <td>Project plan</td>
@@ -396,8 +396,8 @@ quality.</li>
 fields but is not a substitute for expert review.</li>
 <li>Graph extraction is experimental; the MVP deliberately does not add
 a graph database.</li>
-<li>The final demo video has not yet been recorded and will be completed
-as a separate finalization step.</li>
+<li>Auth and public hosting remain out of scope for the local-first
+MVP.</li>
 </ul>
 <h2 id="future-improvements">11. Future improvements</h2>
 <ul>
@@ -423,7 +423,9 @@ Corpus, Compare, and Publication details.</li>
 citation-validation flow.</li>
 <li>Open the repository documentation and evaluation artifacts
 locally.</li>
-<li>Use the demo video after it is recorded and linked.</li>
+<li>Use the linked demo video (<a
+href="https://youtu.be/TWDZt0OCE5o">YouTube</a> or
+<a href="Space_Biology_Evidence_Engine.mp4"><code>Space_Biology_Evidence_Engine.mp4</code></a>).</li>
 </ol>
 <h2 id="common-qa">13. Common Q&amp;A</h2>
 <p><strong>Why not use a general chatbot?</strong><br />
@@ -466,10 +468,13 @@ are linked.</label></li>
 backup plan are committed.</label></li>
 <li><label><input type="checkbox" checked></input><code>plan.md</code> and
 <code>design.md</code> are linked.</label></li>
-<li><label><input type="checkbox"></input>Demo video is recorded, captioned,
-uploaded, and linked from README.</label></li>
-<li><label><input type="checkbox"></input>A public deployed application URL is
-supplied, if required; current release is local-first.</label></li>
+<li><label><input type="checkbox" checked></input>Demo video is recorded,
+uploaded, and linked from README (<a
+href="https://youtu.be/TWDZt0OCE5o">YouTube</a> ·
+<a href="Space_Biology_Evidence_Engine.mp4"><code>Space_Biology_Evidence_Engine.mp4</code></a>).</label></li>
+<li><label><input type="checkbox" checked></input>A public deployed application
+URL is not required for this local-first MVP (demo via Docker
+Compose).</label></li>
 <li><label><input type="checkbox"></input>Final Classroom repository is
 synchronized with the principal repository after approval.</label></li>
 <li><label><input type="checkbox"></input>Canvas submission contains the
@@ -477,7 +482,8 @@ GitHub Classroom repository URL.</label></li>
 </ul>
 <h2 id="submission-status">15. Submission status</h2>
 <p>The final application, pitch deck, one-page summary, technical
-documentation, screenshots, and release package are provided for project
-submission and evaluation.</p>
+documentation, screenshots, demo video, and release package are provided
+for project submission and evaluation. Remaining checklist items are
+course hand-in steps (Classroom sync / Canvas), not product gaps.</p>
 </body>
 </html>
