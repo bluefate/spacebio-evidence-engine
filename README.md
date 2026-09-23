@@ -108,9 +108,7 @@ Humans and AI agents who contribute implementation work are listed here. **Agent
 | Name                                                      | Type            | Role                       | Notes                                                                           |
 | --------------------------------------------------------- | --------------- | -------------------------- | ------------------------------------------------------------------------------- |
 | John Hernandez ([@bluefate](https://github.com/bluefate)) | Human           | Repository owner           | Final authority on requirements, architecture, security, PR approval, and merge |
-| Cursor Auto (Composer)                                    | Agent (Cursor)  | Implementation contributor | Claimed/implemented multiple MVP issues; follows [AGENTS.md](AGENTS.md)         |
-| Cursor Grok 4.5                                           | Agent (Cursor)  | Implementation contributor | Follows [AGENTS.md](AGENTS.md)                                                  |
-| Cursor Grok 4.6                                           | Agent (Cursor)  | Implementation contributor | Follows [AGENTS.md](AGENTS.md)                                                  |
+| Cursor                                                    | Agent (Cursor)  | Implementation contributor | Claimed/implemented multiple MVP issues; follows [AGENTS.md](AGENTS.md)         |
 | Devin                                                     | Agent (Devin)   | Implementation contributor | Follows [AGENTS.md](AGENTS.md)                                                  |
 | Codex                                                     | Agent (Codex)   | Implementation contributor | Follows [AGENTS.md](AGENTS.md)                                                  |
 | Cascade                                                   | Agent (Cascade) | Implementation contributor | Follows [AGENTS.md](AGENTS.md)                                                  |
@@ -118,10 +116,10 @@ Humans and AI agents who contribute implementation work are listed here. **Agent
 Rules for agents:
 
 1. On your **first** implementation PR, add a row for yourself in this table (same PR).
-2. Use a stable display name (for example `Cursor Auto (Composer)`, `Devin`, `Codex`) plus agent type.
+2. Use one row per agent product (for example `Cursor`, `Devin`, `Codex`) — do not add version- or model-specific rows.
 3. Keep the Role short (`Implementation contributor`, `Docs contributor`, etc.).
-4. Do not remove other people or agents.
-5. If you are already listed, you do not need to edit this table again unless correcting your own row.
+4. Do not remove other people or agent products.
+5. If your product is already listed, you do not need to edit this table again unless correcting that row.
 
 ## Backlog and project (source of truth)
 
