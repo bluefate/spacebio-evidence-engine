@@ -8,5 +8,6 @@ Official visual identity for the Space Biology Evidence Engine.
 | [logo-wordmark.png](logo-wordmark.png) | Header / lockup |
 | [favicon.png](favicon.png) | Favicon / small icon |
 | [hero-atmosphere.png](hero-atmosphere.png) | Landing hero background |
+| [hero-banner.png](hero-banner.png) | README / promo banner (brand + workflow) |
 
 Web copies live in [`apps/web/public/brand/`](../../apps/web/public/brand/).
